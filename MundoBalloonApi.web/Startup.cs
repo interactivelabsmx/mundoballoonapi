@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using AutoMapper;
-using MundoBalloonApi.business.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MundoBalloonApi.business.Middleware;
 
 namespace MundoBalloonApi.web
 {
@@ -36,10 +36,7 @@ namespace MundoBalloonApi.web
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint(ServicesSwaggerStartup.Path, ServicesSwaggerStartup.Title); });
         }

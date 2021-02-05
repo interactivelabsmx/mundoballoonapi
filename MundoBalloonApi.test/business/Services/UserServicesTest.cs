@@ -19,7 +19,7 @@ namespace MundoBalloonApi.test.business.Services
         [Fact]
         public void Test_GetUserOrCreateByAccountId_OK()
         {
-            var user = Service.Create(new CreateUserProfileRequest()
+            var user = Service.Create(new CreateUserProfileRequest
             {
                 Picture = "https://picture",
                 ProcessorId = "1234"

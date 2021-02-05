@@ -7,17 +7,17 @@ namespace MundoBalloonApi.test.infrastructure.Data
     [Collection("WithDatabase")]
     public class UserRepositoryTest
     {
+        private readonly RepositoriesFixture _fixture;
+
         public UserRepositoryTest(RepositoriesFixture fixture)
         {
             _fixture = fixture;
         }
 
-        private readonly RepositoriesFixture _fixture;
-
         [Fact]
         public void Test_CreateOrGet_OK()
         {
-            var userProfile = _fixture.UsersRepository.Create(new UserProfile()
+            var userProfile = _fixture.UsersRepository.Create(new UserProfile
             {
                 Picture = "https://picture",
                 ProcessorId = "1234"

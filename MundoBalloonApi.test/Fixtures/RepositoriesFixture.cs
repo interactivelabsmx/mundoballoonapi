@@ -1,8 +1,8 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using MundoBalloonApi.infrastructure.Data.Models;
 using MundoBalloonApi.infrastructure.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace MundoBalloonApi.test.Fixtures
 {

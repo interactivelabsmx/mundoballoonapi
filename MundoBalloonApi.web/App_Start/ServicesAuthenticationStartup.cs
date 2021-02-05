@@ -11,7 +11,6 @@ namespace MundoBalloonApi.web
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAdB2C"));
-
         }
     }
 }
