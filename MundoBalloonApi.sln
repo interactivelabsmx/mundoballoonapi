@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MundoBalloonApi.web", "MundoBalloonApi.web\MundoBalloonApi.web.csproj", "{2347075B-E901-4142-A11C-17591E625647}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MundoBalloonApi.infrastructure", "MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj", "{57B957DB-67AD-4A15-BF86-FB0FC4FB1C18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MundoBalloonApi.business", "MundoBalloonApi.business\MundoBalloonApi.business.csproj", "{1F0B481F-B050-4CD3-9229-DF842CF6E805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MundoBalloonApi.test", "MundoBalloonApi.test\MundoBalloonApi.test.csproj", "{172BA779-B4C7-4EBE-8672-56E1A9AB97BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MundoBalloonApi.GraphQL", "MundoBalloonApi.GraphQL\MundoBalloonApi.GraphQL.csproj", "{BB38BF75-3623-4D57-88F6-C0DFA1BD8A68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2347075B-E901-4142-A11C-17591E625647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2347075B-E901-4142-A11C-17591E625647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2347075B-E901-4142-A11C-17591E625647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2347075B-E901-4142-A11C-17591E625647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57B957DB-67AD-4A15-BF86-FB0FC4FB1C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57B957DB-67AD-4A15-BF86-FB0FC4FB1C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57B957DB-67AD-4A15-BF86-FB0FC4FB1C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57B957DB-67AD-4A15-BF86-FB0FC4FB1C18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0B481F-B050-4CD3-9229-DF842CF6E805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0B481F-B050-4CD3-9229-DF842CF6E805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0B481F-B050-4CD3-9229-DF842CF6E805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0B481F-B050-4CD3-9229-DF842CF6E805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{172BA779-B4C7-4EBE-8672-56E1A9AB97BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{172BA779-B4C7-4EBE-8672-56E1A9AB97BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{172BA779-B4C7-4EBE-8672-56E1A9AB97BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{172BA779-B4C7-4EBE-8672-56E1A9AB97BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB38BF75-3623-4D57-88F6-C0DFA1BD8A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB38BF75-3623-4D57-88F6-C0DFA1BD8A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB38BF75-3623-4D57-88F6-C0DFA1BD8A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB38BF75-3623-4D57-88F6-C0DFA1BD8A68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
