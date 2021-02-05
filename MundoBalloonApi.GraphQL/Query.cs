@@ -12,11 +12,5 @@ namespace MundoBalloonApi.graphql
         {
             return mundoBalloonContext.Products;
         }
-
-        [UseDbContext(typeof(MundoBalloonContext))]
-        public IQueryable<Product> GetHomePage([ScopedService] MundoBalloonContext mundoBalloonContext)
-        {
-            return mundoBalloonContext.Products;
-        }
     }
 }

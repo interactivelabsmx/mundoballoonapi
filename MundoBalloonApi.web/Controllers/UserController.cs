@@ -10,7 +10,7 @@ namespace MundoBalloonApi.web.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         public string GetUserId()
         {
-            return User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         }
     }
 }
