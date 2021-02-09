@@ -1,8 +1,8 @@
 using AutoMapper;
-using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.Dtos;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using MundoBalloonApi.infrastructure.Data.Models;
+using MundoBalloonApi.business.Contracts;
+using MundoBalloonApi.business.Dtos;
 
 namespace MundoBalloonApi.business.Services
 {
@@ -31,5 +31,6 @@ namespace MundoBalloonApi.business.Services
             var result = _repository.Update(user);
             return result;
         }
+
     }
 }

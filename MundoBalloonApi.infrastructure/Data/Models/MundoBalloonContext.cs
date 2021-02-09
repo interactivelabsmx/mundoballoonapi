@@ -838,12 +838,6 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                     .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
             });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        private void OnModelCreatingPartial(ModelBuilder modelBuilder)
-        {
-            throw new NotImplementedException();
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

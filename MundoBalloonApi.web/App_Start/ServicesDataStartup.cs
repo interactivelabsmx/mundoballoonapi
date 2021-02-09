@@ -1,11 +1,11 @@
 using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.Services;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using MundoBalloonApi.infrastructure.Data.Models;
 using MundoBalloonApi.infrastructure.Data.Repositories;
+using MundoBalloonApi.business.Contracts;
+using MundoBalloonApi.business.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MySqlConnector;
 
 namespace MundoBalloonApi.web
@@ -17,10 +17,8 @@ namespace MundoBalloonApi.web
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
 
-            var connectionString =
-                new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "");
-            services.AddDbContext<MundoBalloonContext>(options =>
-                options.UseMySql(connectionString.ToString(), new MySqlServerVersion(new Version(8, 0, 22))));
+            var connectionString = new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "");
+            services.AddDbContext<MundoBalloonContext>(options => options.UseMySql(connectionString.ToString(), new MySqlServerVersion(new Version(8, 0, 22))));
         }
     }
 }

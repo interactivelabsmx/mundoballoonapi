@@ -13,10 +13,10 @@ namespace MundoBalloonApi.test.Fixtures
         {
             _client = client;
         }
-
+        
         public async Task<User> CreateProfile()
         {
-            var user = new CreateUserProfileRequest
+            var user = new CreateUserProfileRequest()
             {
                 Picture = "https://picture",
                 ProcessorId = "123"
