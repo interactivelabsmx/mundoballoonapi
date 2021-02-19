@@ -294,13 +294,15 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
             modelBuilder.Entity<ProductVariant>(entity =>
             {
-                entity.HasKey(e => new {e.ProductVariantId, e.Sku})
+                entity.HasKey(e => new { e.ProductVariantId, e.Sku })
                     .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] {0, 0});
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
                 entity.ToTable("product_variants");
 
                 entity.HasIndex(e => e.ProductId, "fk_product_variants_products1_idx");
+
+                entity.HasIndex(e => e.VariantValueId, "fk_product_variants_variant_values1_idx");
 
                 entity.HasIndex(e => e.ProductVariantId, "product_variant_id_UNIQ_iE")
                     .IsUnique();
@@ -367,6 +369,12 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_product_variants_products1");
+
+                entity.HasOne(d => d.VariantValue)
+                    .WithMany(p => p.ProductVariants)
+                    .HasForeignKey(d => d.VariantValueId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_product_variants_variant_values1");
             });
 
             modelBuilder.Entity<ProductVariantMedium>(entity =>
@@ -764,9 +772,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.HasIndex(e => e.VariantId, "fk_variant_values_variants1_idx");
 
-                entity.Property(e => e.VariantValueId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("variant_value_id");
+                entity.Property(e => e.VariantValueId).HasColumnName("variant_value_id");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
@@ -791,13 +797,6 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                     .HasForeignKey(d => d.VariantId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_variant_values_variants1");
-
-                entity.HasOne(d => d.VariantValueNavigation)
-                    .WithOne(p => p.VariantValue)
-                    .HasPrincipalKey<ProductVariant>(p => p.ProductVariantId)
-                    .HasForeignKey<VariantValue>(d => d.VariantValueId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_variant_values_product_variants2");
             });
 
             modelBuilder.Entity<VerificationRequest>(entity =>

@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using AutoMapper;
 using MundoBalloonApi.business.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MundoBalloonApi.graphql.Middleware;
+using MundoBalloonApi.graphql.Products;
+using MundoBalloonApi.graphql.Sites;
 
 namespace MundoBalloonApi.graphql
 {
@@ -34,7 +36,9 @@ namespace MundoBalloonApi.graphql
 
             services
                 .AddGraphQLServer()
-                .AddQueryType<Query>()
+                .AddQueryType(d => d.Name("Query"))
+                    .AddTypeExtension<ProductsQueries>()
+                    .AddTypeExtension<SiteQueries>()
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
         }

@@ -4,7 +4,7 @@
 
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
-    public class ProductVariant : BaseEntity
+    public partial class ProductVariant : BaseEntity
     {
         public ProductVariant()
         {
@@ -24,9 +24,9 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         public decimal Price { get; set; }
         public decimal? CompareAtPrice { get; set; }
         public decimal? Weight { get; set; }
-        public bool Taxable { get; set; }
-        public bool StoreOnly { get; set; }
-        public bool IsBundle { get; set; }
+        public sbyte Taxable { get; set; }
+        public sbyte StoreOnly { get; set; }
+        public sbyte IsBundle { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual VariantValue VariantValue { get; set; }

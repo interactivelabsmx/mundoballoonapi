@@ -16,9 +16,11 @@ namespace MundoBalloonApi.web
         {
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<ISiteService, SiteService>();
 
             var connectionString = new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "");
-            services.AddDbContext<MundoBalloonContext>(options => options.UseMySql(connectionString.ToString(), new MySqlServerVersion(new Version(8, 0, 22))));
+            services.AddPooledDbContextFactory<MundoBalloonContext>(options =>
+                options.UseMySql(connectionString.ToString(), new MySqlServerVersion(new Version(8, 0, 23))));
         }
     }
 }

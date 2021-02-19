@@ -7,9 +7,10 @@
     "MundoBalloonApi.graphql": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:63627",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MUNDOB_DB_STR": "server=localhost;user=root;database=mundob-dev;password=Labs2013;TreatTinyAsBoolean=true;"
       }
     }
   }

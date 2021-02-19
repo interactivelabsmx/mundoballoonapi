@@ -15,9 +15,10 @@ namespace MundoBalloonApi.graphql.Middleware
                 if (cancellationToken.IsCancellationRequested) return ValueTask.FromCanceled(cancellationToken);
                 queryBuilder.AddProperty("currentUser", "unauthorized");
                 if (!httpContext.User.Identity!.IsAuthenticated) return ValueTask.CompletedTask;
-                var userId = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)!.ToString();
-                var claims = httpContext.User.Claims.Select(x => $"{x.Type} : {x.Value}").ToList();
-                queryBuilder.SetProperty("currentUser", new CurrentUser(userId, claims));
+                var userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)!.ToString();
+                var claims = httpContext.User.Claims;
+                var flatClaims = httpContext.User.Claims.Select(x => $"{x.Type} : {x.Value}").ToList();
+                queryBuilder.SetProperty("currentUser", new CurrentUser(userId, claims, flatClaims));
                 return ValueTask.CompletedTask;
             };
         }

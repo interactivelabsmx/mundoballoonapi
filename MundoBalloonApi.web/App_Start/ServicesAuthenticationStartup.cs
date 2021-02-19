@@ -1,17 +1,28 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MundoBalloonApi.web
 {
+    
     public static class ServicesAuthenticationStartup
     {
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAdB2C"));
-
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "https://securetoken.google.com/mundoballoon-dev";
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "https://securetoken.google.com/mundoballoon-dev",
+                        ValidateAudience = true,
+                        ValidAudience = "mundoballoon-dev",
+                        ValidateLifetime = true
+                    };
+                });
         }
     }
 }
