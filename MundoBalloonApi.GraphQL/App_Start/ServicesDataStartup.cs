@@ -12,8 +12,6 @@ namespace MundoBalloonApi.graphql
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ISiteService, SiteService>();
-
             var connectionString =
                 new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "");
             services.AddPooledDbContextFactory<MundoBalloonContext>(options =>
