@@ -10,6 +10,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         {
             ProductVariants = new HashSet<ProductVariant>();
         }
+
         public int VariantValueId { get; set; }
         public int VariantId { get; set; }
         public string VariantValue1 { get; set; }

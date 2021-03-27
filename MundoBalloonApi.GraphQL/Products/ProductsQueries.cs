@@ -1,7 +1,7 @@
-using HotChocolate;
-using HotChocolate.Types;
 using System.Linq;
+using HotChocolate;
 using HotChocolate.Data;
+using HotChocolate.Types;
 using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.graphql.Products

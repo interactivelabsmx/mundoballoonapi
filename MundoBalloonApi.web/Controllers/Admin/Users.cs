@@ -1,7 +1,7 @@
-﻿using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.Dtos;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MundoBalloonApi.business.Contracts;
+using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.web.Controllers.Admin

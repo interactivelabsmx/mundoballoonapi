@@ -1,4 +1,4 @@
-using MundoBalloonApi.business.Dtos;
+using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.business.Contracts

@@ -1,4 +1,4 @@
-namespace MundoBalloonApi.business.Dtos
+namespace MundoBalloonApi.business.DTOs.Requests
 {
     public class CreateUserProfileRequest
     {

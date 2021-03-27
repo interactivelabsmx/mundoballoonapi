@@ -8,7 +8,7 @@ namespace MundoBalloonApi.test.Fixtures
     {
         public MapperFixture()
         {
-            var config = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); });
+            var config = new MapperConfiguration(cfg => { cfg.AddProfile<RequestsMappingProfile>(); });
             mapper = new Mapper(config);
         }
 

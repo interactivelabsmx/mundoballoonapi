@@ -9,42 +9,31 @@ using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.graphql.Types
 {
-    public class ProductVariantType: ObjectType<ProductVariant>
+    public class ProductVariantType : ObjectType<ProductVariant>
     {
         protected override void Configure(IObjectTypeDescriptor<ProductVariant> descriptor)
         {
-
             descriptor
                 .Field(pv => pv.ProductVariantDescription)
                 .Name("description");
-            
+
             descriptor
                 .Field(pv => pv.ProductVariantName)
                 .Name("name");
-            
+
             descriptor
                 .Field(pv => pv.ProductVariantMedia)
-                .ResolveWith<ProductVariantMediaResolvers>(pv => pv.GetProductVariantMedia(default!, default!, default!))
+                .ResolveWith<ProductVariantMediaResolvers>(
+                    pv => pv.GetProductVariantMedia(default!, default!, default!))
                 .UseDbContext<MundoBalloonContext>()
                 .Name("media");
 
-            // Ignore fields that loop back to product and carts
             descriptor
-                .Field(pv => pv.Product).Ignore();
-            
-            descriptor
-                .Field(pv => pv.OcassionCartDetailProductVariants).Ignore();
-            
-            descriptor
-                .Field(pv => pv.OcassionCartDetailSkuNavigations).Ignore();
-            
-            descriptor
-                .Field(pv => pv.UserCartProductVariants).Ignore();
-        
-            descriptor
-                .Field(pv => pv.UserCartSkuNavigations).Ignore();
+                .Field(pv => pv.VariantValue)
+                .ResolveWith<VariantValueResolvers>(pv => pv.GetProductVariantValue(default!, default!, default!))
+                .UseDbContext<MundoBalloonContext>();
         }
-        
+
         private class ProductVariantMediaResolvers
         {
             public async Task<List<ProductVariantMedium>> GetProductVariantMedia(
@@ -55,6 +44,19 @@ namespace MundoBalloonApi.graphql.Types
                 return await mundoBalloonContext.ProductVariantMedia
                     .Where(pvm => pvm.ProductVariantId == productVariant.ProductVariantId)
                     .ToListAsync(cancellationToken);
+            }
+        }
+
+        private class VariantValueResolvers
+        {
+            public async Task<VariantValue> GetProductVariantValue(
+                ProductVariant productVariant,
+                [ScopedService] MundoBalloonContext mundoBalloonContext,
+                CancellationToken cancellationToken)
+            {
+                return await mundoBalloonContext.VariantValues
+                    .Where(vv => vv.VariantValueId == productVariant.VariantValueId)
+                    .FirstOrDefaultAsync(cancellationToken);
             }
         }
     }

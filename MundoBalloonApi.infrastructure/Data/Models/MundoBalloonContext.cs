@@ -294,9 +294,9 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
             modelBuilder.Entity<ProductVariant>(entity =>
             {
-                entity.HasKey(e => new { e.ProductVariantId, e.Sku })
+                entity.HasKey(e => new {e.ProductVariantId, e.Sku})
                     .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] {0, 0});
 
                 entity.ToTable("product_variants");
 
@@ -836,7 +836,6 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                     .HasColumnName("updated_at")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
             });
-
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

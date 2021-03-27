@@ -1,11 +1,13 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MundoBalloonApi.business.Middleware;
 using MundoBalloonApi.graphql.Middleware;
-using MundoBalloonApi.graphql.Products;
-using MundoBalloonApi.graphql.Types;
+using MundoBalloonApi.graphql.Sites;
+using MySqlConnector;
 
 namespace MundoBalloonApi.graphql
 {
@@ -30,17 +32,20 @@ namespace MundoBalloonApi.graphql
 
             // this enables you to use DataLoader in your resolvers.
             // services.AddDataLoaderRegistry();
+            string connectionString =
+                new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
 
-            ServicesDataStartup.ConfigureServices(services);
+            services.AddAutoMapper(typeof(EntitiesMappingProfile));
+            services.AddMundoBServices()
+                .AddHttpContextAccessor()
+                .AddDbServices(Configuration, connectionString);
+
             ServicesAuthenticationStartup.ConfigureServices(services, Configuration);
 
             services
                 .AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
-                    .AddTypeExtension<ProductsQueries>()
-                .AddType<ProductType>()
-                .AddType<ProductCategoryType>()
-                .AddType<ProductVariantType>()
+                .AddTypeExtension<SiteQueries>()
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
         }

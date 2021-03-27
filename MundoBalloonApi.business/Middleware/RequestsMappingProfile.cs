@@ -1,13 +1,12 @@
-using System.Linq;
 using AutoMapper;
+using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.infrastructure.Data.Models;
-using MundoBalloonApi.business.Dtos;
 
 namespace MundoBalloonApi.business.Middleware
 {
-    public class MappingProfile : Profile
+    public class RequestsMappingProfile : Profile
     {
-        public MappingProfile()
+        public RequestsMappingProfile()
         {
             CreateMap<CreateUserProfileRequest, UserProfile>();
         }

@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace MundoBalloonApi.graphql
 {
-    
     public static class ServicesAuthenticationStartup
     {
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
@@ -14,7 +13,7 @@ namespace MundoBalloonApi.graphql
                 .AddJwtBearer(options =>
                 {
                     options.Authority = "https://securetoken.google.com/mundoballoon-dev";
-                    options.TokenValidationParameters = new TokenValidationParameters()
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidIssuer = "https://securetoken.google.com/mundoballoon-dev",

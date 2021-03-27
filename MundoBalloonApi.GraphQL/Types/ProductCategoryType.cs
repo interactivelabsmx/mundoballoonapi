@@ -3,7 +3,7 @@ using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.graphql.Types
 {
-    public class ProductCategoryType: ObjectType<ProductCategory>
+    public class ProductCategoryType : ObjectType<ProductCategory>
     {
         protected override void Configure(IObjectTypeDescriptor<ProductCategory> descriptor)
         {
@@ -13,11 +13,6 @@ namespace MundoBalloonApi.graphql.Types
             descriptor
                 .Field(pc => pc.ProductCategoryName)
                 .Name("name");
-            
-            // Ignore fields that create loops
-            descriptor
-                .Field(pc => pc.Products)
-                .Ignore();
         }
     }
 }

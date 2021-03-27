@@ -4,7 +4,7 @@
 
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
-    public partial class ProductVariant : BaseEntity
+    public class ProductVariant : BaseEntity
     {
         public ProductVariant()
         {

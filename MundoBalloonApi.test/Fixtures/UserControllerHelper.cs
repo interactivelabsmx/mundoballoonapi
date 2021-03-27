@@ -1,6 +1,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
-using MundoBalloonApi.business.Dtos;
+using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.test.Fixtures
@@ -13,10 +13,10 @@ namespace MundoBalloonApi.test.Fixtures
         {
             _client = client;
         }
-        
+
         public async Task<User> CreateProfile()
         {
-            var user = new CreateUserProfileRequest()
+            var user = new CreateUserProfileRequest
             {
                 Picture = "https://picture",
                 ProcessorId = "123"

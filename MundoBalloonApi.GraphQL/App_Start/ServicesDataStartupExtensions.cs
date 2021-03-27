@@ -8,25 +8,25 @@ using MundoBalloonApi.business.Services;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using MundoBalloonApi.infrastructure.Data.Models;
 using MundoBalloonApi.infrastructure.Data.Repositories;
-using MySqlConnector;
 
-namespace MundoBalloonApi.web
+namespace MundoBalloonApi.graphql
 {
-    public static class ServicesDataStartup
+    public static class ServicesDataStartupExtensions
     {
         private const string CacheProviderName = "MundoBCache";
 
-        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddMundoBServices(this IServiceCollection services)
         {
-            services.AddScoped<IProductsRepository, ProductsRepository>();
-            services.AddScoped<IUsersRepository, UsersRepository>();
-            services.AddScoped<IUsersService, UsersService>();
-            services.AddScoped<ISiteService, SiteService>();
+            return services
+                .AddScoped<IProductsRepository, ProductsRepository>()
+                .AddScoped<ISiteService, SiteService>();
+        }
 
-            var connectionString =
-                new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "");
-            services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
-                    options.UseMySql(connectionString.ToString(), new MySqlServerVersion(new Version(8, 0, 23)))
+        public static IServiceCollection AddDbServices(this IServiceCollection services, IConfiguration configuration,
+            string connectionString)
+        {
+            return services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
+                    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 23)))
                         .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>()))
                 .AddEFSecondLevelCache(options =>
                 {

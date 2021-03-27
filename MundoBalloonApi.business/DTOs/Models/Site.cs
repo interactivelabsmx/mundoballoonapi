@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using MundoBalloonApi.infrastructure.Data.Models;
 
-namespace MundoBalloonApi.business.Dtos
+namespace MundoBalloonApi.business.DTOs.Models
 {
     public class Site
     {

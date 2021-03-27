@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
-using MundoBalloonApi.business.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MundoBalloonApi.business.Middleware;
+using Newtonsoft.Json;
 
 namespace MundoBalloonApi.web
 {
@@ -20,10 +21,12 @@ namespace MundoBalloonApi.web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
-            ServicesDataStartup.ConfigureServices(services);
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(RequestsMappingProfile)));
+            ServicesDataStartup.ConfigureServices(services, Configuration);
             ServicesAuthenticationStartup.ConfigureServices(services, Configuration);
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             ServicesSwaggerStartup.ConfigureServices(services);
         }
 
@@ -35,10 +38,7 @@ namespace MundoBalloonApi.web
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint(ServicesSwaggerStartup.Path, ServicesSwaggerStartup.Title); });
         }

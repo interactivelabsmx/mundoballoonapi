@@ -1,5 +1,5 @@
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.Dtos;
+using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.business.Services;
 using MundoBalloonApi.test.Fixtures;
 using Xunit;
@@ -19,7 +19,7 @@ namespace MundoBalloonApi.test.business.Services
         [Fact]
         public void Test_GetUserOrCreateByAccountId_OK()
         {
-            var user = Service.Create(new CreateUserProfileRequest()
+            var user = Service.Create(new CreateUserProfileRequest
             {
                 Picture = "https://picture",
                 ProcessorId = "1234"
