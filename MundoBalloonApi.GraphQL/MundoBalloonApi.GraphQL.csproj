@@ -23,12 +23,12 @@
     <PackageReference Include="EasyCaching.Redis" Version="1.2.1" />
     <PackageReference Include="EasyCaching.Serialization.Json" Version="1.2.0" />
     <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="2.4.1" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="11.0.9" />
-    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.0.9" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="11.1.0" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.1.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.5" />
     <PackageReference Include="HotChocolate.AspNetCore.Voyager" Version="10.5.5" />
-    <PackageReference Include="HotChocolate.Data.EntityFramework" Version="11.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4">
+    <PackageReference Include="HotChocolate.Data.EntityFramework" Version="11.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
