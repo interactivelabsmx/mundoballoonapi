@@ -16,10 +16,9 @@ namespace MundoBalloonApi.test.Fixtures
 
         public async Task<User> CreateProfile()
         {
-            var user = new CreateUserProfileRequest
+            var user = new CreateUserRequest
             {
-                Picture = "https://picture",
-                ProcessorId = "123"
+                UserId = "123",
             };
             var httpResponse = await _client.PostAsJsonAsync("api/v1/admin/users", user);
             var resultUser = await httpResponse.Content.ReadAsAsync<User>();

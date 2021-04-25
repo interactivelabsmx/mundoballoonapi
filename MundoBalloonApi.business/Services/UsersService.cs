@@ -2,7 +2,7 @@ using AutoMapper;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.infrastructure.Data.Contracts;
-using MundoBalloonApi.infrastructure.Data.Models;
+using User = MundoBalloonApi.business.DTOs.Models.User;
 
 namespace MundoBalloonApi.business.Services
 {
@@ -17,19 +17,12 @@ namespace MundoBalloonApi.business.Services
             _repository = repository;
             _mapper = mapper;
         }
-
-        public UserProfile Create(CreateUserProfileRequest userProfileRequest)
+        
+        public User Create(CreateUserRequest createUserRequest)
         {
-            var user = _mapper.Map<UserProfile>(userProfileRequest);
+            var user = _mapper.Map<infrastructure.Data.Models.User>(createUserRequest);
             var result = _repository.Create(user);
-            return result;
-        }
-
-        public UserProfile Update(UpdateUserProfileRequest userProfileRequest)
-        {
-            var user = _mapper.Map<UserProfile>(userProfileRequest);
-            var result = _repository.Update(user);
-            return result;
+            return _mapper.Map<User>(result);
         }
     }
 }

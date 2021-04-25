@@ -1,11 +1,10 @@
 using MundoBalloonApi.business.DTOs.Requests;
-using MundoBalloonApi.infrastructure.Data.Models;
+using User = MundoBalloonApi.business.DTOs.Models.User;
 
 namespace MundoBalloonApi.business.Contracts
 {
     public interface IUsersService
     {
-        UserProfile Create(CreateUserProfileRequest userProfileRequest);
-        UserProfile Update(UpdateUserProfileRequest userProfileRequest);
+        User Create(CreateUserRequest createUserRequest);
     }
 }

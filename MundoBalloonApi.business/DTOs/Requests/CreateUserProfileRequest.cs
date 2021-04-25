@@ -1,8 +1,7 @@
 namespace MundoBalloonApi.business.DTOs.Requests
 {
-    public class CreateUserProfileRequest
+    public class CreateUserRequest
     {
-        public string? ProcessorId { get; set; }
-        public string? Picture { get; set; }
+        public string? UserId { get; set; }
     }
 }

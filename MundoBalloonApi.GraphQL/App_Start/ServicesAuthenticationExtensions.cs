@@ -5,9 +5,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace MundoBalloonApi.graphql
 {
-    public static class ServicesAuthenticationStartup
+    public static class ServicesAuthenticationExtensions
     {
-        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAuthenticationServices(this IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -22,6 +22,7 @@ namespace MundoBalloonApi.graphql
                         ValidateLifetime = true
                     };
                 });
+            return services;
         }
     }
 }

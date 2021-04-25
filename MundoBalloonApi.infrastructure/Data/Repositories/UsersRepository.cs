@@ -13,20 +13,14 @@ namespace MundoBalloonApi.infrastructure.Data.Repositories
             _context = context;
         }
 
-        public UserProfile Create(UserProfile userProfile)
+        public User Create(User user)
         {
-            _context.UserProfiles.Add(userProfile);
+            var profile = new UserProfile();
+            _context.Users.Add(user);
+            profile.UserId = user.Id;
+            _context.UserProfiles.Add(profile);
             _context.SaveChanges();
-            return userProfile;
-        }
-
-        public UserProfile Update(UserProfile userProfile)
-        {
-            var existingUSer = _context.UserProfiles.FirstOrDefault(u => u.UserId == userProfile.UserId);
-            if (existingUSer != null) return existingUSer;
-            _context.UserProfiles.Update(userProfile);
-            _context.SaveChanges();
-            return userProfile;
+            return user;
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using MundoBalloonApi.business.Middleware;
 using MundoBalloonApi.graphql.Middleware;
 using MundoBalloonApi.graphql.Sites;
+using MundoBalloonApi.graphql.Users;
 using MySqlConnector;
 
 namespace MundoBalloonApi.graphql
@@ -35,16 +36,16 @@ namespace MundoBalloonApi.graphql
             string connectionString =
                 new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
 
-            services.AddAutoMapper(typeof(EntitiesMappingProfile));
             services.AddMundoBServices()
                 .AddHttpContextAccessor()
-                .AddDbServices(Configuration, connectionString);
-
-            ServicesAuthenticationStartup.ConfigureServices(services, Configuration);
+                .AddAutoMapper(typeof(EntitiesMappingProfile))
+                .AddDbServices(Configuration, connectionString)
+                .AddAuthenticationServices();
 
             services
                 .AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
+                .AddTypeExtension<UserQueries>()
                 .AddTypeExtension<SiteQueries>()
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());

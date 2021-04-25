@@ -18,7 +18,7 @@ namespace MundoBalloonApi.graphql
         public static IServiceCollection AddMundoBServices(this IServiceCollection services)
         {
             return services
-                .AddScoped<IProductsRepository, ProductsRepository>()
+                .AddScoped<IUsersService, UsersService>()
                 .AddScoped<ISiteService, SiteService>();
         }
 

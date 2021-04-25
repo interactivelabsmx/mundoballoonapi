@@ -1,6 +1,7 @@
 using AutoMapper;
 using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.infrastructure.Data.Models;
+using UserProfile = MundoBalloonApi.business.DTOs.Models.UserProfile;
 
 namespace MundoBalloonApi.business.Middleware
 {
@@ -8,7 +9,7 @@ namespace MundoBalloonApi.business.Middleware
     {
         public RequestsMappingProfile()
         {
-            CreateMap<CreateUserProfileRequest, UserProfile>();
+            CreateMap<CreateUserRequest, User>();
         }
     }
 }

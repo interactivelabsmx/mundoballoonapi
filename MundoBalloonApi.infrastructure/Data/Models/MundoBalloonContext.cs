@@ -473,13 +473,26 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.HasKey(e => new { e.Id, e.UserId })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
                 entity.ToTable("users");
 
                 entity.HasIndex(e => e.Email, "email")
                     .IsUnique();
+                
+                entity.HasIndex(e => e.UserId, "userId_UNIQUE")
+                    .IsUnique();
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
 
+                entity.Property(e => e.UserId)
+                    .HasColumnType("varchar(45)")
+                    .HasColumnName("userId");
+                    
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
                     .HasColumnName("created_at")

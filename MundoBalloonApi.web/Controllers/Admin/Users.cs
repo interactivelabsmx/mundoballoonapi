@@ -19,10 +19,10 @@ namespace MundoBalloonApi.web.Controllers.Admin
         [AllowAnonymous]
         [HttpPost]
         [Produces("application/json", Type = typeof(User))]
-        public IActionResult CreateProfile([FromBody] CreateUserProfileRequest userProfileRequest)
+        public IActionResult CreateUser([FromBody] CreateUserRequest createUserRequest)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var user = _service.Create(userProfileRequest);
+            var user = _service.Create(createUserRequest);
             return new ObjectResult(user);
         }
     }

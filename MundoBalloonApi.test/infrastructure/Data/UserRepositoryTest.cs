@@ -1,3 +1,4 @@
+using System;
 using MundoBalloonApi.infrastructure.Data.Models;
 using MundoBalloonApi.test.Fixtures;
 using Xunit;
@@ -17,12 +18,13 @@ namespace MundoBalloonApi.test.infrastructure.Data
         [Fact]
         public void Test_CreateOrGet_OK()
         {
-            var userProfile = _fixture.UsersRepository.Create(new UserProfile
+            var user = _fixture.UsersRepository.Create(new User
             {
-                Picture = "https://picture",
-                ProcessorId = "1234"
+                Name = "test",
+                Email = "test.user@mail.com",
+                EmailVerified = DateTime.Now,
             });
-            Assert.True(userProfile.UserId != null);
+            Assert.True(user.Email != null);
         }
     }
 }
