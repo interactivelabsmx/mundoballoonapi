@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-#nullable disable
-
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class ProductCategory : BaseEntity
@@ -12,8 +10,8 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         }
 
         public int ProductCategoryId { get; set; }
-        public string ProductCategoryName { get; set; }
-        public string ProductCategoryDescription { get; set; }
+        public string? ProductCategoryName { get; set; }
+        public string? ProductCategoryDescription { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

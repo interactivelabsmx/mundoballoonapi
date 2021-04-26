@@ -3,8 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-#nullable disable
-
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class MundoBalloonContext : DbContext
@@ -50,9 +48,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.AccessToken)
                     .HasColumnType("text")
-                    .HasColumnName("access_token")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("access_token");
 
                 entity.Property(e => e.AccessTokenExpires)
                     .HasColumnType("timestamp(6)")
@@ -61,9 +57,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.CompoundId)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("compound_id")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("compound_id");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
@@ -73,29 +67,21 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.ProviderAccountId)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("provider_account_id")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("provider_account_id");
 
                 entity.Property(e => e.ProviderId)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("provider_id")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("provider_id");
 
                 entity.Property(e => e.ProviderType)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("provider_type")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("provider_type");
 
                 entity.Property(e => e.RefreshToken)
                     .HasColumnType("text")
-                    .HasColumnName("refresh_token")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("refresh_token");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -121,9 +107,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Sku)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("sku")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("sku");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
@@ -132,9 +116,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Label)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("label")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("label");
 
                 entity.Property(e => e.Price)
                     .HasPrecision(10, 2)
@@ -187,22 +169,16 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.DropOffStage)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("drop_off_stage")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("drop_off_stage");
 
                 entity.Property(e => e.OccasionCartDescription)
                     .IsRequired()
                     .HasColumnType("mediumtext")
-                    .HasColumnName("occasion_cart_description")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("occasion_cart_description");
 
                 entity.Property(e => e.Title)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("title")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("title");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -239,15 +215,11 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.ProductDescription)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("product_description")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("product_description");
 
                 entity.Property(e => e.ProductName)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("product_name")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("product_name");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -275,16 +247,12 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.ProductCategoryDescription)
                     .IsRequired()
                     .HasColumnType("mediumtext")
-                    .HasColumnName("product_category_description")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("product_category_description");
 
                 entity.Property(e => e.ProductCategoryName)
                     .IsRequired()
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("product_category_name")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("product_category_name");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -316,9 +284,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Sku)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("sku")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("sku");
 
                 entity.Property(e => e.CompareAtPrice)
                     .HasPrecision(10, 2)
@@ -339,15 +305,11 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.ProductVariantDescription)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("product_variant_description")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("product_variant_description");
 
                 entity.Property(e => e.ProductVariantName)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("product_variant_name")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("product_variant_name");
 
                 entity.Property(e => e.StoreOnly).HasColumnName("store_only");
 
@@ -396,17 +358,13 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.MediaType)
                     .IsRequired()
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("media_type")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("media_type");
 
                 entity.Property(e => e.ProductVariantId).HasColumnName("product_variant_id");
 
                 entity.Property(e => e.Quality)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("quality")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("quality");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -416,9 +374,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.Url)
                     .IsRequired()
                     .HasColumnType("mediumtext")
-                    .HasColumnName("url")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("url");
 
                 entity.HasOne(d => d.ProductVariant)
                     .WithMany(p => p.ProductVariantMedia)
@@ -443,9 +399,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.AccessToken)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("access_token")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("access_token");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
@@ -459,9 +413,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.SessionToken)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("session_token")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("session_token");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -473,15 +425,11 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.UserId })
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
                 entity.ToTable("users");
 
                 entity.HasIndex(e => e.Email, "email")
                     .IsUnique();
-                
+
                 entity.HasIndex(e => e.UserId, "userId_UNIQUE")
                     .IsUnique();
 
@@ -492,7 +440,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.UserId)
                     .HasColumnType("varchar(45)")
                     .HasColumnName("userId");
-                    
+
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
                     .HasColumnName("created_at")
@@ -500,9 +448,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Email)
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("email")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("email");
 
                 entity.Property(e => e.EmailVerified)
                     .HasColumnType("timestamp(6)")
@@ -510,15 +456,11 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Image)
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("image")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("image");
 
                 entity.Property(e => e.Name)
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("name")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("name");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -542,29 +484,21 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.Address1)
                     .IsRequired()
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("address1")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("address1");
 
                 entity.Property(e => e.Address2)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("address2")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("address2");
 
                 entity.Property(e => e.City)
                     .IsRequired()
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("city")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("city");
 
                 entity.Property(e => e.Country)
                     .IsRequired()
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("country")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("country");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
@@ -580,9 +514,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("state")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("state");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -594,9 +526,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.Zipcode)
                     .IsRequired()
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("zipcode")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("zipcode");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserAddreses)
@@ -620,9 +550,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Sku)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("sku")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("sku");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("timestamp(6)")
@@ -684,16 +612,12 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.OccasionDetails)
                     .HasColumnType("mediumtext")
-                    .HasColumnName("occasion_details")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("occasion_details");
 
                 entity.Property(e => e.OccasionName)
                     .IsRequired()
                     .HasColumnType("varchar(100)")
-                    .HasColumnName("occasion_name")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("occasion_name");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -727,15 +651,11 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Picture)
                     .HasColumnType("mediumtext")
-                    .HasColumnName("picture")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("picture");
 
                 entity.Property(e => e.ProcessorId)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("processor_id")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("processor_id");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")
@@ -768,15 +688,11 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.Variant1)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("variant")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("variant");
 
                 entity.Property(e => e.VariantType)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("variant_type")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("variant_type");
             });
 
             modelBuilder.Entity<VariantValue>(entity =>
@@ -801,9 +717,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
 
                 entity.Property(e => e.VariantValue1)
                     .HasColumnType("varchar(45)")
-                    .HasColumnName("variant_value")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("variant_value");
 
                 entity.HasOne(d => d.Variant)
                     .WithMany(p => p.VariantValues)
@@ -833,16 +747,12 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                 entity.Property(e => e.Identifier)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("identifier")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("identifier");
 
                 entity.Property(e => e.Token)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
-                    .HasColumnName("token")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnName("token");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("timestamp(6)")

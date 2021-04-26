@@ -1,5 +1,4 @@
-﻿
-namespace MundoBalloonApi.business.DTOs.Models
+﻿namespace MundoBalloonApi.business.DTOs.Models
 {
     public class OcassionCartDetail
     {
@@ -9,7 +8,7 @@ namespace MundoBalloonApi.business.DTOs.Models
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
         public string? Label { get; set; }
-        
+
         public ProductVariant? Variant { get; set; }
     }
 }

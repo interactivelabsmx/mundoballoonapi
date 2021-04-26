@@ -5,7 +5,7 @@ namespace MundoBalloonApi.graphql.Users.Types
 {
     public class CreateUserPayload : ClientMutationBase
     {
-        public CreateUserPayload(User user, string clientMutationId) : base(clientMutationId)
+        public CreateUserPayload(User user) : base()
         {
             User = user;
         }

@@ -5,11 +5,10 @@ namespace MundoBalloonApi.graphql.Users.Types
     public class CreateUserInput : ClientMutationBase
     {
         public CreateUserInput(
-            string UserId,
-            string clientMutationId)
-            : base(clientMutationId)
+            string userId)
+            : base()
         {
-            UserId = UserId;
+            UserId = userId;
         }
 
         public string UserId { get; }

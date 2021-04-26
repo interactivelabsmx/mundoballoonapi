@@ -1,5 +1,4 @@
-﻿
-namespace MundoBalloonApi.business.DTOs.Models
+﻿namespace MundoBalloonApi.business.DTOs.Models
 {
     public class UserProfile
     {

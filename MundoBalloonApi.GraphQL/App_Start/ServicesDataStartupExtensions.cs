@@ -15,17 +15,14 @@ namespace MundoBalloonApi.graphql
     {
         private const string CacheProviderName = "MundoBCache";
 
-        public static IServiceCollection AddMundoBServices(this IServiceCollection services)
-        {
-            return services
+        public static IServiceCollection AddMundoBServices(this IServiceCollection services) => services
+                .AddScoped<IUsersRepository, UsersRepository>()
+                .AddScoped<IProductsRepository, ProductsRepository>()
                 .AddScoped<IUsersService, UsersService>()
                 .AddScoped<ISiteService, SiteService>();
-        }
 
         public static IServiceCollection AddDbServices(this IServiceCollection services, IConfiguration configuration,
-            string connectionString)
-        {
-            return services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
+            string connectionString) => services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
                     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 23)))
                         .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>()))
                 .AddEFSecondLevelCache(options =>
@@ -34,6 +31,5 @@ namespace MundoBalloonApi.graphql
                     options.CacheAllQueries(CacheExpirationMode.Sliding, TimeSpan.FromMinutes(15));
                 })
                 .AddEasyCaching(options => { options.WithJson().UseRedis(configuration, CacheProviderName); });
-        }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-#nullable disable
-
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class Variant : BaseEntity
@@ -12,8 +10,8 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         }
 
         public int VariantId { get; set; }
-        public string Variant1 { get; set; }
-        public string VariantType { get; set; }
+        public string? Variant1 { get; set; }
+        public string? VariantType { get; set; }
 
         public virtual ICollection<VariantValue> VariantValues { get; set; }
     }

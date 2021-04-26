@@ -9,19 +9,18 @@ namespace MundoBalloonApi.business.Services
     public class UsersService : IUsersService
     {
         private readonly IMapper _mapper;
+        private readonly IUsersRepository _usersRepository;
 
-        private readonly IUsersRepository _repository;
-
-        public UsersService(IUsersRepository repository, IMapper mapper)
+        public UsersService(IUsersRepository usersRepository, IMapper mapper)
         {
-            _repository = repository;
+            _usersRepository = usersRepository;
             _mapper = mapper;
         }
-        
+
         public User Create(CreateUserRequest createUserRequest)
         {
             var user = _mapper.Map<infrastructure.Data.Models.User>(createUserRequest);
-            var result = _repository.Create(user);
+            var result = _usersRepository.Create(user);
             return _mapper.Map<User>(result);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using MundoBalloonApi.infrastructure.Data.Models;
 
@@ -6,20 +7,22 @@ namespace MundoBalloonApi.infrastructure.Data.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly MundoBalloonContext _context;
+        private readonly IDbContextFactory<MundoBalloonContext> _contextFactory;
 
-        public UsersRepository(MundoBalloonContext context)
+        public UsersRepository(IDbContextFactory<MundoBalloonContext> contextFactory)
         {
-            _context = context;
+            _contextFactory = contextFactory;
         }
 
         public User Create(User user)
         {
-            var profile = new UserProfile();
-            _context.Users.Add(user);
-            profile.UserId = user.Id;
-            _context.UserProfiles.Add(profile);
-            _context.SaveChanges();
+            var context = _contextFactory.CreateDbContext();
+            using (context)
+            {
+                context.Add(user);
+                context.SaveChanges();
+            }
+
             return user;
         }
     }

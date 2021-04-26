@@ -43,7 +43,8 @@ namespace MundoBalloonApi.business.Middleware
                 .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.OccasionCarts));
             CreateMap<OccasionCart, DTOs.Models.OccasionCart>()
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.OccasionCartDescription))
-                .ForMember(dest => dest.CartDetails, opt => opt.MapFrom(src => src.OcassionCartDetails));;
+                .ForMember(dest => dest.CartDetails, opt => opt.MapFrom(src => src.OcassionCartDetails));
+            ;
             CreateMap<OcassionCartDetail, DTOs.Models.OcassionCartDetail>()
                 .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         }

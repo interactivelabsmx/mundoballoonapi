@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class User : BaseEntity
@@ -15,14 +13,14 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         }
 
         public int Id { get; set; }
-        
-        public string UserId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public DateTime? EmailVerified { get; set; }
-        public string Image { get; set; }
 
-        public virtual UserProfile UserProfile { get; set; }
+        public string? UserId { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public DateTime? EmailVerified { get; set; }
+        public string? Image { get; set; }
+
+        public virtual UserProfile? UserProfile { get; set; }
         public virtual ICollection<UserAddrese> UserAddreses { get; set; }
         public virtual ICollection<UserCart> UserCarts { get; set; }
         public virtual ICollection<UserOccasion> UserOccasions { get; set; }

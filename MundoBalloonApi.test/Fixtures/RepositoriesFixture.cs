@@ -15,7 +15,6 @@ namespace MundoBalloonApi.test.Fixtures
             builder.UseMySql(connectionString, new MySqlServerVersion("8.0.22"));
             var options = builder.Options;
             MundoBalloonContext = new MundoBalloonContext(options);
-            UsersRepository = new UsersRepository(MundoBalloonContext);
         }
 
         public IUsersRepository UsersRepository { get; }

@@ -1,4 +1,5 @@
 using System;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,7 @@ using MundoBalloonApi.business.Middleware;
 using MundoBalloonApi.graphql.Middleware;
 using MundoBalloonApi.graphql.Sites;
 using MundoBalloonApi.graphql.Users;
+using MundoBalloonApi.graphql.Users.Types;
 using MySqlConnector;
 
 namespace MundoBalloonApi.graphql
@@ -40,13 +42,17 @@ namespace MundoBalloonApi.graphql
                 .AddHttpContextAccessor()
                 .AddAutoMapper(typeof(EntitiesMappingProfile))
                 .AddDbServices(Configuration, connectionString)
-                .AddAuthenticationServices();
+                .AddAuthenticationServices()
+                .AddInputValidationServices();
 
             services
                 .AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
                 .AddTypeExtension<UserQueries>()
                 .AddTypeExtension<SiteQueries>()
+                .AddMutationType(d => d.Name("Mutation"))
+                .AddTypeExtension<UserMutations>()
+                .AddFairyBread()
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
         }

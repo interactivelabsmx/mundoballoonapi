@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-#nullable disable
 
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
@@ -12,12 +11,12 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         }
 
         public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
+        public string? ProductName { get; set; }
+        public string? ProductDescription { get; set; }
         public int ProductCategoryId { get; set; }
         public decimal Price { get; set; }
 
-        public virtual ProductCategory ProductCategory { get; set; }
+        public virtual ProductCategory? ProductCategory { get; set; }
         public virtual ICollection<ProductVariant> ProductVariants { get; set; }
     }
 }
