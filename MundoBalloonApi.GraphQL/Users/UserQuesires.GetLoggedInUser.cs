@@ -18,7 +18,7 @@ namespace MundoBalloonApi.graphql.Users
         public business.DTOs.Models.User? GetLoggedInUser([ScopedService] MundoBalloonContext mundoBalloonContext,
             [Service] IMapper mapper, [GlobalStateAttribute("currentUser")] CurrentUser currentUser)
         {
-            var result = mundoBalloonContext.Users.Where(u => u.Id == 1).Include(u => u.UserProfile);
+            var result = mundoBalloonContext.Users.Where(u => u.UserId == currentUser.UserId).Include(u => u.UserProfile);
             var user = result.FirstOrDefault();
             return mapper.Map<business.DTOs.Models.User>(user);
         }
