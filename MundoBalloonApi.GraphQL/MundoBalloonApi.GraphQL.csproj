@@ -22,7 +22,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="EasyCaching.Redis" Version="1.2.1" />
     <PackageReference Include="EasyCaching.Serialization.Json" Version="1.2.0" />
-    <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="2.5.0" />
+    <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="2.7.0" />
     <PackageReference Include="FairyBread" Version="6.0.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.1.0" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="11.2.2" />
@@ -40,10 +40,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MundoBalloonApi.business\MundoBalloonApi.business.csproj" />
     <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Types" />
   </ItemGroup>
 
 </Project>
