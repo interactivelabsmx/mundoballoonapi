@@ -55,6 +55,17 @@ namespace MundoBalloonApi.graphql
                 .AddFairyBread()
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
+            
+            var origins = new string[] { "http://localhost", "http://localhost:3000" };
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins(origins)
+                        .AllowAnyHeader()
+                        .AllowAnyHeader();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +76,8 @@ namespace MundoBalloonApi.graphql
             app.UseAuthentication();
 
             app.UseRouting();
+
+            if (env.IsDevelopment()) app.UseCors();
 
             app.UseEndpoints(endpoints => { endpoints.MapGraphQL(); });
         }

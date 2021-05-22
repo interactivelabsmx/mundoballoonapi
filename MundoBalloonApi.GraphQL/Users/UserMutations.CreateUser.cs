@@ -1,6 +1,5 @@
 using System.Threading;
 using HotChocolate;
-using HotChocolate.Execution;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DTOs.Requests;
 using MundoBalloonApi.graphql.Users.Types;
@@ -21,4 +20,4 @@ namespace MundoBalloonApi.graphql.Users
             return new CreateUserPayload(user);
         }
     }
-}
+} 
