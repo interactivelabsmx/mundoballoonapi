@@ -14,6 +14,13 @@ namespace MundoBalloonApi.infrastructure.Data.Repositories
             _contextFactory = contextFactory;
         }
 
+        public User? GetById(string userId)
+        {
+            var context = _contextFactory.CreateDbContext();
+            using (context)
+                return context.Users.FirstOrDefault(u => u.UserId == userId);
+        }
+
         public User Create(User user)
         {
             var context = _contextFactory.CreateDbContext();

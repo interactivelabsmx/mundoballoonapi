@@ -22,7 +22,7 @@ namespace MundoBalloonApi.web.Controllers.Admin
         public IActionResult CreateUser([FromBody] CreateUserRequest createUserRequest)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var user = _service.Create(createUserRequest);
+            var user = _service.CreateOrGetUser(createUserRequest);
             return new ObjectResult(user);
         }
     }

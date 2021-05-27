@@ -22,9 +22,9 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         public decimal Price { get; set; }
         public decimal? CompareAtPrice { get; set; }
         public decimal? Weight { get; set; }
-        public bool Taxable { get; set; }
-        public bool StoreOnly { get; set; }
-        public bool IsBundle { get; set; }
+        public bool? Taxable { get; set; }
+        public bool? StoreOnly { get; set; }
+        public bool? IsBundle { get; set; }
 
         public virtual Product? Product { get; set; }
         public virtual VariantValue? VariantValue { get; set; }

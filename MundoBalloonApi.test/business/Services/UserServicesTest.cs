@@ -19,7 +19,7 @@ namespace MundoBalloonApi.test.business.Services
         [Fact]
         public void Test_GetUserOrCreateByAccountId_OK()
         {
-            var user = Service.Create(new CreateUserRequest
+            var user = Service.CreateOrGetUser(new CreateUserRequest
             {
                 UserId = "123",
             });

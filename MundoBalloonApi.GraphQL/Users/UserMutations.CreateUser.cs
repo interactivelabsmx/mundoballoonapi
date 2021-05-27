@@ -1,4 +1,5 @@
 using System.Threading;
+using System.Threading.Tasks;
 using HotChocolate;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DTOs.Requests;
@@ -13,11 +14,11 @@ namespace MundoBalloonApi.graphql.Users
             [Service] IUsersService usersService,
             CancellationToken cancellationToken)
         {
-            var user = usersService.Create(new CreateUserRequest()
+            var user = usersService.CreateOrGetUser(new CreateUserRequest()
             {
                 UserId = input.UserId
             });
             return new CreateUserPayload(user);
         }
     }
-} 
+}

@@ -10,7 +10,7 @@
         public string? State { get; set; }
         public string? Country { get; set; }
         public string? Zipcode { get; set; }
-        public bool IsBilling { get; set; }
-        public bool IsShipping { get; set; }
+        public bool? IsBilling { get; set; }
+        public bool? IsShipping { get; set; }
     }
 }
