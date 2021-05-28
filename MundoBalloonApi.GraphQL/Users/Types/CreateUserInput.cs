@@ -6,7 +6,6 @@ namespace MundoBalloonApi.graphql.Users.Types
     {
         public CreateUserInput(
             string userId)
-            : base()
         {
             UserId = userId;
         }

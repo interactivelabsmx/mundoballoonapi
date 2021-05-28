@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class VariantValue : BaseEntity

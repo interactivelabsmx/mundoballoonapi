@@ -5,12 +5,12 @@ namespace MundoBalloonApi.graphql.Common.Types
 {
     public class PayloadBase : ClientMutationBase
     {
-        protected PayloadBase() : base()
+        protected PayloadBase()
         {
             Errors = Array.Empty<UserError>();
         }
 
-        protected PayloadBase(IReadOnlyList<UserError> errors) : base()
+        protected PayloadBase(IReadOnlyList<UserError> errors)
         {
             Errors = errors;
         }

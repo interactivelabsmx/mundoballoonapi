@@ -21,7 +21,7 @@ namespace MundoBalloonApi.test.business.Services
         {
             var user = Service.CreateOrGetUser(new CreateUserRequest
             {
-                UserId = "123",
+                UserId = "123"
             });
             Assert.True(user.UserId != null);
         }

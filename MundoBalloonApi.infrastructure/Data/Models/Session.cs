@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class Session : BaseEntity

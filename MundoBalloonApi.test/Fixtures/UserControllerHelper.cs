@@ -18,7 +18,7 @@ namespace MundoBalloonApi.test.Fixtures
         {
             var user = new CreateUserRequest
             {
-                UserId = "123",
+                UserId = "123"
             };
             var httpResponse = await _client.PostAsJsonAsync("api/v1/admin/users", user);
             var resultUser = await httpResponse.Content.ReadAsAsync<User>();

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class UserOccasion : BaseEntity

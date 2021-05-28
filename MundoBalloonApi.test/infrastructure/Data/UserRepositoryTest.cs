@@ -22,7 +22,7 @@ namespace MundoBalloonApi.test.infrastructure.Data
             {
                 Name = "test",
                 Email = "test.user@mail.com",
-                EmailVerified = DateTime.Now,
+                EmailVerified = DateTime.Now
             });
             Assert.True(user.Email != null);
         }

@@ -1,6 +1,5 @@
 using System;
 using FirebaseAdmin;
-using FluentValidation;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +10,6 @@ using MundoBalloonApi.business.Middleware;
 using MundoBalloonApi.graphql.Middleware;
 using MundoBalloonApi.graphql.Sites;
 using MundoBalloonApi.graphql.Users;
-using MundoBalloonApi.graphql.Users.Types;
 using MySqlConnector;
 
 namespace MundoBalloonApi.graphql
@@ -29,12 +27,11 @@ namespace MundoBalloonApi.graphql
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
-            FirebaseApp.Create(new AppOptions()
+            FirebaseApp.Create(new AppOptions
             {
-                Credential = GoogleCredential.FromJson(Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? ""),
+                Credential = GoogleCredential.FromJson(Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "")
             });
-            
+
             // If you need dependency injection with your query object add your query type as a services.
             // services.AddSingleton<Query>();
 
@@ -63,8 +60,12 @@ namespace MundoBalloonApi.graphql
                 .AddFairyBread()
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
-            
-            var origins = new string[] { "http://localhost", "http://localhost:3000" };
+
+            var origins = new[]
+            {
+                "http://dev.mundoballoon.com", "http://dev.mundoballoon.com:3000", "https://dev.mundoballoon.com",
+                "https://dev.mundoballoon.com:3000"
+            };
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
