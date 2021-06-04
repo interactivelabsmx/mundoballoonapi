@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.DTOs.Models;
@@ -9,5 +10,6 @@ namespace MundoBalloonApi.business.Contracts
     {
         User CreateOrGetUser(CreateUserRequest createUserRequest);
         Task<UserRecord?> GetFirebaseUserById(string userId);
+        List<UserClaim> GetUserClaims(string userId);
     }
 }

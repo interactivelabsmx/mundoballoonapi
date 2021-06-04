@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace MundoBalloonApi.business.DTOs.Models
 {
     public class CurrentUser
     {
-        public CurrentUser(string userId, IEnumerable<Claim> claims, List<string> flatClaims)
+        public CurrentUser(string userId, IEnumerable<System.Security.Claims.Claim> claims, List<string> flatClaims)
         {
             UserId = userId;
             Claims = claims;
@@ -13,8 +12,7 @@ namespace MundoBalloonApi.business.DTOs.Models
         }
 
         public string UserId { get; }
-        public IEnumerable<Claim> Claims { get; }
-
+        public IEnumerable<System.Security.Claims.Claim> Claims { get; }
         public List<string> FlatClaims { get; }
     }
 }

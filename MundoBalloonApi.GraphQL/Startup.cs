@@ -23,8 +23,6 @@ namespace MundoBalloonApi.graphql
 
         private IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             FirebaseApp.Create(new AppOptions
@@ -61,11 +59,7 @@ namespace MundoBalloonApi.graphql
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
 
-            var origins = new[]
-            {
-                "http://dev.mundoballoon.com", "http://dev.mundoballoon.com:3000", "https://dev.mundoballoon.com",
-                "https://dev.mundoballoon.com:3000"
-            };
+            var origins = new[] { "https://dev.mundoballoon.com", "https://dev.mundoballoon.com:3000" };
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>

@@ -24,5 +24,6 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         public virtual ICollection<UserAddrese> UserAddreses { get; set; }
         public virtual ICollection<UserCart> UserCarts { get; set; }
         public virtual ICollection<UserOccasion> UserOccasions { get; set; }
+        public virtual ICollection<UserClaim> UserClaims { get; set; }
     }
 }

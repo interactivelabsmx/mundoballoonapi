@@ -16,5 +16,6 @@ namespace MundoBalloonApi.business.DTOs.Models
         public ICollection<UserAddrese>? Addreses { get; set; }
         public ICollection<UserCart>? Carts { get; set; }
         public ICollection<UserOccasion>? Occasions { get; set; }
+        public ICollection<UserClaim>? UserClaims { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using MundoBalloonApi.infrastructure.Data.Models;
@@ -33,6 +34,16 @@ namespace MundoBalloonApi.infrastructure.Data.Repositories
             }
 
             return user;
+        }
+
+        public List<UserClaim> GetUserClaims(string userId)
+        {
+            var context = _contextFactory.CreateDbContext();
+            using (context)
+            {
+                var userClaims =  context.UserClaims.Where(uc => uc.UserId == userId).Include(uc => uc.Claim).ToList();
+                return userClaims;
+            } 
         }
     }
 }

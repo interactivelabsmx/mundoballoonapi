@@ -1,4 +1,5 @@
-﻿using MundoBalloonApi.infrastructure.Data.Models;
+﻿using System.Collections.Generic;
+using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.infrastructure.Data.Contracts
 {
@@ -7,5 +8,7 @@ namespace MundoBalloonApi.infrastructure.Data.Contracts
         User? GetById(string userId);
 
         User Create(User user);
+
+        List<UserClaim> GetUserClaims(string userId);
     }
 }

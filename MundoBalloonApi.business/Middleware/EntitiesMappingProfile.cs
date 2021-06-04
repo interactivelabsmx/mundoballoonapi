@@ -26,13 +26,17 @@ namespace MundoBalloonApi.business.Middleware
             CreateMap<ProductVariantMedium, DTOs.Models.ProductVariantMedium>();
             CreateMap<Variant, DTOs.Models.Variant>();
             // USER
+            CreateMap<Claim, DTOs.Models.Claim>();
             CreateMap<User, DTOs.Models.User>()
                 .ForMember(dest => dest.Profile, opt => opt.MapFrom(src => src.UserProfile))
                 .ForMember(dest => dest.Addreses, opt => opt.MapFrom(src => src.UserAddreses))
                 .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
-                .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions));
+                .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions))
+                .ForMember(dest => dest.UserClaims, opt => opt.MapFrom(src => src.UserClaims));
             CreateMap<UserProfile, DTOs.Models.UserProfile>();
             CreateMap<UserAddrese, DTOs.Models.UserAddrese>();
+            CreateMap<UserClaim, DTOs.Models.UserClaim>()
+                .ForMember(dest => dest.Claim, opt => opt.MapFrom(src => src.Claim));
             // SAVED CARTS
             CreateMap<UserCart, DTOs.Models.UserCart>()
                 .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
@@ -44,7 +48,6 @@ namespace MundoBalloonApi.business.Middleware
             CreateMap<OccasionCart, DTOs.Models.OccasionCart>()
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.OccasionCartDescription))
                 .ForMember(dest => dest.CartDetails, opt => opt.MapFrom(src => src.OcassionCartDetails));
-            ;
             CreateMap<OcassionCartDetail, DTOs.Models.OcassionCartDetail>()
                 .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         }

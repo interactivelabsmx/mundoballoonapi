@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using FirebaseAdmin.Auth;
@@ -41,6 +42,12 @@ namespace MundoBalloonApi.business.Services
             {
                 return null;
             }
+        }
+
+        public List<UserClaim> GetUserClaims(string userId)
+        {
+            var result = _usersRepository.GetUserClaims(userId);
+            return _mapper.Map<List<UserClaim>>(result);
         }
     }
 }

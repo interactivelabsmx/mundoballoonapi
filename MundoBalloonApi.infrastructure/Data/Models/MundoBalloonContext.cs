@@ -13,6 +13,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         }
 
         public virtual DbSet<Account> Accounts { get; set; } = default!;
+        public virtual DbSet<Claim> Claims { get; set; }
         public virtual DbSet<OcassionCartDetail> OcassionCartDetails { get; set; } = default!;
         public virtual DbSet<OccasionCart> OccasionCarts { get; set; } = default!;
         public virtual DbSet<Product> Products { get; set; } = default!;
@@ -23,6 +24,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
         public virtual DbSet<User> Users { get; set; } = default!;
         public virtual DbSet<UserAddrese> UserAddreses { get; set; } = default!;
         public virtual DbSet<UserCart> UserCarts { get; set; } = default!;
+        public virtual DbSet<UserClaim> UserClaims { get; set; }
         public virtual DbSet<UserOccasion> UserOccasions { get; set; } = default!;
         public virtual DbSet<UserProfile> UserProfiles { get; set; } = default!;
         public virtual DbSet<Variant> Variants { get; set; } = default!;
@@ -89,6 +91,30 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                     .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+            });
+
+            modelBuilder.Entity<Claim>(entity =>
+            {
+                entity.ToTable("claims");
+
+                entity.HasIndex(e => e.Claim1, "claim_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.ClaimId).HasColumnName("claim_id");
+
+                entity.Property(e => e.Claim1)
+                    .HasMaxLength(45)
+                    .HasColumnName("claim");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("timestamp(6)")
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("timestamp(6)")
+                    .HasColumnName("updated_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
             });
 
             modelBuilder.Entity<OcassionCartDetail>(entity =>
@@ -590,6 +616,52 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_user_cart_Users1");
+            });
+            
+            modelBuilder.Entity<UserClaim>(entity =>
+            {
+                entity.HasKey(e => e.UserClaimsId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("user_claims");
+
+                entity.HasIndex(e => e.ClaimId, "fk_user_claims_claims1_idx");
+
+                entity.HasIndex(e => e.UserId, "fk_user_claims_users1_idx");
+
+                entity.Property(e => e.UserClaimsId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("user_claims_id");
+
+                entity.Property(e => e.ClaimId).HasColumnName("claim_id");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("timestamp(6)")
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("timestamp(6)")
+                    .HasColumnName("updated_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .HasColumnName("userId");
+
+                entity.HasOne(d => d.Claim)
+                    .WithMany(p => p.UserClaims)
+                    .HasForeignKey(d => d.ClaimId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_user_claims_claims1");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserClaims)
+                    .HasPrincipalKey(p => p.UserId)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_user_claims_users1");
             });
 
             modelBuilder.Entity<UserOccasion>(entity =>
