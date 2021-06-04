@@ -41,9 +41,9 @@ namespace MundoBalloonApi.infrastructure.Data.Repositories
             var context = _contextFactory.CreateDbContext();
             using (context)
             {
-                var userClaims =  context.UserClaims.Where(uc => uc.UserId == userId).Include(uc => uc.Claim).ToList();
+                var userClaims = context.UserClaims.Where(uc => uc.UserId == userId).Include(uc => uc.Claim).ToList();
                 return userClaims;
-            } 
+            }
         }
     }
 }

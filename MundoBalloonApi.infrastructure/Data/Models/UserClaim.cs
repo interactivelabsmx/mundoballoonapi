@@ -1,5 +1,4 @@
-﻿
-namespace MundoBalloonApi.infrastructure.Data.Models
+﻿namespace MundoBalloonApi.infrastructure.Data.Models
 {
     public class UserClaim : BaseEntity
     {

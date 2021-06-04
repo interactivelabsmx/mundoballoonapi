@@ -59,7 +59,7 @@ namespace MundoBalloonApi.graphql
                 .AddAuthorization()
                 .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
 
-            var origins = new[] { "https://dev.mundoballoon.com", "https://dev.mundoballoon.com:3000" };
+            var origins = new[] {"https://dev.mundoballoon.com", "https://dev.mundoballoon.com:3000"};
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>

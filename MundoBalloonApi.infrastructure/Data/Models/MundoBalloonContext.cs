@@ -617,7 +617,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_user_cart_Users1");
             });
-            
+
             modelBuilder.Entity<UserClaim>(entity =>
             {
                 entity.HasKey(e => e.UserClaimsId)
