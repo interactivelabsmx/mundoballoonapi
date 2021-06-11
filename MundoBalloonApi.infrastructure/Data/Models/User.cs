@@ -10,6 +10,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models
             UserAddreses = new HashSet<UserAddrese>();
             UserCarts = new HashSet<UserCart>();
             UserOccasions = new HashSet<UserOccasion>();
+            UserClaims = new HashSet<UserClaim>();
         }
 
         public int Id { get; set; }

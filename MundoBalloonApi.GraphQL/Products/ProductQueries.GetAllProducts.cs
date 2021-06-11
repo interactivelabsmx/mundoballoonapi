@@ -1,0 +1,22 @@
+using System.Linq;
+using AutoMapper;
+using HotChocolate;
+using HotChocolate.Data;
+using HotChocolate.Types;
+using MundoBalloonApi.infrastructure.Data.Models;
+using Product = MundoBalloonApi.business.DTOs.Models.Product;
+
+namespace MundoBalloonApi.graphql.Products
+{
+    public partial class ProductQueries
+    {
+        [UseDbContext(typeof(MundoBalloonContext))]
+        [UsePaging]
+        [UseSorting]
+        public IQueryable<Product> GetAllProducts([ScopedService] MundoBalloonContext mundoBalloonContext, [Service] IMapper mapper)
+        {
+            var products = mundoBalloonContext.Products;
+            return mapper.ProjectTo<Product>(products);
+        }
+    }
+}
