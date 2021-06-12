@@ -33,7 +33,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\MundoBalloonApi.business\MundoBalloonApi.business.csproj" />
         <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj" />
         <ProjectReference Include="..\MundoBalloonApi.web\MundoBalloonApi.web.csproj" />
     </ItemGroup>
