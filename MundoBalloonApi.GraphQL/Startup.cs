@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using MundoBalloonApi.business.Middleware;
 using MundoBalloonApi.graphql.Middleware;
 using MundoBalloonApi.graphql.Products;
-using MundoBalloonApi.graphql.Sites;
+using MundoBalloonApi.graphql.Site;
 using MundoBalloonApi.graphql.Users;
 using MySqlConnector;
 
