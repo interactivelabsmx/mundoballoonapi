@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using MundoBalloonApi.business.DTOs.Models;
+using MundoBalloonApi.business.DataObjects.Entities;
 
 namespace MundoBalloonApi.business.Contracts
 {

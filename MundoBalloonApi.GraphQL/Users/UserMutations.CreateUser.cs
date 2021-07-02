@@ -1,8 +1,8 @@
 using System.Threading;
 using HotChocolate;
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DTOs.Requests;
-using MundoBalloonApi.graphql.Users.Types;
+using MundoBalloonApi.business.DataObjects.Requests;
+using MundoBalloonApi.graphql.Users.Requests;
 
 namespace MundoBalloonApi.graphql.Users
 {

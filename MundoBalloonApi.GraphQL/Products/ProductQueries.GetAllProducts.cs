@@ -4,7 +4,7 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using MundoBalloonApi.infrastructure.Data.Models;
-using Product = MundoBalloonApi.business.DTOs.Models.Product;
+using Product = MundoBalloonApi.business.DataObjects.Entities.Product;
 
 namespace MundoBalloonApi.graphql.Products
 {
@@ -13,7 +13,8 @@ namespace MundoBalloonApi.graphql.Products
         [UseDbContext(typeof(MundoBalloonContext))]
         [UsePaging]
         [UseSorting]
-        public IQueryable<Product> GetAllProducts([ScopedService] MundoBalloonContext mundoBalloonContext, [Service] IMapper mapper)
+        public IQueryable<Product> GetAllProducts([ScopedService] MundoBalloonContext mundoBalloonContext,
+            [Service] IMapper mapper)
         {
             var products = mundoBalloonContext.Products;
             return mapper.ProjectTo<Product>(products);

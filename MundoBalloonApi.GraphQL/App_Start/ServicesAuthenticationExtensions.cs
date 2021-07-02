@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DTOs.Models;
+using MundoBalloonApi.business.DataObjects.Entities;
 using Claim = System.Security.Claims.Claim;
 
 namespace MundoBalloonApi.graphql

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DTOs.Models;
+using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
 
@@ -28,25 +28,25 @@ namespace MundoBalloonApi.business.Services
             if (includeProducts)
             {
                 var products = await _productsRepository.GetProducts().ToListAsync();
-                site.Products = _mapper.Map<List<Product>, List<DTOs.Models.Product>>(products);
+                site.Products = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
             }
 
             if (includeFeaturedProducts)
             {
                 var products = await _productsRepository.GetProducts().ToListAsync();
-                site.FeaturedProducts = _mapper.Map<List<Product>, List<DTOs.Models.Product>>(products);
+                site.FeaturedProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
             }
 
             if (includeBestSellingProducts)
             {
                 var products = await _productsRepository.GetProducts().ToListAsync();
-                site.BestSellingProducts = _mapper.Map<List<Product>, List<DTOs.Models.Product>>(products);
+                site.BestSellingProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
             }
 
             if (includeNewestProducts)
             {
                 var products = await _productsRepository.GetProducts().ToListAsync();
-                site.NewestProducts = _mapper.Map<List<Product>, List<DTOs.Models.Product>>(products);
+                site.NewestProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
             }
 
             return site;

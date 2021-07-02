@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DTOs.Models;
-using MundoBalloonApi.business.DTOs.Requests;
+using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 
 namespace MundoBalloonApi.business.Services

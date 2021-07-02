@@ -4,9 +4,9 @@ using HotChocolate;
 using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Data;
 using Microsoft.EntityFrameworkCore;
-using MundoBalloonApi.business.DTOs.Models;
+using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
-using User = MundoBalloonApi.business.DTOs.Models.User;
+using User = MundoBalloonApi.business.DataObjects.Entities.User;
 
 namespace MundoBalloonApi.graphql.Users
 {

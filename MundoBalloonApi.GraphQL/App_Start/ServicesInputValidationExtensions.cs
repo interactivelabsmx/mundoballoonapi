@@ -1,6 +1,6 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using MundoBalloonApi.graphql.Users.Types;
+using MundoBalloonApi.graphql.Users.Requests;
 
 namespace MundoBalloonApi.graphql
 {

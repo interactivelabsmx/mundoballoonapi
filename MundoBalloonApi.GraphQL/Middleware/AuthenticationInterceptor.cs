@@ -2,7 +2,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using HotChocolate.AspNetCore;
-using MundoBalloonApi.business.DTOs.Models;
+using MundoBalloonApi.business.DataObjects.Entities;
 
 namespace MundoBalloonApi.graphql.Middleware
 {

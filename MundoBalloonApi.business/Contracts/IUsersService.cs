@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FirebaseAdmin.Auth;
-using MundoBalloonApi.business.DTOs.Models;
-using MundoBalloonApi.business.DTOs.Requests;
+using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DataObjects.Requests;
 
 namespace MundoBalloonApi.business.Contracts
 {

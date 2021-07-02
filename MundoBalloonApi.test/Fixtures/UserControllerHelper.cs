@@ -1,6 +1,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
-using MundoBalloonApi.business.DTOs.Requests;
+using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.test.Fixtures
