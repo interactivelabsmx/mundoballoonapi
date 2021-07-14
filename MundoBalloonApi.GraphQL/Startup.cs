@@ -57,6 +57,7 @@ namespace MundoBalloonApi.graphql
                 .AddTypeExtension<ProductQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<UserMutations>()
+                .AddTypeExtension<ProductMutations>()
                 .AddSorting()
                 .AddFairyBread()
                 .AddAuthorization()

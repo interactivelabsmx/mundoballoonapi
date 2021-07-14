@@ -7,13 +7,12 @@ namespace MundoBalloonApi.graphql.Products
 {
     public partial class ProductMutations
     {
-        public CreateProductPayload CreateProduct(
-            CreateProductRequest input,
+        public CreateProductVariantPayload CreateProductVariant(
+            CreateProductVariantRequest input,
             [Service] IProductService productService)
         {
-            
-            var product = productService.CreateProduct(input);
-            return new CreateProductPayload(product);
+            var product = productService.CreateProductVariant(input);
+            return new CreateProductVariantPayload(product);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Threading;
 using HotChocolate;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Requests;
@@ -9,9 +8,8 @@ namespace MundoBalloonApi.graphql.Users
     public partial class UserMutations
     {
         public CreateUserPayload CreateUser(
-            CreateUserInput input,
-            [Service] IUsersService usersService,
-            CancellationToken cancellationToken)
+            CreateUserRequest input,
+            [Service] IUsersService usersService)
         {
             var user = usersService.CreateOrGetUser(new CreateUserRequest
             {

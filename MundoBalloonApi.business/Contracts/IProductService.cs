@@ -5,6 +5,7 @@ namespace MundoBalloonApi.business.Contracts
 {
     public interface IProductService
     {
-        Product CreateProduct(CreateUserRequest createUserRequest);
+        Product CreateProduct(CreateProductRequest createProductRequest);
+        ProductVariant CreateProductVariant(CreateProductVariantRequest request);
     }
 }
