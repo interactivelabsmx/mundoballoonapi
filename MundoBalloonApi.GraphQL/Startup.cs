@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MundoBalloonApi.business.Middleware;
+using MundoBalloonApi.graphql.Collections;
 using MundoBalloonApi.graphql.Middleware;
 using MundoBalloonApi.graphql.Products;
 using MundoBalloonApi.graphql.Site;
@@ -55,6 +56,7 @@ namespace MundoBalloonApi.graphql
                 .AddTypeExtension<UserQueries>()
                 .AddTypeExtension<SiteQueries>()
                 .AddTypeExtension<ProductQueries>()
+                .AddTypeExtension<CollectionQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<UserMutations>()
                 .AddTypeExtension<ProductMutations>()
