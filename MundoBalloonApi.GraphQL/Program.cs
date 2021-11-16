@@ -1,19 +1,17 @@
 ﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 
-namespace MundoBalloonApi.graphql
+namespace MundoBalloonApi.graphql;
+
+public class Program
 {
-    public class Program
+    public static Task Main(string[] args)
     {
-        public static Task Main(string[] args)
-        {
-            return CreateWebHostBuilder(args).Build().RunAsync();
-        }
+        return CreateWebHostBuilder(args).Build().RunAsync();
+    }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-        }
+    private static IWebHostBuilder CreateWebHostBuilder(string[] args)
+    {
+        return WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>();
     }
 }

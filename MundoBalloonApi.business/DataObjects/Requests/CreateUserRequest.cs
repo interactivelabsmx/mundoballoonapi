@@ -1,8 +1,7 @@
-namespace MundoBalloonApi.business.DataObjects.Requests
+namespace MundoBalloonApi.business.DataObjects.Requests;
+
+public class CreateUserRequest
 {
-    public class CreateUserRequest
-    {
-        public string? UserId { get; set; }
-        public string? AccessToken { get; set; }
-    }
+    public string? UserId { get; set; }
+    public string? AccessToken { get; set; }
 }

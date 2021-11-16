@@ -1,11 +1,9 @@
-using System.Threading.Tasks;
 using MundoBalloonApi.business.DataObjects.Entities;
 
-namespace MundoBalloonApi.business.Contracts
+namespace MundoBalloonApi.business.Contracts;
+
+public interface ISiteService
 {
-    public interface ISiteService
-    {
-        Task<Site> GetSite(bool includeProducts, bool includeFeaturedProducts, bool includeBestSellingProducts,
-            bool includeNewestProducts);
-    }
+    Task<Site> GetSite(bool includeProducts, bool includeFeaturedProducts, bool includeBestSellingProducts,
+        bool includeNewestProducts);
 }

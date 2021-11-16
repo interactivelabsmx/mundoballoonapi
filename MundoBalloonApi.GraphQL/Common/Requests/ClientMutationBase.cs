@@ -1,6 +1,5 @@
-namespace MundoBalloonApi.graphql.Common.Requests
+namespace MundoBalloonApi.graphql.Common.Requests;
+
+public class ClientMutationBase
 {
-    public class ClientMutationBase
-    {
-    }
 }

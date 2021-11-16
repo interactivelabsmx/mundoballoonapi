@@ -1,18 +1,15 @@
-﻿using System.Collections.Generic;
+﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-namespace MundoBalloonApi.infrastructure.Data.Models
+public class ProductCategory : BaseEntity
 {
-    public class ProductCategory : BaseEntity
+    public ProductCategory()
     {
-        public ProductCategory()
-        {
-            Products = new HashSet<Product>();
-        }
-
-        public int ProductCategoryId { get; set; }
-        public string? ProductCategoryName { get; set; }
-        public string? ProductCategoryDescription { get; set; }
-
-        public virtual ICollection<Product> Products { get; set; }
+        Products = new HashSet<Product>();
     }
+
+    public int ProductCategoryId { get; set; }
+    public string? ProductCategoryName { get; set; }
+    public string? ProductCategoryDescription { get; set; }
+
+    public virtual ICollection<Product> Products { get; set; }
 }

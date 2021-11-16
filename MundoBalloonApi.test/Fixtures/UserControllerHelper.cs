@@ -1,28 +1,25 @@
-using System.Net.Http;
-using System.Threading.Tasks;
 using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.infrastructure.Data.Models;
 
-namespace MundoBalloonApi.test.Fixtures
+namespace MundoBalloonApi.test.Fixtures;
+
+public class UserControllerHelper
 {
-    public class UserControllerHelper
+    private readonly HttpClient _client;
+
+    public UserControllerHelper(HttpClient client)
     {
-        private readonly HttpClient _client;
+        _client = client;
+    }
 
-        public UserControllerHelper(HttpClient client)
+    public async Task<User> CreateProfile()
+    {
+        var user = new CreateUserRequest
         {
-            _client = client;
-        }
-
-        public async Task<User> CreateProfile()
-        {
-            var user = new CreateUserRequest
-            {
-                UserId = "123"
-            };
-            var httpResponse = await _client.PostAsJsonAsync("api/v1/admin/users", user);
-            var resultUser = await httpResponse.Content.ReadAsAsync<User>();
-            return resultUser;
-        }
+            UserId = "123"
+        };
+        var httpResponse = await _client.PostAsJsonAsync("api/v1/admin/users", user);
+        var resultUser = await httpResponse.Content.ReadAsAsync<User>();
+        return resultUser;
     }
 }

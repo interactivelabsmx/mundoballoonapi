@@ -1,18 +1,16 @@
-using HotChocolate;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.graphql.Products.Requests;
 
-namespace MundoBalloonApi.graphql.Products
+namespace MundoBalloonApi.graphql.Products;
+
+public partial class ProductMutations
 {
-    public partial class ProductMutations
+    public CreateProductVariantPayload CreateProductVariant(
+        CreateProductVariantRequest input,
+        [Service] IProductService productService)
     {
-        public CreateProductVariantPayload CreateProductVariant(
-            CreateProductVariantRequest input,
-            [Service] IProductService productService)
-        {
-            var product = productService.CreateProductVariant(input);
-            return new CreateProductVariantPayload(product);
-        }
+        var product = productService.CreateProductVariant(input);
+        return new CreateProductVariantPayload(product);
     }
 }

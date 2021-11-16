@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using MundoBalloonApi.infrastructure.Data.Models;
+﻿using MundoBalloonApi.infrastructure.Data.Models;
 
-namespace MundoBalloonApi.infrastructure.Data.Contracts
+namespace MundoBalloonApi.infrastructure.Data.Contracts;
+
+public interface IUsersRepository
 {
-    public interface IUsersRepository
-    {
-        User? GetById(string userId);
+    User? GetById(string userId);
 
-        User Create(User user);
+    User Create(User user);
 
-        List<UserClaim> GetUserClaims(string userId);
-    }
+    List<UserClaim> GetUserClaims(string userId);
 }

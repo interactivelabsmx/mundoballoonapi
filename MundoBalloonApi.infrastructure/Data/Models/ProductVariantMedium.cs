@@ -1,13 +1,12 @@
-﻿namespace MundoBalloonApi.infrastructure.Data.Models
-{
-    public class ProductVariantMedium : BaseEntity
-    {
-        public int ProductVariantMediaId { get; set; }
-        public int ProductVariantId { get; set; }
-        public string? MediaType { get; set; }
-        public string? Url { get; set; }
-        public string? Quality { get; set; }
+﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-        public virtual ProductVariant? ProductVariant { get; set; }
-    }
+public class ProductVariantMedium : BaseEntity
+{
+    public int ProductVariantMediaId { get; set; }
+    public int ProductVariantId { get; set; }
+    public string? MediaType { get; set; }
+    public string? Url { get; set; }
+    public string? Quality { get; set; }
+
+    public virtual ProductVariant? ProductVariant { get; set; }
 }

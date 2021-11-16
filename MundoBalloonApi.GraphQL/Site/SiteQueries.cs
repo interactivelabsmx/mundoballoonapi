@@ -1,16 +1,12 @@
-using System.Threading.Tasks;
-using HotChocolate;
-using HotChocolate.Types;
 using MundoBalloonApi.business.Contracts;
 
-namespace MundoBalloonApi.graphql.Site
+namespace MundoBalloonApi.graphql.Site;
+
+[ExtendObjectType(Name = "Query")]
+public class SiteQueries
 {
-    [ExtendObjectType(Name = "Query")]
-    public class SiteQueries
+    public async Task<business.DataObjects.Entities.Site> GetSite([Service] ISiteService siteService)
     {
-        public async Task<business.DataObjects.Entities.Site> GetSite([Service] ISiteService siteService)
-        {
-            return await siteService.GetSite(true, true, true, true);
-        }
+        return await siteService.GetSite(true, true, true, true);
     }
 }

@@ -1,11 +1,10 @@
 using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.business.DataObjects.Requests;
 
-namespace MundoBalloonApi.business.Contracts
+namespace MundoBalloonApi.business.Contracts;
+
+public interface IProductService
 {
-    public interface IProductService
-    {
-        Product CreateProduct(CreateProductRequest createProductRequest);
-        ProductVariant CreateProductVariant(CreateProductVariantRequest request);
-    }
+    Product CreateProduct(CreateProductRequest createProductRequest);
+    ProductVariant CreateProductVariant(CreateProductVariantRequest request);
 }

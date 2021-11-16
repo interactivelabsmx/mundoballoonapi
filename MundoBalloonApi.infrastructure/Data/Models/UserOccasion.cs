@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-namespace MundoBalloonApi.infrastructure.Data.Models
+public class UserOccasion : BaseEntity
 {
-    public class UserOccasion : BaseEntity
+    public UserOccasion()
     {
-        public UserOccasion()
-        {
-            OccasionCarts = new HashSet<OccasionCart>();
-        }
-
-        public int UserOccasionId { get; set; }
-        public int? UserId { get; set; }
-        public string? OccasionName { get; set; }
-        public DateTime? OccasionDate { get; set; }
-        public string? OccasionDetails { get; set; }
-
-        public virtual User? User { get; set; }
-        public virtual ICollection<OccasionCart> OccasionCarts { get; set; }
+        OccasionCarts = new HashSet<OccasionCart>();
     }
+
+    public int UserOccasionId { get; set; }
+    public int? UserId { get; set; }
+    public string? OccasionName { get; set; }
+    public DateTime? OccasionDate { get; set; }
+    public string? OccasionDetails { get; set; }
+
+    public virtual User? User { get; set; }
+    public virtual ICollection<OccasionCart> OccasionCarts { get; set; }
 }

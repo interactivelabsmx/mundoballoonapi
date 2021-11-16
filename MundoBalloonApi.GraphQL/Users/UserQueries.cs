@@ -1,9 +1,6 @@
-using HotChocolate.Types;
+namespace MundoBalloonApi.graphql.Users;
 
-namespace MundoBalloonApi.graphql.Users
+[ExtendObjectType(Name = "Query")]
+public partial class UserQueries
 {
-    [ExtendObjectType(Name = "Query")]
-    public partial class UserQueries
-    {
-    }
 }

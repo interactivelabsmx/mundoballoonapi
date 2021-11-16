@@ -1,9 +1,6 @@
-using HotChocolate.Types;
+namespace MundoBalloonApi.graphql.Users;
 
-namespace MundoBalloonApi.graphql.Users
+[ExtendObjectType(Name = "Mutation")]
+public partial class UserMutations
 {
-    [ExtendObjectType(Name = "Mutation")]
-    public partial class UserMutations
-    {
-    }
 }

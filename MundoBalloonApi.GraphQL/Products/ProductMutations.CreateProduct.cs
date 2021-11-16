@@ -1,21 +1,18 @@
-using HotChocolate;
 using HotChocolate.AspNetCore.Authorization;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.graphql.Products.Requests;
 
-namespace MundoBalloonApi.graphql.Products
+namespace MundoBalloonApi.graphql.Products;
+
+[Authorize]
+public partial class ProductMutations
 {
-    [Authorize]
-    public partial class ProductMutations
+    public CreateProductPayload CreateProduct(
+        CreateProductRequest input,
+        [Service] IProductService productService)
     {
-        public CreateProductPayload CreateProduct(
-            CreateProductRequest input,
-            [Service] IProductService productService)
-        {
-            
-            var product = productService.CreateProduct(input);
-            return new CreateProductPayload(product);
-        }
+        var product = productService.CreateProduct(input);
+        return new CreateProductPayload(product);
     }
 }
