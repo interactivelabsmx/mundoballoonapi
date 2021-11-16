@@ -4,10 +4,11 @@ using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.test.Fixtures;
 
-public class RepositoriesFixture : IDisposable
+public abstract class RepositoriesFixture : IDisposable
 {
-    public RepositoriesFixture()
+    protected RepositoriesFixture(IUsersRepository usersRepository)
     {
+        UsersRepository = usersRepository;
         const string connectionString = "Server=localhost;Database=mundoBalloon_test;User=root;Password=#Labs2013;";
         var builder = new DbContextOptionsBuilder<MundoBalloonContext>();
         builder.UseMySql(connectionString, new MySqlServerVersion("8.0.22"));

@@ -42,7 +42,7 @@ public static class ServicesAuthenticationExtensions
 
     private static Claim UserClaimConverter(UserClaim userClaim)
     {
-        var claim = userClaim?.Claim?.Claim1 ?? "";
+        var claim = userClaim.Claim?.Claim1 ?? "";
         return new Claim(claim, "true");
     }
 }

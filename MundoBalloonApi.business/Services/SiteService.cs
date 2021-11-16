@@ -22,30 +22,30 @@ public class SiteService : ISiteService
         bool includeBestSellingProducts,
         bool includeNewestProducts)
     {
+        List<Product> products;
         var site = new Site();
         if (includeProducts)
         {
-            var products = await _productsRepository.GetProducts().ToListAsync();
+            products = await _productsRepository.GetProducts().ToListAsync();
             site.Products = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
         }
 
         if (includeFeaturedProducts)
         {
-            var products = await _productsRepository.GetProducts().ToListAsync();
+            products = await _productsRepository.GetProducts().ToListAsync();
             site.FeaturedProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
         }
 
         if (includeBestSellingProducts)
         {
-            var products = await _productsRepository.GetProducts().ToListAsync();
+            products = await _productsRepository.GetProducts().ToListAsync();
             site.BestSellingProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
         }
 
-        if (includeNewestProducts)
-        {
-            var products = await _productsRepository.GetProducts().ToListAsync();
-            site.NewestProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
-        }
+        if (!includeNewestProducts) return site;
+
+        products = await _productsRepository.GetProducts().ToListAsync();
+        site.NewestProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
 
         return site;
     }

@@ -8,10 +8,10 @@ public class MapperFixture : IDisposable
     public MapperFixture()
     {
         var config = new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMappingProfile>(); });
-        mapper = new Mapper(config);
+        Mapper = new Mapper(config);
     }
 
-    public IMapper mapper { get; }
+    private IMapper Mapper { get; }
 
     public void Dispose()
     {
