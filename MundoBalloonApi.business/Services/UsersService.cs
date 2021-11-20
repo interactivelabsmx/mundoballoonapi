@@ -23,7 +23,9 @@ public class UsersService : IUsersService
         var currentUser = _usersRepository.GetById(createUserRequest.UserId);
         if (currentUser != null) return _mapper.Map<User>(currentUser);
 
-        var user = _mapper.Map<infrastructure.Data.Models.User>(createUserRequest);
+        var user = new infrastructure.Data.Models.User() {
+            UserId = createUserRequest.UserId,
+        };
         var result = _usersRepository.Create(user);
         return _mapper.Map<User>(result);
     }
