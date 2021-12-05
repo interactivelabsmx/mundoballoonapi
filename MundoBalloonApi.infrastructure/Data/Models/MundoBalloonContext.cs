@@ -27,6 +27,7 @@ public class MundoBalloonContext : DbContext
     public virtual DbSet<Variant> Variants { get; set; } = default!;
     public virtual DbSet<VariantValue> VariantValues { get; set; } = default!;
     public virtual DbSet<VerificationRequest> VerificationRequests { get; set; } = default!;
+    public virtual DbSet<CountryCode> CountryCodes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -828,6 +829,69 @@ public class MundoBalloonContext : DbContext
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
         });
+        
+        modelBuilder.Entity<CountryCode>(entity =>
+            {
+                entity.HasKey(e => new { e.Fifa, e.Wmo })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                entity.ToTable("country_codes");
+
+                entity.HasIndex(e => e.Dial, "country_codes_Dial_index");
+
+                entity.Property(e => e.Fifa)
+                    .HasMaxLength(3)
+                    .HasColumnName("FIFA");
+
+                entity.Property(e => e.Wmo)
+                    .HasMaxLength(3)
+                    .HasColumnName("WMO");
+
+                entity.Property(e => e.Capital).HasColumnType("text");
+
+                entity.Property(e => e.Continent).HasMaxLength(2);
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("timestamp(6)")
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                entity.Property(e => e.Dial).HasMaxLength(5);
+
+                entity.Property(e => e.Ds)
+                    .HasMaxLength(3)
+                    .HasColumnName("DS");
+
+                entity.Property(e => e.GeonameId).HasColumnName("Geoname ID");
+
+                entity.Property(e => e.Ioc)
+                    .HasMaxLength(3)
+                    .HasColumnName("IOC");
+
+                entity.Property(e => e.Itu)
+                    .HasMaxLength(3)
+                    .HasColumnName("ITU");
+
+                entity.Property(e => e.Languages).HasColumnType("text");
+
+                entity.Property(e => e.OfficialNameEn)
+                    .HasColumnType("text")
+                    .HasColumnName("official_name_en");
+
+                entity.Property(e => e.OfficialNameEs)
+                    .HasColumnType("text")
+                    .HasColumnName("official_name_es");
+
+                entity.Property(e => e.Supported)
+                    .HasColumnName("supported")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("timestamp(6)")
+                    .HasColumnName("updated_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            });
     }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
