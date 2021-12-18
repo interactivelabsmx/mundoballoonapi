@@ -14,4 +14,10 @@ public class CollectionQueries
         var products = mundoBalloonContext.ProductCategories;
         return mapper.ProjectTo<ProductCategory>(products);
     }
+
+    [UseDbContext(typeof(MundoBalloonContext))]
+    public IQueryable<CountryCode> GetCountryCodes([ScopedService] MundoBalloonContext mundoBalloonContext)
+    {
+        return mundoBalloonContext.CountryCodes.Where(cc => cc.Supported == true);
+    }
 }

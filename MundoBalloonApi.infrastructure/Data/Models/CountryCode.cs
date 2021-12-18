@@ -1,6 +1,6 @@
 ﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-public partial class CountryCode : BaseEntity
+public class CountryCode : BaseEntity
 {
     public string Fifa { get; set; }
     public string Wmo { get; set; }
@@ -16,4 +16,3 @@ public partial class CountryCode : BaseEntity
     public int? GeonameId { get; set; }
     public bool? Supported { get; set; }
 }
-
