@@ -10,7 +10,7 @@ public class MundoBalloonContext : DbContext
     }
 
     public virtual DbSet<Account> Accounts { get; set; } = default!;
-    public virtual DbSet<Claim> Claims { get; set; }
+    public virtual DbSet<Claim> Claims { get; set; } = default!;
     public virtual DbSet<OcassionCartDetail> OcassionCartDetails { get; set; } = default!;
     public virtual DbSet<OccasionCart> OccasionCarts { get; set; } = default!;
     public virtual DbSet<Product> Products { get; set; } = default!;
@@ -21,13 +21,13 @@ public class MundoBalloonContext : DbContext
     public virtual DbSet<User> Users { get; set; } = default!;
     public virtual DbSet<UserAddrese> UserAddreses { get; set; } = default!;
     public virtual DbSet<UserCart> UserCarts { get; set; } = default!;
-    public virtual DbSet<UserClaim> UserClaims { get; set; }
+    public virtual DbSet<UserClaim> UserClaims { get; set; } = default!;
     public virtual DbSet<UserOccasion> UserOccasions { get; set; } = default!;
     public virtual DbSet<UserProfile> UserProfiles { get; set; } = default!;
     public virtual DbSet<Variant> Variants { get; set; } = default!;
     public virtual DbSet<VariantValue> VariantValues { get; set; } = default!;
     public virtual DbSet<VerificationRequest> VerificationRequests { get; set; } = default!;
-    public virtual DbSet<CountryCode> CountryCodes { get; set; }
+    public virtual DbSet<CountryCode> CountryCodes { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
