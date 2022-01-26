@@ -17,10 +17,8 @@ public class ProductVariant : BaseEntity
     public int ProductId { get; set; }
     public string? ProductVariantName { get; set; }
     public string? ProductVariantDescription { get; set; }
-    public decimal Price { get; set; }
-    public decimal? CompareAtPrice { get; set; }
-    public decimal? Weight { get; set; }
-    public bool? Taxable { get; set; }
+    public double Price { get; set; }
+    public double? Weight { get; set; }
     public bool? StoreOnly { get; set; }
     public bool? IsBundle { get; set; }
 

@@ -1,11 +1,9 @@
-using FairyBread;
 using FluentValidation;
 using MundoBalloonApi.business.DataObjects.Requests;
 
 namespace MundoBalloonApi.graphql.Products.Requests;
 
-public class CreateProductVariantInputValidator : AbstractValidator<CreateProductVariantRequest>,
-    IRequiresOwnScopeValidator
+public class CreateProductVariantInputValidator : AbstractValidator<CreateProductVariantRequest>
 {
     public CreateProductVariantInputValidator()
     {

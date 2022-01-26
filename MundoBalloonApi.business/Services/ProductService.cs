@@ -44,9 +44,7 @@ public class ProductService : IProductService
             ProductVariantName = request.Name,
             ProductVariantDescription = request.Description,
             Price = request.Price,
-            CompareAtPrice = request.CompareAtPrice ?? 0,
             Weight = request.Weight ?? 0,
-            Taxable = request.Taxable ?? false,
             StoreOnly = request.StoreOnly ?? false,
             IsBundle = request.IsBundle ?? false
         };

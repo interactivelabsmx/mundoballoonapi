@@ -11,7 +11,7 @@ public class Product : BaseEntity
     public string? ProductName { get; set; }
     public string? ProductDescription { get; set; }
     public int ProductCategoryId { get; set; }
-    public decimal Price { get; set; }
+    public double Price { get; set; }
 
     public virtual ProductCategory? ProductCategory { get; set; }
     public virtual ICollection<ProductVariant> ProductVariants { get; set; }

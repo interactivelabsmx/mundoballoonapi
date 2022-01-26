@@ -55,7 +55,6 @@ public class Startup
             .AddTypeExtension<UserMutations>()
             .AddTypeExtension<ProductMutations>()
             .AddSorting()
-            .AddFairyBread()
             .AddAuthorization()
             .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
 

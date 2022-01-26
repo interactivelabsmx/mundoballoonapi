@@ -87,6 +87,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
         });
@@ -113,6 +115,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
         modelBuilder.Entity<OcassionCartDetail>(entity =>
@@ -156,6 +160,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.HasOne(d => d.OccasionCart)
                 .WithMany(p => p.OcassionCartDetails)
@@ -208,6 +214,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.UserOccasionId).HasColumnName("user_occasion_id");
 
@@ -249,6 +257,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.HasOne(d => d.ProductCategory)
                 .WithMany(p => p.Products)
@@ -282,6 +292,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
         modelBuilder.Entity<ProductVariant>(entity =>
@@ -310,10 +322,6 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("varchar(45)")
                 .HasColumnName("sku");
 
-            entity.Property(e => e.CompareAtPrice)
-                .HasPrecision(10, 2)
-                .HasColumnName("compare_at_price");
-
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
@@ -337,12 +345,12 @@ public class MundoBalloonContext : DbContext
 
             entity.Property(e => e.StoreOnly).HasColumnName("store_only");
 
-            entity.Property(e => e.Taxable).HasColumnName("taxable");
-
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.VariantValueId).HasColumnName("variant_value_id");
 
@@ -394,6 +402,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.Url)
                 .IsRequired()
@@ -443,6 +453,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
         });
@@ -490,6 +502,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
         modelBuilder.Entity<UserAddrese>(entity =>
@@ -544,6 +558,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -595,6 +611,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.HasOne(d => d.ProductVariant)
                 .WithMany(p => p.UserCartProductVariants)
@@ -642,6 +660,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.UserId)
                 .IsRequired()
@@ -693,6 +713,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -731,6 +753,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -755,6 +779,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.Variant1)
                 .HasColumnType("varchar(45)")
@@ -782,6 +808,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.VariantId).HasColumnName("variant_id");
 
@@ -828,6 +856,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
         modelBuilder.Entity<CountryCode>(entity =>
@@ -891,7 +921,11 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
+
+        modelBuilder.ApplyGlobalFilters<ISoftDelete>(e => e.IsDeleted == false);
     }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -913,27 +947,18 @@ public class MundoBalloonContext : DbContext
     private void OnBeforeSaving()
     {
         var entries = ChangeTracker.Entries();
-        var utcNow = DateTime.UtcNow;
-
         foreach (var entry in entries)
-            // for entities that inherit from BaseEntity,
-            // set UpdatedOn / CreatedOn appropriately
             if (entry.Entity is BaseEntity trackable)
                 switch (entry.State)
                 {
                     case EntityState.Modified:
-                        // set the updated date to "now"
+                        var utcNow = DateTime.UtcNow;
                         trackable.UpdatedAt = utcNow;
-
-                        // mark property as "don't touch"
-                        // we don't want to update on a Modify operation
-                        entry.Property("created_at").IsModified = false;
                         break;
 
-                    case EntityState.Added:
-                        // set both updated and created date to "now"
-                        trackable.CreatedAt = utcNow;
-                        trackable.UpdatedAt = utcNow;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        trackable.IsDeleted = true;
                         break;
                 }
     }

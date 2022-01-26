@@ -24,7 +24,9 @@ public class EntitiesMappingProfile : Profile
         CreateMap<VariantValue, DataObjects.Entities.VariantValue>()
             .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.VariantValue1));
         CreateMap<ProductVariantMedium, DataObjects.Entities.ProductVariantMedium>();
-        CreateMap<Variant, DataObjects.Entities.Variant>();
+        CreateMap<Variant, DataObjects.Entities.Variant>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1))
+            .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));
         // USER
         CreateMap<Claim, DataObjects.Entities.Claim>();
         CreateMap<User, DataObjects.Entities.User>()
