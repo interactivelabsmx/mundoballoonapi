@@ -54,4 +54,19 @@ public class ProductService : IProductService
         var productVariantDto = _mapper.Map<ProductVariant>(productVariant);
         return productVariantDto;
     }
+
+    public bool DeleteProduct(int productId)
+    {
+        var context = _contextFactory.CreateDbContext();
+        var product = context.Products.FirstOrDefault(p => p.ProductId == productId);
+        if (product != null)
+        {
+            context.Products.Remove(product);
+            var productVariants = context.ProductVariants.Where(pv => pv.ProductId == productId).ToList();
+            if (productVariants.Count > 0) context.ProductVariants.RemoveRange(productVariants);
+            context.SaveChanges();
+            return true;
+        }
+        return false;
+    }
 }

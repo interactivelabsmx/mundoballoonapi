@@ -7,4 +7,6 @@ public interface IProductService
 {
     Product CreateProduct(CreateProductRequest createProductRequest);
     ProductVariant CreateProductVariant(CreateProductVariantRequest request);
+
+    bool DeleteProduct(int productId);
 }
