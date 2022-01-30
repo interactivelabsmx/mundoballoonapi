@@ -38,6 +38,7 @@ public class ProductService : IProductService
         {
             Sku = request.Sku,
             ProductId = request.ProductId,
+            VariantValueId = request.VariantValueId,
             ProductVariantName = request.Name,
             ProductVariantDescription = request.Description,
             Price = request.Price,

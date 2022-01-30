@@ -4,7 +4,7 @@ public class ProductVariantMedium
 {
     public int ProductVariantMediaId { get; set; }
     public int ProductVariantId { get; set; }
-    public string? MediaType { get; set; }
-    public string? Url { get; set; }
-    public string? Quality { get; set; }
+    public string MediaType { get; set; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
+    public string Quality { get; set; } = string.Empty;
 }
