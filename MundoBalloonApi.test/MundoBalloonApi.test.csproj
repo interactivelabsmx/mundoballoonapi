@@ -14,7 +14,7 @@
         <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="11.0.0" />
+        <PackageReference Include="AutoMapper" Version="11.0.1" />
         <PackageReference Include="FirebaseAdmin" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.1" />
