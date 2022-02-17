@@ -8,7 +8,9 @@ public static class ServicesInputValidationExtensions
 {
     public static IServiceCollection AddInputValidationServices(this IServiceCollection services)
     {
-        return services.AddValidatorsFromAssemblyContaining<CreateUserInputValidator>()
-            .AddValidatorsFromAssemblyContaining<CreateProductInputValidator>();
+        return services
+            .AddValidatorsFromAssemblyContaining<CreateUserInputValidator>()
+            .AddValidatorsFromAssemblyContaining<CreateProductInputValidator>()
+            .AddValidatorsFromAssemblyContaining<CreateProductVariantInputValidator>();
     }
 }

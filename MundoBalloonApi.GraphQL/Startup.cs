@@ -26,14 +26,6 @@ public class Startup
             Credential = GoogleCredential.FromJson(Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "")
         });
 
-        // If you need dependency injection with your query object add your query type as a services.
-        // services.AddSingleton<Query>();
-
-        // enable InMemory messaging services for subscription support.
-        // services.AddInMemorySubscriptions();
-
-        // this enables you to use DataLoader in your resolvers.
-        // services.AddDataLoaderRegistry();
         var connectionString =
             new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
 
@@ -70,7 +62,6 @@ public class Startup
         });
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
