@@ -35,14 +35,6 @@ public class ProductsRepository : IProductsRepository
         return product;
     }
     
-    public ProductVariant CreateProductVariant(ProductVariant productVariant)
-    {
-        var context = _contextFactory.CreateDbContext();
-        context.ProductVariants.Add(productVariant);
-        context.SaveChanges();
-        return productVariant;
-    }
-    
     public bool DeleteProduct(int productId)
     {
         var context = _contextFactory.CreateDbContext();
@@ -56,5 +48,24 @@ public class ProductsRepository : IProductsRepository
             return true;
         }
         return false;
+    }
+
+    public Product UpdateProduct(Product product)
+    {
+        var context = _contextFactory.CreateDbContext();
+        using (context)
+        {
+            context.Products.Update(product);
+            context.SaveChanges();    
+        }
+        return product;
+    }
+    
+    public ProductVariant CreateProductVariant(ProductVariant productVariant)
+    {
+        var context = _contextFactory.CreateDbContext();
+        context.ProductVariants.Add(productVariant);
+        context.SaveChanges();
+        return productVariant;
     }
 }

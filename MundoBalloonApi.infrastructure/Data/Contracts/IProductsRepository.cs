@@ -10,5 +10,7 @@ public interface IProductsRepository
 
     bool DeleteProduct(int productId);
 
+    Product UpdateProduct(Product product);
+
     ProductVariant CreateProductVariant(ProductVariant productVariant);
 }

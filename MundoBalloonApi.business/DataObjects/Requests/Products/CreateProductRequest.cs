@@ -1,4 +1,4 @@
-namespace MundoBalloonApi.business.DataObjects.Requests;
+namespace MundoBalloonApi.business.DataObjects.Requests.Products;
 
 public class CreateProductRequest
 {

@@ -4,15 +4,14 @@ using MundoBalloonApi.business.DataObjects.Requests.Products;
 
 namespace MundoBalloonApi.graphql.Products.Requests;
 
-public class CreateProductVariantInputValidator : AbstractValidator<CreateProductVariantRequest>
+public class UpdateProductInputValidator : AbstractValidator<UpdateProductRequest>
 {
-    public CreateProductVariantInputValidator()
+    public UpdateProductInputValidator()
     {
-        RuleFor(input => input.Sku).NotEmpty();
-        RuleFor(input => input.VariantValueId).NotEmpty();
         RuleFor(input => input.ProductId).NotEmpty();
         RuleFor(input => input.Name).NotEmpty();
         RuleFor(input => input.Description).NotEmpty();
         RuleFor(input => input.Price).NotEmpty();
+        RuleFor(input => input.ProductCategoryId).NotEmpty();
     }
 }

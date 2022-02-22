@@ -1,5 +1,19 @@
 using AutoMapper;
-using MundoBalloonApi.infrastructure.Data.Models;
+using Claim = MundoBalloonApi.infrastructure.Data.Models.Claim;
+using OcassionCartDetail = MundoBalloonApi.infrastructure.Data.Models.OcassionCartDetail;
+using OccasionCart = MundoBalloonApi.infrastructure.Data.Models.OccasionCart;
+using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
+using ProductCategory = MundoBalloonApi.infrastructure.Data.Models.ProductCategory;
+using ProductVariant = MundoBalloonApi.infrastructure.Data.Models.ProductVariant;
+using ProductVariantMedium = MundoBalloonApi.infrastructure.Data.Models.ProductVariantMedium;
+using User = MundoBalloonApi.infrastructure.Data.Models.User;
+using UserAddrese = MundoBalloonApi.infrastructure.Data.Models.UserAddrese;
+using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
+using UserClaim = MundoBalloonApi.infrastructure.Data.Models.UserClaim;
+using UserOccasion = MundoBalloonApi.infrastructure.Data.Models.UserOccasion;
+using UserProfile = MundoBalloonApi.infrastructure.Data.Models.UserProfile;
+using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
+using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 
 namespace MundoBalloonApi.business.Middleware;
 
@@ -13,6 +27,14 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductDescription))
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.ProductCategory))
             .ForMember(dest => dest.Variants, opt => opt.MapFrom(src => src.ProductVariants));
+        CreateMap<Product, DataObjects.Entities.ProductEntity>()
+            .IgnoreAllPropertiesWithAnInaccessibleSetter()
+            .IgnoreAllSourcePropertiesWithAnInaccessibleSetter()
+            .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
+            .ForMember(dest => dest.ProductCategoryId, opt => opt.MapFrom(src => src.ProductCategoryId))
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductName))
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductDescription));
         CreateMap<ProductCategory, DataObjects.Entities.ProductCategory>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductCategoryName))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductCategoryDescription));

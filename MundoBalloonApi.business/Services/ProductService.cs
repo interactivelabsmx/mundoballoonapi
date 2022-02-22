@@ -1,6 +1,7 @@
 using AutoMapper;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Requests;
+using MundoBalloonApi.business.DataObjects.Requests.Products;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 using Product = MundoBalloonApi.business.DataObjects.Entities.Product;
 using ProductVariant = MundoBalloonApi.business.DataObjects.Entities.ProductVariant;
@@ -54,5 +55,20 @@ public class ProductService : IProductService
     public bool DeleteProduct(int productId)
     {
         return _productsRepository.DeleteProduct(productId);
+    }
+
+    public Product UpdateProduct(UpdateProductRequest updateProductRequest)
+    {
+        var product = new infrastructure.Data.Models.Product()
+        {
+            ProductId = updateProductRequest.ProductId,
+            ProductName = updateProductRequest.Name,
+            ProductDescription = updateProductRequest.Description,
+            Price = updateProductRequest.Price,
+            ProductCategoryId = updateProductRequest.ProductCategoryId,
+        };
+        var updatedProduct = _productsRepository.UpdateProduct(product);
+        var productDto = _mapper.Map<Product>(updatedProduct);
+        return productDto;
     }
 }
