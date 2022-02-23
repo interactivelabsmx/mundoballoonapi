@@ -55,6 +55,11 @@ public class ProductService : IProductService
         return _productsRepository.DeleteProduct(productId);
     }
 
+    public bool DeleteProductVariant(int productVariantId)
+    {
+        return _productsRepository.DeleteProductVariant(productVariantId);
+    }
+
     public Product UpdateProduct(UpdateProductRequest updateProductRequest)
     {
         var product = new infrastructure.Data.Models.Product

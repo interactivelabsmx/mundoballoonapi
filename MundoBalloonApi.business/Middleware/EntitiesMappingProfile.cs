@@ -29,11 +29,6 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.ProductCategory))
             .ForMember(dest => dest.Variants, opt => opt.MapFrom(src => src.ProductVariants));
         CreateMap<Product, ProductEntity>()
-            .IgnoreAllPropertiesWithAnInaccessibleSetter()
-            .IgnoreAllSourcePropertiesWithAnInaccessibleSetter()
-            .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
-            .ForMember(dest => dest.ProductCategoryId, opt => opt.MapFrom(src => src.ProductCategoryId))
-            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductName))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductDescription));
         CreateMap<ProductCategory, DataObjects.Entities.ProductCategory>()
@@ -44,6 +39,9 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription))
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.VariantValue))
             .ForMember(dest => dest.Media, opt => opt.MapFrom(src => src.ProductVariantMedia));
+        CreateMap<ProductVariant, DataObjects.Entities.ProductVariantEntity>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductVariantName))
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription));
         CreateMap<VariantValue, DataObjects.Entities.VariantValue>()
             .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.VariantValue1));
         CreateMap<ProductVariantMedium, DataObjects.Entities.ProductVariantMedium>();

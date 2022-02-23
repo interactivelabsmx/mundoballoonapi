@@ -51,6 +51,20 @@ public class ProductsRepository : IProductsRepository
 
         return false;
     }
+    
+    public bool DeleteProductVariant(int productVariantId)
+    {
+        var context = _contextFactory.CreateDbContext();
+        var productVariant = context.ProductVariants.FirstOrDefault(p => p.ProductVariantId == productVariantId);
+        if (productVariant != null)
+        {
+            context.ProductVariants.Remove(productVariant);
+            context.SaveChanges();
+            return true;
+        }
+
+        return false;
+    }
 
     public Product UpdateProduct(Product product)
     {
