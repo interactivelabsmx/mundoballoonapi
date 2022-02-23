@@ -1,4 +1,5 @@
 using AutoMapper;
+using MundoBalloonApi.business.DataObjects.Entities;
 using Claim = MundoBalloonApi.infrastructure.Data.Models.Claim;
 using OcassionCartDetail = MundoBalloonApi.infrastructure.Data.Models.OcassionCartDetail;
 using OccasionCart = MundoBalloonApi.infrastructure.Data.Models.OccasionCart;
@@ -27,7 +28,7 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductDescription))
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.ProductCategory))
             .ForMember(dest => dest.Variants, opt => opt.MapFrom(src => src.ProductVariants));
-        CreateMap<Product, DataObjects.Entities.ProductEntity>()
+        CreateMap<Product, ProductEntity>()
             .IgnoreAllPropertiesWithAnInaccessibleSetter()
             .IgnoreAllSourcePropertiesWithAnInaccessibleSetter()
             .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))

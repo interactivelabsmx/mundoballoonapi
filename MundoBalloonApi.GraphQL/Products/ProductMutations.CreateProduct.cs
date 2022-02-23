@@ -1,6 +1,5 @@
 using HotChocolate.AspNetCore.Authorization;
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.business.DataObjects.Requests.Products;
 using MundoBalloonApi.graphql.Products.Requests;
 

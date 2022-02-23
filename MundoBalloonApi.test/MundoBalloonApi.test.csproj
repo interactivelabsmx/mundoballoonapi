@@ -14,12 +14,12 @@
         <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="11.0.1" />
-        <PackageReference Include="FirebaseAdmin" Version="2.2.0" />
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.2" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="AutoMapper" Version="11.0.1"/>
+        <PackageReference Include="FirebaseAdmin" Version="2.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.2"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.2"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0"/>
+        <PackageReference Include="xunit" Version="2.4.1"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -31,9 +31,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\MundoBalloonApi.business\MundoBalloonApi.business.csproj" />
-        <ProjectReference Include="..\MundoBalloonApi.GraphQL\MundoBalloonApi.GraphQL.csproj" />
-        <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj" />
+        <ProjectReference Include="..\MundoBalloonApi.business\MundoBalloonApi.business.csproj"/>
+        <ProjectReference Include="..\MundoBalloonApi.GraphQL\MundoBalloonApi.GraphQL.csproj"/>
+        <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>

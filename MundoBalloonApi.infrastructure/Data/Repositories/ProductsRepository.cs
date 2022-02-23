@@ -23,18 +23,19 @@ public class ProductsRepository : IProductsRepository
             .IgnoreAutoIncludes()
             .AsSplitQuery();
     }
-    
+
     public Product CreateProduct(Product product)
     {
         var context = _contextFactory.CreateDbContext();
         using (context)
         {
             context.Products.Add(product);
-            context.SaveChanges();    
+            context.SaveChanges();
         }
+
         return product;
     }
-    
+
     public bool DeleteProduct(int productId)
     {
         var context = _contextFactory.CreateDbContext();
@@ -47,6 +48,7 @@ public class ProductsRepository : IProductsRepository
             context.SaveChanges();
             return true;
         }
+
         return false;
     }
 
@@ -56,11 +58,12 @@ public class ProductsRepository : IProductsRepository
         using (context)
         {
             context.Products.Update(product);
-            context.SaveChanges();    
+            context.SaveChanges();
         }
+
         return product;
     }
-    
+
     public ProductVariant CreateProductVariant(ProductVariant productVariant)
     {
         var context = _contextFactory.CreateDbContext();

@@ -6,7 +6,7 @@ namespace MundoBalloonApi.graphql.Products;
 [Authorize]
 public partial class ProductMutations
 {
-    public Boolean? DeleteProduct(
+    public bool? DeleteProduct(
         [Service] IProductService productService, int productId)
     {
         return productService.DeleteProduct(productId);

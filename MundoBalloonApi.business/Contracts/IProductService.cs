@@ -1,5 +1,4 @@
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.business.DataObjects.Requests.Products;
 
 namespace MundoBalloonApi.business.Contracts;
@@ -12,5 +11,4 @@ public interface IProductService
     bool DeleteProduct(int productId);
 
     Product UpdateProduct(UpdateProductRequest updateProductRequest);
-    
 }

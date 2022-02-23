@@ -7,12 +7,12 @@ namespace MundoBalloonApi.graphql.Products;
 public partial class ProductQueries
 {
     [UseDbContext(typeof(MundoBalloonContext))]
-    [UsePaging(IncludeTotalCount = true)]
+    [UsePaging]
     [UseSorting]
     public IQueryable<ProductEntity> GetProductsEntity([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
-        var products = mundoBalloonContext.Products.Select(p => new ProductEntity()
+        var products = mundoBalloonContext.Products.Select(p => new ProductEntity
         {
             ProductId = p.ProductId,
             Name = p.ProductName ?? string.Empty,

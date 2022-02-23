@@ -8,6 +8,6 @@ public class UpdateProductPayload
     {
         Product = product;
     }
-    
+
     public Product Product { get; }
 }
