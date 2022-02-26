@@ -51,7 +51,7 @@ public class ProductsRepository : IProductsRepository
 
         return false;
     }
-    
+
     public bool DeleteProductVariant(int productVariantId)
     {
         var context = _contextFactory.CreateDbContext();
@@ -83,6 +83,18 @@ public class ProductsRepository : IProductsRepository
         var context = _contextFactory.CreateDbContext();
         context.ProductVariants.Add(productVariant);
         context.SaveChanges();
+        return productVariant;
+    }
+
+    public ProductVariant UpdateProductVariant(ProductVariant productVariant)
+    {
+        var context = _contextFactory.CreateDbContext();
+        using (context)
+        {
+            context.ProductVariants.Update(productVariant);
+            context.SaveChanges();
+        }
+
         return productVariant;
     }
 }

@@ -39,7 +39,7 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription))
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.VariantValue))
             .ForMember(dest => dest.Media, opt => opt.MapFrom(src => src.ProductVariantMedia));
-        CreateMap<ProductVariant, DataObjects.Entities.ProductVariantEntity>()
+        CreateMap<ProductVariant, ProductVariantEntity>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductVariantName))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription));
         CreateMap<VariantValue, DataObjects.Entities.VariantValue>()

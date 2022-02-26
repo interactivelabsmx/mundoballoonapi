@@ -12,5 +12,7 @@ public interface IProductService
 
     bool DeleteProductVariant(int productVariantId);
 
-    Product UpdateProduct(UpdateProductRequest updateProductRequest);
+    Product UpdateProduct(ProductEntity productEntity);
+
+    ProductVariant UpdateProductVariant(ProductVariantEntity productVariantEntity);
 }

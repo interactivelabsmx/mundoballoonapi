@@ -8,9 +8,10 @@ namespace MundoBalloonApi.graphql.Products;
 [Authorize]
 public partial class ProductMutations
 {
-    public UpdateProductPayload UpdateProduct(ProductEntity input, [Service] IProductService productService)
+    public UpdateProductVariantPayload UpdateProductVariant(ProductVariantEntity input,
+        [Service] IProductService productService)
     {
-        var product = productService.UpdateProduct(input);
-        return new UpdateProductPayload(product);
+        var productVariant = productService.UpdateProductVariant(input);
+        return new UpdateProductVariantPayload(productVariant);
     }
 }

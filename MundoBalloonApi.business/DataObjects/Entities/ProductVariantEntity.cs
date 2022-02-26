@@ -9,7 +9,7 @@ public class ProductVariantEntity
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public double Price { get; set; }
-    public double Weight { get; set; }
-    public bool StoreOnly { get; set; }
-    public bool IsBundle { get; set; }
+    public double? Weight { get; set; } = 0;
+    public bool? StoreOnly { get; set; } = false;
+    public bool? IsBundle { get; set; } = false;
 }

@@ -60,18 +60,38 @@ public class ProductService : IProductService
         return _productsRepository.DeleteProductVariant(productVariantId);
     }
 
-    public Product UpdateProduct(UpdateProductRequest updateProductRequest)
+    public Product UpdateProduct(ProductEntity productEntity)
     {
         var product = new infrastructure.Data.Models.Product
         {
-            ProductId = updateProductRequest.ProductId,
-            ProductName = updateProductRequest.Name,
-            ProductDescription = updateProductRequest.Description,
-            Price = updateProductRequest.Price,
-            ProductCategoryId = updateProductRequest.ProductCategoryId
+            ProductId = productEntity.ProductId,
+            ProductName = productEntity.Name,
+            ProductDescription = productEntity.Description,
+            Price = productEntity.Price,
+            ProductCategoryId = productEntity.ProductCategoryId
         };
         var updatedProduct = _productsRepository.UpdateProduct(product);
         var productDto = _mapper.Map<Product>(updatedProduct);
         return productDto;
+    }
+
+    public ProductVariant UpdateProductVariant(ProductVariantEntity productVariantEntity)
+    {
+        var productVariant = new infrastructure.Data.Models.ProductVariant
+        {
+            ProductVariantId = productVariantEntity.ProductVariantId,
+            Sku = productVariantEntity.Sku,
+            VariantValueId = productVariantEntity.VariantValueId,
+            ProductId = productVariantEntity.ProductId,
+            ProductVariantName = productVariantEntity.Name,
+            ProductVariantDescription = productVariantEntity.Description,
+            Price = productVariantEntity.Price,
+            Weight = productVariantEntity.Weight ?? 0,
+            StoreOnly = productVariantEntity.StoreOnly ?? false,
+            IsBundle = productVariantEntity.IsBundle ?? false
+        };
+        var updateProductVariant = _productsRepository.UpdateProductVariant(productVariant);
+        var productVariantDto = _mapper.Map<ProductVariant>(updateProductVariant);
+        return productVariantDto;
     }
 }

@@ -11,8 +11,10 @@ public interface IProductsRepository
     bool DeleteProduct(int productId);
 
     bool DeleteProductVariant(int productVariantId);
-    
+
     Product UpdateProduct(Product product);
 
     ProductVariant CreateProductVariant(ProductVariant productVariant);
+
+    ProductVariant UpdateProductVariant(ProductVariant productVariant);
 }

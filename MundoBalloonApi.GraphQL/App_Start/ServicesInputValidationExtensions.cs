@@ -12,6 +12,7 @@ public static class ServicesInputValidationExtensions
             .AddValidatorsFromAssemblyContaining<CreateUserInputValidator>()
             .AddValidatorsFromAssemblyContaining<CreateProductInputValidator>()
             .AddValidatorsFromAssemblyContaining<CreateProductVariantInputValidator>()
-            .AddValidatorsFromAssemblyContaining<UpdateProductInputValidator>();
+            .AddValidatorsFromAssemblyContaining<UpdateProductInputValidator>()
+            .AddValidatorsFromAssemblyContaining<UpdateProductVariantInputValidator>();
     }
 }
