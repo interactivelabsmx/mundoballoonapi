@@ -1,5 +1,6 @@
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Requests;
+using MundoBalloonApi.business.DataObjects.Requests.Users;
 using MundoBalloonApi.graphql.Users.Requests;
 
 namespace MundoBalloonApi.graphql.Users;

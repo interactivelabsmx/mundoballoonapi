@@ -3,7 +3,8 @@ using MundoBalloonApi.graphql.Common.Requests;
 
 namespace MundoBalloonApi.graphql.Users.Requests;
 
-public class CreateUserPayload : ClientMutationBase
+// This Demonstrates a pattern when you want to "Format a Response" Before sending
+public class CreateUserPayload
 {
     public CreateUserPayload(User user)
     {

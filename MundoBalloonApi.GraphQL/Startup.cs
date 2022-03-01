@@ -46,6 +46,7 @@ public class Startup
             .AddMutationType(d => d.Name("Mutation"))
             .AddTypeExtension<UserMutations>()
             .AddTypeExtension<ProductMutations>()
+            .AddTypeExtension<CollectionMutations>()
             .AddSorting()
             .AddAuthorization()
             .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());

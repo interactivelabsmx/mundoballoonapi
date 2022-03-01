@@ -1,4 +1,5 @@
 using FluentValidation;
+using MundoBalloonApi.graphql.Collections.Requests;
 using MundoBalloonApi.graphql.Products.Requests;
 using MundoBalloonApi.graphql.Users.Requests;
 
@@ -13,6 +14,7 @@ public static class ServicesInputValidationExtensions
             .AddValidatorsFromAssemblyContaining<CreateProductInputValidator>()
             .AddValidatorsFromAssemblyContaining<CreateProductVariantInputValidator>()
             .AddValidatorsFromAssemblyContaining<UpdateProductInputValidator>()
-            .AddValidatorsFromAssemblyContaining<UpdateProductVariantInputValidator>();
+            .AddValidatorsFromAssemblyContaining<UpdateProductVariantInputValidator>()
+            .AddValidatorsFromAssemblyContaining<CreateProductCategoryInputValidator>();
     }
 }

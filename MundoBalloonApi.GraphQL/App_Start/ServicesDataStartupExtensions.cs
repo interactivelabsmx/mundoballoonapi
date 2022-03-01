@@ -17,9 +17,11 @@ public static class ServicesDataStartupExtensions
         return services
             .AddScoped<IUsersRepository, UsersRepository>()
             .AddScoped<IProductsRepository, ProductsRepository>()
+            .AddScoped<ICollectionsRepository, CollectionsRepository>()
             .AddScoped<IUsersService, UsersService>()
             .AddScoped<ISiteService, SiteService>()
-            .AddScoped<IProductService, ProductService>();
+            .AddScoped<IProductService, ProductService>()
+            .AddScoped<ICollectionsService, CollectionsService>();
     }
 
     public static IServiceCollection AddDbServices(this IServiceCollection services, IConfiguration configuration,
