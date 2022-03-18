@@ -1,15 +1,14 @@
 using AutoMapper;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests.Collections;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 
 namespace MundoBalloonApi.business.Services;
 
 public class CollectionsService : ICollectionsService
 {
-    private readonly IMapper _mapper;
     private readonly ICollectionsRepository _collectionsRepository;
+    private readonly IMapper _mapper;
 
     public CollectionsService(ICollectionsRepository collectionsRepository, IMapper mapper)
     {
@@ -17,9 +16,13 @@ public class CollectionsService : ICollectionsService
         _mapper = mapper;
     }
 
-    public ProductCategory CreateProductCategory(CreateProductCategoryRequest productCategory)
+    public ProductCategory CreateProductCategory(ProductCategory productCategory)
     {
-        var category = _mapper.Map<infrastructure.Data.Models.ProductCategory>(productCategory);
+        var category = new infrastructure.Data.Models.ProductCategory
+        {
+            ProductCategoryName = productCategory.Name,
+            ProductCategoryDescription = productCategory.Description
+        };
         _collectionsRepository.CreateProductCategory(category);
         var newCategory = _mapper.Map<ProductCategory>(category);
         return newCategory;

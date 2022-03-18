@@ -6,7 +6,6 @@ namespace MundoBalloonApi.infrastructure.Data.Repositories;
 
 public class CollectionsRepository : ICollectionsRepository
 {
-    
     private readonly IDbContextFactory<MundoBalloonContext> _contextFactory;
 
     public CollectionsRepository(IDbContextFactory<MundoBalloonContext> contextFactory)

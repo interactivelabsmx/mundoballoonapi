@@ -1,9 +1,9 @@
 using FluentValidation;
-using MundoBalloonApi.business.DataObjects.Requests.Products;
+using MundoBalloonApi.business.DataObjects.Entities;
 
 namespace MundoBalloonApi.graphql.Products.Requests;
 
-public class CreateProductVariantInputValidator : AbstractValidator<CreateProductVariantRequest>
+public class CreateProductVariantInputValidator : AbstractValidator<ProductVariant>
 {
     public CreateProductVariantInputValidator()
     {

@@ -2,7 +2,6 @@ using AutoMapper;
 using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.business.DataObjects.Requests.Users;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 

@@ -1,8 +1,6 @@
 using HotChocolate.AspNetCore.Authorization;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests.Products;
-using MundoBalloonApi.graphql.Products.Requests;
 
 namespace MundoBalloonApi.graphql.Products;
 
@@ -10,7 +8,7 @@ namespace MundoBalloonApi.graphql.Products;
 public partial class ProductMutations
 {
     public ProductVariant CreateProductVariant(
-        CreateProductVariantRequest input,
+        ProductVariant input,
         [Service] IProductService productService)
     {
         var productVariant = productService.CreateProductVariant(input);

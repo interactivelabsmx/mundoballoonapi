@@ -1,7 +1,6 @@
 using AutoMapper;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests.Products;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 
 namespace MundoBalloonApi.business.Services;
@@ -17,7 +16,7 @@ public class ProductService : IProductService
         _mapper = mapper;
     }
 
-    public Product CreateProduct(CreateProductRequest createProductRequest)
+    public Product CreateProduct(Product createProductRequest)
     {
         var product = new infrastructure.Data.Models.Product
         {
@@ -31,7 +30,7 @@ public class ProductService : IProductService
         return productDto;
     }
 
-    public ProductVariant CreateProductVariant(CreateProductVariantRequest request)
+    public ProductVariant CreateProductVariant(ProductVariant request)
     {
         var productVariant = new infrastructure.Data.Models.ProductVariant
         {
@@ -41,9 +40,9 @@ public class ProductService : IProductService
             ProductVariantName = request.Name,
             ProductVariantDescription = request.Description,
             Price = request.Price,
-            Weight = request.Weight ?? 0,
-            StoreOnly = request.StoreOnly ?? false,
-            IsBundle = request.IsBundle ?? false
+            Weight = 0,
+            StoreOnly = false,
+            IsBundle = false
         };
         productVariant = _productsRepository.CreateProductVariant(productVariant);
         var productVariantDto = _mapper.Map<ProductVariant>(productVariant);

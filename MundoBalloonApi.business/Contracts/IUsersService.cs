@@ -1,6 +1,5 @@
 using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests;
 using MundoBalloonApi.business.DataObjects.Requests.Users;
 
 namespace MundoBalloonApi.business.Contracts;
