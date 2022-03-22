@@ -44,10 +44,4 @@ public class UsersService : IUsersService
             return null;
         }
     }
-
-    public List<UserClaim> GetUserClaims(string userId)
-    {
-        var result = _usersRepository.GetUserClaims(userId);
-        return _mapper.Map<List<UserClaim>>(result);
-    }
 }

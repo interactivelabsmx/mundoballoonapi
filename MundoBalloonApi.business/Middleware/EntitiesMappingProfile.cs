@@ -1,6 +1,5 @@
 using AutoMapper;
 using MundoBalloonApi.business.DataObjects.Entities;
-using Claim = MundoBalloonApi.infrastructure.Data.Models.Claim;
 using OcassionCartDetail = MundoBalloonApi.infrastructure.Data.Models.OcassionCartDetail;
 using OccasionCart = MundoBalloonApi.infrastructure.Data.Models.OccasionCart;
 using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
@@ -8,11 +7,10 @@ using ProductCategory = MundoBalloonApi.infrastructure.Data.Models.ProductCatego
 using ProductVariant = MundoBalloonApi.infrastructure.Data.Models.ProductVariant;
 using ProductVariantMedium = MundoBalloonApi.infrastructure.Data.Models.ProductVariantMedium;
 using User = MundoBalloonApi.infrastructure.Data.Models.User;
-using UserAddrese = MundoBalloonApi.infrastructure.Data.Models.UserAddrese;
+using UserAddresses = MundoBalloonApi.infrastructure.Data.Models.UserAddresses;
 using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
-using UserClaim = MundoBalloonApi.infrastructure.Data.Models.UserClaim;
 using UserOccasion = MundoBalloonApi.infrastructure.Data.Models.UserOccasion;
-using UserProfile = MundoBalloonApi.infrastructure.Data.Models.UserProfile;
+using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymentProfile;
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
 using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 
@@ -49,17 +47,13 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1))
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));
         // USER
-        CreateMap<Claim, DataObjects.Entities.Claim>();
         CreateMap<User, DataObjects.Entities.User>()
-            .ForMember(dest => dest.Profile, opt => opt.MapFrom(src => src.UserProfile))
-            .ForMember(dest => dest.Addreses, opt => opt.MapFrom(src => src.UserAddreses))
+            .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
+            .ForMember(dest => dest.Addreses, opt => opt.MapFrom(src => src.UserAddressess))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
-            .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions))
-            .ForMember(dest => dest.UserClaims, opt => opt.MapFrom(src => src.UserClaims));
-        CreateMap<UserProfile, DataObjects.Entities.UserProfile>();
-        CreateMap<UserAddrese, DataObjects.Entities.UserAddrese>();
-        CreateMap<UserClaim, DataObjects.Entities.UserClaim>()
-            .ForMember(dest => dest.Claim, opt => opt.MapFrom(src => src.Claim));
+            .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions));
+        CreateMap<UserPaymentProfile, DataObjects.Entities.UserPaymentProfile>();
+        CreateMap<UserAddresses, DataObjects.Entities.UserAddresses>();
         // SAVED CARTS
         CreateMap<UserCart, DataObjects.Entities.UserCart>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));

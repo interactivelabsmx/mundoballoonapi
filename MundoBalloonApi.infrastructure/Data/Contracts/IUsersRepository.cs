@@ -7,6 +7,4 @@ public interface IUsersRepository
     User? GetById(string userId);
 
     User Create(User user);
-
-    List<UserClaim> GetUserClaims(string userId);
 }

@@ -2,7 +2,7 @@
 
 public class OccasionCart
 {
-    public int OccasionCartId { get; set; }
+    public int? OccasionCartId { get; set; } = 0;
     public int UserOccasionId { get; set; }
     public string Description { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;

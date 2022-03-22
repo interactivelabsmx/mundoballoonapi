@@ -2,7 +2,7 @@
 
 public class UserOccasion
 {
-    public int UserOccasionId { get; set; }
+    public int? UserOccasionId { get; set; } = 0;
     public int UserId { get; set; } = 0;
     public string Name { get; set; } = string.Empty;
     public DateTime? Date { get; set; }

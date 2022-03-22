@@ -2,7 +2,7 @@ namespace MundoBalloonApi.business.DataObjects.Entities;
 
 public class ProductVariant
 {
-    public int ProductVariantId { get; set; }
+    public int? ProductVariantId { get; set; } = 0;
     public string Sku { get; set; } = string.Empty;
     public int VariantValueId { get; set; }
     public int ProductId { get; set; }

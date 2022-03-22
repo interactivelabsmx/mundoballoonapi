@@ -8,5 +8,4 @@ public interface IUsersService
 {
     User CreateOrGetUser(CreateUserRequest createUserRequest);
     Task<UserRecord?> GetFirebaseUserById(string userId);
-    List<UserClaim> GetUserClaims(string userId);
 }

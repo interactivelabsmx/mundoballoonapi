@@ -19,10 +19,8 @@ public class UserRepositoryTest
     {
         var user = _fixture.UsersRepository.Create(new User
         {
-            Name = "test",
-            Email = "test.user@mail.com",
-            EmailVerified = DateTime.Now
+            UserId = "123"
         });
-        Assert.True(user.Email != null);
+        Assert.True(user.UserId != null);
     }
 }

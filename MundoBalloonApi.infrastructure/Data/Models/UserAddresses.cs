@@ -1,8 +1,8 @@
 ﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-public class UserAddrese : BaseEntity
+public class UserAddresses : BaseEntity
 {
-    public int UserAddresesId { get; set; }
+    public int UserAddressesId { get; set; }
     public int? UserId { get; set; }
     public string? Address1 { get; set; }
     public string? Address2 { get; set; }

@@ -1,8 +1,8 @@
 ﻿namespace MundoBalloonApi.business.DataObjects.Entities;
 
-public class UserAddrese
+public class UserAddresses
 {
-    public int UserAddresesId { get; set; }
+    public int? UserAddressesId { get; set; } = 0;
     public int UserId { get; set; }
     public string Address1 { get; set; } = string.Empty;
     public string Address2 { get; set; } = string.Empty;

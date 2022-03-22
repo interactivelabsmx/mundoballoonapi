@@ -9,116 +9,23 @@ public class MundoBalloonContext : DbContext
     {
     }
 
-    public virtual DbSet<Account> Accounts { get; set; } = default!;
-    public virtual DbSet<Claim> Claims { get; set; } = default!;
     public virtual DbSet<OcassionCartDetail> OcassionCartDetails { get; set; } = default!;
     public virtual DbSet<OccasionCart> OccasionCarts { get; set; } = default!;
     public virtual DbSet<Product> Products { get; set; } = default!;
     public virtual DbSet<ProductCategory> ProductCategories { get; set; } = default!;
     public virtual DbSet<ProductVariant> ProductVariants { get; set; } = default!;
     public virtual DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
-    public virtual DbSet<Session> Sessions { get; set; } = default!;
     public virtual DbSet<User> Users { get; set; } = default!;
-    public virtual DbSet<UserAddrese> UserAddreses { get; set; } = default!;
+    public virtual DbSet<UserAddresses> UserAddressess { get; set; } = default!;
     public virtual DbSet<UserCart> UserCarts { get; set; } = default!;
-    public virtual DbSet<UserClaim> UserClaims { get; set; } = default!;
     public virtual DbSet<UserOccasion> UserOccasions { get; set; } = default!;
-    public virtual DbSet<UserProfile> UserProfiles { get; set; } = default!;
+    public virtual DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
     public virtual DbSet<Variant> Variants { get; set; } = default!;
     public virtual DbSet<VariantValue> VariantValues { get; set; } = default!;
-    public virtual DbSet<VerificationRequest> VerificationRequests { get; set; } = default!;
     public virtual DbSet<CountryCode> CountryCodes { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Account>(entity =>
-        {
-            entity.ToTable("accounts");
-
-            entity.HasIndex(e => e.CompoundId, "compound_id")
-                .IsUnique();
-
-            entity.HasIndex(e => e.ProviderAccountId, "provider_account_id");
-
-            entity.HasIndex(e => e.ProviderId, "provider_id");
-
-            entity.HasIndex(e => e.UserId, "user_id");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-
-            entity.Property(e => e.AccessToken)
-                .HasColumnType("text")
-                .HasColumnName("access_token");
-
-            entity.Property(e => e.AccessTokenExpires)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("access_token_expires");
-
-            entity.Property(e => e.CompoundId)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("compound_id");
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.ProviderAccountId)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("provider_account_id");
-
-            entity.Property(e => e.ProviderId)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("provider_id");
-
-            entity.Property(e => e.ProviderType)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("provider_type");
-
-            entity.Property(e => e.RefreshToken)
-                .HasColumnType("text")
-                .HasColumnName("refresh_token");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-        });
-
-        modelBuilder.Entity<Claim>(entity =>
-        {
-            entity.ToTable("claims");
-
-            entity.HasIndex(e => e.Claim1, "claim_UNIQUE")
-                .IsUnique();
-
-            entity.Property(e => e.ClaimId).HasColumnName("claim_id");
-
-            entity.Property(e => e.Claim1)
-                .HasMaxLength(45)
-                .HasColumnName("claim");
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-        });
-
         modelBuilder.Entity<OcassionCartDetail>(entity =>
         {
             entity.HasKey(e => new { e.OccasionCartId, e.Sku })
@@ -418,53 +325,9 @@ public class MundoBalloonContext : DbContext
                 .HasConstraintName("fk_product_variant_media_product_variants1");
         });
 
-        modelBuilder.Entity<Session>(entity =>
-        {
-            entity.ToTable("sessions");
-
-            entity.HasIndex(e => e.AccessToken, "access_token")
-                .IsUnique();
-
-            entity.HasIndex(e => e.SessionToken, "session_token")
-                .IsUnique();
-
-            entity.Property(e => e.Id).HasColumnName("id");
-
-            entity.Property(e => e.AccessToken)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("access_token");
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.Expires)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("expires");
-
-            entity.Property(e => e.SessionToken)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("session_token");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-        });
-
         modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("users");
-
-            entity.HasIndex(e => e.Email, "email")
-                .IsUnique();
 
             entity.HasIndex(e => e.UserId, "userId_UNIQUE")
                 .IsUnique();
@@ -482,22 +345,6 @@ public class MundoBalloonContext : DbContext
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.Email)
-                .HasColumnType("varchar(255)")
-                .HasColumnName("email");
-
-            entity.Property(e => e.EmailVerified)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("email_verified");
-
-            entity.Property(e => e.Image)
-                .HasColumnType("varchar(255)")
-                .HasColumnName("image");
-
-            entity.Property(e => e.Name)
-                .HasColumnType("varchar(255)")
-                .HasColumnName("name");
-
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
@@ -506,18 +353,18 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
-        modelBuilder.Entity<UserAddrese>(entity =>
+        modelBuilder.Entity<UserAddresses>(entity =>
         {
-            entity.HasKey(e => e.UserAddresesId)
+            entity.HasKey(e => e.UserAddressesId)
                 .HasName("PRIMARY");
 
-            entity.ToTable("user_addreses");
+            entity.ToTable("user_addresses");
 
             entity.HasIndex(e => e.UserId, "fk_user_addreses_Users1_idx");
 
-            entity.Property(e => e.UserAddresesId)
+            entity.Property(e => e.UserAddressesId)
                 .ValueGeneratedNever()
-                .HasColumnName("user_addreses_id");
+                .HasColumnName("user_addresses_id");
 
             entity.Property(e => e.Address1)
                 .IsRequired()
@@ -569,7 +416,7 @@ public class MundoBalloonContext : DbContext
                 .HasColumnName("zipcode");
 
             entity.HasOne(d => d.User)
-                .WithMany(p => p.UserAddreses)
+                .WithMany(p => p.UserAddressess)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("fk_user_addreses_Users1");
         });
@@ -634,54 +481,6 @@ public class MundoBalloonContext : DbContext
                 .HasConstraintName("fk_user_cart_Users1");
         });
 
-        modelBuilder.Entity<UserClaim>(entity =>
-        {
-            entity.HasKey(e => e.UserClaimsId)
-                .HasName("PRIMARY");
-
-            entity.ToTable("user_claims");
-
-            entity.HasIndex(e => e.ClaimId, "fk_user_claims_claims1_idx");
-
-            entity.HasIndex(e => e.UserId, "fk_user_claims_users1_idx");
-
-            entity.Property(e => e.UserClaimsId)
-                .ValueGeneratedNever()
-                .HasColumnName("user_claims_id");
-
-            entity.Property(e => e.ClaimId).HasColumnName("claim_id");
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
-            entity.Property(e => e.UserId)
-                .IsRequired()
-                .HasMaxLength(45)
-                .HasColumnName("userId");
-
-            entity.HasOne(d => d.Claim)
-                .WithMany(p => p.UserClaims)
-                .HasForeignKey(d => d.ClaimId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_user_claims_claims1");
-
-            entity.HasOne(d => d.User)
-                .WithMany(p => p.UserClaims)
-                .HasPrincipalKey(p => p.UserId)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_user_claims_users1");
-        });
-
         modelBuilder.Entity<UserOccasion>(entity =>
         {
             entity.ToTable("user_occasion");
@@ -724,12 +523,12 @@ public class MundoBalloonContext : DbContext
                 .HasConstraintName("fk_user_occasion_Users1");
         });
 
-        modelBuilder.Entity<UserProfile>(entity =>
+        modelBuilder.Entity<UserPaymentProfile>(entity =>
         {
             entity.HasKey(e => e.UserProfileId)
                 .HasName("PRIMARY");
 
-            entity.ToTable("user_profile");
+            entity.ToTable("user_payment_profile");
 
             entity.HasIndex(e => e.UserId, "user_id_UNIQUE")
                 .IsUnique();
@@ -740,10 +539,6 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.Picture)
-                .HasColumnType("mediumtext")
-                .HasColumnName("picture");
 
             entity.Property(e => e.ProcessorId)
                 .HasColumnType("varchar(45)")
@@ -759,9 +554,9 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User)
-                .WithOne(p => p.UserProfile)
-                .HasForeignKey<UserProfile>(d => d.UserId)
-                .HasConstraintName("fk_user_profile_Users1");
+                .WithMany(p => p.UserPaymentProfiles)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("user_payment_profile_users_id_fk");
         });
 
         modelBuilder.Entity<Variant>(entity =>
@@ -822,42 +617,6 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.VariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_variant_values_variants1");
-        });
-
-        modelBuilder.Entity<VerificationRequest>(entity =>
-        {
-            entity.ToTable("verification_requests");
-
-            entity.HasIndex(e => e.Token, "token")
-                .IsUnique();
-
-            entity.Property(e => e.Id).HasColumnName("id");
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.Expires)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("expires");
-
-            entity.Property(e => e.Identifier)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("identifier");
-
-            entity.Property(e => e.Token)
-                .IsRequired()
-                .HasColumnType("varchar(255)")
-                .HasColumnName("token");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
         modelBuilder.Entity<CountryCode>(entity =>
