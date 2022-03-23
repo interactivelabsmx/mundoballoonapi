@@ -24,7 +24,28 @@ public class CollectionsService : ICollectionsService
             ProductCategoryDescription = productCategory.Description
         };
         _collectionsRepository.CreateProductCategory(category);
-        var newCategory = _mapper.Map<ProductCategory>(category);
-        return newCategory;
+        return _mapper.Map<ProductCategory>(category);
+    }
+
+    public Variant CreateVariant(Variant variant)
+    {
+        var newVariant = new infrastructure.Data.Models.Variant
+        {
+            Variant1 = variant.Name,
+            VariantType = variant.Type
+        };
+        _collectionsRepository.CreateVariant(newVariant);
+        return _mapper.Map<Variant>(newVariant);
+    }
+    
+    public VariantValue CreateVariantValue(VariantValue variantValue)
+    {
+        var newVariant = new infrastructure.Data.Models.VariantValue
+        {
+            VariantId = variantValue.VariantId,
+            VariantValue1 = variantValue.Value
+        };
+        _collectionsRepository.CreateVariantValue(newVariant);
+        return _mapper.Map<VariantValue>(newVariant);
     }
 }

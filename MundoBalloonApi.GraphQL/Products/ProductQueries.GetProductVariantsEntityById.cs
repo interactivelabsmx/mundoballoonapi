@@ -20,10 +20,7 @@ public partial class ProductQueries
                 Price = p.Price,
                 Name = p.ProductVariantName ?? string.Empty,
                 Description = p.ProductVariantDescription ?? string.Empty,
-                VariantValueId = p.VariantValueId,
-                Weight = p.Weight ?? 0,
-                StoreOnly = p.StoreOnly ?? false,
-                IsBundle = p.IsBundle ?? false
+                VariantValueId = p.VariantValueId
             });
         return products;
     }

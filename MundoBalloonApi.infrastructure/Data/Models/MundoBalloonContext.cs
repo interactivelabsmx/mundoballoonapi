@@ -234,8 +234,6 @@ public class MundoBalloonContext : DbContext
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.IsBundle).HasColumnName("is_bundle");
-
             entity.Property(e => e.Price)
                 .HasPrecision(10, 2)
                 .HasColumnName("price");
@@ -250,8 +248,6 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("varchar(45)")
                 .HasColumnName("product_variant_name");
 
-            entity.Property(e => e.StoreOnly).HasColumnName("store_only");
-
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
@@ -260,10 +256,6 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.Property(e => e.VariantValueId).HasColumnName("variant_value_id");
-
-            entity.Property(e => e.Weight)
-                .HasPrecision(10, 2)
-                .HasColumnName("weight");
 
             entity.HasOne(d => d.Product)
                 .WithMany(p => p.ProductVariants)

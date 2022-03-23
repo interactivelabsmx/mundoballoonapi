@@ -18,10 +18,6 @@ public class ProductVariant : BaseEntity
     public string? ProductVariantName { get; set; }
     public string? ProductVariantDescription { get; set; }
     public double Price { get; set; }
-    public double? Weight { get; set; }
-    public bool? StoreOnly { get; set; }
-    public bool? IsBundle { get; set; }
-
     public virtual Product? Product { get; set; }
     public virtual VariantValue? VariantValue { get; set; }
     public virtual ICollection<OcassionCartDetail> OcassionCartDetailProductVariants { get; set; }

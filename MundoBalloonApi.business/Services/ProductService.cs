@@ -39,10 +39,7 @@ public class ProductService : IProductService
             VariantValueId = request.VariantValueId,
             ProductVariantName = request.Name,
             ProductVariantDescription = request.Description,
-            Price = request.Price,
-            Weight = 0,
-            StoreOnly = false,
-            IsBundle = false
+            Price = request.Price
         };
         productVariant = _productsRepository.CreateProductVariant(productVariant);
         var productVariantDto = _mapper.Map<ProductVariant>(productVariant);
@@ -84,10 +81,7 @@ public class ProductService : IProductService
             ProductId = productVariantEntity.ProductId,
             ProductVariantName = productVariantEntity.Name,
             ProductVariantDescription = productVariantEntity.Description,
-            Price = productVariantEntity.Price,
-            Weight = productVariantEntity.Weight ?? 0,
-            StoreOnly = productVariantEntity.StoreOnly ?? false,
-            IsBundle = productVariantEntity.IsBundle ?? false
+            Price = productVariantEntity.Price
         };
         var updateProductVariant = _productsRepository.UpdateProductVariant(productVariant);
         var productVariantDto = _mapper.Map<ProductVariant>(updateProductVariant);

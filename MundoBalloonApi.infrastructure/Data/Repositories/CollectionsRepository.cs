@@ -24,4 +24,28 @@ public class CollectionsRepository : ICollectionsRepository
 
         return productCategory;
     }
+
+    public Variant CreateVariant(Variant variant)
+    {
+        var context = _contextFactory.CreateDbContext();
+        using (context)
+        {
+            context.Variants.Add(variant);
+            context.SaveChanges();
+        }
+
+        return variant;
+    }
+    
+    public VariantValue CreateVariantValue(VariantValue variant)
+    {
+        var context = _contextFactory.CreateDbContext();
+        using (context)
+        {
+            context.VariantValues.Add(variant);
+            context.SaveChanges();
+        }
+
+        return variant;
+    }
 }
