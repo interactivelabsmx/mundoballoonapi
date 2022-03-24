@@ -13,8 +13,7 @@ public partial class ProductQueries
     {
         var productVariant = mundoBalloonContext.ProductVariants
             .Include(pv => pv.ProductVariantMedia)
-            .Include(pv => pv.VariantValue)
-            .IgnoreAutoIncludes()
+            .Include(pv => pv.ProductVariantValues)
             .FirstOrDefault(p => p.ProductVariantId == productVariantId);
         return productVariant != null ? mapper.Map<ProductVariant>(productVariant) : null;
     }

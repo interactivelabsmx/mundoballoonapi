@@ -9,10 +9,7 @@ public class ProductVariant
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public double Price { get; set; }
-    public double? Weight { get; set; } = 0;
-    public bool? StoreOnly { get; set; } = false;
-    public bool? IsBundle { get; set; } = false;
 
-    public VariantValue? Variant { get; set; }
     public ICollection<ProductVariantMedium>? Media { get; set; }
+    public virtual ICollection<ProductVariantValue>? Variants { get; set; }
 }

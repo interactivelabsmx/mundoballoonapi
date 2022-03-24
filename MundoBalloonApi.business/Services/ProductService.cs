@@ -36,7 +36,6 @@ public class ProductService : IProductService
         {
             Sku = request.Sku,
             ProductId = request.ProductId,
-            VariantValueId = request.VariantValueId,
             ProductVariantName = request.Name,
             ProductVariantDescription = request.Description,
             Price = request.Price
@@ -77,7 +76,6 @@ public class ProductService : IProductService
         {
             ProductVariantId = productVariantEntity.ProductVariantId,
             Sku = productVariantEntity.Sku,
-            VariantValueId = productVariantEntity.VariantValueId,
             ProductId = productVariantEntity.ProductId,
             ProductVariantName = productVariantEntity.Name,
             ProductVariantDescription = productVariantEntity.Description,

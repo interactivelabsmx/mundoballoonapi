@@ -4,7 +4,7 @@ public class VariantValue : BaseEntity
 {
     public VariantValue()
     {
-        ProductVariants = new HashSet<ProductVariant>();
+        ProductVariantValues = new HashSet<ProductVariantValue>();
     }
 
     public int VariantValueId { get; set; }
@@ -12,5 +12,5 @@ public class VariantValue : BaseEntity
     public string? VariantValue1 { get; set; }
 
     public virtual Variant? Variant { get; set; }
-    public virtual ICollection<ProductVariant> ProductVariants { get; set; }
+    public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
 }

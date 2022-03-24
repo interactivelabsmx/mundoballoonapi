@@ -213,8 +213,6 @@ public class MundoBalloonContext : DbContext
 
             entity.HasIndex(e => e.ProductId, "fk_product_variants_products1_idx");
 
-            entity.HasIndex(e => e.VariantValueId, "fk_product_variants_variant_values1_idx");
-
             entity.HasIndex(e => e.ProductVariantId, "product_variant_id_UNIQ_iE")
                 .IsUnique();
 
@@ -255,19 +253,11 @@ public class MundoBalloonContext : DbContext
 
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
-            entity.Property(e => e.VariantValueId).HasColumnName("variant_value_id");
-
             entity.HasOne(d => d.Product)
                 .WithMany(p => p.ProductVariants)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_product_variants_products1");
-
-            entity.HasOne(d => d.VariantValue)
-                .WithMany(p => p.ProductVariants)
-                .HasForeignKey(d => d.VariantValueId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_product_variants_variant_values1");
         });
 
         modelBuilder.Entity<ProductVariantMedium>(entity =>
@@ -315,6 +305,48 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_product_variant_media_product_variants1");
+        });
+        
+        modelBuilder.Entity<ProductVariantValue>(entity =>
+        {
+            entity.HasKey(e => new { e.ProductVariantId, e.VariantValueId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("product_variant_values");
+
+            entity.HasIndex(e => e.VariantValueId, "product_variant_values_variant_values_variant_value_id_fk");
+
+            entity.Property(e => e.ProductVariantId).HasColumnName("product_variant_id");
+
+            entity.Property(e => e.VariantValueId).HasColumnName("variant_value_id");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.IsDeleted)
+                .HasColumnName("isDeleted")
+                .HasDefaultValueSql("'0'");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.HasOne(d => d.ProductVariant)
+                .WithMany(p => p.ProductVariantValues)
+                .HasPrincipalKey(p => p.ProductVariantId)
+                .HasForeignKey(d => d.ProductVariantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("product_variant_values_product_variants_product_variant_id_fk");
+
+            entity.HasOne(d => d.VariantValue)
+                .WithMany(p => p.ProductVariantValues)
+                .HasForeignKey(d => d.VariantValueId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("product_variant_values_variant_values_variant_value_id_fk");
         });
 
         modelBuilder.Entity<User>(entity =>

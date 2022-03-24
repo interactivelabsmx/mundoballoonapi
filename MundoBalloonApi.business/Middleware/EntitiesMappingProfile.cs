@@ -6,6 +6,7 @@ using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
 using ProductCategory = MundoBalloonApi.infrastructure.Data.Models.ProductCategory;
 using ProductVariant = MundoBalloonApi.infrastructure.Data.Models.ProductVariant;
 using ProductVariantMedium = MundoBalloonApi.infrastructure.Data.Models.ProductVariantMedium;
+using ProductVariantValue = MundoBalloonApi.infrastructure.Data.Models.ProductVariantValue;
 using User = MundoBalloonApi.infrastructure.Data.Models.User;
 using UserAddresses = MundoBalloonApi.infrastructure.Data.Models.UserAddresses;
 using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
@@ -35,14 +36,15 @@ public class EntitiesMappingProfile : Profile
         CreateMap<ProductVariant, DataObjects.Entities.ProductVariant>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductVariantName))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription))
-            .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.VariantValue))
-            .ForMember(dest => dest.Media, opt => opt.MapFrom(src => src.ProductVariantMedia));
+            .ForMember(dest => dest.Media, opt => opt.MapFrom(src => src.ProductVariantMedia))
+            .ForMember(dest => dest.Variants, opt => opt.MapFrom(src => src.ProductVariantValues));
         CreateMap<ProductVariant, ProductVariantEntity>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductVariantName))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription));
         CreateMap<VariantValue, DataObjects.Entities.VariantValue>()
             .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.VariantValue1));
         CreateMap<ProductVariantMedium, DataObjects.Entities.ProductVariantMedium>();
+        CreateMap<ProductVariantValue, DataObjects.Entities.ProductVariantValue>();
         CreateMap<Variant, DataObjects.Entities.Variant>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1))
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));

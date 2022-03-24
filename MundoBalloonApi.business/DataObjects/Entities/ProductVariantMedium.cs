@@ -7,4 +7,6 @@ public class ProductVariantMedium
     public string MediaType { get; set; } = string.Empty;
     public string Url { get; set; } = string.Empty;
     public string Quality { get; set; } = string.Empty;
+    
+    public virtual ProductVariant? ProductVariant { get; set; }
 }
