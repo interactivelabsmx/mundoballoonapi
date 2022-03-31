@@ -8,7 +8,6 @@ public class CreateProductVariantInputValidator : AbstractValidator<ProductVaria
     public CreateProductVariantInputValidator()
     {
         RuleFor(input => input.Sku).NotEmpty();
-        RuleFor(input => input.VariantValueId).NotEmpty();
         RuleFor(input => input.ProductId).NotEmpty();
         RuleFor(input => input.Name).NotEmpty();
         RuleFor(input => input.Description).NotEmpty();

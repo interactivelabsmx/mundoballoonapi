@@ -309,7 +309,7 @@ public class MundoBalloonContext : DbContext
         
         modelBuilder.Entity<ProductVariantValue>(entity =>
         {
-            entity.HasKey(e => new { e.ProductVariantId, e.VariantValueId })
+            entity.HasKey(e => new { e.ProductVariantId, e.VariantId, e.VariantValueId })
                 .HasName("PRIMARY")
                 .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
@@ -319,6 +319,8 @@ public class MundoBalloonContext : DbContext
 
             entity.Property(e => e.ProductVariantId).HasColumnName("product_variant_id");
 
+            entity.Property(e => e.VariantId).HasColumnName("variant_id");
+            
             entity.Property(e => e.VariantValueId).HasColumnName("variant_value_id");
 
             entity.Property(e => e.CreatedAt)
@@ -341,6 +343,12 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("product_variant_values_product_variants_product_variant_id_fk");
+
+            entity.HasOne(d => d.Variant)
+                .WithMany(p => p.ProductVariantValues)
+                .HasForeignKey(d => d.VariantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("product_variant_values_variants_variant_id_fk");
 
             entity.HasOne(d => d.VariantValue)
                 .WithMany(p => p.ProductVariantValues)
