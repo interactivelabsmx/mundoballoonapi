@@ -36,7 +36,7 @@ public class CollectionsRepository : ICollectionsRepository
 
         return variant;
     }
-    
+
     public VariantValue CreateVariantValue(VariantValue variant)
     {
         var context = _contextFactory.CreateDbContext();

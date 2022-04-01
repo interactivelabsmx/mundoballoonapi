@@ -38,9 +38,10 @@ public class Startup
 
         services
             .AddGraphQLServer()
+            .AddType<UploadType>()
             .AddQueryType(d => d.Name("Query"))
-            .AddTypeExtension<UserQueries>()
             .AddTypeExtension<SiteQueries>()
+            .AddTypeExtension<UserQueries>()
             .AddTypeExtension<ProductQueries>()
             .AddTypeExtension<CollectionQueries>()
             .AddMutationType(d => d.Name("Mutation"))

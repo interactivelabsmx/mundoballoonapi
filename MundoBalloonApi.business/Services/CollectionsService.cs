@@ -37,7 +37,7 @@ public class CollectionsService : ICollectionsService
         _collectionsRepository.CreateVariant(newVariant);
         return _mapper.Map<Variant>(newVariant);
     }
-    
+
     public VariantValue CreateVariantValue(VariantValue variantValue)
     {
         var newVariant = new infrastructure.Data.Models.VariantValue

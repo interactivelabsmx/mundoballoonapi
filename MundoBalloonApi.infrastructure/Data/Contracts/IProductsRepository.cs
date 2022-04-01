@@ -16,5 +16,11 @@ public interface IProductsRepository
 
     ProductVariant CreateProductVariant(ProductVariant productVariant);
 
+    ProductVariant ProductVariantAddValue(ProductVariantValue variantValue);
+
+    ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia);
+
+    ProductVariant? GetProductVariantById(int productVariantId);
+
     ProductVariant UpdateProductVariant(ProductVariant productVariant);
 }

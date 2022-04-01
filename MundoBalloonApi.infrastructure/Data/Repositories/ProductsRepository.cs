@@ -86,6 +86,30 @@ public class ProductsRepository : IProductsRepository
         return productVariant;
     }
 
+    public ProductVariant ProductVariantAddValue(ProductVariantValue variantValue)
+    {
+        var context = _contextFactory.CreateDbContext();
+        var productVariant = context.ProductVariants.First(pv => pv.ProductVariantId == variantValue.ProductVariantId);
+        productVariant.ProductVariantValues.Add(variantValue);
+        context.SaveChanges();
+        return productVariant;
+    }
+
+    public ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia)
+    {
+        var context = _contextFactory.CreateDbContext();
+        var productVariant = context.ProductVariants.First(pv => pv.ProductVariantId == variantMedia.ProductVariantId);
+        productVariant.ProductVariantMedia.Add(variantMedia);
+        context.SaveChanges();
+        return productVariant;
+    }
+
+    public ProductVariant? GetProductVariantById(int productVariantId)
+    {
+        var context = _contextFactory.CreateDbContext();
+        return context.ProductVariants.FirstOrDefault(pv => pv.ProductVariantId == productVariantId);
+    }
+
     public ProductVariant UpdateProductVariant(ProductVariant productVariant)
     {
         var context = _contextFactory.CreateDbContext();

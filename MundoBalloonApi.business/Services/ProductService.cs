@@ -45,6 +45,20 @@ public class ProductService : IProductService
         return productVariantDto;
     }
 
+    public ProductVariant ProductVariantAddValue(ProductVariantValue variantValue)
+    {
+        var variantValueModel = _mapper.Map<infrastructure.Data.Models.ProductVariantValue>(variantValue);
+        var productVariant = _productsRepository.ProductVariantAddValue(variantValueModel);
+        return _mapper.Map<ProductVariant>(productVariant);
+    }
+
+    public ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia)
+    {
+        var variantMediaModel = _mapper.Map<infrastructure.Data.Models.ProductVariantMedium>(variantMedia);
+        var productVariant = _productsRepository.ProductVariantAddMedia(variantMediaModel);
+        return _mapper.Map<ProductVariant>(productVariant);
+    }
+
     public bool DeleteProduct(int productId)
     {
         return _productsRepository.DeleteProduct(productId);

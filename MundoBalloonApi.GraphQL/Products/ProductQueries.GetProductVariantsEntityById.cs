@@ -19,7 +19,7 @@ public partial class ProductQueries
                 ProductId = p.ProductId,
                 Price = p.Price,
                 Name = p.ProductVariantName ?? string.Empty,
-                Description = p.ProductVariantDescription ?? string.Empty,
+                Description = p.ProductVariantDescription ?? string.Empty
             });
         return products;
     }
