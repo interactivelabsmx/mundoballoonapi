@@ -3,20 +3,20 @@ using Azure.Storage.Blobs;
 
 namespace MundoBalloonApi.infrastructure.Storage;
 
-public class StorageHelper
+public static class StorageHelper
 {
     public static async Task<Uri?> UploadFileToStorage(Stream fileStream, string fileName,
-        AzureStorageConfig _storageConfig, CancellationToken cancellationToken)
+        AzureStorageConfig storageConfig, CancellationToken cancellationToken)
     {
         // Create a URI to the blob
         var blobUri = new Uri("https://" +
-                              _storageConfig.AccountName +
+                              storageConfig.AccountName +
                               ".blob.core.windows.net/" +
-                              _storageConfig.ImageContainer +
+                              storageConfig.ImageContainer +
                               "/" + Guid.NewGuid() + fileName);
 
         var storageCredentials =
-            new StorageSharedKeyCredential(_storageConfig.AccountName, _storageConfig.AccountKey);
+            new StorageSharedKeyCredential(storageConfig.AccountName, storageConfig.AccountKey);
 
         // Create the blob client.
         var blobClient = new BlobClient(blobUri, storageCredentials);
