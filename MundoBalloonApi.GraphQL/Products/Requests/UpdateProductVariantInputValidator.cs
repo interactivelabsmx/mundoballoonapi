@@ -9,7 +9,6 @@ public class UpdateProductVariantInputValidator : AbstractValidator<ProductVaria
     {
         RuleFor(input => input.ProductVariantId).NotEmpty();
         RuleFor(input => input.Sku).NotEmpty();
-        RuleFor(input => input.VariantValueId).NotEmpty();
         RuleFor(input => input.ProductId).NotEmpty();
         RuleFor(input => input.Name).NotEmpty();
         RuleFor(input => input.Description).NotEmpty();
