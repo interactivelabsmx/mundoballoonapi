@@ -47,7 +47,12 @@ public class ProductService : IProductService
 
     public ProductVariant ProductVariantAddValue(ProductVariantValue variantValue)
     {
-        var variantValueModel = _mapper.Map<infrastructure.Data.Models.ProductVariantValue>(variantValue);
+        var variantValueModel = new infrastructure.Data.Models.ProductVariantValue()
+        {
+            ProductVariantId = variantValue.ProductVariantId,
+            VariantId = variantValue.VariantId,
+            VariantValueId = variantValue.VariantValueId,
+        };
         var productVariant = _productsRepository.ProductVariantAddValue(variantValueModel);
         return _mapper.Map<ProductVariant>(productVariant);
     }
