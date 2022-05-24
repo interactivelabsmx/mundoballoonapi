@@ -95,6 +95,20 @@ public class ProductsRepository : IProductsRepository
         return productVariant;
     }
 
+    public bool DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId)
+    {
+        var context = _contextFactory.CreateDbContext();
+        var value = context.ProductVariantValues.FirstOrDefault(pvv => pvv.ProductVariantId == productVariantId && pvv.VariantId == variantId && pvv.VariantValueId == variantValueId);
+        if (value != null)
+        {
+            context.ProductVariantValues.Remove(value);
+            context.SaveChanges();
+            return true;
+        }
+
+        return false;
+    }
+
     public ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia)
     {
         var context = _contextFactory.CreateDbContext();
@@ -102,6 +116,20 @@ public class ProductsRepository : IProductsRepository
         productVariant.ProductVariantMedia.Add(variantMedia);
         context.SaveChanges();
         return productVariant;
+    }
+    
+    public bool DeleteProductVariantMedia(int productVariantMediaId)
+    {
+        var context = _contextFactory.CreateDbContext();
+        var media = context.ProductVariantMedia.FirstOrDefault(p => p.ProductVariantMediaId == productVariantMediaId);
+        if (media != null)
+        {
+            context.ProductVariantMedia.Remove(media);
+            context.SaveChanges();
+            return true;
+        }
+
+        return false;
     }
 
     public ProductVariant? GetProductVariantById(int productVariantId)

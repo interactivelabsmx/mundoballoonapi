@@ -15,6 +15,8 @@ public class MundoBalloonContext : DbContext
     public virtual DbSet<ProductCategory> ProductCategories { get; set; } = default!;
     public virtual DbSet<ProductVariant> ProductVariants { get; set; } = default!;
     public virtual DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
+    public virtual DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
+    
     public virtual DbSet<User> Users { get; set; } = default!;
     public virtual DbSet<UserAddresses> UserAddressess { get; set; } = default!;
     public virtual DbSet<UserCart> UserCarts { get; set; } = default!;
@@ -286,6 +288,14 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.Quality)
                 .HasColumnType("varchar(45)")
                 .HasColumnName("quality");
+            
+            entity.Property(e => e.Name)
+                .HasColumnType("varchar(45)")
+                .HasColumnName("name");
+            
+            entity.Property(e => e.Description)
+                .HasColumnType("text")
+                .HasColumnName("description");
 
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(6)")

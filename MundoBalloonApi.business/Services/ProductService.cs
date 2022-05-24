@@ -57,6 +57,11 @@ public class ProductService : IProductService
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
+    public bool DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId)
+    {
+        return _productsRepository.DeleteProductVariantValue(productVariantId, variantId, variantValueId);
+    }
+
     public ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia)
     {
         var variantMediaModel = new infrastructure.Data.Models.ProductVariantMedium
@@ -64,10 +69,17 @@ public class ProductService : IProductService
             ProductVariantId = variantMedia.ProductVariantId,
             MediaType = variantMedia.MediaType,
             Url = variantMedia.Url,
-            Quality = variantMedia.Quality
+            Quality = variantMedia.Quality,
+            Name = variantMedia.Name,
+            Description = variantMedia.Description
         };
         var productVariant = _productsRepository.ProductVariantAddMedia(variantMediaModel);
         return _mapper.Map<ProductVariant>(productVariant);
+    }
+
+    public bool DeleteProductVariantMedia(int productVariantMediaId)
+    {
+        return _productsRepository.DeleteProductVariantMedia(productVariantMediaId);
     }
 
     public bool DeleteProduct(int productId)

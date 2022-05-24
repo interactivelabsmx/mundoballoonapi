@@ -18,7 +18,11 @@ public interface IProductsRepository
 
     ProductVariant ProductVariantAddValue(ProductVariantValue variantValue);
 
+    bool DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId);
+
     ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia);
+    
+    bool DeleteProductVariantMedia(int productVariantMediaId);
 
     ProductVariant? GetProductVariantById(int productVariantId);
 
