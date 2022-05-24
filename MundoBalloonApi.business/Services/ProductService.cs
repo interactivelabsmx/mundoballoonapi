@@ -59,7 +59,13 @@ public class ProductService : IProductService
 
     public ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia)
     {
-        var variantMediaModel = _mapper.Map<infrastructure.Data.Models.ProductVariantMedium>(variantMedia);
+        var variantMediaModel = new infrastructure.Data.Models.ProductVariantMedium
+        {
+            ProductVariantId = variantMedia.ProductVariantId,
+            MediaType = variantMedia.MediaType,
+            Url = variantMedia.Url,
+            Quality = variantMedia.Quality
+        };
         var productVariant = _productsRepository.ProductVariantAddMedia(variantMediaModel);
         return _mapper.Map<ProductVariant>(productVariant);
     }

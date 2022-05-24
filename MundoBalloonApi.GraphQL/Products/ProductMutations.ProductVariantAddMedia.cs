@@ -3,7 +3,7 @@ using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Storage;
 
 namespace MundoBalloonApi.graphql.Products;
-
+ 
 public partial class ProductMutations
 {
     public async Task<ProductVariant?> ProductVariantAddMedia(
