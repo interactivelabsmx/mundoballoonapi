@@ -22,13 +22,13 @@ public class UsersRepository : IUsersRepository
         }
     }
 
-    public User Create(User user)
+    public async Task<User> Create(User user)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
         {
             context.Add(user);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         return user;

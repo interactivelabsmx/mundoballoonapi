@@ -1,19 +1,14 @@
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DataObjects.Requests.Users;
-using MundoBalloonApi.graphql.Users.Requests;
+using MundoBalloonApi.business.DataObjects.Entities;
 
 namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserMutations
 {
-    public CreateUserPayload CreateUser(
-        CreateUserRequest input,
+    public async Task<User> CreateUser(
+        string userId,
         [Service] IUsersService usersService)
     {
-        var user = usersService.CreateOrGetUser(new CreateUserRequest
-        {
-            UserId = input.UserId
-        });
-        return new CreateUserPayload(user);
+        return await usersService.CreateOrGetUser(userId);
     }
 }

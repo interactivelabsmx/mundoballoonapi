@@ -6,5 +6,5 @@ public interface IUsersRepository
 {
     User? GetById(string userId);
 
-    User Create(User user);
+    Task<User> Create(User user);
 }

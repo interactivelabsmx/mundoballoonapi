@@ -1,11 +1,10 @@
 using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests.Users;
 
 namespace MundoBalloonApi.business.Contracts;
 
 public interface IUsersService
 {
-    User CreateOrGetUser(CreateUserRequest createUserRequest);
+    Task<User> CreateOrGetUser(string userId);
     Task<UserRecord?> GetFirebaseUserById(string userId);
 }

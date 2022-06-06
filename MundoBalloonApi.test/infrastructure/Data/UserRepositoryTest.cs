@@ -15,9 +15,9 @@ public class UserRepositoryTest
     }
 
     [Fact]
-    public void Test_CreateOrGet_OK()
+    public async void Test_CreateOrGet_OK()
     {
-        var user = _fixture.UsersRepository.Create(new User
+        var user = await _fixture.UsersRepository.Create(new User
         {
             UserId = "123"
         });

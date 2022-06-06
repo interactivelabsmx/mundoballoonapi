@@ -16,9 +16,8 @@ public class MundoBalloonContext : DbContext
     public virtual DbSet<ProductVariant> ProductVariants { get; set; } = default!;
     public virtual DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
     public virtual DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
-    
+
     public virtual DbSet<User> Users { get; set; } = default!;
-    public virtual DbSet<UserAddresses> UserAddressess { get; set; } = default!;
     public virtual DbSet<UserCart> UserCarts { get; set; } = default!;
     public virtual DbSet<UserOccasion> UserOccasions { get; set; } = default!;
     public virtual DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
@@ -288,11 +287,11 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.Quality)
                 .HasColumnType("varchar(45)")
                 .HasColumnName("quality");
-            
+
             entity.Property(e => e.Name)
                 .HasColumnType("varchar(45)")
                 .HasColumnName("name");
-            
+
             entity.Property(e => e.Description)
                 .HasColumnType("text")
                 .HasColumnName("description");
@@ -393,74 +392,6 @@ public class MundoBalloonContext : DbContext
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-        });
-
-        modelBuilder.Entity<UserAddresses>(entity =>
-        {
-            entity.HasKey(e => e.UserAddressesId)
-                .HasName("PRIMARY");
-
-            entity.ToTable("user_addresses");
-
-            entity.HasIndex(e => e.UserId, "fk_user_addreses_Users1_idx");
-
-            entity.Property(e => e.UserAddressesId)
-                .ValueGeneratedNever()
-                .HasColumnName("user_addresses_id");
-
-            entity.Property(e => e.Address1)
-                .IsRequired()
-                .HasColumnType("varchar(45)")
-                .HasColumnName("address1");
-
-            entity.Property(e => e.Address2)
-                .HasColumnType("varchar(45)")
-                .HasColumnName("address2");
-
-            entity.Property(e => e.City)
-                .IsRequired()
-                .HasColumnType("varchar(45)")
-                .HasColumnName("city");
-
-            entity.Property(e => e.Country)
-                .IsRequired()
-                .HasColumnType("varchar(45)")
-                .HasColumnName("country");
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsBilling)
-                .HasColumnName("is_billing")
-                .HasDefaultValueSql("'1'");
-
-            entity.Property(e => e.IsShipping).HasColumnName("is_shipping");
-
-            entity.Property(e => e.State)
-                .IsRequired()
-                .HasColumnType("varchar(45)")
-                .HasColumnName("state");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.Property(e => e.Zipcode)
-                .IsRequired()
-                .HasColumnType("varchar(45)")
-                .HasColumnName("zipcode");
-
-            entity.HasOne(d => d.User)
-                .WithMany(p => p.UserAddressess)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("fk_user_addreses_Users1");
         });
 
         modelBuilder.Entity<UserCart>(entity =>

@@ -2,7 +2,6 @@ using AutoMapper;
 using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Entities;
-using MundoBalloonApi.business.DataObjects.Requests.Users;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 
 namespace MundoBalloonApi.business.Services;
@@ -18,16 +17,16 @@ public class UsersService : IUsersService
         _mapper = mapper;
     }
 
-    public User CreateOrGetUser(CreateUserRequest createUserRequest)
+    public async Task<User> CreateOrGetUser(string userId)
     {
-        var currentUser = _usersRepository.GetById(createUserRequest.UserId);
+        var currentUser = _usersRepository.GetById(userId);
         if (currentUser != null) return _mapper.Map<User>(currentUser);
 
         var user = new infrastructure.Data.Models.User
         {
-            UserId = createUserRequest.UserId
+            UserId = userId
         };
-        var result = _usersRepository.Create(user);
+        var result = await _usersRepository.Create(user);
         return _mapper.Map<User>(result);
     }
 

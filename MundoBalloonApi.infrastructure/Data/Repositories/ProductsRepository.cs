@@ -98,7 +98,9 @@ public class ProductsRepository : IProductsRepository
     public bool DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId)
     {
         var context = _contextFactory.CreateDbContext();
-        var value = context.ProductVariantValues.FirstOrDefault(pvv => pvv.ProductVariantId == productVariantId && pvv.VariantId == variantId && pvv.VariantValueId == variantValueId);
+        var value = context.ProductVariantValues.FirstOrDefault(pvv =>
+            pvv.ProductVariantId == productVariantId && pvv.VariantId == variantId &&
+            pvv.VariantValueId == variantValueId);
         if (value != null)
         {
             context.ProductVariantValues.Remove(value);
@@ -117,7 +119,7 @@ public class ProductsRepository : IProductsRepository
         context.SaveChanges();
         return productVariant;
     }
-    
+
     public bool DeleteProductVariantMedia(int productVariantMediaId)
     {
         var context = _contextFactory.CreateDbContext();
