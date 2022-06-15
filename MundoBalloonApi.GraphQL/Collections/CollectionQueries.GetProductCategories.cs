@@ -8,8 +8,5 @@ public partial class CollectionQueries
 {
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductCategory> GetProductCategories([ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper)
-    {
-        return mapper.ProjectTo<ProductCategory>(mundoBalloonContext.ProductCategories);
-    }
+        [Service] IMapper mapper) => mapper.ProjectTo<ProductCategory>(mundoBalloonContext.ProductCategories);
 }

@@ -8,13 +8,16 @@ namespace MundoBalloonApi.graphql.Users;
 [ExtendObjectType(Name = "Query")]
 public partial class UserQueries
 {
-    private static FirebaseUser GetFirebaseUser(User user, IMapper mapper)
+    private static FirebaseUser GetFirebaseUser(User user)
     {
         var userRecord = FirebaseAuth.DefaultInstance.GetUserAsync(user.UserId);
-        var firebaseUser = mapper.Map<FirebaseUser>(user);
-        firebaseUser.Email = userRecord.Result.Email;
-        firebaseUser.DisplayName = userRecord.Result.DisplayName;
-        firebaseUser.PhoneNumber = userRecord.Result.PhoneNumber;
-        return firebaseUser;
+        return new FirebaseUser()
+        {
+            Id = user.Id,
+            UserId = user.UserId,
+            Email = userRecord.Result.Email,
+            DisplayName = userRecord.Result.DisplayName,
+            PhoneNumber = userRecord.Result.PhoneNumber
+        };
     }
 }

@@ -11,10 +11,9 @@ public partial class UserQueries
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
-    public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper)
+    public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext)
     {
         var user = await mundoBalloonContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-        return user == null ? null : GetFirebaseUser(user, mapper);
+        return user == null ? null : GetFirebaseUser(user);
     }
 }

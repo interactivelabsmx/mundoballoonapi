@@ -1,3 +1,4 @@
+using AutoMapper;
 using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
 
@@ -8,9 +9,7 @@ public partial class ProductQueries
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
     [UseSorting]
-    public IQueryable<ProductEntity> GetProductsEntity([ScopedService] MundoBalloonContext mundoBalloonContext)
-    {
-        return mundoBalloonContext.Products.Select(p => new ProductEntity
+    public IQueryable<ProductEntity> GetProductsEntity([ScopedService] MundoBalloonContext mundoBalloonContext) => mundoBalloonContext.Products.Select(p => new ProductEntity
         {
             ProductId = p.ProductId,
             Name = p.ProductName ?? string.Empty,
@@ -18,5 +17,4 @@ public partial class ProductQueries
             Price = p.Price,
             ProductCategoryId = p.ProductCategoryId
         });
-    }
 }

@@ -12,9 +12,8 @@ public static class ServicesDataStartupExtensions
 {
     private const string CacheProviderName = "MundoBCache";
 
-    public static IServiceCollection AddMundoBServices(this IServiceCollection services)
-    {
-        return services
+    public static IServiceCollection AddMundoBServices(this IServiceCollection services) =>
+     services
             .AddScoped<IUsersRepository, UsersRepository>()
             .AddScoped<IProductsRepository, ProductsRepository>()
             .AddScoped<ICollectionsRepository, CollectionsRepository>()
@@ -22,12 +21,9 @@ public static class ServicesDataStartupExtensions
             .AddScoped<ISiteService, SiteService>()
             .AddScoped<IProductService, ProductService>()
             .AddScoped<ICollectionsService, CollectionsService>();
-    }
 
     public static IServiceCollection AddDbServices(this IServiceCollection services, IConfiguration configuration,
-        string connectionString)
-    {
-        return services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
+        string connectionString) => services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
             {
                 options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 29)))
                     .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>());
@@ -39,5 +35,4 @@ public static class ServicesDataStartupExtensions
                 options.CacheAllQueries(CacheExpirationMode.Sliding, TimeSpan.FromMinutes(15));
             })
             .AddEasyCaching(options => { options.WithJson().UseRedis(configuration, CacheProviderName); });
-    }
 }

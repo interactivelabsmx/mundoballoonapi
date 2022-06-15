@@ -52,7 +52,7 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
             .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions));
-        CreateMap<User, FirebaseUser>()
+        CreateMap<User, DataObjects.Entities.FirebaseUser>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
             .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions));

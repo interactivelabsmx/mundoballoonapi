@@ -6,13 +6,10 @@ namespace MundoBalloonApi.graphql;
 
 public static class ServicesInputValidationExtensions
 {
-    public static IServiceCollection AddInputValidationServices(this IServiceCollection services)
-    {
-        return services
+    public static IServiceCollection AddInputValidationServices(this IServiceCollection services) => services
             .AddValidatorsFromAssemblyContaining<CreateProductInputValidator>()
             .AddValidatorsFromAssemblyContaining<CreateProductVariantInputValidator>()
             .AddValidatorsFromAssemblyContaining<UpdateProductInputValidator>()
             .AddValidatorsFromAssemblyContaining<UpdateProductVariantInputValidator>()
             .AddValidatorsFromAssemblyContaining<CreateProductCategoryInputValidator>();
-    }
 }

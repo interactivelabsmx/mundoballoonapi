@@ -6,8 +6,5 @@ public partial class UserMutations
 {
     public Task<bool> DeleteUser(
         string userId,
-        [Service] IUsersService usersService, CancellationToken cancellationToken)
-    {
-        return usersService.DeleteUser(userId, cancellationToken);
-    }
+        [Service] IUsersService usersService, CancellationToken cancellationToken) => usersService.DeleteUser(userId, cancellationToken);
 }

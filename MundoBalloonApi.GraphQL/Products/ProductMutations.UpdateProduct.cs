@@ -5,8 +5,5 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductMutations
 {
-    public Task<Product> UpdateProduct(ProductEntity input, [Service] IProductService productService)
-    {
-        return productService.UpdateProduct(input);
-    }
+    public Task<Product> UpdateProduct(ProductEntity input, [Service] IProductService productService) => productService.UpdateProduct(input);
 }

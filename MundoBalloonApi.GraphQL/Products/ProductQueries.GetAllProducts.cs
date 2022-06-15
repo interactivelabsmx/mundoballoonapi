@@ -10,8 +10,5 @@ public partial class ProductQueries
     [UsePaging]
     [UseSorting]
     public IQueryable<Product> GetAllProducts([ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper)
-    {
-        return mapper.ProjectTo<Product>(mundoBalloonContext.Products);
-    }
+        [Service] IMapper mapper) => mapper.ProjectTo<Product>(mundoBalloonContext.Products);
 }

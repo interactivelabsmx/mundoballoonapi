@@ -7,8 +7,5 @@ public partial class ProductMutations
 {
     public Task<ProductVariant> ProductVariantAddValue(
         ProductVariantValue input,
-        [Service] IProductService productService)
-    {
-        return productService.ProductVariantAddValue(input);
-    }
+        [Service] IProductService productService) => productService.ProductVariantAddValue(input);
 }
