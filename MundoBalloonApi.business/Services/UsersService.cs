@@ -17,7 +17,7 @@ public class UsersService : IUsersService
         _mapper = mapper;
     }
 
-    public async Task<User> CreateOrGetUser(string userId)
+    public async Task<User> CreateOrGetUser(string userId, CancellationToken cancellationToken)
     {
         var currentUser = _usersRepository.GetById(userId);
         if (currentUser != null) return _mapper.Map<User>(currentUser);
@@ -26,7 +26,7 @@ public class UsersService : IUsersService
         {
             UserId = userId
         };
-        var result = await _usersRepository.Create(user);
+        var result = await _usersRepository.Create(user, cancellationToken);
         return _mapper.Map<User>(result);
     }
 

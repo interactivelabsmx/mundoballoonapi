@@ -22,13 +22,13 @@ public class UsersRepository : IUsersRepository
         }
     }
 
-    public async Task<User> Create(User user)
+    public async Task<User> Create(User user, CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             context.Add(user);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
 
         return user;

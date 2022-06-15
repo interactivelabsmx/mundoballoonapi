@@ -28,8 +28,11 @@ public static class ServicesDataStartupExtensions
         string connectionString)
     {
         return services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
-                options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 23)))
-                    .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>()))
+            {
+                options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 29)))
+                    .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>());
+                options.EnableSensitiveDataLogging();
+            })
             .AddEFSecondLevelCache(options =>
             {
                 options.UseEasyCachingCoreProvider(CacheProviderName);

@@ -7,8 +7,8 @@ public partial class UserMutations
 {
     public async Task<User> CreateUser(
         string userId,
-        [Service] IUsersService usersService)
+        [Service] IUsersService usersService, CancellationToken cancellationToken)
     {
-        return await usersService.CreateOrGetUser(userId);
+        return await usersService.CreateOrGetUser(userId, cancellationToken);
     }
 }

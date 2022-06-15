@@ -15,12 +15,13 @@ public class UserRepositoryTest
     }
 
     [Fact]
-    public async void Test_CreateOrGet_OK()
+    public async Task Test_CreateOrGet_OK()
     {
+        var cancellationToken = new CancellationTokenSource().Token;
         var user = await _fixture.UsersRepository.Create(new User
         {
             UserId = "123"
-        });
+        }, cancellationToken);
         Assert.True(user.UserId != null);
     }
 }
