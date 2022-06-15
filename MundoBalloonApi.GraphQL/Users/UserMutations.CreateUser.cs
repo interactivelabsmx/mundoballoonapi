@@ -7,5 +7,8 @@ public partial class UserMutations
 {
     public Task<User> CreateUser(
         string userId,
-        [Service] IUsersService usersService, CancellationToken cancellationToken) =>  usersService.CreateOrGetUser(userId, cancellationToken);
+        [Service] IUsersService usersService, CancellationToken cancellationToken)
+    {
+        return usersService.CreateOrGetUser(userId, cancellationToken);
+    }
 }

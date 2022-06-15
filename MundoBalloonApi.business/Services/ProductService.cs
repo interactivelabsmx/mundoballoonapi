@@ -55,8 +55,10 @@ public class ProductService : IProductService
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId) =>
-        await _productsRepository.DeleteProductVariantValue(productVariantId, variantId, variantValueId);
+    public async Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId)
+    {
+        return await _productsRepository.DeleteProductVariantValue(productVariantId, variantId, variantValueId);
+    }
 
     public async Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia)
     {
@@ -73,14 +75,20 @@ public class ProductService : IProductService
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId) =>
-        await _productsRepository.DeleteProductVariantMedia(productVariantMediaId);
+    public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId)
+    {
+        return await _productsRepository.DeleteProductVariantMedia(productVariantMediaId);
+    }
 
-    public async Task<bool> DeleteProduct(int productId) =>
-        await _productsRepository.DeleteProduct(productId);
+    public async Task<bool> DeleteProduct(int productId)
+    {
+        return await _productsRepository.DeleteProduct(productId);
+    }
 
-    public async Task<bool> DeleteProductVariant(int productVariantId) =>
-        await _productsRepository.DeleteProductVariant(productVariantId);
+    public async Task<bool> DeleteProductVariant(int productVariantId)
+    {
+        return await _productsRepository.DeleteProductVariant(productVariantId);
+    }
 
     public async Task<Product> UpdateProduct(ProductEntity productEntity)
     {

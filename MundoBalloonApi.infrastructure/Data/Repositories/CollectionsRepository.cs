@@ -21,6 +21,7 @@ public class CollectionsRepository : ICollectionsRepository
             context.ProductCategories.Add(productCategory);
             await context.SaveChangesAsync();
         }
+
         return productCategory;
     }
 
@@ -32,6 +33,7 @@ public class CollectionsRepository : ICollectionsRepository
             context.Variants.Add(variant);
             await context.SaveChangesAsync();
         }
+
         return variant;
     }
 
@@ -43,6 +45,7 @@ public class CollectionsRepository : ICollectionsRepository
             context.VariantValues.Add(variant);
             await context.SaveChangesAsync();
         }
+
         return variant;
     }
 }

@@ -5,5 +5,8 @@ namespace MundoBalloonApi.graphql.Products;
 public partial class ProductMutations
 {
     public Task<bool> DeleteProductVariantValue(
-        [Service] IProductService productService, int productVariantId, int variantId, int variantValueId) => productService.DeleteProductVariantValue(productVariantId, variantId, variantValueId);
+        [Service] IProductService productService, int productVariantId, int variantId, int variantValueId)
+    {
+        return productService.DeleteProductVariantValue(productVariantId, variantId, variantValueId);
+    }
 }

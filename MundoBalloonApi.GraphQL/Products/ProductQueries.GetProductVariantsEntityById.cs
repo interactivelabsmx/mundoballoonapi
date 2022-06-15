@@ -1,4 +1,3 @@
-using AutoMapper;
 using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
 
@@ -8,7 +7,9 @@ public partial class ProductQueries
 {
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductVariantEntity> GetProductVariantsEntityById(int productId,
-        [ScopedService] MundoBalloonContext mundoBalloonContext) => mundoBalloonContext.ProductVariants.Where(pv => pv.ProductId == productId).Select(p =>
+        [ScopedService] MundoBalloonContext mundoBalloonContext)
+    {
+        return mundoBalloonContext.ProductVariants.Where(pv => pv.ProductId == productId).Select(p =>
             new ProductVariantEntity
             {
                 ProductVariantId = p.ProductVariantId,
@@ -18,4 +19,5 @@ public partial class ProductQueries
                 Name = p.ProductVariantName ?? string.Empty,
                 Description = p.ProductVariantDescription ?? string.Empty
             });
+    }
 }

@@ -1,4 +1,3 @@
-using AutoMapper;
 using HotChocolate.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.DataObjects.Entities;
@@ -10,8 +9,8 @@ public partial class UserQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    [UsePaging]
-    public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext, CancellationToken cancellationToken)
+    public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext,
+        CancellationToken cancellationToken)
     {
         var user = await mundoBalloonContext.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
         return user == null ? null : GetFirebaseUser(user);

@@ -12,8 +12,9 @@ public static class ServicesDataStartupExtensions
 {
     private const string CacheProviderName = "MundoBCache";
 
-    public static IServiceCollection AddMundoBServices(this IServiceCollection services) =>
-     services
+    public static IServiceCollection AddMundoBServices(this IServiceCollection services)
+    {
+        return services
             .AddScoped<IUsersRepository, UsersRepository>()
             .AddScoped<IProductsRepository, ProductsRepository>()
             .AddScoped<ICollectionsRepository, CollectionsRepository>()
@@ -21,18 +22,19 @@ public static class ServicesDataStartupExtensions
             .AddScoped<ISiteService, SiteService>()
             .AddScoped<IProductService, ProductService>()
             .AddScoped<ICollectionsService, CollectionsService>();
+    }
 
     public static IServiceCollection AddDbServices(this IServiceCollection services, IConfiguration configuration,
-        string connectionString) => services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
-            {
+        string connectionString)
+    {
+        return services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
                 options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 29)))
-                    .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>());
-                options.EnableSensitiveDataLogging();
-            })
+                    .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>()))
             .AddEFSecondLevelCache(options =>
             {
                 options.UseEasyCachingCoreProvider(CacheProviderName);
                 options.CacheAllQueries(CacheExpirationMode.Sliding, TimeSpan.FromMinutes(15));
             })
             .AddEasyCaching(options => { options.WithJson().UseRedis(configuration, CacheProviderName); });
+    }
 }

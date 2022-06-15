@@ -42,6 +42,5 @@ public class UsersRepository : IUsersRepository
         context.Users.Remove(user);
         await context.SaveChangesAsync(cancellationToken);
         return true;
-
     }
 }

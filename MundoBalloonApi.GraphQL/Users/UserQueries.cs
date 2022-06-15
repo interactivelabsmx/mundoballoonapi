@@ -10,7 +10,7 @@ public partial class UserQueries
     private static FirebaseUser GetFirebaseUser(User user)
     {
         var userRecord = FirebaseAuth.DefaultInstance.GetUserAsync(user.UserId);
-        return new FirebaseUser()
+        return new FirebaseUser
         {
             Id = user.Id,
             UserId = user.UserId,

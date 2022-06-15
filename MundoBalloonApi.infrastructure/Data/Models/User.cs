@@ -11,7 +11,7 @@ public class User : BaseEntity
 
     public int Id { get; set; }
 
-    public string UserId { get; set; } = String.Empty;
+    public string UserId { get; set; } = string.Empty;
 
     public virtual ICollection<UserCart> UserCarts { get; set; }
     public virtual ICollection<UserOccasion> UserOccasions { get; set; }

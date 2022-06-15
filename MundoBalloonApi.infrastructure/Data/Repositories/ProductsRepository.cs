@@ -32,6 +32,7 @@ public class ProductsRepository : IProductsRepository
             context.Products.Add(product);
             await context.SaveChangesAsync();
         }
+
         return product;
     }
 
@@ -50,7 +51,8 @@ public class ProductsRepository : IProductsRepository
     public async Task<bool> DeleteProductVariant(int productVariantId)
     {
         var context = await _contextFactory.CreateDbContextAsync();
-        var productVariant = await context.ProductVariants.FirstOrDefaultAsync(p => p.ProductVariantId == productVariantId);
+        var productVariant =
+            await context.ProductVariants.FirstOrDefaultAsync(p => p.ProductVariantId == productVariantId);
         if (productVariant == null) return false;
         context.ProductVariants.Remove(productVariant);
         await context.SaveChangesAsync();
@@ -65,6 +67,7 @@ public class ProductsRepository : IProductsRepository
             context.Products.Update(product);
             await context.SaveChangesAsync();
         }
+
         return product;
     }
 
@@ -79,7 +82,8 @@ public class ProductsRepository : IProductsRepository
     public async Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue)
     {
         var context = await _contextFactory.CreateDbContextAsync();
-        var productVariant = await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantValue.ProductVariantId);
+        var productVariant =
+            await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantValue.ProductVariantId);
         productVariant.ProductVariantValues.Add(variantValue);
         await context.SaveChangesAsync();
         return productVariant;
@@ -100,7 +104,8 @@ public class ProductsRepository : IProductsRepository
     public async Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia)
     {
         var context = await _contextFactory.CreateDbContextAsync();
-        var productVariant = await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantMedia.ProductVariantId);
+        var productVariant =
+            await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantMedia.ProductVariantId);
         productVariant.ProductVariantMedia.Add(variantMedia);
         await context.SaveChangesAsync();
         return productVariant;
@@ -109,7 +114,8 @@ public class ProductsRepository : IProductsRepository
     public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId)
     {
         var context = await _contextFactory.CreateDbContextAsync();
-        var media = await context.ProductVariantMedia.FirstOrDefaultAsync(p => p.ProductVariantMediaId == productVariantMediaId);
+        var media = await context.ProductVariantMedia.FirstOrDefaultAsync(p =>
+            p.ProductVariantMediaId == productVariantMediaId);
         if (media == null) return false;
         context.ProductVariantMedia.Remove(media);
         await context.SaveChangesAsync();
@@ -130,6 +136,7 @@ public class ProductsRepository : IProductsRepository
             context.ProductVariants.Update(productVariant);
             await context.SaveChangesAsync();
         }
+
         return productVariant;
     }
 }
