@@ -4,22 +4,23 @@ namespace MundoBalloonApi.business.Contracts;
 
 public interface IProductService
 {
-    Product CreateProduct(Product createProductRequest);
-    ProductVariant CreateProductVariant(ProductVariant request);
+    Task<Product> CreateProduct(Product createProductRequest);
 
-    ProductVariant ProductVariantAddValue(ProductVariantValue variantValue);
+    Task<ProductVariant> CreateProductVariant(ProductVariant request);
 
-    bool DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId);
+    Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue);
 
-    ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia);
+    Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId);
 
-    bool DeleteProductVariantMedia(int productVariantMediaId);
+    Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia);
 
-    bool DeleteProduct(int productId);
+    Task<bool> DeleteProductVariantMedia(int productVariantMediaId);
 
-    bool DeleteProductVariant(int productVariantId);
+    Task<bool> DeleteProduct(int productId);
 
-    Product UpdateProduct(ProductEntity productEntity);
+    Task<bool> DeleteProductVariant(int productVariantId);
 
-    ProductVariant UpdateProductVariant(ProductVariantEntity productVariantEntity);
+    Task<Product> UpdateProduct(ProductEntity productEntity);
+
+    Task<ProductVariant> UpdateProductVariant(ProductVariantEntity productVariantEntity);
 }

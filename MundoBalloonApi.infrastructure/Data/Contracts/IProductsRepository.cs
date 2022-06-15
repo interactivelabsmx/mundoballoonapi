@@ -6,25 +6,25 @@ public interface IProductsRepository
 {
     IQueryable<Product> GetProducts();
 
-    Product CreateProduct(Product product);
+    Task<Product> CreateProduct(Product product);
 
-    bool DeleteProduct(int productId);
+    Task<bool> DeleteProduct(int productId);
 
-    bool DeleteProductVariant(int productVariantId);
+    Task<bool> DeleteProductVariant(int productVariantId);
 
-    Product UpdateProduct(Product product);
+    Task<Product> UpdateProduct(Product product);
 
-    ProductVariant CreateProductVariant(ProductVariant productVariant);
+    Task<ProductVariant> CreateProductVariant(ProductVariant productVariant);
 
-    ProductVariant ProductVariantAddValue(ProductVariantValue variantValue);
+    Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue);
 
-    bool DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId);
+    Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId);
 
-    ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia);
+    Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia);
 
-    bool DeleteProductVariantMedia(int productVariantMediaId);
+    Task<bool> DeleteProductVariantMedia(int productVariantMediaId);
 
-    ProductVariant? GetProductVariantById(int productVariantId);
+    Task<ProductVariant?> GetProductVariantById(int productVariantId);
 
-    ProductVariant UpdateProductVariant(ProductVariant productVariant);
+    Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant);
 }

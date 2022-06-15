@@ -4,9 +4,9 @@ namespace MundoBalloonApi.business.Contracts;
 
 public interface ICollectionsService
 {
-    ProductCategory CreateProductCategory(ProductCategory productCategory);
+    Task<ProductCategory> CreateProductCategory(ProductCategory productCategory);
 
-    Variant CreateVariant(Variant variant);
+    Task<Variant> CreateVariant(Variant variant);
 
-    VariantValue CreateVariantValue(VariantValue variantValue);
+    Task<VariantValue> CreateVariantValue(VariantValue variantValue);
 }

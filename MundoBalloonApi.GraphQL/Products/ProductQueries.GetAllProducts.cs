@@ -12,7 +12,6 @@ public partial class ProductQueries
     public IQueryable<Product> GetAllProducts([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
-        var products = mundoBalloonContext.Products;
-        return mapper.ProjectTo<Product>(products);
+        return mapper.ProjectTo<Product>(mundoBalloonContext.Products);
     }
 }

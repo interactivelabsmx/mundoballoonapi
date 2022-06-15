@@ -24,129 +24,117 @@ public class ProductsRepository : IProductsRepository
             .AsSplitQuery();
     }
 
-    public Product CreateProduct(Product product)
+    public async Task<Product> CreateProduct(Product product)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
         {
             context.Products.Add(product);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         return product;
     }
 
-    public bool DeleteProduct(int productId)
+    public async Task<bool> DeleteProduct(int productId)
     {
-        var context = _contextFactory.CreateDbContext();
-        var product = context.Products.FirstOrDefault(p => p.ProductId == productId);
-        if (product != null)
-        {
-            context.Products.Remove(product);
-            var productVariants = context.ProductVariants.Where(pv => pv.ProductId == productId).ToList();
-            if (productVariants.Count > 0) context.ProductVariants.RemoveRange(productVariants);
-            context.SaveChanges();
-            return true;
-        }
-
-        return false;
+        var context = await _contextFactory.CreateDbContextAsync();
+        var product = await context.Products.FirstOrDefaultAsync(p => p.ProductId == productId);
+        if (product == null) return false;
+        context.Products.Remove(product);
+        var productVariants = context.ProductVariants.Where(pv => pv.ProductId == productId).ToList();
+        if (productVariants.Count > 0) context.ProductVariants.RemoveRange(productVariants);
+        await context.SaveChangesAsync();
+        return true;
     }
 
-    public bool DeleteProductVariant(int productVariantId)
+    public async Task<bool> DeleteProductVariant(int productVariantId)
     {
-        var context = _contextFactory.CreateDbContext();
-        var productVariant = context.ProductVariants.FirstOrDefault(p => p.ProductVariantId == productVariantId);
-        if (productVariant != null)
-        {
-            context.ProductVariants.Remove(productVariant);
-            context.SaveChanges();
-            return true;
-        }
-
-        return false;
+        var context = await _contextFactory.CreateDbContextAsync();
+        var productVariant =
+            await context.ProductVariants.FirstOrDefaultAsync(p => p.ProductVariantId == productVariantId);
+        if (productVariant == null) return false;
+        context.ProductVariants.Remove(productVariant);
+        await context.SaveChangesAsync();
+        return true;
     }
 
-    public Product UpdateProduct(Product product)
+    public async Task<Product> UpdateProduct(Product product)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
         {
             context.Products.Update(product);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         return product;
     }
 
-    public ProductVariant CreateProductVariant(ProductVariant productVariant)
+    public async Task<ProductVariant> CreateProductVariant(ProductVariant productVariant)
     {
-        var context = _contextFactory.CreateDbContext();
+        var context = await _contextFactory.CreateDbContextAsync();
         context.ProductVariants.Add(productVariant);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         return productVariant;
     }
 
-    public ProductVariant ProductVariantAddValue(ProductVariantValue variantValue)
+    public async Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue)
     {
-        var context = _contextFactory.CreateDbContext();
-        var productVariant = context.ProductVariants.First(pv => pv.ProductVariantId == variantValue.ProductVariantId);
+        var context = await _contextFactory.CreateDbContextAsync();
+        var productVariant =
+            await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantValue.ProductVariantId);
         productVariant.ProductVariantValues.Add(variantValue);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         return productVariant;
     }
 
-    public bool DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId)
+    public async Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId)
     {
-        var context = _contextFactory.CreateDbContext();
-        var value = context.ProductVariantValues.FirstOrDefault(pvv =>
+        var context = await _contextFactory.CreateDbContextAsync();
+        var value = await context.ProductVariantValues.FirstOrDefaultAsync(pvv =>
             pvv.ProductVariantId == productVariantId && pvv.VariantId == variantId &&
             pvv.VariantValueId == variantValueId);
-        if (value != null)
-        {
-            context.ProductVariantValues.Remove(value);
-            context.SaveChanges();
-            return true;
-        }
-
-        return false;
+        if (value == null) return false;
+        context.ProductVariantValues.Remove(value);
+        await context.SaveChangesAsync();
+        return true;
     }
 
-    public ProductVariant ProductVariantAddMedia(ProductVariantMedium variantMedia)
+    public async Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia)
     {
-        var context = _contextFactory.CreateDbContext();
-        var productVariant = context.ProductVariants.First(pv => pv.ProductVariantId == variantMedia.ProductVariantId);
+        var context = await _contextFactory.CreateDbContextAsync();
+        var productVariant =
+            await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantMedia.ProductVariantId);
         productVariant.ProductVariantMedia.Add(variantMedia);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         return productVariant;
     }
 
-    public bool DeleteProductVariantMedia(int productVariantMediaId)
+    public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId)
     {
-        var context = _contextFactory.CreateDbContext();
-        var media = context.ProductVariantMedia.FirstOrDefault(p => p.ProductVariantMediaId == productVariantMediaId);
-        if (media != null)
-        {
-            context.ProductVariantMedia.Remove(media);
-            context.SaveChanges();
-            return true;
-        }
-
-        return false;
+        var context = await _contextFactory.CreateDbContextAsync();
+        var media = await context.ProductVariantMedia.FirstOrDefaultAsync(p =>
+            p.ProductVariantMediaId == productVariantMediaId);
+        if (media == null) return false;
+        context.ProductVariantMedia.Remove(media);
+        await context.SaveChangesAsync();
+        return true;
     }
 
-    public ProductVariant? GetProductVariantById(int productVariantId)
+    public async Task<ProductVariant?> GetProductVariantById(int productVariantId)
     {
-        var context = _contextFactory.CreateDbContext();
-        return context.ProductVariants.FirstOrDefault(pv => pv.ProductVariantId == productVariantId);
+        var context = await _contextFactory.CreateDbContextAsync();
+        return await context.ProductVariants.FirstOrDefaultAsync(pv => pv.ProductVariantId == productVariantId);
     }
 
-    public ProductVariant UpdateProductVariant(ProductVariant productVariant)
+    public async Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
         {
             context.ProductVariants.Update(productVariant);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         return productVariant;

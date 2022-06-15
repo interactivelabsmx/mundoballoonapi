@@ -33,4 +33,14 @@ public class UsersRepository : IUsersRepository
 
         return user;
     }
+
+    public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        var user = await context.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
+        if (user == null) return false;
+        context.Users.Remove(user);
+        await context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
 }

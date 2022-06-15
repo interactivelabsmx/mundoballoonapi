@@ -5,11 +5,10 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductMutations
 {
-    public ProductVariant CreateProductVariant(
+    public Task<ProductVariant> CreateProductVariant(
         ProductVariant input,
         [Service] IProductService productService)
     {
-        var productVariant = productService.CreateProductVariant(input);
-        return productVariant;
+        return productService.CreateProductVariant(input);
     }
 }

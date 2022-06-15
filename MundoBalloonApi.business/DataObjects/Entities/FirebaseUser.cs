@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.business.DataObjects.Entities;
 
-public class FireBaseUser : User
+public class FirebaseUser : User
 {
     public string? Email { get; set; } = string.Empty;
     public string? DisplayName { get; set; } = string.Empty;

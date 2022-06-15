@@ -13,37 +13,37 @@ public class CollectionsRepository : ICollectionsRepository
         _contextFactory = contextFactory;
     }
 
-    public ProductCategory CreateProductCategory(ProductCategory productCategory)
+    public async Task<ProductCategory> CreateProductCategory(ProductCategory productCategory)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
         {
             context.ProductCategories.Add(productCategory);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         return productCategory;
     }
 
-    public Variant CreateVariant(Variant variant)
+    public async Task<Variant> CreateVariant(Variant variant)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
         {
             context.Variants.Add(variant);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         return variant;
     }
 
-    public VariantValue CreateVariantValue(VariantValue variant)
+    public async Task<VariantValue> CreateVariantValue(VariantValue variant)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
         {
             context.VariantValues.Add(variant);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         return variant;

@@ -7,7 +7,7 @@ namespace MundoBalloonApi.graphql.Collections;
 [Authorize]
 public partial class CollectionMutations
 {
-    public ProductCategory CreateProductCategory(ProductCategory input,
+    public Task<ProductCategory> CreateProductCategory(ProductCategory input,
         [Service] ICollectionsService collectionsService)
     {
         return collectionsService.CreateProductCategory(input);

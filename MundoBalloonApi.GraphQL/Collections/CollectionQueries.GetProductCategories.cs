@@ -10,7 +10,6 @@ public partial class CollectionQueries
     public IQueryable<ProductCategory> GetProductCategories([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
-        var productsCategories = mundoBalloonContext.ProductCategories;
-        return mapper.ProjectTo<ProductCategory>(productsCategories);
+        return mapper.ProjectTo<ProductCategory>(mundoBalloonContext.ProductCategories);
     }
 }

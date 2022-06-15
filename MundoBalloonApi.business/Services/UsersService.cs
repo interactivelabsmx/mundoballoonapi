@@ -30,6 +30,13 @@ public class UsersService : IUsersService
         return _mapper.Map<User>(result);
     }
 
+    public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
+    {
+        var currentUser = _usersRepository.GetById(userId);
+        if (currentUser != null) return false;
+        return await _usersRepository.DeleteUser(userId, cancellationToken);
+    }
+
     public async Task<UserRecord?> GetFirebaseUserById(string userId)
     {
         try

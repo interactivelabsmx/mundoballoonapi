@@ -16,36 +16,36 @@ public class CollectionsService : ICollectionsService
         _mapper = mapper;
     }
 
-    public ProductCategory CreateProductCategory(ProductCategory productCategory)
+    public async Task<ProductCategory> CreateProductCategory(ProductCategory productCategory)
     {
         var category = new infrastructure.Data.Models.ProductCategory
         {
             ProductCategoryName = productCategory.Name,
             ProductCategoryDescription = productCategory.Description
         };
-        _collectionsRepository.CreateProductCategory(category);
+        await _collectionsRepository.CreateProductCategory(category);
         return _mapper.Map<ProductCategory>(category);
     }
 
-    public Variant CreateVariant(Variant variant)
+    public async Task<Variant> CreateVariant(Variant variant)
     {
         var newVariant = new infrastructure.Data.Models.Variant
         {
             Variant1 = variant.Name,
             VariantType = variant.Type
         };
-        _collectionsRepository.CreateVariant(newVariant);
+        await _collectionsRepository.CreateVariant(newVariant);
         return _mapper.Map<Variant>(newVariant);
     }
 
-    public VariantValue CreateVariantValue(VariantValue variantValue)
+    public async Task<VariantValue> CreateVariantValue(VariantValue variantValue)
     {
         var newVariant = new infrastructure.Data.Models.VariantValue
         {
             VariantId = variantValue.VariantId,
             VariantValue1 = variantValue.Value
         };
-        _collectionsRepository.CreateVariantValue(newVariant);
+        await _collectionsRepository.CreateVariantValue(newVariant);
         return _mapper.Map<VariantValue>(newVariant);
     }
 }

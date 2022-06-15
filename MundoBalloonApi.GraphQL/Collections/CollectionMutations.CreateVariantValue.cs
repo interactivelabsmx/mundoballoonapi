@@ -7,7 +7,7 @@ namespace MundoBalloonApi.graphql.Collections;
 [Authorize]
 public partial class CollectionMutations
 {
-    public VariantValue CreateVariantValue(VariantValue input,
+    public Task<VariantValue> CreateVariantValue(VariantValue input,
         [Service] ICollectionsService collectionsService)
     {
         return collectionsService.CreateVariantValue(input);
