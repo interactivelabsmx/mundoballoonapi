@@ -12,9 +12,9 @@ public partial class UserQueries
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<User?> GetLoggedInUser([ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper, [GlobalStateAttribute("currentUser")] CurrentUser currentUser)
+        [Service] IMapper mapper, [GlobalStateAttribute("currentUser")] CurrentUser currentUser, CancellationToken cancellationToken)
     {
-        var user = await mundoBalloonContext.Users.FirstOrDefaultAsync(u => u.UserId == currentUser.UserId);
-        return mapper.Map<User>(user);
+        var user = await mundoBalloonContext.Users.FirstOrDefaultAsync(u => u.UserId == currentUser.UserId, cancellationToken);
+        return user == null ? null : mapper.Map<User>(user);
     }
 }

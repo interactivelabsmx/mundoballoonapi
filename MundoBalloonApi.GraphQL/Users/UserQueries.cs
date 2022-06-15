@@ -1,4 +1,3 @@
-using AutoMapper;
 using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.DataObjects.Entities;
 using User = MundoBalloonApi.infrastructure.Data.Models.User;

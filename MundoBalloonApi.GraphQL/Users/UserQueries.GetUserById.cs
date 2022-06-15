@@ -11,9 +11,9 @@ public partial class UserQueries
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
-    public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext)
+    public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext, CancellationToken cancellationToken)
     {
-        var user = await mundoBalloonContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        var user = await mundoBalloonContext.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
         return user == null ? null : GetFirebaseUser(user);
     }
 }
