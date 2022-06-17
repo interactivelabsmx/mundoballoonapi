@@ -1,5 +1,5 @@
 using AutoMapper;
-using HotChocolate.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
@@ -9,7 +9,7 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserQueries
 {
-    [Authorize]
+    [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<User?> GetLoggedInUser([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalStateAttribute("currentUser")] CurrentUser currentUser,

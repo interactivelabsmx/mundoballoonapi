@@ -4,7 +4,6 @@ using MundoBalloonApi.business.DataObjects.Entities;
 
 namespace MundoBalloonApi.graphql.Collections;
 
-[Authorize]
 public partial class CollectionMutations
 {
     public Task<VariantValue> CreateVariantValue(VariantValue input,

@@ -2,7 +2,7 @@ using HotChocolate.AspNetCore.Authorization;
 
 namespace MundoBalloonApi.graphql.Products;
 
-[Authorize]
+[Authorize(Roles = new [] { "ADMIN" })]
 [ExtendObjectType(Name = "Mutation")]
 public partial class ProductMutations
 {

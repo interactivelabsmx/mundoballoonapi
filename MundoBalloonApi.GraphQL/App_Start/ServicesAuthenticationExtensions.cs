@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using MundoBalloonApi.business.Contracts;
 
 namespace MundoBalloonApi.graphql;
 
@@ -26,22 +25,17 @@ public static class ServicesAuthenticationExtensions
                     OnTokenValidated = context =>
                     {
                         var userId = context.Principal.FindFirstValue(ClaimTypes.NameIdentifier)!.ToString();
-                        var usersService = context.HttpContext.RequestServices.GetRequiredService<IUsersService>();
-                        // TODO: Add claims from firebase
-                        // var userClaims = usersService.GetUserClaims(userId);
-                        // var claims = userClaims.ConvertAll(UserClaimConverter);
-                        // var appIdentity = new ClaimsIdentity(claims);
-                        // context.Principal?.AddIdentity(appIdentity);
+                        var role = context.Principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                        var claims = new List<Claim>()
+                        {
+                            role ?? new Claim(ClaimTypes.Role, "USER")
+                        };
+                        var appIdentity = new ClaimsIdentity(claims);
+                        context.Principal?.AddIdentity(appIdentity);
                         return Task.CompletedTask;
                     }
                 };
             });
         return services;
     }
-
-    // private static Claim UserClaimConverter(UserClaim userClaim)
-    // {
-    //     var claim = userClaim.Claim?.Claim1 ?? "";
-    //     return new Claim(claim, "true");
-    // }
 }
