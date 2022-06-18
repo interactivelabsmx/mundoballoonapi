@@ -6,7 +6,7 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductMutations
 {
-    [Authorize(Roles = new [] { "ADMIN" })]
+    [Authorize(Roles = new[] { "ADMIN" })]
     public Task<Product> CreateProduct(
         Product input,
         [Service] IProductService productService)

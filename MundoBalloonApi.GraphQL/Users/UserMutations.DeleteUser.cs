@@ -1,5 +1,5 @@
-using HotChocolate.AspNetCore.Authorization;
 using FirebaseAdmin.Auth;
+using HotChocolate.AspNetCore.Authorization;
 using MundoBalloonApi.business.Contracts;
 
 namespace MundoBalloonApi.graphql.Users;

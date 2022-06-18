@@ -8,7 +8,7 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserQueries
 {
-    [Authorize(Roles = new [] { "ADMIN" })]
+    [Authorize(Roles = new[] { "ADMIN" })]
     [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper,

@@ -7,10 +7,11 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserQueries
 {
-    [Authorize(Roles = new [] { "ADMIN" })]
+    [Authorize(Roles = new[] { "ADMIN" })]
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
-    public IQueryable<FirebaseUser> GetUsers([ScopedService] MundoBalloonContext mundoBalloonContext, [Service] IMapper mapper)
+    public IQueryable<FirebaseUser> GetUsers([ScopedService] MundoBalloonContext mundoBalloonContext,
+        [Service] IMapper mapper)
     {
         return mundoBalloonContext.Users.Select(u => GetFirebaseUser(u, mapper));
     }
