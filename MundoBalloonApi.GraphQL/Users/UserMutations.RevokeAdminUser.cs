@@ -8,11 +8,11 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserMutations
 {
     [Authorize(Roles = new [] { "ADMIN" })]
-    public async Task<bool> GrantAdminUser(
+    public async Task<bool> RevokeAdminUser(
         string userId,
         [Service] IUsersService usersService, CancellationToken cancellationToken)
     {
-        var claims = new Dictionary<string, object> { { ClaimTypes.Role, "ADMIN" } };
+        var claims = new Dictionary<string, object> { { ClaimTypes.Role, "" } };
         await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(userId, claims, cancellationToken);
         return true;
     }

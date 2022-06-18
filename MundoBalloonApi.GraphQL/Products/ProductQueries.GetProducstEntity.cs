@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
 
@@ -5,6 +6,7 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductQueries
 {
+    [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
     [UseSorting]

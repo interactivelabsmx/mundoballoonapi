@@ -1,3 +1,4 @@
+using HotChocolate.AspNetCore.Authorization;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DataObjects.Entities;
 using MundoBalloonApi.infrastructure.Storage;
@@ -6,6 +7,7 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductMutations
 {
+    [Authorize(Roles = new [] { "ADMIN" })]
     public async Task<ProductVariant?> ProductVariantAddMedia(
         IFile file,
         ProductVariantMedium input,

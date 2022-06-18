@@ -7,7 +7,6 @@ using User = MundoBalloonApi.infrastructure.Data.Models.User;
 
 namespace MundoBalloonApi.graphql.Users;
 
-[Authorize(Roles = new [] { "ADMIN" })]
 [ExtendObjectType(Name = "Query")]
 public partial class UserQueries
 {

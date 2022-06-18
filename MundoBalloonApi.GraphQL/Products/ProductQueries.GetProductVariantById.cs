@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Models;
 using ProductVariant = MundoBalloonApi.business.DataObjects.Entities.ProductVariant;
@@ -7,6 +8,7 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductQueries
 {
+    [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<ProductVariant?> GetProductVariantById([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productVariantId)
