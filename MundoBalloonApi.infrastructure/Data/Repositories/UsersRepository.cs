@@ -13,12 +13,12 @@ public class UsersRepository : IUsersRepository
         _contextFactory = contextFactory;
     }
 
-    public User? GetById(string userId)
+    public async Task<User?> GetById(string userId, CancellationToken cancellationToken)
     {
-        var context = _contextFactory.CreateDbContext();
-        using (context)
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
         {
-            return context.Users.FirstOrDefault(u => u.UserId == userId);
+            return await context.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken: cancellationToken);
         }
     }
 

@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit.Redis;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using MundoBalloonApi.business.Middleware;
@@ -34,7 +35,8 @@ public class Startup
             .AddAutoMapper(typeof(EntitiesMappingProfile))
             .AddDbServices(Configuration, connectionString)
             .AddAuthenticationServices()
-            .AddInputValidationServices();
+            .AddInputValidationServices()
+            .AddRedisRateLimiting();
 
         services
             .AddGraphQLServer()

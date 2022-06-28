@@ -19,7 +19,7 @@ public class UsersService : IUsersService
 
     public async Task<User> CreateOrGetUser(string userId, CancellationToken cancellationToken)
     {
-        var currentUser = _usersRepository.GetById(userId);
+        var currentUser = await _usersRepository.GetById(userId, cancellationToken);
         if (currentUser != null) return _mapper.Map<User>(currentUser);
 
         var user = new infrastructure.Data.Models.User
@@ -32,7 +32,7 @@ public class UsersService : IUsersService
 
     public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
     {
-        var currentUser = _usersRepository.GetById(userId);
+        var currentUser = await _usersRepository.GetById(userId, cancellationToken);
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUser(userId, cancellationToken);
     }

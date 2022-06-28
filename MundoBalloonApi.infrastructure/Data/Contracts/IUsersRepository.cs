@@ -4,7 +4,7 @@ namespace MundoBalloonApi.infrastructure.Data.Contracts;
 
 public interface IUsersRepository
 {
-    User? GetById(string userId);
+    Task<User?> GetById(string userId, CancellationToken cancellationToken);
 
     Task<User> Create(User user, CancellationToken cancellationToken);
 
