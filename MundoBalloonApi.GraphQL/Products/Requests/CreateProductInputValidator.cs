@@ -1,5 +1,5 @@
 using FluentValidation;
-using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DTOs.Entities;
 
 namespace MundoBalloonApi.graphql.Products.Requests;
 

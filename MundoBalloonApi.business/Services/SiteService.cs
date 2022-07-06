@@ -1,9 +1,9 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DTOs.Entities;
+using MundoBalloonApi.business.DTOs.SiteService;
 using MundoBalloonApi.infrastructure.Data.Contracts;
-using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
 
 namespace MundoBalloonApi.business.Services;
 
@@ -18,35 +18,89 @@ public class SiteService : ISiteService
         _mapper = mapper;
     }
 
-    public async Task<Site> GetSite(bool includeProducts, bool includeFeaturedProducts,
+    public async Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts(
         bool includeBestSellingProducts,
         bool includeNewestProducts)
     {
-        List<Product> products;
-        var site = new Site();
-        if (includeProducts)
-        {
-            products = await _productsRepository.GetProducts().ToListAsync();
-            site.Products = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
-        }
+        var homepageProducts = new Dictionary<string, List<Product>>();
 
-        if (includeFeaturedProducts)
-        {
-            products = await _productsRepository.GetProducts().ToListAsync();
-            site.FeaturedProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
-        }
+        var products = await _productsRepository.GetProducts().ToListAsync();
+        var productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
+        homepageProducts.Add("Featured", productsDto);
 
         if (includeBestSellingProducts)
         {
             products = await _productsRepository.GetProducts().ToListAsync();
-            site.BestSellingProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
+            productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
+            homepageProducts.Add("Best Selling", productsDto);
         }
 
-        if (!includeNewestProducts) return site;
+        if (includeNewestProducts)
+        {
+            products = await _productsRepository.GetProducts().ToListAsync();
+            productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
+            homepageProducts.Add("Newest", productsDto);
+        }
 
-        products = await _productsRepository.GetProducts().ToListAsync();
-        site.NewestProducts = _mapper.Map<List<Product>, List<DataObjects.Entities.Product>>(products);
+        return homepageProducts;
+    }
 
-        return site;
+    public List<NavOption> GetNavOptions()
+    {
+        return new List<NavOption>
+        {
+            new()
+            {
+                Name = "Featured", Options = new[]
+                {
+                    new NavCategory
+                    {
+                        Href = "/search?cat=new",
+                        Name = "New Arrivals",
+                        ImageSrc =
+                            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+                        ImageAlt =
+                            "Models sitting back to back, wearing Basic Tee in black and bone."
+                    },
+                    new NavCategory
+                    {
+                        Href = "/search?cat=new",
+                        Name = "Basic Tees",
+                        ImageSrc =
+                            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+                        ImageAlt =
+                            "Models sitting back to back, wearing Basic Tee in black and bone."
+                    },
+                    new NavCategory
+                    {
+                        Href = "/search?cat=new",
+                        Name = "Accessories",
+                        ImageSrc =
+                            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
+                        ImageAlt =
+                            "Models sitting back to back, wearing Basic Tee in black and bone."
+                    },
+                    new NavCategory
+                    {
+                        Href = "/search?cat=new",
+                        Name = "Carry",
+                        ImageSrc =
+                            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
+                        ImageAlt =
+                            "Models sitting back to back, wearing Basic Tee in black and bone."
+                        }
+                }
+            },
+            new()
+            {
+                Name = "Shop",
+                Href = "/search"
+            },
+            new()
+            {
+                Name = "Contact",
+                Href = "/contact"
+            }
+        };
     }
 }

@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace MundoBalloonApi.business.DataObjects.Entities;
+namespace MundoBalloonApi.business.DTOs.Entities;
 
 public class CurrentUser
 {

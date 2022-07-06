@@ -1,4 +1,4 @@
-using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DTOs.Entities;
 
 namespace MundoBalloonApi.business.Contracts;
 

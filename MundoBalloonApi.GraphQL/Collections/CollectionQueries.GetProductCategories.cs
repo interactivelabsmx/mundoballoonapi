@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using MundoBalloonApi.infrastructure.Data.Models;
-using ProductCategory = MundoBalloonApi.business.DataObjects.Entities.ProductCategory;
+using ProductCategory = MundoBalloonApi.business.DTOs.Entities.ProductCategory;
 
 namespace MundoBalloonApi.graphql.Collections;
 

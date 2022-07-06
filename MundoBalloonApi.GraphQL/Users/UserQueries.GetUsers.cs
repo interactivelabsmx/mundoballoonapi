@@ -1,6 +1,6 @@
 using AutoMapper;
 using HotChocolate.AspNetCore.Authorization;
-using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
 
 namespace MundoBalloonApi.graphql.Users;

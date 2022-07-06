@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using HotChocolate.AspNetCore;
-using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DTOs.Entities;
 
 namespace MundoBalloonApi.graphql.Middleware;
 

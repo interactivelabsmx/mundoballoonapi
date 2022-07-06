@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Models;
-using ProductVariant = MundoBalloonApi.business.DataObjects.Entities.ProductVariant;
+using ProductVariant = MundoBalloonApi.business.DTOs.Entities.ProductVariant;
 
 namespace MundoBalloonApi.graphql.Products;
 

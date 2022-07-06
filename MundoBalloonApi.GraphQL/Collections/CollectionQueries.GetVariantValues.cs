@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using MundoBalloonApi.infrastructure.Data.Models;
-using VariantValue = MundoBalloonApi.business.DataObjects.Entities.VariantValue;
+using VariantValue = MundoBalloonApi.business.DTOs.Entities.VariantValue;
 
 namespace MundoBalloonApi.graphql.Collections;
 

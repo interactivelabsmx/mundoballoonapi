@@ -1,6 +1,6 @@
 using AutoMapper;
 using MundoBalloonApi.business.Contracts;
-using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Contracts;
 
 namespace MundoBalloonApi.business.Services;

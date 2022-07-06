@@ -1,4 +1,4 @@
-namespace MundoBalloonApi.business.DataObjects.Entities;
+namespace MundoBalloonApi.business.DTOs.Entities;
 
 public class ProductVariant
 {

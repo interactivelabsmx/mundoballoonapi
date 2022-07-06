@@ -1,9 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using MundoBalloonApi.business.DataObjects.Entities;
+using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
-using User = MundoBalloonApi.business.DataObjects.Entities.User;
+using User = MundoBalloonApi.business.DTOs.Entities.User;
 
 namespace MundoBalloonApi.graphql.Users;
 
