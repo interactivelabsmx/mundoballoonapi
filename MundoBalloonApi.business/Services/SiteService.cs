@@ -51,10 +51,12 @@ public class SiteService : ISiteService
         {
             new()
             {
+                Order = 1,
                 Name = "Featured", Options = new[]
                 {
                     new NavCategory
                     {
+                        Order = 1,
                         Href = "/search?cat=new",
                         Name = "New Arrivals",
                         ImageSrc =
@@ -64,6 +66,7 @@ public class SiteService : ISiteService
                     },
                     new NavCategory
                     {
+                        Order = 2,
                         Href = "/search?cat=new",
                         Name = "Basic Tees",
                         ImageSrc =
@@ -73,6 +76,7 @@ public class SiteService : ISiteService
                     },
                     new NavCategory
                     {
+                        Order = 3,
                         Href = "/search?cat=new",
                         Name = "Accessories",
                         ImageSrc =
@@ -82,6 +86,7 @@ public class SiteService : ISiteService
                     },
                     new NavCategory
                     {
+                        Order = 4,
                         Href = "/search?cat=new",
                         Name = "Carry",
                         ImageSrc =
@@ -93,11 +98,13 @@ public class SiteService : ISiteService
             },
             new()
             {
+                Order = 2,
                 Name = "Shop",
                 Href = "/search"
             },
             new()
             {
+                Order = 3,
                 Name = "Contact",
                 Href = "/contact"
             }
