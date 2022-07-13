@@ -31,11 +31,11 @@ public class Startup
             new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
 
         services.AddMundoBServices()
-            .AddHttpContextAccessor()
             .AddAutoMapper(typeof(EntitiesMappingProfile))
             .AddDbServices(Configuration, connectionString)
-            .AddAuthenticationServices()
+            .AddHttpContextAccessor()
             .AddInputValidationServices()
+            .AddAuthenticationServices()
             .AddRedisRateLimiting();
 
         services
@@ -52,25 +52,20 @@ public class Startup
             .AddTypeExtension<CollectionMutations>()
             .AddSorting()
             .AddAuthorization()
-            .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor());
+            .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor())
+            .AddInstrumentation();
 
-        var origins = new[] { "https://dev.mundoballoon.com", "https://dev.mundoballoon.com:3000" };
-        services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder.WithOrigins(origins)
-                    .AllowAnyHeader()
-                    .AllowAnyHeader();
-            });
-        });
+        var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
+        services.AddOpenTelemetryLogging(logConnectionString);
+        
+        services.AddCorsServices();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-        app.UseHsts();
+        if (!env.IsDevelopment()) app.UseHsts();
 
         app.UseAuthentication();
 

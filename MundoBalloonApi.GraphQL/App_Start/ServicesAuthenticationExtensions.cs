@@ -38,4 +38,25 @@ public static class ServicesAuthenticationExtensions
             });
         return services;
     }
+    
+    public static IServiceCollection AddCorsServices(this IServiceCollection services)
+    {
+        // Only added to dev in Startup.Configure
+        var origins = new[]
+        {
+            "https://dev.mundoballoon.com",
+            "https://dev.mundoballoon.com:3000",
+            "http://localhost",
+            "http://localhost:3000"
+        };
+        return services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.WithOrigins(origins)
+                    .AllowAnyHeader()
+                    .AllowAnyHeader();
+            });
+        });
+    }
 }
