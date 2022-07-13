@@ -13,22 +13,24 @@ namespace MundoBalloonApi.graphql;
 
 public class Startup
 {
+    private IConfiguration Configuration { get; }
+
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
     }
 
-    private IConfiguration Configuration { get; }
-
     public void ConfigureServices(IServiceCollection services)
     {
-        FirebaseApp.Create(new AppOptions
-        {
-            Credential = GoogleCredential.FromJson(Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "")
-        });
-
+        var firebaseCredentialString = Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "";
+        var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
         var connectionString =
             new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
+
+        FirebaseApp.Create(new AppOptions
+        {
+            Credential = GoogleCredential.FromJson(firebaseCredentialString)
+        });
 
         services.AddMundoBServices()
             .AddAutoMapper(typeof(EntitiesMappingProfile))
@@ -55,10 +57,9 @@ public class Startup
             .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor())
             .AddInstrumentation();
 
-        var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
-        services.AddOpenTelemetryLogging(logConnectionString);
-        
-        services.AddCorsServices();
+        services
+            .AddOpenTelemetryLogging(logConnectionString)
+            .AddCorsServices();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
