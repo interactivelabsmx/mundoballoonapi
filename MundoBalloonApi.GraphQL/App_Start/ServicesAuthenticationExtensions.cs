@@ -47,7 +47,9 @@ public static class ServicesAuthenticationExtensions
             "https://dev.mundoballoon.com",
             "https://dev.mundoballoon.com:3000",
             "http://localhost",
-            "http://localhost:3000"
+            "http://localhost:3000",
+            "https://localhost",
+            "https://localhost:3000"
         };
         return services.AddCors(options =>
         {
