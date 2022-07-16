@@ -12,10 +12,7 @@ public static class ServicesLoggingExtensions
             builder.AddHttpClientInstrumentation();
             builder.AddAspNetCoreInstrumentation();
             builder.AddHotChocolateInstrumentation();
-            builder.AddAzureMonitorTraceExporter(options =>
-            {
-                options.ConnectionString = connectionString;
-            });
+            builder.AddAzureMonitorTraceExporter(options => { options.ConnectionString = connectionString; });
         });
     }
 }

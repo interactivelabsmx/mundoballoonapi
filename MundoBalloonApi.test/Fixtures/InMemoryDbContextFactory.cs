@@ -5,7 +5,6 @@ namespace MundoBalloonApi.test.Fixtures;
 
 public class InMemoryDbContextFactory : IDbContextFactory<MundoBalloonContext>
 {
-
     public MundoBalloonContext CreateDbContext()
     {
         var options = new DbContextOptionsBuilder<MundoBalloonContext>()

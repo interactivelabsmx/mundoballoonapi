@@ -18,7 +18,7 @@ public class UsersRepository : IUsersRepository
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
-            return await context.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken: cancellationToken);
+            return await context.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
         }
     }
 

@@ -8,5 +8,5 @@ public interface ISiteService
     Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts(bool includeBestSellingProducts,
         bool includeNewestProducts);
 
-    List<NavOption> GetNavOptions();
+    List<NavOption> GetNavOptions(string language);
 }

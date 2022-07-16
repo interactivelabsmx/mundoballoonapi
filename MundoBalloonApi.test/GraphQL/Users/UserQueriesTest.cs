@@ -16,7 +16,7 @@ public class UserQueriesTest
     public async Task CreateUser()
     {
         // arrange
-        IRequestExecutor executor = await new ServiceCollection()
+        var executor = await new ServiceCollection()
             .AddPooledDbContextFactory<MundoBalloonContext>(
                 options => options.UseInMemoryDatabase("MundoBalloonContext:Integration:Graphql"))
             .AddGraphQLServer()
@@ -31,7 +31,8 @@ public class UserQueriesTest
             db?.Users.AddRange(fakeData.Users);
             await db?.SaveChangesAsync()!;
         }
-        IExecutionResult result = await executor.ExecuteAsync(@"
+
+        var result = await executor.ExecuteAsync(@"
           userById(userId: 2) {
             ...User
           }

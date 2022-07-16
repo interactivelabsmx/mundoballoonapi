@@ -8,7 +8,8 @@ namespace MundoBalloonApi.graphql.Site;
 public partial class SiteQueries
 {
     [AllowAnonymous]
-    public async Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts([Service] ISiteService siteService, bool includeBestSellingProducts, bool includeNewestProducts)
+    public async Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts(
+        [Service] ISiteService siteService, bool includeBestSellingProducts, bool includeNewestProducts)
     {
         return await siteService.GetHomepageProducts(includeBestSellingProducts, includeNewestProducts);
     }

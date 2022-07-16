@@ -5,9 +5,25 @@ namespace MundoBalloonApi.test.Fixtures;
 
 public class FakeData
 {
-    private static readonly string[] MediaTypes = new string[] { "Image", "Video" };
-    private static readonly string[] MediaQuality = new string[] { "high", "low" };
-    private static readonly string[] VariantType = new string[] { "string", "number", "boolean" };
+    private static readonly string[] MediaTypes = { "Image", "Video" };
+    private static readonly string[] MediaQuality = { "high", "low" };
+    private static readonly string[] VariantType = { "string", "number", "boolean" };
+
+    private readonly Faker<ProductCategory> _productCategoryFaker;
+
+    private readonly Faker<Product> _productFaker;
+
+    private readonly Faker<ProductVariant> _productVariantFaker;
+
+    private readonly Faker<ProductVariantMedium> _productVariantMediumFaker;
+
+    private readonly Faker<ProductVariantValue> _productVariantValueFaker;
+
+    private readonly Faker<User> _userFaker;
+
+    private readonly Faker<Variant> _variantFaker;
+
+    private readonly Faker<VariantValue> _variantValueFaker;
 
     public FakeData()
     {
@@ -29,47 +45,51 @@ public class FakeData
         Users = Enumerable.Range(1, 10).Select(MakeUser).ToList();
     }
 
-    private readonly Faker<Variant> _variantFaker;
     public List<Variant> Variants { get; }
+    public List<VariantValue> VariantValues { get; }
+    public List<ProductCategory> ProductCategories { get; }
+    public List<Product> Products { get; }
+    public List<ProductVariant> ProductVariants { get; }
+    public List<ProductVariantMedium> ProductVariantMedia { get; }
+    public List<ProductVariantValue> ProductVariantValues { get; }
+    public List<User> Users { get; }
+
     private Faker<Variant> VariantFakerBuilder()
     {
         return new Faker<Variant>()
             .RuleFor(v => v.Variant1, f => f.Commerce.Department())
             .RuleFor(v => v.VariantType, f => f.PickRandom(VariantType));
     }
+
     private Variant MakeVariant(int seed)
     {
         return _variantFaker.UseSeed(seed).Generate();
     }
 
-    private readonly Faker<VariantValue> _variantValueFaker;
-    public List<VariantValue> VariantValues { get; }
     private Faker<VariantValue> VariantValueFakerBuilder(List<Variant> variants)
     {
         return new Faker<VariantValue>()
             .RuleFor(vv => vv.VariantValue1, f => f.Commerce.Color())
             .RuleFor(vv => vv.VariantId, faker => faker.PickRandom(variants).VariantId);
     }
+
     private VariantValue MakeVariantValue(int seed)
     {
         return _variantValueFaker.UseSeed(seed).Generate();
     }
-    
-    private readonly Faker<ProductCategory> _productCategoryFaker;
-    public List<ProductCategory> ProductCategories { get; }
+
     private Faker<ProductCategory> ProductCategoryFakerBuilder()
     {
         return new Faker<ProductCategory>()
             .RuleFor(pc => pc.ProductCategoryName, f => f.Commerce.Categories(1)[0])
             .RuleFor(pc => pc.ProductCategoryDescription, f => f.Commerce.Categories(1)[0]);
     }
+
     private ProductCategory MakeProductCategory(int seed)
     {
         return _productCategoryFaker.UseSeed(seed).Generate();
     }
 
-    private readonly Faker<Product> _productFaker;
-    public List<Product> Products { get; }
     private Faker<Product> ProductFakerBuilder(List<ProductCategory> productCategories)
     {
         return new Faker<Product>()
@@ -78,13 +98,12 @@ public class FakeData
             .RuleFor(p => p.Price, f => double.Parse(f.Commerce.Price()))
             .RuleFor(p => p.ProductCategoryId, f => f.PickRandom(productCategories).ProductCategoryId);
     }
+
     private Product MakeProduct(int seed)
     {
         return _productFaker.UseSeed(seed).Generate();
     }
-    
-    private readonly Faker<ProductVariant> _productVariantFaker;
-    public List<ProductVariant> ProductVariants { get; }
+
     private Faker<ProductVariant> ProductVariantFakerBuilder(List<Product> products)
     {
         return new Faker<ProductVariant>()
@@ -94,13 +113,12 @@ public class FakeData
             .RuleFor(p => p.Price, f => double.Parse(f.Commerce.Price()))
             .RuleFor(p => p.ProductId, f => f.PickRandom(products).ProductId);
     }
+
     private ProductVariant MakeProductVariant(int seed)
     {
         return _productVariantFaker.UseSeed(seed).Generate();
     }
 
-    private readonly Faker<ProductVariantMedium> _productVariantMediumFaker;
-    public List<ProductVariantMedium> ProductVariantMedia { get; }
     private Faker<ProductVariantMedium> ProductVariantMediumFakerBuilder(List<ProductVariant> productVariants)
     {
         return new Faker<ProductVariantMedium>()
@@ -111,36 +129,35 @@ public class FakeData
             .RuleFor(pvm => pvm.Url, f => f.Image.PlaceholderUrl(100, 150))
             .RuleFor(pvm => pvm.ProductVariantId, f => f.PickRandom(productVariants).ProductVariantId);
     }
+
     private ProductVariantMedium MakeProductVariantMedium(int seed)
     {
         return _productVariantMediumFaker.UseSeed(seed).Generate();
     }
-    
-    private readonly Faker<ProductVariantValue> _productVariantValueFaker;
-    public List<ProductVariantValue> ProductVariantValues { get; }
-    private Faker<ProductVariantValue> ProductVariantValueFakerBuilder(List<ProductVariant> productVariants, List<VariantValue> variantValues)
+
+    private Faker<ProductVariantValue> ProductVariantValueFakerBuilder(List<ProductVariant> productVariants,
+        List<VariantValue> variantValues)
     {
         return new Faker<ProductVariantValue>()
             .RuleFor(pvm => pvm.ProductVariantId, f => f.PickRandom(productVariants).ProductVariantId)
             .RuleFor(pvm => pvm.VariantId, f => f.PickRandom(variantValues).VariantId)
             .RuleFor(pvm => pvm.VariantValueId, f => f.PickRandom(variantValues).VariantValueId);
     }
+
     private ProductVariantValue MakeProductVariantValue(int seed)
     {
         return _productVariantValueFaker.UseSeed(seed).Generate();
     }
-    
-    private readonly Faker<User> _userFaker;
-    public List<User> Users { get; }
+
     private Faker<User> UserFakerBuilder()
     {
         var userId = 0;
         return new Faker<User>()
             .RuleFor(u => u.UserId, f => (userId++).ToString());
     }
+
     private User MakeUser(int seed)
     {
         return _userFaker.UseSeed(seed).Generate();
     }
-
 }

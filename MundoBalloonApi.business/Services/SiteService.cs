@@ -45,9 +45,74 @@ public class SiteService : ISiteService
         return homepageProducts;
     }
 
-    public List<NavOption> GetNavOptions()
+    public List<NavOption> GetNavOptions(string language)
     {
+        if (language == "es")
+            return new List<NavOption>
+            {
+                new()
+                {
+                    Order = 1,
+                    Name = "Ofertas", Options = new[]
+                    {
+                        new NavCategory
+                        {
+                            Order = 1,
+                            Href = "/search?cat=new",
+                            Name = "Nuevos Productos",
+                            ImageSrc =
+                                "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+                            ImageAlt =
+                                "Descripcion de la fotografia"
+                        },
+                        new NavCategory
+                        {
+                            Order = 2,
+                            Href = "/search?cat=new",
+                            Name = "Playeras",
+                            ImageSrc =
+                                "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+                            ImageAlt =
+                                "Descripcion de la fotografia"
+                        },
+                        new NavCategory
+                        {
+                            Order = 3,
+                            Href = "/search?cat=new",
+                            Name = "Accesorios",
+                            ImageSrc =
+                                "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
+                            ImageAlt =
+                                "Descripcion de la fotografia"
+                        },
+                        new NavCategory
+                        {
+                            Order = 4,
+                            Href = "/search?cat=new",
+                            Name = "Bolsas",
+                            ImageSrc =
+                                "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
+                            ImageAlt =
+                                "Descripcion de la fotografia"
+                        }
+                    }
+                },
+                new()
+                {
+                    Order = 2,
+                    Name = "Productos",
+                    Href = "/search"
+                },
+                new()
+                {
+                    Order = 3,
+                    Name = "Contacto",
+                    Href = "/contact"
+                }
+            };
         return new List<NavOption>
+
+
         {
             new()
             {
@@ -93,7 +158,7 @@ public class SiteService : ISiteService
                             "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
                         ImageAlt =
                             "Models sitting back to back, wearing Basic Tee in black and bone."
-                        }
+                    }
                 }
             },
             new()

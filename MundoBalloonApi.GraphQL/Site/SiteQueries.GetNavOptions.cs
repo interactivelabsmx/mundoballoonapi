@@ -8,8 +8,9 @@ namespace MundoBalloonApi.graphql.Site;
 public partial class SiteQueries
 {
     [AllowAnonymous]
-    public List<NavOption> GetNavOptions([Service] ISiteService siteService)
+    public List<NavOption> GetNavOptions([Service] ISiteService siteService,
+        [GlobalStateAttribute("language")] string language)
     {
-        return siteService.GetNavOptions();
+        return siteService.GetNavOptions(language);
     }
 }

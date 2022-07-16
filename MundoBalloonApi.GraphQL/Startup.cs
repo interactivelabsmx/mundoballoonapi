@@ -13,12 +13,12 @@ namespace MundoBalloonApi.graphql;
 
 public class Startup
 {
-    private IConfiguration Configuration { get; }
-
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
     }
+
+    private IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
     {
@@ -55,6 +55,7 @@ public class Startup
             .AddSorting()
             .AddAuthorization()
             .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor())
+            .AddHttpRequestInterceptor(LanguageInterceptor.GetLanguageInterceptor())
             .AddInstrumentation();
 
         services

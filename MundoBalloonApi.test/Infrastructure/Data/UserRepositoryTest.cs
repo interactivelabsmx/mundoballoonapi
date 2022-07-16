@@ -20,7 +20,7 @@ public class UserRepositoryTest : SharedDatabaseFixture
         }, cancellationToken);
         Assert.True(user.UserId != null);
     }
-    
+
     [Fact]
     public async Task Test_GetById_OK()
     {
@@ -29,7 +29,7 @@ public class UserRepositoryTest : SharedDatabaseFixture
         var user = await userRepository.GetById("1", cancellationToken);
         Assert.True(user != null);
     }
-    
+
     [Fact]
     public async Task Test_Delete_OK()
     {

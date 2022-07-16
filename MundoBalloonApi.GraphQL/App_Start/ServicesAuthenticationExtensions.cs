@@ -38,7 +38,7 @@ public static class ServicesAuthenticationExtensions
             });
         return services;
     }
-    
+
     public static IServiceCollection AddCorsServices(this IServiceCollection services)
     {
         // Only added to dev in Startup.Configure
