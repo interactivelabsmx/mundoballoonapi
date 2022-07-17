@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Models;
 
-namespace MundoBalloonApi.test.Fixtures;
+namespace MundoBalloonApi.test.Infrastructure.Fixtures;
 
 public abstract class SharedDatabaseFixture : IDisposable
 {
