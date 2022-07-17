@@ -1,11 +1,5 @@
-using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
 using HotChocolate;
 using HotChocolate.Execution;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using MundoBalloonApi.business.Middleware;
-using MundoBalloonApi.graphql.Users;
 using MundoBalloonApi.infrastructure.Data.Models;
 using MundoBalloonApi.test.GraphQL.Fixtures;
 using Snapshooter.Xunit;
@@ -31,6 +25,7 @@ public class UserQueriesTest : BaseServiceCollection
             });
             await db?.SaveChangesAsync()!;
         }
+
         // Act
         var query = @"
           query GetUserById($userId: String!) {
@@ -39,7 +34,8 @@ public class UserQueriesTest : BaseServiceCollection
               }
             }
         ";
-        IReadOnlyQueryRequest request = new QueryRequestBuilder().SetQuery(query).SetVariableValue("userId", "Mgq4doWHJNdRNmCVwz61XNOwKO92").Create();
+        var request = new QueryRequestBuilder().SetQuery(query)
+            .SetVariableValue("userId", "Mgq4doWHJNdRNmCVwz61XNOwKO92").Create();
         var result = await Executor?.ExecuteRequestAsync(request)!;
         // Assert
         (await result.ToJsonAsync()).MatchSnapshot();

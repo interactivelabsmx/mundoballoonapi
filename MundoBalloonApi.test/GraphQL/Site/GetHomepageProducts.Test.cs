@@ -7,7 +7,7 @@ using Xunit;
 namespace MundoBalloonApi.test.GraphQL.Site;
 
 [Collection("FirebaseInitializer")]
-public class GetHomepageProductsTest: BaseServiceCollection
+public class GetHomepageProductsTest : BaseServiceCollection
 {
     [Fact]
     public async Task GetHomepageProductsTest_GetsFeaturedProducts()
@@ -26,7 +26,7 @@ public class GetHomepageProductsTest: BaseServiceCollection
               }
             }
         ";
-        IReadOnlyQueryRequest request = new QueryRequestBuilder().SetQuery(query).SetVariableValue("userId", "1").Create();
+        var request = new QueryRequestBuilder().SetQuery(query).SetVariableValue("userId", "1").Create();
         var result = await Executor?.ExecuteRequestAsync(request)!;
         // Assert
         (await result.ToJsonAsync()).MatchSnapshot();

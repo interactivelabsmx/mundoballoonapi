@@ -14,13 +14,13 @@
         <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="34.0.2" />
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.7" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-        <PackageReference Include="Snapshooter.Xunit" Version="0.7.1" />
-        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="Bogus" Version="34.0.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.7"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0"/>
+        <PackageReference Include="Snapshooter.Xunit" Version="0.7.1"/>
+        <PackageReference Include="xunit" Version="2.4.1"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -32,9 +32,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\MundoBalloonApi.business\MundoBalloonApi.business.csproj" />
-        <ProjectReference Include="..\MundoBalloonApi.GraphQL\MundoBalloonApi.GraphQL.csproj" />
-        <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj" />
+        <ProjectReference Include="..\MundoBalloonApi.business\MundoBalloonApi.business.csproj"/>
+        <ProjectReference Include="..\MundoBalloonApi.GraphQL\MundoBalloonApi.GraphQL.csproj"/>
+        <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>

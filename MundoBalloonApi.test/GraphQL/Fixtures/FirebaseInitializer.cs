@@ -5,7 +5,7 @@ using Xunit;
 namespace MundoBalloonApi.test.GraphQL.Fixtures;
 
 [CollectionDefinition("FirebaseInitializer")]
-public class FirebaseInitializer: IDisposable, ICollectionFixture<FirebaseInitializer>
+public class FirebaseInitializer : IDisposable, ICollectionFixture<FirebaseInitializer>
 {
     public FirebaseInitializer()
     {
@@ -18,7 +18,7 @@ public class FirebaseInitializer: IDisposable, ICollectionFixture<FirebaseInitia
             });
         }
     }
-    
+
     public void Dispose()
     {
     }

@@ -1,5 +1,3 @@
-using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +17,6 @@ namespace MundoBalloonApi.test.GraphQL.Fixtures;
 
 public abstract class BaseServiceCollection : IDisposable
 {
-    protected IServiceProvider? Executor { get; private set; }
-    protected IDbContextFactory<MundoBalloonContext>? ContextFactory { get; private set; }
-
     protected BaseServiceCollection()
     {
         // arrange
@@ -39,14 +34,14 @@ public abstract class BaseServiceCollection : IDisposable
             .AddGraphQLServer()
             .AddType<UploadType>()
             .AddQueryType(d => d.Name("Query"))
-                .AddTypeExtension<SiteQueries>()
-                .AddTypeExtension<UserQueries>()
-                .AddTypeExtension<ProductQueries>()
-                .AddTypeExtension<CollectionQueries>()
+            .AddTypeExtension<SiteQueries>()
+            .AddTypeExtension<UserQueries>()
+            .AddTypeExtension<ProductQueries>()
+            .AddTypeExtension<CollectionQueries>()
             .AddMutationType(d => d.Name("Mutation"))
-                .AddTypeExtension<UserMutations>()
-                .AddTypeExtension<ProductMutations>()
-                .AddTypeExtension<CollectionMutations>()
+            .AddTypeExtension<UserMutations>()
+            .AddTypeExtension<ProductMutations>()
+            .AddTypeExtension<CollectionMutations>()
             .AddSorting()
             .Services
             .BuildServiceProvider();
@@ -59,7 +54,10 @@ public abstract class BaseServiceCollection : IDisposable
             contextSeeded.Seed();
         }
     }
-    
+
+    protected IServiceProvider? Executor { get; private set; }
+    protected IDbContextFactory<MundoBalloonContext>? ContextFactory { get; private set; }
+
     public void Dispose()
     {
         Executor = null;
