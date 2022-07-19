@@ -1,7 +1,7 @@
 using Bogus;
 using MundoBalloonApi.infrastructure.Data.Models;
 using MundoBalloonApi.infrastructure.Data.Repositories;
-using MundoBalloonApi.test.Fixtures;
+using MundoBalloonApi.test.Infrastructure.Fixtures;
 using Xunit;
 
 namespace MundoBalloonApi.test.infrastructure.Data;
