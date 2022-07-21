@@ -10,8 +10,9 @@ public partial class ProductQueries
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
+    [UseFiltering]
     [UseSorting]
-    public IQueryable<Product> GetAllProducts([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<Product> GetSearchProducts([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
         return mapper.ProjectTo<Product>(mundoBalloonContext.Products);

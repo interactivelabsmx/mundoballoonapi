@@ -53,6 +53,7 @@ public class Startup
             .AddTypeExtension<ProductMutations>()
             .AddTypeExtension<CollectionMutations>()
             .AddSorting()
+            .AddFiltering()
             .AddAuthorization()
             .AddHttpRequestInterceptor(AuthenticationInterceptor.GetAuthenticationInterceptor())
             .AddHttpRequestInterceptor(LanguageInterceptor.GetLanguageInterceptor())
