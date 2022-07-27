@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.business.DTOs.Entities;
 
-public class Product
+public class Product : BaseDto
 {
     public int? ProductId { get; set; } = 0;
     public string Name { get; set; } = string.Empty;
