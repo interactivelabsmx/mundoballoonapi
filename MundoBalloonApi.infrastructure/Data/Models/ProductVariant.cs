@@ -2,28 +2,22 @@
 
 public class ProductVariant : BaseEntity
 {
-    public ProductVariant()
-    {
-        OcassionCartDetailProductVariants = new HashSet<OcassionCartDetail>();
-        OcassionCartDetailSkuNavigations = new HashSet<OcassionCartDetail>();
-        ProductVariantMedia = new HashSet<ProductVariantMedium>();
-        ProductVariantMedia = new HashSet<ProductVariantMedium>();
-        ProductVariantValues = new HashSet<ProductVariantValue>();
-        UserCartProductVariants = new HashSet<UserCart>();
-        UserCartSkuNavigations = new HashSet<UserCart>();
-    }
+    public int ProductVariantId { get; init; }
+    public string? Sku { get; init; }
+    public int ProductId { get; init; }
+    public string? ProductVariantName { get; init; }
+    public string? ProductVariantDescription { get; init; }
+    public double Price { get; init; }
+    public Product? Product { get; set; }
 
-    public int ProductVariantId { get; set; }
-    public string? Sku { get; set; }
-    public int ProductId { get; set; }
-    public string? ProductVariantName { get; set; }
-    public string? ProductVariantDescription { get; set; }
-    public double Price { get; set; }
-    public virtual Product? Product { get; set; }
-    public virtual ICollection<OcassionCartDetail> OcassionCartDetailProductVariants { get; set; }
-    public virtual ICollection<OcassionCartDetail> OcassionCartDetailSkuNavigations { get; set; }
-    public virtual ICollection<ProductVariantMedium> ProductVariantMedia { get; set; }
-    public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
-    public virtual ICollection<UserCart> UserCartProductVariants { get; set; }
-    public virtual ICollection<UserCart> UserCartSkuNavigations { get; set; }
+    public ICollection<OccasionCartDetail> OccasionCartDetailProductVariants { get; set; } =
+        new HashSet<OccasionCartDetail>();
+
+    public ICollection<OccasionCartDetail> OccasionCartDetailSkuNavigations { get; set; } =
+        new HashSet<OccasionCartDetail>();
+
+    public ICollection<ProductVariantMedium> ProductVariantMedia { get; set; } = new HashSet<ProductVariantMedium>();
+    public ICollection<ProductVariantValue> ProductVariantValues { get; set; } = new HashSet<ProductVariantValue>();
+    public ICollection<UserCart> UserCartProductVariants { get; set; } = new HashSet<UserCart>();
+    public ICollection<UserCart> UserCartSkuNavigations { get; set; } = new HashSet<UserCart>();
 }

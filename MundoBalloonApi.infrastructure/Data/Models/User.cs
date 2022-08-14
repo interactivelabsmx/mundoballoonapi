@@ -2,18 +2,11 @@
 
 public class User : BaseEntity
 {
-    public User()
-    {
-        UserCarts = new HashSet<UserCart>();
-        UserOccasions = new HashSet<UserOccasion>();
-        UserPaymentProfiles = new HashSet<UserPaymentProfile>();
-    }
+    public int Id { get; init; }
 
-    public int Id { get; set; }
+    public string UserId { get; init; } = string.Empty;
 
-    public string UserId { get; set; } = string.Empty;
-
-    public virtual ICollection<UserCart> UserCarts { get; set; }
-    public virtual ICollection<UserOccasion> UserOccasions { get; set; }
-    public virtual ICollection<UserPaymentProfile>? UserPaymentProfiles { get; set; }
+    public ICollection<UserCart> UserCarts { get; } = new HashSet<UserCart>();
+    public ICollection<UserOccasion> UserOccasions { get; } = new HashSet<UserOccasion>();
+    public ICollection<UserPaymentProfile>? UserPaymentProfiles { get; } = new HashSet<UserPaymentProfile>();
 }

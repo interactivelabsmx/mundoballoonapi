@@ -24,7 +24,6 @@ public static class ServicesAuthenticationExtensions
                 {
                     OnTokenValidated = context =>
                     {
-                        var userId = context.Principal.FindFirstValue(ClaimTypes.NameIdentifier)!.ToString();
                         var role = context.Principal?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
                         var claims = new List<Claim>
                         {

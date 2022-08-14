@@ -17,8 +17,6 @@ public class FakeData
 
     private readonly Faker<ProductVariantMedium> _productVariantMediumFaker;
 
-    private readonly Faker<ProductVariantValue> _productVariantValueFaker;
-
     private readonly Faker<User> _userFaker;
 
     private readonly Faker<Variant> _variantFaker;
@@ -39,8 +37,6 @@ public class FakeData
         ProductVariants = Enumerable.Range(1, 20).Select(MakeProductVariant).ToList();
         _productVariantMediumFaker = ProductVariantMediumFakerBuilder(ProductVariants);
         ProductVariantMedia = Enumerable.Range(1, 50).Select(MakeProductVariantMedium).ToList();
-        _productVariantValueFaker = ProductVariantValueFakerBuilder(ProductVariants, VariantValues);
-        ProductVariantValues = Enumerable.Range(1, 50).Select(MakeProductVariantValue).ToList();
         _userFaker = UserFakerBuilder();
         Users = Enumerable.Range(1, 10).Select(MakeUser).ToList();
     }
@@ -51,10 +47,9 @@ public class FakeData
     public List<Product> Products { get; }
     public List<ProductVariant> ProductVariants { get; }
     public List<ProductVariantMedium> ProductVariantMedia { get; }
-    public List<ProductVariantValue> ProductVariantValues { get; }
     public List<User> Users { get; }
 
-    private Faker<Variant> VariantFakerBuilder()
+    private static Faker<Variant> VariantFakerBuilder()
     {
         return new Faker<Variant>()
             .RuleFor(v => v.Variant1, f => f.Commerce.Department())
@@ -66,7 +61,7 @@ public class FakeData
         return _variantFaker.UseSeed(seed).Generate();
     }
 
-    private Faker<VariantValue> VariantValueFakerBuilder(List<Variant> variants)
+    private static Faker<VariantValue> VariantValueFakerBuilder(List<Variant> variants)
     {
         return new Faker<VariantValue>()
             .RuleFor(vv => vv.VariantValue1, f => f.Commerce.Color())
@@ -78,7 +73,7 @@ public class FakeData
         return _variantValueFaker.UseSeed(seed).Generate();
     }
 
-    private Faker<ProductCategory> ProductCategoryFakerBuilder()
+    private static Faker<ProductCategory> ProductCategoryFakerBuilder()
     {
         return new Faker<ProductCategory>()
             .RuleFor(pc => pc.ProductCategoryName, f => f.Commerce.Categories(1)[0])
@@ -90,7 +85,7 @@ public class FakeData
         return _productCategoryFaker.UseSeed(seed).Generate();
     }
 
-    private Faker<Product> ProductFakerBuilder(List<ProductCategory> productCategories)
+    private static Faker<Product> ProductFakerBuilder(List<ProductCategory> productCategories)
     {
         return new Faker<Product>()
             .RuleFor(p => p.ProductName, f => f.Commerce.ProductName())
@@ -104,7 +99,7 @@ public class FakeData
         return _productFaker.UseSeed(seed).Generate();
     }
 
-    private Faker<ProductVariant> ProductVariantFakerBuilder(List<Product> products)
+    private static Faker<ProductVariant> ProductVariantFakerBuilder(List<Product> products)
     {
         return new Faker<ProductVariant>()
             .RuleFor(pv => pv.Sku, f => f.Commerce.Ean13())
@@ -119,7 +114,7 @@ public class FakeData
         return _productVariantFaker.UseSeed(seed).Generate();
     }
 
-    private Faker<ProductVariantMedium> ProductVariantMediumFakerBuilder(List<ProductVariant> productVariants)
+    private static Faker<ProductVariantMedium> ProductVariantMediumFakerBuilder(List<ProductVariant> productVariants)
     {
         return new Faker<ProductVariantMedium>()
             .RuleFor(pvm => pvm.Name, f => f.Commerce.ProductName())
@@ -135,25 +130,11 @@ public class FakeData
         return _productVariantMediumFaker.UseSeed(seed).Generate();
     }
 
-    private Faker<ProductVariantValue> ProductVariantValueFakerBuilder(List<ProductVariant> productVariants,
-        List<VariantValue> variantValues)
-    {
-        return new Faker<ProductVariantValue>()
-            .RuleFor(pvm => pvm.ProductVariantId, f => f.PickRandom(productVariants).ProductVariantId)
-            .RuleFor(pvm => pvm.VariantId, f => f.PickRandom(variantValues).VariantId)
-            .RuleFor(pvm => pvm.VariantValueId, f => f.PickRandom(variantValues).VariantValueId);
-    }
-
-    private ProductVariantValue MakeProductVariantValue(int seed)
-    {
-        return _productVariantValueFaker.UseSeed(seed).Generate();
-    }
-
-    private Faker<User> UserFakerBuilder()
+    private static Faker<User> UserFakerBuilder()
     {
         var userId = 0;
         return new Faker<User>()
-            .RuleFor(u => u.UserId, f => (userId++).ToString());
+            .RuleFor(u => u.UserId, _ => (userId++).ToString());
     }
 
     private User MakeUser(int seed)

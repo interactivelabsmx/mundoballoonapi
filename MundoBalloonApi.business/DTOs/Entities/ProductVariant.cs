@@ -10,5 +10,5 @@ public class ProductVariant
     public double Price { get; set; }
 
     public ICollection<ProductVariantMedium>? Media { get; set; }
-    public virtual ICollection<ProductVariantValue>? VariantValues { get; set; }
+    public ICollection<ProductVariantValue>? VariantValues { get; set; }
 }

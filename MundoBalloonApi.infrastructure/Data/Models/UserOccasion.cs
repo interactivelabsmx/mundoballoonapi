@@ -2,17 +2,12 @@
 
 public class UserOccasion : BaseEntity
 {
-    public UserOccasion()
-    {
-        OccasionCarts = new HashSet<OccasionCart>();
-    }
+    public int UserOccasionId { get; init; }
+    public int? UserId { get; init; }
+    public string? OccasionName { get; init; }
+    public DateTime? OccasionDate { get; init; }
+    public string? OccasionDetails { get; init; }
 
-    public int UserOccasionId { get; set; }
-    public int? UserId { get; set; }
-    public string? OccasionName { get; set; }
-    public DateTime? OccasionDate { get; set; }
-    public string? OccasionDetails { get; set; }
-
-    public virtual User? User { get; set; }
-    public virtual ICollection<OccasionCart> OccasionCarts { get; set; }
+    public User? User { get; set; }
+    public ICollection<OccasionCart> OccasionCarts { get; set; } = new HashSet<OccasionCart>();
 }

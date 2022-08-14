@@ -17,5 +17,6 @@ public abstract class SharedDatabaseFixture : IDisposable
     public void Dispose()
     {
         _factory = null;
+        GC.SuppressFinalize(this);
     }
 }

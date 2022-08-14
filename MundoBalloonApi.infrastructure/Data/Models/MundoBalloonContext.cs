@@ -9,35 +9,35 @@ public class MundoBalloonContext : DbContext
     {
     }
 
-    public virtual DbSet<OcassionCartDetail> OcassionCartDetails { get; set; } = default!;
-    public virtual DbSet<OccasionCart> OccasionCarts { get; set; } = default!;
-    public virtual DbSet<Product> Products { get; set; } = default!;
-    public virtual DbSet<ProductCategory> ProductCategories { get; set; } = default!;
-    public virtual DbSet<ProductVariant> ProductVariants { get; set; } = default!;
-    public virtual DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
-    public virtual DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
+    public DbSet<OccasionCartDetail> OccasionCartDetails { get; set; } = default!;
+    public DbSet<OccasionCart> OccasionCarts { get; set; } = default!;
+    public DbSet<Product> Products { get; set; } = default!;
+    public DbSet<ProductCategory> ProductCategories { get; set; } = default!;
+    public DbSet<ProductVariant> ProductVariants { get; set; } = default!;
+    public DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
+    public DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
 
-    public virtual DbSet<User> Users { get; set; } = default!;
-    public virtual DbSet<UserCart> UserCarts { get; set; } = default!;
-    public virtual DbSet<UserOccasion> UserOccasions { get; set; } = default!;
-    public virtual DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
-    public virtual DbSet<Variant> Variants { get; set; } = default!;
-    public virtual DbSet<VariantValue> VariantValues { get; set; } = default!;
-    public virtual DbSet<CountryCode> CountryCodes { get; set; } = default!;
+    public DbSet<User> Users { get; set; } = default!;
+    public DbSet<UserCart> UserCarts { get; set; } = default!;
+    public DbSet<UserOccasion> UserOccasions { get; set; } = default!;
+    public DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
+    public DbSet<Variant> Variants { get; set; } = default!;
+    public DbSet<VariantValue> VariantValues { get; set; } = default!;
+    public DbSet<CountryCode> CountryCodes { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<OcassionCartDetail>(entity =>
+        modelBuilder.Entity<OccasionCartDetail>(entity =>
         {
             entity.HasKey(e => new { e.OccasionCartId, e.Sku })
                 .HasName("PRIMARY")
                 .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-            entity.ToTable("ocassion_cart_details");
+            entity.ToTable("occasion_cart_details");
 
-            entity.HasIndex(e => e.Sku, "fk_ocassion_cart_details_product_variants1_idx");
+            entity.HasIndex(e => e.Sku, "fk_occasion_cart_details_product_variants1_idx");
 
-            entity.HasIndex(e => e.ProductVariantId, "fk_ocassion_cart_details_product_variants2_idx");
+            entity.HasIndex(e => e.ProductVariantId, "fk_occasion_cart_details_product_variants2_idx");
 
             entity.Property(e => e.OccasionCartId).HasColumnName("occasion_cart_id");
 
@@ -72,24 +72,24 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.HasOne(d => d.OccasionCart)
-                .WithMany(p => p.OcassionCartDetails)
+                .WithMany(p => p.OccasionCartDetails)
                 .HasForeignKey(d => d.OccasionCartId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_ocassion_cart_details_occasion_cart1");
+                .HasConstraintName("fk_occasion_cart_details_occasion_cart1");
 
             entity.HasOne(d => d.ProductVariant)
-                .WithMany(p => p.OcassionCartDetailProductVariants)
+                .WithMany(p => p.OccasionCartDetailProductVariants)
                 .HasPrincipalKey(p => p.ProductVariantId)
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_ocassion_cart_details_product_variants2");
+                .HasConstraintName("fk_occasion_cart_details_product_variants2");
 
             entity.HasOne(d => d.SkuNavigation)
-                .WithMany(p => p.OcassionCartDetailSkuNavigations)
+                .WithMany(p => p.OccasionCartDetailSkuNavigations)
                 .HasPrincipalKey(p => p.Sku)
                 .HasForeignKey(d => d.Sku)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_ocassion_cart_details_product_variants1");
+                .HasConstraintName("fk_occasion_cart_details_product_variants1");
         });
 
         modelBuilder.Entity<OccasionCart>(entity =>
@@ -625,7 +625,7 @@ public class MundoBalloonContext : DbContext
                 .HasMaxLength(3)
                 .HasColumnName("DS");
 
-            entity.Property(e => e.GeonameId).HasColumnName("Geoname ID");
+            entity.Property(e => e.GeoNameId).HasColumnName("Geoname ID");
 
             entity.Property(e => e.Ioc)
                 .HasMaxLength(3)
@@ -692,6 +692,14 @@ public class MundoBalloonContext : DbContext
                         entry.State = EntityState.Modified;
                         trackable.IsDeleted = true;
                         break;
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    case EntityState.Added:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
     }
 }

@@ -6,6 +6,6 @@ public class UserCart
     public string Sku { get; set; } = string.Empty;
     public double Quantity { get; set; }
     public double Price { get; set; }
-    public int ProductVariantId { get; set; } = 0;
+    public int ProductVariantId { get; set; }
     public ProductVariant? Variant { get; set; }
 }

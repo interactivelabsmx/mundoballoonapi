@@ -1,5 +1,4 @@
 using AutoMapper;
-using FirebaseAdmin.Auth;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Contracts;
@@ -35,19 +34,5 @@ public class UsersService : IUsersService
         var currentUser = await _usersRepository.GetById(userId, cancellationToken);
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUser(userId, cancellationToken);
-    }
-
-    public async Task<UserRecord?> GetFirebaseUserById(string userId)
-    {
-        try
-        {
-            var auth = FirebaseAuth.DefaultInstance;
-            var userRecord = await auth.GetUserAsync(userId);
-            return userRecord;
-        }
-        catch (FirebaseAuthException e) when (e.Message.Contains($"Failed to get user with uid: {userId}"))
-        {
-            return null;
-        }
     }
 }

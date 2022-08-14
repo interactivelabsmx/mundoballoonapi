@@ -2,9 +2,9 @@
 
 public class UserPaymentProfile : BaseEntity
 {
-    public int UserProfileId { get; set; }
-    public int? UserId { get; set; }
-    public string? ProcessorId { get; set; }
+    public int UserProfileId { get; init; }
+    public int? UserId { get; init; }
+    public string? ProcessorId { get; init; }
 
-    public virtual User? User { get; set; }
+    public User? User { get; set; }
 }

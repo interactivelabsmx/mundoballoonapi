@@ -2,11 +2,11 @@
 
 public class ProductVariantValue : BaseEntity
 {
-    public int ProductVariantId { get; set; }
-    public int VariantId { get; set; }
-    public int VariantValueId { get; set; }
+    public int ProductVariantId { get; init; }
+    public int VariantId { get; init; }
+    public int VariantValueId { get; init; }
 
-    public virtual ProductVariant? ProductVariant { get; set; }
-    public virtual Variant? Variant { get; set; }
-    public virtual VariantValue? VariantValue { get; set; }
+    public ProductVariant? ProductVariant { get; set; }
+    public Variant? Variant { get; set; }
+    public VariantValue? VariantValue { get; set; }
 }

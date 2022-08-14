@@ -2,16 +2,10 @@
 
 public class Variant : BaseEntity
 {
-    public Variant()
-    {
-        VariantValues = new HashSet<VariantValue>();
-        ProductVariantValues = new HashSet<ProductVariantValue>();
-    }
+    public int VariantId { get; init; }
+    public string? Variant1 { get; init; }
+    public string? VariantType { get; init; }
 
-    public int VariantId { get; set; }
-    public string? Variant1 { get; set; }
-    public string? VariantType { get; set; }
-
-    public virtual ICollection<VariantValue> VariantValues { get; set; }
-    public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
+    public ICollection<VariantValue> VariantValues { get; set; } = new HashSet<VariantValue>();
+    public ICollection<ProductVariantValue> ProductVariantValues { get; set; } = new HashSet<ProductVariantValue>();
 }

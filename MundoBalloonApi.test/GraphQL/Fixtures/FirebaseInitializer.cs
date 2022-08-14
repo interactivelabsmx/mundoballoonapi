@@ -9,17 +9,16 @@ public class FirebaseInitializer : IDisposable, ICollectionFixture<FirebaseIniti
 {
     public FirebaseInitializer()
     {
-        if (FirebaseApp.DefaultInstance == null)
+        if (FirebaseApp.DefaultInstance != null) return;
+        var firebaseCredentialString = Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "";
+        FirebaseApp.Create(new AppOptions
         {
-            var firebaseCredentialString = Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "";
-            FirebaseApp.Create(new AppOptions
-            {
-                Credential = GoogleCredential.FromJson(firebaseCredentialString)
-            });
-        }
+            Credential = GoogleCredential.FromJson(firebaseCredentialString)
+        });
     }
 
     public void Dispose()
     {
+        GC.SuppressFinalize(this);
     }
 }

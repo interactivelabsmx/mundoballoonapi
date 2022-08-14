@@ -122,12 +122,6 @@ public class ProductsRepository : IProductsRepository
         return true;
     }
 
-    public async Task<ProductVariant?> GetProductVariantById(int productVariantId)
-    {
-        var context = await _contextFactory.CreateDbContextAsync();
-        return await context.ProductVariants.FirstOrDefaultAsync(pv => pv.ProductVariantId == productVariantId);
-    }
-
     public async Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant)
     {
         var context = await _contextFactory.CreateDbContextAsync();

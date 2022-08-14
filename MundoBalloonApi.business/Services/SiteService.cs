@@ -35,12 +35,10 @@ public class SiteService : ISiteService
             homepageProducts.Add("Best Selling", productsDto);
         }
 
-        if (includeNewestProducts)
-        {
-            products = await _productsRepository.GetProducts().ToListAsync();
-            productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
-            homepageProducts.Add("Newest", productsDto);
-        }
+        if (!includeNewestProducts) return homepageProducts;
+        products = await _productsRepository.GetProducts().ToListAsync();
+        productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
+        homepageProducts.Add("Newest", productsDto);
 
         return homepageProducts;
     }
@@ -111,8 +109,6 @@ public class SiteService : ISiteService
                 }
             };
         return new List<NavOption>
-
-
         {
             new()
             {

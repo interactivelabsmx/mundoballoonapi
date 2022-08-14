@@ -1,17 +1,11 @@
-using System.Security.Claims;
-
 namespace MundoBalloonApi.business.DTOs.Entities;
 
 public class CurrentUser
 {
-    public CurrentUser(string userId, IEnumerable<Claim> claims, List<string> flatClaims)
+    public CurrentUser(string userId)
     {
         UserId = userId;
-        Claims = claims;
-        FlatClaims = flatClaims;
     }
 
     public string UserId { get; }
-    public IEnumerable<Claim> Claims { get; }
-    public List<string> FlatClaims { get; }
 }

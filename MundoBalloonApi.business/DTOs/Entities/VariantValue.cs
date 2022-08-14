@@ -6,5 +6,5 @@ public class VariantValue
     public int VariantId { get; set; }
     public string Value { get; set; } = string.Empty;
 
-    public virtual ICollection<ProductVariantValue>? ProductVariantValues { get; set; }
+    public ICollection<ProductVariantValue>? ProductVariantValues { get; set; }
 }

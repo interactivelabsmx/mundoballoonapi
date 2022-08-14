@@ -9,7 +9,7 @@ public partial class SiteQueries
 {
     [AllowAnonymous]
     public List<NavOption> GetNavOptions([Service] ISiteService siteService,
-        [GlobalStateAttribute("language")] string language)
+        [GlobalState("language")] string language)
     {
         return siteService.GetNavOptions(language);
     }

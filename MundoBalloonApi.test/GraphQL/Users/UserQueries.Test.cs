@@ -17,17 +17,17 @@ public class UserQueriesTest : BaseServiceCollection
         var db = await ContextFactory?.CreateDbContextAsync()!;
         await using (db)
         {
-            db?.Users.Add(new User
+            db.Users.Add(new User
             {
                 Id = 999,
                 // This is an actual firebase user
                 UserId = "Mgq4doWHJNdRNmCVwz61XNOwKO92"
             });
-            await db?.SaveChangesAsync()!;
+            await db.SaveChangesAsync();
         }
 
         // Act
-        var query = @"
+        const string query = @"
           query GetUserById($userId: String!) {
               userById(userId: $userId) {
                 id

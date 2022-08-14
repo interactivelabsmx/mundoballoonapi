@@ -1,7 +1,7 @@
 using AutoMapper;
 using MundoBalloonApi.business.DTOs.Entities;
-using OcassionCartDetail = MundoBalloonApi.infrastructure.Data.Models.OcassionCartDetail;
 using OccasionCart = MundoBalloonApi.infrastructure.Data.Models.OccasionCart;
+using OccasionCartDetail = MundoBalloonApi.infrastructure.Data.Models.OccasionCartDetail;
 using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
 using ProductCategory = MundoBalloonApi.infrastructure.Data.Models.ProductCategory;
 using ProductVariant = MundoBalloonApi.infrastructure.Data.Models.ProductVariant;
@@ -67,8 +67,8 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         CreateMap<OccasionCart, DTOs.Entities.OccasionCart>()
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.OccasionCartDescription))
-            .ForMember(dest => dest.CartDetails, opt => opt.MapFrom(src => src.OcassionCartDetails));
-        CreateMap<OcassionCartDetail, DTOs.Entities.OcassionCartDetail>()
+            .ForMember(dest => dest.CartDetails, opt => opt.MapFrom(src => src.OccasionCartDetails));
+        CreateMap<OccasionCartDetail, DTOs.Entities.OccasionCartDetail>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
     }
 }

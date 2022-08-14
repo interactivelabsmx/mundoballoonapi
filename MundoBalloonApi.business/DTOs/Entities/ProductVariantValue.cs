@@ -6,7 +6,7 @@ public class ProductVariantValue
     public int VariantId { get; set; }
     public int VariantValueId { get; set; }
 
-    public virtual ProductVariant? ProductVariant { get; set; }
-    public virtual Variant? Variant { get; set; }
-    public virtual VariantValue? VariantValue { get; set; }
+    public ProductVariant? ProductVariant { get; set; }
+    public Variant? Variant { get; set; }
+    public VariantValue? VariantValue { get; set; }
 }

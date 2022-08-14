@@ -1,6 +1,6 @@
 ﻿namespace MundoBalloonApi.business.DTOs.Entities;
 
-public class OcassionCartDetail
+public class OccasionCartDetail
 {
     public int OccasionCartId { get; set; }
     public string Sku { get; set; } = string.Empty;

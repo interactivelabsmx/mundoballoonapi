@@ -13,6 +13,6 @@ public class CountryCode : BaseEntity
     public string Capital { get; set; } = string.Empty;
     public string Continent { get; set; } = string.Empty;
     public string Languages { get; set; } = string.Empty;
-    public int GeonameId { get; set; } = 0;
+    public int GeoNameId { get; set; } = 0;
     public bool Supported { get; set; } = false;
 }

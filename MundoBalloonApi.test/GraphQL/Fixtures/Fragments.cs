@@ -2,7 +2,7 @@ namespace MundoBalloonApi.test.GraphQL.Fixtures;
 
 public static class Fragments
 {
-    private static readonly string ProductSimpleCard = @"
+    private const string ProductSimpleCard = @"
         fragment CategoryName on ProductCategory {
             name
         }
@@ -31,7 +31,7 @@ public static class Fragments
         }
     ";
 
-    public static string ProductsDictionaryFragment = ProductSimpleCard + @"
+    public const string ProductsDictionaryFragment = ProductSimpleCard + @"
         fragment ProductsDictionary on KeyValuePairOfStringAndListOfProduct {
           key
           value {

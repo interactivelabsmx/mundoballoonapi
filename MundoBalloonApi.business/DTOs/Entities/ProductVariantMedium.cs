@@ -10,5 +10,5 @@ public class ProductVariantMedium
     public string? Url { get; set; } = string.Empty;
     public string Quality { get; set; } = string.Empty;
 
-    public virtual ProductVariant? ProductVariant { get; set; }
+    public ProductVariant? ProductVariant { get; set; }
 }

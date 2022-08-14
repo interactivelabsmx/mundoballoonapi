@@ -24,7 +24,5 @@ public interface IProductsRepository
 
     Task<bool> DeleteProductVariantMedia(int productVariantMediaId);
 
-    Task<ProductVariant?> GetProductVariantById(int productVariantId);
-
     Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant);
 }

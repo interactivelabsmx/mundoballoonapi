@@ -62,5 +62,6 @@ public abstract class BaseServiceCollection : IDisposable
     {
         Executor = null;
         ContextFactory = null;
+        GC.SuppressFinalize(this);
     }
 }

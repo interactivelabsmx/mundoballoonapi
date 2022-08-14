@@ -14,9 +14,7 @@ public static class AuthenticationInterceptor
             queryBuilder.AddProperty("currentUser", "unauthorized");
             if (!httpContext.User.Identity!.IsAuthenticated) return ValueTask.CompletedTask;
             var userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)!.ToString();
-            var claims = httpContext.User.Claims;
-            var flatClaims = httpContext.User.Claims.Select(x => $"{x.Type} : {x.Value}").ToList();
-            queryBuilder.SetProperty("currentUser", new CurrentUser(userId, claims, flatClaims));
+            queryBuilder.SetProperty("currentUser", new CurrentUser(userId));
             return ValueTask.CompletedTask;
         };
     }

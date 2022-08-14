@@ -8,5 +8,5 @@ public class OccasionCart
     public string Title { get; set; } = string.Empty;
     public string DropOffStage { get; set; } = string.Empty;
 
-    public ICollection<OcassionCartDetail>? CartDetails { get; set; }
+    public ICollection<OccasionCartDetail>? CartDetails { get; set; }
 }

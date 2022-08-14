@@ -13,7 +13,7 @@ public class GetHomepageProductsTest : BaseServiceCollection
     public async Task GetHomepageProductsTest_GetsFeaturedProducts()
     {
         // Act
-        var query = Fragments.ProductsDictionaryFragment + @"
+        const string query = Fragments.ProductsDictionaryFragment + @"
             query GetHomepageProducts(
               $includeBestSelling: Boolean = false
               $includeNewest: Boolean = false
