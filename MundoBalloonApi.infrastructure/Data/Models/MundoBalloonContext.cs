@@ -16,7 +16,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<ProductVariant> ProductVariants { get; set; } = default!;
     public DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
     public DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
-
+    public DbSet<ProductVariantReview> ProductVariantReviews { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserCart> UserCarts { get; set; } = default!;
     public DbSet<UserOccasion> UserOccasions { get; set; } = default!;
@@ -315,7 +315,7 @@ public class MundoBalloonContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_product_variant_media_product_variants1");
         });
-        
+
         modelBuilder.Entity<ProductVariantReview>(entity =>
         {
             entity.HasKey(e => e.ProductVariantReviewId)
@@ -324,7 +324,7 @@ public class MundoBalloonContext : DbContext
             entity.ToTable("product_variant_review");
 
             entity.HasIndex(e => e.ProductVariantId, "fk_product_variants_idx");
-            
+
             entity.HasIndex(e => e.UserId, "fk_users_idx");
 
             entity.Property(e => e.ProductVariantReviewId).HasColumnName("product_variant_review_id");
@@ -358,7 +358,7 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_product_variants_idx");
-            
+
             entity.HasOne(d => d.User)
                 .WithMany(p => p.ProductVariantReviews)
                 .HasPrincipalKey(p => p.Id)

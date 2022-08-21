@@ -16,13 +16,13 @@ public partial class ProductQueries
         var product = await mundoBalloonContext.Products
             .Include(p => p.ProductCategory)
             .Include(p => p.ProductVariants)
-                .ThenInclude(pv => pv.ProductVariantMedia)
+            .ThenInclude(pv => pv.ProductVariantMedia)
             .Include(p => p.ProductVariants)
-                .ThenInclude(pv => pv.ProductVariantValues)
-                .ThenInclude(pv => pv.Variant)
+            .ThenInclude(pv => pv.ProductVariantValues)
+            .ThenInclude(pv => pv.Variant)
             .Include(p => p.ProductVariants)
-                .ThenInclude(pv => pv.ProductVariantValues)
-                .ThenInclude(pv => pv.VariantValue)
+            .ThenInclude(pv => pv.ProductVariantValues)
+            .ThenInclude(pv => pv.VariantValue)
             .IgnoreAutoIncludes()
             .AsNoTracking()
             .FirstOrDefaultAsync(p => p.ProductId == productId);
