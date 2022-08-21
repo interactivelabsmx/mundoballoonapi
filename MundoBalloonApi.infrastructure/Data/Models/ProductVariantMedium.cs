@@ -10,5 +10,5 @@ public class ProductVariantMedium : BaseEntity
     public string? Url { get; init; }
     public string? Quality { get; init; }
 
-    public ProductVariant? ProductVariant { get; set; }
+    public ProductVariant? ProductVariant { get; set; } = new();
 }

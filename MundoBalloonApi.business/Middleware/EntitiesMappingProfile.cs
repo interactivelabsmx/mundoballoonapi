@@ -7,6 +7,7 @@ using ProductCategory = MundoBalloonApi.infrastructure.Data.Models.ProductCatego
 using ProductVariant = MundoBalloonApi.infrastructure.Data.Models.ProductVariant;
 using ProductVariantMedium = MundoBalloonApi.infrastructure.Data.Models.ProductVariantMedium;
 using ProductVariantValue = MundoBalloonApi.infrastructure.Data.Models.ProductVariantValue;
+using ProductVariantReview = MundoBalloonApi.infrastructure.Data.Models.ProductVariantReview;
 using User = MundoBalloonApi.infrastructure.Data.Models.User;
 using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
 using UserOccasion = MundoBalloonApi.infrastructure.Data.Models.UserOccasion;
@@ -36,13 +37,15 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductVariantName))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription))
             .ForMember(dest => dest.Media, opt => opt.MapFrom(src => src.ProductVariantMedia))
-            .ForMember(dest => dest.VariantValues, opt => opt.MapFrom(src => src.ProductVariantValues));
+            .ForMember(dest => dest.VariantValues, opt => opt.MapFrom(src => src.ProductVariantValues))
+            .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.ProductVariantReviews));
         CreateMap<ProductVariant, ProductVariantEntity>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductVariantName))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductVariantDescription));
         CreateMap<VariantValue, DTOs.Entities.VariantValue>()
             .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.VariantValue1));
         CreateMap<ProductVariantMedium, DTOs.Entities.ProductVariantMedium>();
+        CreateMap<ProductVariantReview, DTOs.Entities.ProductVariantReview>();
         CreateMap<ProductVariantValue, DTOs.Entities.ProductVariantValue>();
         CreateMap<Variant, DTOs.Entities.Variant>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1))
@@ -51,7 +54,8 @@ public class EntitiesMappingProfile : Profile
         CreateMap<User, DTOs.Entities.User>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
-            .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions));
+            .ForMember(dest => dest.Occasions, opt => opt.MapFrom(src => src.UserOccasions))
+            .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.ProductVariantReviews));
         CreateMap<User, FirebaseUser>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
