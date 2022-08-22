@@ -743,14 +743,6 @@ public class MundoBalloonContext : DbContext
                         entry.State = EntityState.Modified;
                         trackable.IsDeleted = true;
                         break;
-                    case EntityState.Detached:
-                        break;
-                    case EntityState.Unchanged:
-                        break;
-                    case EntityState.Added:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
     }
 }
