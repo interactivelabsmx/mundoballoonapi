@@ -34,7 +34,7 @@ public class MundoBalloonContext : DbContext
 
             entity.ToTable("event_cart_details");
 
-            entity.HasIndex(e => e.Sku, "event_cart_details_user_event_user_event_id_fk_idx");
+            entity.HasIndex(e => e.user_event_id, "event_cart_details_user_event_user_event_id_fk_idx");
 
             entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2_idx");
 
@@ -57,8 +57,10 @@ public class MundoBalloonContext : DbContext
                 .HasPrecision(10, 2)
                 .HasColumnName("price");
 
-            entity.Property(e => e.ProductVariantId).HasColumnName("product_variant_id");
-
+            entity.Property(e => e.ProductVariantId)
+                .HasColumnName("product_variant_id");
+            entity.Property(d => d.user_event_id)
+                .HasColumnName("user_event_id");
             entity.Property(e => e.Quantity)
                 .HasPrecision(10, 2)
                 .HasColumnName("quantity");
@@ -67,8 +69,18 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");            
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+
+            entity.HasOne(d => d.UserEvent)
+                .WithMany(p => p.EventCarts)
+                .HasForeignKey(d => d.EventCartId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("event_cart_details_user_event_user_event_id_fk");
 
             entity.HasOne(d => d.ProductVariant)
                 .WithMany(p => p.EventCartDetailProductVariants)
@@ -76,8 +88,10 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_event_cart_details_product_variants2");
+            
+                
 
-                    });
+        });
 
         modelBuilder.Entity<Product>(entity =>
         {

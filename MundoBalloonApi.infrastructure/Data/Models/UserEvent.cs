@@ -1,14 +1,13 @@
 ﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-public class UserCart : BaseEntity
+public class UserEvent : BaseEntity
 {
-    public int UserId { get; init; }
-    public string? Sku { get; init; }
-    public double Quantity { get; init; }
-    public double Price { get; init; }
-    public int? ProductVariantId { get; init; }
+    public int UserEventId { get; init; }
+    public int? UserId { get; init; }
+    public string? EventName { get; init; }
+    public DateTime? EventDate { get; init; }
+    public string? EventDetails { get; init; }
 
-    public ProductVariant? ProductVariant { get; set; }
-    public ProductVariant? SkuNavigation { get; set; }
     public User? User { get; set; }
+    public ICollection<EventCartDetail> EventCarts { get; set; } = new HashSet<EventCartDetail>();
 }
