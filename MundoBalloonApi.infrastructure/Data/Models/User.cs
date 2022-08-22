@@ -7,6 +7,6 @@ public class User : BaseEntity
     public string UserId { get; init; } = string.Empty;
 
     public ICollection<UserCart> UserCarts { get; } = new HashSet<UserCart>();
-    public ICollection<UserOccasion> UserOccasions { get; } = new HashSet<UserOccasion>();
+    public ICollection<UserEvent> UserEvents { get; } = new HashSet<UserEvent>();
     public ICollection<UserPaymentProfile>? UserPaymentProfiles { get; } = new HashSet<UserPaymentProfile>();
 }
