@@ -7,6 +7,6 @@ public class UserEvent
     public string Name { get; set; } = string.Empty;
     public DateTime? Date { get; set; }
     public string Details { get; set; } = string.Empty;
-
-    public ICollection<EventCart>? Carts { get; set; }
+    public User? User { get; set; }
+    public ICollection<EventCartDetail>? Carts { get; set; }
 }

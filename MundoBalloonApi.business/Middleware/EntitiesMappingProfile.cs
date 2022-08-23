@@ -64,8 +64,6 @@ public class EntitiesMappingProfile : Profile
         // SAVED CARTS
         CreateMap<UserCart, DTOs.Entities.UserCart>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
-        CreateMap<EventCart, DTOs.Entities.EventCart>()
-            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.CartDetails));
         CreateMap<EventCartDetail, DTOs.Entities.EventCartDetail>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
 
