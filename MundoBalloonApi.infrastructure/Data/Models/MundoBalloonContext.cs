@@ -16,7 +16,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<ProductVariant> ProductVariants { get; set; } = default!;
     public DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
     public DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
-
+    public DbSet<ProductVariantReview> ProductVariantReviews { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserCart> UserCarts { get; set; } = default!;
     public DbSet<UserOccasion> UserOccasions { get; set; } = default!;
@@ -314,6 +314,57 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_product_variant_media_product_variants1");
+        });
+
+        modelBuilder.Entity<ProductVariantReview>(entity =>
+        {
+            entity.HasKey(e => e.ProductVariantReviewId)
+                .HasName("PRIMARY");
+
+            entity.ToTable("product_variant_review");
+
+            entity.HasIndex(e => e.ProductVariantId, "fk_product_variants_idx");
+
+            entity.HasIndex(e => e.UserId, "fk_users_idx");
+
+            entity.Property(e => e.ProductVariantReviewId).HasColumnName("product_variant_review_id");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.Rating)
+                .IsRequired()
+                .HasColumnType("smallint")
+                .HasColumnName("rating");
+
+            entity.Property(e => e.ProductVariantId).HasColumnName("product_variant_id");
+
+            entity.Property(e => e.Comments)
+                .HasColumnType("text")
+                .HasColumnName("comments");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+            entity.HasOne(d => d.ProductVariant)
+                .WithMany(p => p.ProductVariantReviews)
+                .HasPrincipalKey(p => p.ProductVariantId)
+                .HasForeignKey(d => d.ProductVariantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_product_variants_idx");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.ProductVariantReviews)
+                .HasPrincipalKey(p => p.Id)
+                .HasForeignKey(d => d.ProductVariantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_users_idx");
         });
 
         modelBuilder.Entity<ProductVariantValue>(entity =>
@@ -692,14 +743,6 @@ public class MundoBalloonContext : DbContext
                         entry.State = EntityState.Modified;
                         trackable.IsDeleted = true;
                         break;
-                    case EntityState.Detached:
-                        break;
-                    case EntityState.Unchanged:
-                        break;
-                    case EntityState.Added:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
     }
 }

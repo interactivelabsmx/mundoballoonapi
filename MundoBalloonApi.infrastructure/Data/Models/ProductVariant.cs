@@ -20,4 +20,5 @@ public class ProductVariant : BaseEntity
     public ICollection<ProductVariantValue> ProductVariantValues { get; set; } = new HashSet<ProductVariantValue>();
     public ICollection<UserCart> UserCartProductVariants { get; set; } = new HashSet<UserCart>();
     public ICollection<UserCart> UserCartSkuNavigations { get; set; } = new HashSet<UserCart>();
+    public ICollection<ProductVariantReview> ProductVariantReviews { get; set; } = new HashSet<ProductVariantReview>();
 }

@@ -3,7 +3,187 @@
     "homepageProducts": [
       {
         "key": "Featured",
-        "value": []
+        "value": [
+          {
+            "productId": 10,
+            "name": "Tasty Soft Cheese",
+            "category": {
+              "name": "Home"
+            },
+            "price": 721.17,
+            "variants": [
+              {
+                "media": []
+              }
+            ]
+          },
+          {
+            "productId": 9,
+            "name": "Practical Granite Car",
+            "category": {
+              "name": "Garden"
+            },
+            "price": 270.14,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Video"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 8,
+            "name": "Unbranded Wooden Pants",
+            "category": {
+              "name": "Sports"
+            },
+            "price": 818.1,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Video"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 7,
+            "name": "Fantastic Fresh Tuna",
+            "category": {
+              "name": "Tools"
+            },
+            "price": 367.07,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Image"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 6,
+            "name": "Refined Rubber Chips",
+            "category": {
+              "name": "Grocery"
+            },
+            "price": 915.03,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Image"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 5,
+            "name": "Incredible Plastic Ball",
+            "category": {
+              "name": "Automotive"
+            },
+            "price": 464,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Video"
+                  },
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Video"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 4,
+            "name": "Licensed Frozen Towels",
+            "category": {
+              "name": "Computers"
+            },
+            "price": 12.96,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Image"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 3,
+            "name": "Gorgeous Metal Pizza",
+            "category": {
+              "name": "Shoes"
+            },
+            "price": 560.93,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Image"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 2,
+            "name": "Licensed Cotton Keyboard",
+            "category": {
+              "name": "Jewelery"
+            },
+            "price": 109.9,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Image"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "productId": 1,
+            "name": "Gorgeous Wooden Shoes",
+            "category": {
+              "name": "Garden"
+            },
+            "price": 657.86,
+            "variants": [
+              {
+                "media": [
+                  {
+                    "url": "https://via.placeholder.com/100x150/cccccc/9c9c9c.png",
+                    "mediaType": "Video"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   }

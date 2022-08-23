@@ -35,7 +35,7 @@ public class UserRepositoryTest : SharedDatabaseFixture
     {
         var cancellationToken = new CancellationTokenSource().Token;
         var userRepository = new UsersRepository(Factory);
-        var user = await userRepository.DeleteUser("1", cancellationToken);
+        var user = await userRepository.DeleteUser("3", cancellationToken);
         Assert.True(user);
     }
 }

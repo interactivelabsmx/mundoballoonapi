@@ -43,6 +43,7 @@ public abstract class BaseServiceCollection : IDisposable
             .AddTypeExtension<ProductMutations>()
             .AddTypeExtension<CollectionMutations>()
             .AddSorting()
+            .AddFiltering()
             .Services
             .BuildServiceProvider();
         ContextFactory = Executor.GetService<IDbContextFactory<MundoBalloonContext>>();

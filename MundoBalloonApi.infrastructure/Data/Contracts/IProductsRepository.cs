@@ -25,4 +25,6 @@ public interface IProductsRepository
     Task<bool> DeleteProductVariantMedia(int productVariantMediaId);
 
     Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant);
+
+    Task<ProductVariant> AddProductVariantReview(ProductVariantReview variantReview);
 }

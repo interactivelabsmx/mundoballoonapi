@@ -18,23 +18,41 @@ public class SeedDbContext
 
         var fakeData = new FakeData();
 
+        /* USERS */
+        fakeData.Users = fakeData.MakeUsers();
+        _context.Users.AddRange(fakeData.Users);
+        _context.SaveChanges();
+        
         /* COLLECTIONS */
+        fakeData.Variants = fakeData.MakeVariants();
         _context.Variants.AddRange(fakeData.Variants);
-        _context.VariantValues.AddRange(fakeData.VariantValues);
+        _context.SaveChanges();
+        
+        fakeData.ProductCategories = fakeData.MakeProductCategories();
         _context.ProductCategories.AddRange(fakeData.ProductCategories);
+        _context.SaveChanges();
+        
+        /* COLLECTIONS DEPENDENT */
+        fakeData.VariantValues = fakeData.MakeVariantValues(fakeData.Variants);
+        _context.VariantValues.AddRange(fakeData.VariantValues);
         _context.SaveChanges();
 
         /* PRODUCTS */
+        fakeData.Products = fakeData.MakeProducts(fakeData.ProductCategories);
         _context.Products.AddRange(fakeData.Products);
-        _context.ProductVariants.AddRange(fakeData.ProductVariants);
         _context.SaveChanges();
 
         /* PRODUCT VARIANTS */
+        fakeData.ProductVariants = fakeData.MakeProductVariants(fakeData.Products);
+        _context.ProductVariants.AddRange(fakeData.ProductVariants);
+        _context.SaveChanges();
+
+        fakeData.ProductVariantMedia = fakeData.MakeProductVariantMedia(fakeData.ProductVariants);
         _context.ProductVariantMedia.AddRange(fakeData.ProductVariantMedia);
         _context.SaveChanges();
 
-        /* USERS */
-        _context.Users.AddRange(fakeData.Users);
+        fakeData.ProductVariantReviews = fakeData.MakeProductVariantReviews(fakeData.ProductVariants, fakeData.Users);
+        _context.ProductVariantReviews.AddRange(fakeData.ProductVariantReviews);
         _context.SaveChanges();
     }
 }
