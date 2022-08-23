@@ -8,4 +8,5 @@ public class User
     public ICollection<UserCart>? Carts { get; set; }
     public ICollection<UserEvent>? Events { get; set; }
     public ICollection<UserPaymentProfile>? PaymentProfiles { get; set; }
+    public ICollection<ProductVariantReview>? Reviews { get; set; }
 }
