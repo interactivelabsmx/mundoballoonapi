@@ -133,4 +133,17 @@ public class ProductsRepository : IProductsRepository
 
         return productVariant;
     }
+
+    public async Task<ProductVariant> AddProductVariantReview(ProductVariantReview variantReview)
+    {
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
+        {
+            var productVariant =
+                await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantReview.ProductVariantId);
+            productVariant.ProductVariantReviews.Add(variantReview);
+            await context.SaveChangesAsync();
+            return productVariant;
+        }
+    }
 }

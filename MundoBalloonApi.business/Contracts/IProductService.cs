@@ -14,6 +14,8 @@ public interface IProductService
 
     Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia);
 
+    Task<ProductVariant> AddProductVariantReview(ProductVariantReview review);
+
     Task<bool> DeleteProductVariantMedia(int productVariantMediaId);
 
     Task<bool> DeleteProduct(int productId);

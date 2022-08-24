@@ -11,4 +11,5 @@ public class ProductVariant
 
     public ICollection<ProductVariantMedium>? Media { get; set; }
     public ICollection<ProductVariantValue>? VariantValues { get; set; }
+    public ICollection<ProductVariantReview>? Reviews { get; set; }
 }

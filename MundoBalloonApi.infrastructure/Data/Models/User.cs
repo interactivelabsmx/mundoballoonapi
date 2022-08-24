@@ -9,4 +9,5 @@ public class User : BaseEntity
     public ICollection<UserCart> UserCarts { get; } = new HashSet<UserCart>();
     public ICollection<UserEvent> UserEvents { get; } = new HashSet<UserEvent>();
     public ICollection<UserPaymentProfile>? UserPaymentProfiles { get; } = new HashSet<UserPaymentProfile>();
+    public ICollection<ProductVariantReview>? ProductVariantReviews { get; } = new HashSet<ProductVariantReview>();
 }

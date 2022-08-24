@@ -8,6 +8,6 @@ public class Product : BaseEntity
     public int ProductCategoryId { get; init; }
     public double Price { get; init; }
 
-    public ProductCategory? ProductCategory { get; } = new();
+    public ProductCategory? ProductCategory { get; set; }
     public ICollection<ProductVariant> ProductVariants { get; } = new HashSet<ProductVariant>();
 }
