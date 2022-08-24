@@ -8,7 +8,7 @@ public class EventCartDetail
     public double Quantity { get; set; }
     public double Price { get; set; }
     public string Label { get; set; } = string.Empty;
-    public int? user_event_id{get; init;}
+    public int? UserEventId{get; init;}
     public ProductVariant? Variant { get; set; }
     public UserEvent? UserEvent{get; set;}
 }

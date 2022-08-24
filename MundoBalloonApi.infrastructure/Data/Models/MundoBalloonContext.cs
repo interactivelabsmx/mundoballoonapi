@@ -34,7 +34,7 @@ public class MundoBalloonContext : DbContext
 
             entity.ToTable("event_cart_details");
 
-            entity.HasIndex(e => e.user_event_id, "event_cart_details_user_event_user_event_id_fk_idx");
+            entity.HasIndex(e => e.UserEventId, "event_cart_details_user_event_user_event_id_fk_idx");
 
             entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2_idx");
 
@@ -59,7 +59,7 @@ public class MundoBalloonContext : DbContext
 
             entity.Property(e => e.ProductVariantId)
                 .HasColumnName("product_variant_id");
-            entity.Property(d => d.user_event_id)
+            entity.Property(d => d.UserEventId)
                 .HasColumnName("user_event_id");
             entity.Property(e => e.Quantity)
                 .HasPrecision(10, 2)
