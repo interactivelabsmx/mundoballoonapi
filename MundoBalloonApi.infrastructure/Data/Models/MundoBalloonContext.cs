@@ -9,8 +9,7 @@ public class MundoBalloonContext : DbContext
     {
     }
 
-    public DbSet<OccasionCartDetail> OccasionCartDetails { get; set; } = default!;
-    public DbSet<OccasionCart> OccasionCarts { get; set; } = default!;
+    public DbSet<EventCartDetail> EventCartDetails { get; set; } = default!;
     public DbSet<Product> Products { get; set; } = default!;
     public DbSet<ProductCategory> ProductCategories { get; set; } = default!;
     public DbSet<ProductVariant> ProductVariants { get; set; } = default!;
@@ -19,7 +18,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<ProductVariantReview> ProductVariantReviews { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserCart> UserCarts { get; set; } = default!;
-    public DbSet<UserOccasion> UserOccasions { get; set; } = default!;
+    public DbSet<UserEvent> UserEvents { get; set; } = default!;
     public DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
     public DbSet<Variant> Variants { get; set; } = default!;
     public DbSet<VariantValue> VariantValues { get; set; } = default!;
@@ -27,19 +26,19 @@ public class MundoBalloonContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<OccasionCartDetail>(entity =>
+        modelBuilder.Entity<EventCartDetail>(entity =>
         {
-            entity.HasKey(e => new { e.OccasionCartId, e.Sku })
+            entity.HasKey(e => new { e.EventCartId, e.Sku })
                 .HasName("PRIMARY")
                 .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-            entity.ToTable("occasion_cart_details");
+            entity.ToTable("event_cart_details");
 
-            entity.HasIndex(e => e.Sku, "fk_occasion_cart_details_product_variants1_idx");
+            entity.HasIndex(e => e.UserEventId, "event_cart_details_user_event_user_event_id_fk_idx");
 
-            entity.HasIndex(e => e.ProductVariantId, "fk_occasion_cart_details_product_variants2_idx");
+            entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2_idx");
 
-            entity.Property(e => e.OccasionCartId).HasColumnName("occasion_cart_id");
+            entity.Property(e => e.EventCartId).HasColumnName("event_cart_details_id");
 
             entity.Property(e => e.Sku)
                 .HasColumnType("varchar(45)")
@@ -58,8 +57,10 @@ public class MundoBalloonContext : DbContext
                 .HasPrecision(10, 2)
                 .HasColumnName("price");
 
-            entity.Property(e => e.ProductVariantId).HasColumnName("product_variant_id");
-
+            entity.Property(e => e.ProductVariantId)
+                .HasColumnName("product_variant_id");
+            entity.Property(d => d.UserEventId)
+                .HasColumnName("user_event_id");
             entity.Property(e => e.Quantity)
                 .HasPrecision(10, 2)
                 .HasColumnName("quantity");
@@ -68,70 +69,28 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
-            entity.HasOne(d => d.OccasionCart)
-                .WithMany(p => p.OccasionCartDetails)
-                .HasForeignKey(d => d.OccasionCartId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_occasion_cart_details_occasion_cart1");
-
-            entity.HasOne(d => d.ProductVariant)
-                .WithMany(p => p.OccasionCartDetailProductVariants)
-                .HasPrincipalKey(p => p.ProductVariantId)
-                .HasForeignKey(d => d.ProductVariantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_occasion_cart_details_product_variants2");
-
-            entity.HasOne(d => d.SkuNavigation)
-                .WithMany(p => p.OccasionCartDetailSkuNavigations)
-                .HasPrincipalKey(p => p.Sku)
-                .HasForeignKey(d => d.Sku)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_occasion_cart_details_product_variants1");
-        });
-
-        modelBuilder.Entity<OccasionCart>(entity =>
-        {
-            entity.ToTable("occasion_cart");
-
-            entity.HasIndex(e => e.UserOccasionId, "fk_occasion_cart_user_occasion1_idx");
-
-            entity.Property(e => e.OccasionCartId).HasColumnName("occasion_cart_id");
-
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.DropOffStage)
-                .HasColumnType("varchar(45)")
-                .HasColumnName("drop_off_stage");
-
-            entity.Property(e => e.OccasionCartDescription)
-                .IsRequired()
-                .HasColumnType("mediumtext")
-                .HasColumnName("occasion_cart_description");
-
-            entity.Property(e => e.Title)
-                .HasColumnType("varchar(45)")
-                .HasColumnName("title");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");            
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
-            entity.Property(e => e.UserOccasionId).HasColumnName("user_occasion_id");
 
-            entity.HasOne(d => d.UserOccasion)
-                .WithMany(p => p.OccasionCarts)
-                .HasForeignKey(d => d.UserOccasionId)
+            entity.HasOne(d => d.UserEvent)
+                .WithMany(p => p.EventCarts)
+                .HasForeignKey(d => d.EventCartId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_occasion_cart_user_occasion1");
+                .HasConstraintName("event_cart_details_user_event_user_event_id_fk");
+
+            entity.HasOne(d => d.ProductVariant)
+                .WithMany(p => p.EventCartDetailProductVariants)
+                .HasPrincipalKey(p => p.ProductVariantId)
+                .HasForeignKey(d => d.ProductVariantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_event_cart_details_product_variants2");
+            
+                
+
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -505,32 +464,32 @@ public class MundoBalloonContext : DbContext
                 .HasConstraintName("fk_user_cart_Users1");
         });
 
-        modelBuilder.Entity<UserOccasion>(entity =>
+        modelBuilder.Entity<UserEvent>(entity =>
         {
-            entity.ToTable("user_occasion");
+            entity.ToTable("user_event");
 
-            entity.HasIndex(e => e.UserId, "fk_user_occasion_Users1_idx");
+            entity.HasIndex(e => e.UserId, "fk_user_event_Users1_idx");
 
-            entity.Property(e => e.UserOccasionId).HasColumnName("user_occasion_id");
+            entity.Property(e => e.UserEventId).HasColumnName("user_event_id");
 
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.OccasionDate)
+            entity.Property(e => e.EventDate)
                 .HasColumnType("timestamp(6)")
-                .HasColumnName("occasion_date")
+                .HasColumnName("event_date")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.OccasionDetails)
+            entity.Property(e => e.EventDetails)
                 .HasColumnType("mediumtext")
-                .HasColumnName("occasion_details");
+                .HasColumnName("event_details");
 
-            entity.Property(e => e.OccasionName)
+            entity.Property(e => e.EventName)
                 .IsRequired()
                 .HasColumnType("varchar(100)")
-                .HasColumnName("occasion_name");
+                .HasColumnName("event_name");
 
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(6)")
@@ -542,9 +501,9 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User)
-                .WithMany(p => p.UserOccasions)
+                .WithMany(p => p.UserEvents)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("fk_user_occasion_Users1");
+                .HasConstraintName("fk_user_event_Users1");
         });
 
         modelBuilder.Entity<UserPaymentProfile>(entity =>

@@ -1,5 +1,6 @@
 ﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
+
 public class UserCart : BaseEntity
 {
     public int UserId { get; init; }

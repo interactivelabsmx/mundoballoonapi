@@ -10,11 +10,11 @@ public class ProductVariant : BaseEntity
     public double Price { get; init; }
     public Product? Product { get; set; }
 
-    public ICollection<OccasionCartDetail> OccasionCartDetailProductVariants { get; set; } =
-        new HashSet<OccasionCartDetail>();
+    public ICollection<EventCartDetail> EventCartDetailProductVariants { get; set; } =
+        new HashSet<EventCartDetail>();
 
-    public ICollection<OccasionCartDetail> OccasionCartDetailSkuNavigations { get; set; } =
-        new HashSet<OccasionCartDetail>();
+    public ICollection<EventCartDetail> EventCartDetailSkuNavigations { get; set; } =
+        new HashSet<EventCartDetail>();
 
     public ICollection<ProductVariantMedium> ProductVariantMedia { get; set; } = new HashSet<ProductVariantMedium>();
     public ICollection<ProductVariantValue> ProductVariantValues { get; set; } = new HashSet<ProductVariantValue>();
