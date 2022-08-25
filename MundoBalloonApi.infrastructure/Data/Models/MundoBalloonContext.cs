@@ -72,9 +72,8 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");            
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
 
             entity.HasOne(d => d.UserEvent)
                 .WithMany(p => p.EventCarts)
@@ -88,9 +87,6 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_event_cart_details_product_variants2");
-            
-                
-
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -316,14 +312,12 @@ public class MundoBalloonContext : DbContext
                 .HasPrincipalKey(p => p.ProductVariantId)
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_product_variants_idx");
+                .HasConstraintName("fk_product_variant_review_product_variant1");
 
             entity.HasOne(d => d.User)
                 .WithMany(p => p.ProductVariantReviews)
-                .HasPrincipalKey(p => p.Id)
-                .HasForeignKey(d => d.ProductVariantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_users_idx");
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("fk_product_variant_review_user1");
         });
 
         modelBuilder.Entity<ProductVariantValue>(entity =>
@@ -378,18 +372,14 @@ public class MundoBalloonContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+            entity.HasKey(e => e.UserId)
+                .HasName("PRIMARY");
+
             entity.ToTable("users");
-
-            entity.HasIndex(e => e.UserId, "userId_UNIQUE")
-                .IsUnique();
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("id");
 
             entity.Property(e => e.UserId)
                 .HasColumnType("varchar(45)")
-                .HasColumnName("userId");
+                .HasColumnName("user_id");
 
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")

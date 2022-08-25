@@ -19,7 +19,6 @@ public class UserQueriesTest : BaseServiceCollection
         {
             db.Users.Add(new User
             {
-                Id = 999,
                 // This is an actual firebase user
                 UserId = "Mgq4doWHJNdRNmCVwz61XNOwKO92"
             });
@@ -30,7 +29,7 @@ public class UserQueriesTest : BaseServiceCollection
         const string query = @"
           query GetUserById($userId: String!) {
               userById(userId: $userId) {
-                id
+                userId
               }
             }
         ";
