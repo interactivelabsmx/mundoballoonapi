@@ -25,11 +25,14 @@ public class FakeData
 
     private Faker<VariantValue>? _variantValueFaker;
 
+    private Faker<UserEvent>? _userEventFaker;
+
     public FakeData()
     {
         _variantFaker = VariantFakerBuilder();
         _productCategoryFaker = ProductCategoryFakerBuilder();
         _userFaker = UserFakerBuilder();
+        _userEventFaker = UserEventFakerBuilder();
     }
 
     public List<Variant>? Variants { get; set; }
@@ -40,6 +43,7 @@ public class FakeData
     public List<ProductVariantMedium>? ProductVariantMedia { get; set; }
     public List<ProductVariantReview>? ProductVariantReviews { get; set; }
     public List<User>? Users { get; set; }
+    public List<UserEvent> UserEventReviews {get; set;}
 
     private static Faker<Variant> VariantFakerBuilder()
     {
@@ -166,7 +170,15 @@ public class FakeData
             .RuleFor(pvm => pvm.Url, f => f.Image.PlaceholderUrl(100, 150))
             .RuleFor(pvm => pvm.ProductVariantId, f => f.PickRandom(productVariants).ProductVariantId);
     }
-
+        private static Faker<UserEvent> UserEventFakerBuilder(List<UserEvent> userEvents)
+    {
+        return new Faker<UserEvent>()
+        .RuleFor(ue => ue.UserEventId, f => f.UserEvent.UserEventId())
+        .RuleFor(ue => ue.UserId, f => f.UserEvent.UserId())
+        .RuleFor(ue => ue.EventName, f => f.UserEvent.EventName())
+        .RuleFor(ue => ue.EventDate, f => f.UserEvent.EventDate())
+        .RuleFor(ue => ue.EventDetails, f => f.UserEvent.EventDetails());
+    }
     private ProductVariantMedium MakeProductVariantMedium(int seed)
     {
         return _productVariantMediumFaker?.UseSeed(seed).Generate() ?? new ProductVariantMedium();

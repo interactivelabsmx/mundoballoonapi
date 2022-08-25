@@ -43,4 +43,15 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
+    public async Task<UserEvent> CreateUserEvent(UserEvent userEvent)
+    {
+        var context = await _contextFactory.CreateDbContextAsync();
+        await using (context)
+        {
+            context.UserEvents.Add(userEvent);
+            await context.SaveChangesAsync();
+        }
+
+        return userEvent;
+    }
 }

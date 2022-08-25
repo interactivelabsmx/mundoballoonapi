@@ -54,5 +54,10 @@ public class SeedDbContext
         fakeData.ProductVariantReviews = fakeData.MakeProductVariantReviews(fakeData.ProductVariants, fakeData.Users);
         _context.ProductVariantReviews.AddRange(fakeData.ProductVariantReviews);
         _context.SaveChanges();
+
+        /*USER EVENTS*/
+        fakeData.UserEventReviews = fakeData.MakeUserEventReviews(fakeData.UserEvents,fakeData.UserEvent);
+        _context.ProductVariantReviews.AddRange(fakeData.UserEvents);
+        _context.SaveChanges();
     }
 }
