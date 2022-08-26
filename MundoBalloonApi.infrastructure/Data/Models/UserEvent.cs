@@ -2,8 +2,8 @@
 
 public class UserEvent : BaseEntity
 {
-    public int? UserEventId { get; init; }
-    public int? UserId { get; init; }
+    public int UserEventId { get; init; }
+    public string? UserId { get; init; }
     public string? EventName { get; init; }
     public DateTime? EventDate { get; init; }
     public string? EventDetails { get; init; }

@@ -22,16 +22,16 @@ public class SeedDbContext
         fakeData.Users = fakeData.MakeUsers();
         _context.Users.AddRange(fakeData.Users);
         _context.SaveChanges();
-        
+
         /* COLLECTIONS */
         fakeData.Variants = fakeData.MakeVariants();
         _context.Variants.AddRange(fakeData.Variants);
         _context.SaveChanges();
-        
+
         fakeData.ProductCategories = fakeData.MakeProductCategories();
         _context.ProductCategories.AddRange(fakeData.ProductCategories);
         _context.SaveChanges();
-        
+
         /* COLLECTIONS DEPENDENT */
         fakeData.VariantValues = fakeData.MakeVariantValues(fakeData.Variants);
         _context.VariantValues.AddRange(fakeData.VariantValues);

@@ -70,6 +70,5 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         CreateMap<EventCartDetail, DTOs.Entities.EventCartDetail>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
-
     }
 }

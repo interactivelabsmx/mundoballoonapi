@@ -18,6 +18,12 @@ public static class Fragments
             }
         }
 
+        fragment ProductVariantsReview on ProductVariant {
+            reviews {
+                rating
+            }
+        }
+
         fragment ProductSimpleCard on Product {
             productId
             name
@@ -27,6 +33,7 @@ public static class Fragments
             price
             variants {
                 ...ProductVariantsMediaOnly
+                ...ProductVariantsReview
             }
         }
     ";
