@@ -11,6 +11,10 @@ public class FakeData
 
     private readonly Faker<ProductCategory> _productCategoryFaker;
 
+    private readonly Faker<User> _userFaker;
+
+    private readonly Faker<Variant> _variantFaker;
+
     private Faker<Product>? _productFaker;
 
     private Faker<ProductVariant>? _productVariantFaker;
@@ -18,10 +22,6 @@ public class FakeData
     private Faker<ProductVariantMedium>? _productVariantMediumFaker;
 
     private Faker<ProductVariantReview>? _productVariantReviewFaker;
-
-    private readonly Faker<User> _userFaker;
-
-    private readonly Faker<Variant> _variantFaker;
 
     private Faker<VariantValue>? _variantValueFaker;
 
@@ -135,14 +135,15 @@ public class FakeData
         return Enumerable.Range(1, count).Select(MakeProductVariant).ToList();
     }
 
-    private static Faker<ProductVariantReview>? ProductVariantReviewFakerBuilder(List<ProductVariant> productVariants, List<User> users)
+    private static Faker<ProductVariantReview>? ProductVariantReviewFakerBuilder(List<ProductVariant> productVariants,
+        List<User> users)
     {
-        Random rnd = new Random();
+        var rnd = new Random();
         return new Faker<ProductVariantReview>()
             .RuleFor(pvr => pvr.Comments, f => f.Rant.Review())
             .RuleFor(pvr => pvr.Rating, _ => rnd.Next(1, 5))
             .RuleFor(pvr => pvr.ProductVariantId, f => f.PickRandom(productVariants).ProductVariantId)
-            .RuleFor(pvr => pvr.UserId, f => f.PickRandom(users).Id);
+            .RuleFor(pvr => pvr.UserId, f => f.PickRandom(users).UserId);
     }
 
     private ProductVariantReview MakeProductVariantReview(int seed)
@@ -150,12 +151,13 @@ public class FakeData
         return _productVariantReviewFaker?.UseSeed(seed).Generate() ?? new ProductVariantReview();
     }
 
-    public List<ProductVariantReview> MakeProductVariantReviews(List<ProductVariant> productVariants, List<User> users, int count = 10)
+    public List<ProductVariantReview> MakeProductVariantReviews(List<ProductVariant> productVariants, List<User> users,
+        int count = 10)
     {
         _productVariantReviewFaker ??= ProductVariantReviewFakerBuilder(productVariants, users);
         return Enumerable.Range(1, count).Select(MakeProductVariantReview).ToList();
     }
-    
+
     private static Faker<ProductVariantMedium>? ProductVariantMediumFakerBuilder(List<ProductVariant> productVariants)
     {
         return new Faker<ProductVariantMedium>()
