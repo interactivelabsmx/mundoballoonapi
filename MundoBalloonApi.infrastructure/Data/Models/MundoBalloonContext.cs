@@ -28,39 +28,28 @@ public class MundoBalloonContext : DbContext
     {
         modelBuilder.Entity<EventCartDetail>(entity =>
         {
-            entity.HasKey(e => new { e.EventCartId, e.Sku })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.EventCartDetailId)
+                .HasName("PRIMARY");
 
             entity.ToTable("event_cart_details");
 
-            entity.HasIndex(e => e.UserEventId, "event_cart_details_user_event_user_event_id_fk_idx");
+            entity.HasIndex(e => e.UserEventId, "event_cart_details_user_event_user_event_id_fk");
 
-            entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2_idx");
+            entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2");
 
-            entity.Property(e => e.EventCartId).HasColumnName("event_cart_details_id");
-
-            entity.Property(e => e.Sku)
-                .HasColumnType("varchar(45)")
-                .HasColumnName("sku");
+            entity.Property(e => e.EventCartDetailId).HasColumnName("event_cart_detail_id");
 
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.Label)
-                .HasColumnType("varchar(45)")
-                .HasColumnName("label");
-
-            entity.Property(e => e.Price)
-                .HasPrecision(10, 2)
-                .HasColumnName("price");
-
             entity.Property(e => e.ProductVariantId)
                 .HasColumnName("product_variant_id");
+
             entity.Property(d => d.UserEventId)
                 .HasColumnName("user_event_id");
+
             entity.Property(e => e.Quantity)
                 .HasPrecision(10, 2)
                 .HasColumnName("quantity");
@@ -69,6 +58,7 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
@@ -77,7 +67,7 @@ public class MundoBalloonContext : DbContext
 
             entity.HasOne(d => d.UserEvent)
                 .WithMany(p => p.EventCarts)
-                .HasForeignKey(d => d.EventCartId)
+                .HasForeignKey(d => d.EventCartDetailId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("event_cart_details_user_event_user_event_id_fk");
 
@@ -86,7 +76,7 @@ public class MundoBalloonContext : DbContext
                 .HasPrincipalKey(p => p.ProductVariantId)
                 .HasForeignKey(d => d.ProductVariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_event_cart_details_product_variants2");
+                .HasConstraintName("fk_occasion_cart_details_product_variants2");
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -283,7 +273,7 @@ public class MundoBalloonContext : DbContext
             entity.HasIndex(e => e.UserId, "fk_users_idx");
 
             entity.Property(e => e.ProductVariantReviewId).HasColumnName("product_variant_review_id");
-
+            
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
@@ -304,6 +294,8 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
+            entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
