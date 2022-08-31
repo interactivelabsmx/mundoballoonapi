@@ -43,4 +43,24 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
+     public async Task<UserEvent?> GetByUserId(int userEventId, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            return await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId, cancellationToken);
+        }
+    }
+    public async Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            context.Add(userEvent);
+            await context.SaveChangesAsync(cancellationToken);
+        }
+
+        return userEvent;
+    }
+
 }

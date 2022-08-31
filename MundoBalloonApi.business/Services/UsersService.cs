@@ -9,7 +9,7 @@ public class UsersService : IUsersService
 {
     private readonly IMapper _mapper;
     private readonly IUsersRepository _usersRepository;
-
+    
     public UsersService(IUsersRepository usersRepository, IMapper mapper)
     {
         _usersRepository = usersRepository;
@@ -34,5 +34,17 @@ public class UsersService : IUsersService
         var currentUser = await _usersRepository.GetById(userId, cancellationToken);
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUser(userId, cancellationToken);
+    }
+    public async Task<UserEvent> CreateOrGetUserEvent(int userEventid, CancellationToken cancellationToken)
+    {
+        var currentUser = await _usersRepository.GetByUserId(userEventid,cancellationToken);
+        if(currentUser != null) return _mapper.Map<UserEvent>(currentUser);
+
+        var userEvent = new infrastructure.Data.Models.UserEvent
+        {
+            UserEventId = userEventid
+        };
+        var result = await _usersRepository.CreateUserEvent(userEvent,cancellationToken);
+        return _mapper.Map<UserEvent>(result);
     }
 }

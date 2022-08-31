@@ -9,4 +9,7 @@ public interface IUsersRepository
     Task<User> Create(User user, CancellationToken cancellationToken);
 
     Task<bool> DeleteUser(string userId, CancellationToken cancellationToken);
+    Task<UserEvent?> GetByUserId(int UserEventId, CancellationToken cancellationToken);
+
+    Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
 }
