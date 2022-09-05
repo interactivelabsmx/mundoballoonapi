@@ -27,5 +27,6 @@ public partial class ProductQueries
             .AsNoTracking()
             .FirstOrDefaultAsync(p => p.ProductId == productId);
         return mapper.Map<Product>(product);
+        
     }
 }
