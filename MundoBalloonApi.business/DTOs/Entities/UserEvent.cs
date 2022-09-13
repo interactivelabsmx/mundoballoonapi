@@ -1,6 +1,6 @@
 ﻿namespace MundoBalloonApi.business.DTOs.Entities;
 
-public class UserEvent
+public class UserEvent : BaseDto
 {
     public int UserEventId { get; set; } = 0;
     public string UserId { get; set; } = string.Empty;

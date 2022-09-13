@@ -44,6 +44,7 @@ public class Startup
             .AddGraphQLServer()
             .AddType<UploadType>()
             .AddQueryType()
+            .AddTypeExtension<UserEventQueries>()
             .AddTypeExtension<SiteQueries>()
             .AddTypeExtension<UserQueries>()
             .AddTypeExtension<ProductQueries>()

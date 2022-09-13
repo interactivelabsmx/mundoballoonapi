@@ -34,6 +34,7 @@ public abstract class BaseServiceCollection : IDisposable
             .AddTypeExtension<SiteQueries>()
             .AddTypeExtension<UserQueries>()
             .AddTypeExtension<ProductQueries>()
+            .AddTypeExtension<UserEventQueries>()
             .AddTypeExtension<CollectionQueries>()
             .AddMutationType(d => d.Name("Mutation"))
             .AddTypeExtension<UserMutations>()
