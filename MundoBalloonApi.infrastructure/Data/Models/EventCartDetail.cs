@@ -8,6 +8,6 @@ public class EventCartDetail : BaseEntity
     public int? UserEventId { get; init; }
 
     public ProductVariant? ProductVariant { get; set; }
-    public ProductVariant? SkuNavigation { get; set; }
+
     public UserEvent? UserEvent { get; set; }
 }

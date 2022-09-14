@@ -9,6 +9,5 @@ public class UserCart : BaseEntity
     public int? ProductVariantId { get; init; }
 
     public ProductVariant? ProductVariant { get; set; }
-    public ProductVariant? SkuNavigation { get; set; }
     public User? User { get; set; }
 }

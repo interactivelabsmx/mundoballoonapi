@@ -66,7 +66,7 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
             entity.HasOne(d => d.UserEvent)
-                .WithMany(p => p.EventCarts)
+                .WithMany(p => p.EventCartDetails)
                 .HasForeignKey(d => d.EventCartDetailId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("event_cart_details_user_event_user_event_id_fk");
@@ -431,14 +431,6 @@ public class MundoBalloonContext : DbContext
                 .HasPrincipalKey(p => p.ProductVariantId)
                 .HasForeignKey(d => d.ProductVariantId)
                 .HasConstraintName("fk_user_cart_product_variants2");
-
-            entity.HasOne(d => d.SkuNavigation)
-                .WithMany(p => p.UserCartSkuNavigations)
-                .HasPrincipalKey(p => p.Sku)
-                .HasForeignKey(d => d.Sku)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_user_cart_product_variants1");
-
             entity.HasOne(d => d.User)
                 .WithMany(p => p.UserCarts)
                 .HasForeignKey(d => d.UserId)
