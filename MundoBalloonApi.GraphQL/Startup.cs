@@ -52,6 +52,7 @@ public class Startup
             .AddMutationType()
             .AddTypeExtension<UserMutations>()
             .AddTypeExtension<ProductMutations>()
+            .AddTypeExtension<UserEventMutations>()
             .AddTypeExtension<CollectionMutations>()
             .AddSorting()
             .AddFiltering()

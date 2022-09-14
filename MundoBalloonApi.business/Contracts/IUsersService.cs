@@ -7,4 +7,6 @@ public interface IUsersService
     Task<User> CreateOrGetUser(string userId, CancellationToken cancellationToken);
     Task<bool> DeleteUser(string userId, CancellationToken cancellationToken);
     Task<UserEvent>CreateOrGetUserEvent(int userEventId,CancellationToken cancellationToken);
+    Task<bool> DeleteUserEvent(int userEventId);
+    Task<UserEvent> UpdateUserEvent(UserEvent userEvent);
 }
