@@ -9,7 +9,7 @@ public class UsersService : IUsersService
 {
     private readonly IMapper _mapper;
     private readonly IUsersRepository _usersRepository;
-    
+
     public UsersService(IUsersRepository usersRepository, IMapper mapper)
     {
         _usersRepository = usersRepository;
@@ -35,23 +35,22 @@ public class UsersService : IUsersService
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUser(userId, cancellationToken);
     }
-    public async Task<UserEvent> CreateOrGetUserEvent(int userEventid, CancellationToken cancellationToken)
+    public async Task<UserEvent> CreateUserEvent(string userId, string name, string details)
     {
-        var currentUser = await _usersRepository.GetByUserId(userEventid,cancellationToken);
-        if(currentUser != null) return _mapper.Map<UserEvent>(currentUser);
-
         var userEvent = new infrastructure.Data.Models.UserEvent
         {
-            UserEventId = userEventid
+            UserId = userId,
+            EventName = name,
+            EventDetails = details
         };
-        var result = await _usersRepository.CreateUserEvent(userEvent,cancellationToken);
-        return _mapper.Map<UserEvent>(result);
+        userEvent = await _usersRepository.CreateUserEvent(userEvent);
+        return _mapper.Map<UserEvent>(userEvent);
     }
-         public async Task<bool> DeleteUserEvent(int userEventId)
+    public async Task<bool> DeleteUserEvent(int userEventId)
     {
         return await _usersRepository.DeleteUserEvent(userEventId);
     }
-public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent)
+    public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent)
     {
         var userEvents = new infrastructure.Data.Models.UserEvent
         {
@@ -64,4 +63,5 @@ public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent)
         var updatedUserEvent = await _usersRepository.UpdateUserEvent(userEvents);
         return _mapper.Map<UserEvent>(updatedUserEvent);
     }
+    
 }

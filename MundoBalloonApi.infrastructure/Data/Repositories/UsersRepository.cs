@@ -51,13 +51,13 @@ public class UsersRepository : IUsersRepository
             return await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId, cancellationToken);
         }
     }
-    public async Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
+    public async Task<UserEvent> CreateUserEvent(UserEvent userEvent)
     {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        var context = await _contextFactory.CreateDbContextAsync();
         await using (context)
         {
             context.Add(userEvent);
-            await context.SaveChangesAsync(cancellationToken);
+            await context.SaveChangesAsync();
         }
 
         return userEvent;

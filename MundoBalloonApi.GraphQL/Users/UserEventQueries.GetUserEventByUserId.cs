@@ -13,6 +13,6 @@ public partial class UserEventQueries
     public IQueryable<UserEvent> GetUserEventByUserId([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, string userId)
     {
-        return mapper.ProjectTo<UserEvent>(mundoBalloonContext.UserEvents);
+        return mapper.ProjectTo<UserEvent>(mundoBalloonContext.UserEvents.Where(ue => ue.UserId == userId));
     }
 }
