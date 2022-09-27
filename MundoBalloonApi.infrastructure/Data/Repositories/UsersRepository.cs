@@ -51,34 +51,34 @@ public class UsersRepository : IUsersRepository
             return await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId, cancellationToken);
         }
     }
-    public async Task<UserEvent> CreateUserEvent(UserEvent userEvent)
+    public async Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync();
         await using (context)
         {
             context.Add(userEvent);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
 
         return userEvent;
     }
-    public async Task<bool> DeleteUserEvent(int userEventId)
+    public async Task<bool> DeleteUserEvent(int userEventId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync();
         var UserEvent =
             await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId);
         if (UserEvent == null) return false;
         context.UserEvents.Remove(UserEvent);
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(cancellationToken);
         return true;
     }
-    public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent)
+    public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync();
         await using (context)
         {
             context.UserEvents.Update(userEvent);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
 
         return userEvent;

@@ -7,8 +7,9 @@ public partial class UserEventMutations
 {
     public Task<UserEvent> CreateUserEvent(
         string userId, string name, string details,
-        [Service] IUsersService usersService)
+        [Service] IUsersService usersService,
+        CancellationToken cancellationToken)
     {
-        return usersService.CreateUserEvent(userId, name, details);
+        return usersService.CreateUserEvent(userId, name, details, cancellationToken);
     }
 }
