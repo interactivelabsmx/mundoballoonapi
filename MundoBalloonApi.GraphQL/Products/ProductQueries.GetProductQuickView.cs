@@ -24,6 +24,7 @@ public partial class ProductQueries
                     on productVariant.ProductVariantId equals medium.ProductVariantId
                 where product.ProductId == productId
                 select product)
+            .DefaultIfEmpty()
             .AsSplitQuery()
             .AsNoTracking()
             .FirstOrDefaultAsync();
