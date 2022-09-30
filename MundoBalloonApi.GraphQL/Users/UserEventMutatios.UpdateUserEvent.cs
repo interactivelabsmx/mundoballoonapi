@@ -6,7 +6,7 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserEventMutations
 {
-    [Authorize(Roles = new[] { "ADMIN" })]
+    [Authorize]
     public Task<UserEvent> UpdateUserEvent(UserEvent input, [Service] IUsersService usersService,
     CancellationToken cancellationToken)
     {

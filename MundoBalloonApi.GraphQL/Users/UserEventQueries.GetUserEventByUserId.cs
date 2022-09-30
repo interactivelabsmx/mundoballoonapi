@@ -8,11 +8,11 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserEventQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<UserEvent> GetUserEventByUserId([ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper, string userId, CancellationToken cancellationToken)
+        [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser, CancellationToken cancellationToken)
     {
-        return mapper.ProjectTo<UserEvent>(mundoBalloonContext.UserEvents.Where(u => u.UserId == userId));
+        return mapper.ProjectTo<UserEvent>(mundoBalloonContext.UserEvents.Where(u => u.UserId == currentUser.UserId));
     }
 }
