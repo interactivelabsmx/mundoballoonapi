@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Models;
 using UserEvent = MundoBalloonApi.business.DTOs.Entities.UserEvent;
 using MundoBalloonApi.business.DTOs.Entities;

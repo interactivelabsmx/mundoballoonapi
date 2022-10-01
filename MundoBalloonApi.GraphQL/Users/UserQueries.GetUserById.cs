@@ -17,4 +17,4 @@ public partial class UserQueries
         var user = await mundoBalloonContext.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
         return user == null ? null : GetFirebaseUser(user, mapper);
     }
-} 
+}

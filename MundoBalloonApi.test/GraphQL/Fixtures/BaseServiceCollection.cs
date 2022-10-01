@@ -12,6 +12,7 @@ using MundoBalloonApi.infrastructure.Data.Contracts;
 using MundoBalloonApi.infrastructure.Data.Models;
 using MundoBalloonApi.infrastructure.Data.Repositories;
 using MundoBalloonApi.test.Fixtures;
+
 namespace MundoBalloonApi.test.GraphQL.Fixtures;
 
 public abstract class BaseServiceCollection : IDisposable
@@ -46,7 +47,7 @@ public abstract class BaseServiceCollection : IDisposable
             .AddFiltering()
             .Services
             .BuildServiceProvider();
-         ContextFactory = Executor.GetService<IDbContextFactory<MundoBalloonContext>>();
+        ContextFactory = Executor.GetService<IDbContextFactory<MundoBalloonContext>>();
         var db = ContextFactory?.CreateDbContext();
         if (db == null) return;
         using (db)

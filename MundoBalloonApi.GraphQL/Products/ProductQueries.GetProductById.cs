@@ -13,7 +13,8 @@ public partial class ProductQueries
     public async Task<Product?> GetProductById([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)
     {
-        var productQuery = await (from product in mundoBalloonContext.Products
+        var productQuery = await (
+                from product in mundoBalloonContext.Products
                 join productCategory in mundoBalloonContext.ProductCategories
                     on product.ProductCategoryId equals productCategory.ProductCategoryId
                 join productVariant in mundoBalloonContext.ProductVariants
@@ -25,7 +26,8 @@ public partial class ProductQueries
                 join variantValue in mundoBalloonContext.VariantValues
                     on productVariantValue.VariantValueId equals variantValue.VariantValueId
                 where product.ProductId == productId
-                select product)
+                select product
+            )
             .AsSplitQuery()
             .AsNoTracking()
             .FirstOrDefaultAsync();

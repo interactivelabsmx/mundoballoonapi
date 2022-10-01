@@ -273,7 +273,7 @@ public class MundoBalloonContext : DbContext
             entity.HasIndex(e => e.UserId, "fk_users_idx");
 
             entity.Property(e => e.ProductVariantReviewId).HasColumnName("product_variant_review_id");
-            
+
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
@@ -294,7 +294,7 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-            
+
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
