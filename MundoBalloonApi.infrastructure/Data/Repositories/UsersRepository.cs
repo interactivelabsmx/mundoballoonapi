@@ -53,7 +53,7 @@ public class UsersRepository : IUsersRepository
     }
     public async Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             context.Add(userEvent);
@@ -64,7 +64,7 @@ public class UsersRepository : IUsersRepository
     }
     public async Task<bool> DeleteUserEvent(int userEventId, CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         var UserEvent =
             await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId);
         if (UserEvent == null) return false;
@@ -74,7 +74,7 @@ public class UsersRepository : IUsersRepository
     }
     public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             context.UserEvents.Update(userEvent);

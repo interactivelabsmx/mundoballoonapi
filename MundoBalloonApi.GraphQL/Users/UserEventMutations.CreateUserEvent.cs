@@ -6,10 +6,10 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserEventMutations
 {
     public Task<UserEvent> CreateUserEvent(
-        string userId, string name, string details,
+        string name, string details,
         [Service] IUsersService usersService,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-        return usersService.CreateUserEvent(userId, name, details, cancellationToken);
+        return usersService.CreateUserEvent(currentUser.UserId, name, details, cancellationToken);
     }
 }
