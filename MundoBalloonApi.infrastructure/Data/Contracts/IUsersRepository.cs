@@ -12,6 +12,6 @@ public interface IUsersRepository
     Task<UserEvent?> GetByUserId(int UserEventId, CancellationToken cancellationToken);
 
     Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
-    Task<bool> DeleteUserEvent(int userEventId);
-    Task<UserEvent> UpdateUserEvent (UserEvent userEvent);
+    Task<bool> DeleteUserEvent(int userEventId, CancellationToken cancellationToken);
+    Task<UserEvent> UpdateUserEvent (UserEvent userEvent, CancellationToken cancellationToken);
 }
