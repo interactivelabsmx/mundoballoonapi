@@ -8,7 +8,7 @@ public partial class UserEventMutations
 {
     [Authorize]
     public Task<UserEvent> UpdateUserEvent(UserEvent input, [Service] IUsersService usersService,
-    CancellationToken cancellationToken)
+        CancellationToken cancellationToken)
     {
         return usersService.UpdateUserEvent(input, cancellationToken);
     }
