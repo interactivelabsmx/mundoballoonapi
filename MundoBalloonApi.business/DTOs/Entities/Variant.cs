@@ -6,5 +6,9 @@ public class Variant
     public string Name { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
 
+    public int? UiRegistryId { get; set; }
+
+    public UiRegistry? UiRegistry { get; set; }
+
     public ICollection<VariantValue>? VariantValues { get; set; }
 }

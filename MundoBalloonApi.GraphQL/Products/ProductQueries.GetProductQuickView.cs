@@ -38,6 +38,7 @@ public partial class ProductQueries
                 join vv in variantValuesQuery on v.VariantId equals vv.VariantId
                 select v)
             .Distinct()
+            .Include(v => v.UiRegistry)
             .AsEnumerable();
 
         return new ProductQuickView
