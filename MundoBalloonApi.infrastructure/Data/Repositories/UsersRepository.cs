@@ -68,10 +68,10 @@ public class UsersRepository : IUsersRepository
     public async Task<bool> DeleteUserEvent(int userEventId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var UserEvent =
-            await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId);
-        if (UserEvent == null) return false;
-        context.UserEvents.Remove(UserEvent);
+        var userEvent =
+            await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId, cancellationToken);
+        if (userEvent == null) return false;
+        context.UserEvents.Remove(userEvent);
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }

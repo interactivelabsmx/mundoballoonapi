@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+using HotChocolate.AspNetCore.Authorization;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DTOs.Entities;
 
@@ -8,8 +8,8 @@ public partial class UserEventMutations
 {
     [Authorize]
     public Task<bool> DeleteUserEvent(
-        [Service] IUsersService usersService, int userEventId,
-        CancellationToken cancellationToken, [GlobalState("currentUser")] CurrentUser currentUser)
+        [Service] IUsersService usersService, int userEventId, [GlobalState("currentUser")] CurrentUser currentUser,
+        CancellationToken cancellationToken)
     {
         return usersService.DeleteUserEvent(currentUser.UserId, userEventId, cancellationToken);
     }
