@@ -13,20 +13,25 @@ public partial class ProductQueries
     public async Task<Product?> GetProductById([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)
     {
-        var product = await mundoBalloonContext.Products
-            .Include(p => p.ProductCategory)
-            .Include(p => p.ProductVariants)
-            .ThenInclude(pv => pv.ProductVariantMedia)
-            .Include(p => p.ProductVariants)
-            .ThenInclude(pv => pv.ProductVariantValues)
-            .ThenInclude(pv => pv.Variant)
-            .Include(p => p.ProductVariants)
-            .ThenInclude(pv => pv.ProductVariantValues)
-            .ThenInclude(pv => pv.VariantValue)
-            .IgnoreAutoIncludes()
+        var productQuery = await (
+                from product in mundoBalloonContext.Products
+                join productCategory in mundoBalloonContext.ProductCategories
+                    on product.ProductCategoryId equals productCategory.ProductCategoryId
+                join productVariant in mundoBalloonContext.ProductVariants
+                    on product.ProductId equals productVariant.ProductId
+                join medium in mundoBalloonContext.ProductVariantMedia
+                    on productVariant.ProductVariantId equals medium.ProductVariantId
+                join productVariantValue in mundoBalloonContext.ProductVariantValues
+                    on productVariant.ProductVariantId equals productVariantValue.ProductVariantId
+                join variantValue in mundoBalloonContext.VariantValues
+                    on productVariantValue.VariantValueId equals variantValue.VariantValueId
+                where product.ProductId == productId
+                select product
+            )
+            .AsSplitQuery()
             .AsNoTracking()
-            .FirstOrDefaultAsync(p => p.ProductId == productId);
-        return mapper.Map<Product>(product);
-        
+            .FirstOrDefaultAsync();
+
+        return mapper.Map<Product>(productQuery);
     }
 }

@@ -16,6 +16,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
     public DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
     public DbSet<ProductVariantReview> ProductVariantReviews { get; set; } = default!;
+    public virtual DbSet<UiRegistry> UiRegistries { get; set; } = null!;
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserCart> UserCarts { get; set; } = default!;
     public DbSet<UserEvent> UserEvents { get; set; } = default!;
@@ -273,7 +274,7 @@ public class MundoBalloonContext : DbContext
             entity.HasIndex(e => e.UserId, "fk_users_idx");
 
             entity.Property(e => e.ProductVariantReviewId).HasColumnName("product_variant_review_id");
-            
+
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
@@ -294,7 +295,7 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-            
+
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
@@ -520,6 +521,8 @@ public class MundoBalloonContext : DbContext
         {
             entity.ToTable("variants");
 
+            entity.HasIndex(e => e.UiRegistryId, "variants_ui_registry_null_fk");
+
             entity.Property(e => e.VariantId).HasColumnName("variant_id");
 
             entity.Property(e => e.CreatedAt)
@@ -527,20 +530,61 @@ public class MundoBalloonContext : DbContext
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
+            entity.Property(e => e.IsDeleted)
+                .HasColumnName("isDeleted")
+                .HasDefaultValueSql("'0'");
+
+            entity.Property(e => e.UiRegistryId).HasColumnName("ui_registry_id");
+
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
             entity.Property(e => e.Variant1)
-                .HasColumnType("varchar(45)")
+                .HasMaxLength(45)
                 .HasColumnName("variant");
 
             entity.Property(e => e.VariantType)
-                .HasColumnType("varchar(45)")
-                .HasColumnName("variant_type");
+                .HasColumnType("enum('string','number','boolean')")
+                .HasColumnName("variant_type")
+                .HasDefaultValueSql("'string'");
+
+            entity.HasOne(d => d.UiRegistry)
+                .WithMany(p => p.Variants)
+                .HasForeignKey(d => d.UiRegistryId)
+                .HasConstraintName("variants_ui_registry_null_fk");
+        });
+        
+        modelBuilder.Entity<UiRegistry>(entity =>
+        {
+            entity.ToTable("ui_registry");
+
+            entity.HasComment("This is to tie some values to UI components to render them");
+
+            entity.HasIndex(e => e.ComponentId, "ui_registry_component_id_index");
+
+            entity.Property(e => e.UiRegistryId).HasColumnName("ui_registry_id");
+
+            entity.Property(e => e.ComponentId)
+                .HasMaxLength(50)
+                .HasColumnName("component_id");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.Deprecated).HasColumnName("deprecated");
+
+            entity.Property(e => e.IsDeleted)
+                .HasColumnName("isDeleted")
+                .HasDefaultValueSql("'0'");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
         });
 
         modelBuilder.Entity<VariantValue>(entity =>

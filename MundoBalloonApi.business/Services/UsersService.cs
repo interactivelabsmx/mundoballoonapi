@@ -35,7 +35,9 @@ public class UsersService : IUsersService
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUser(userId, cancellationToken);
     }
-    public async Task<UserEvent> CreateUserEvent(string userId, string name, string details, CancellationToken cancellationToken)
+
+    public async Task<UserEvent> CreateUserEvent(string userId, string name, string details,
+        CancellationToken cancellationToken)
     {
         var userEvent = new infrastructure.Data.Models.UserEvent
         {
@@ -46,12 +48,14 @@ public class UsersService : IUsersService
         userEvent = await _usersRepository.CreateUserEvent(userEvent, cancellationToken);
         return _mapper.Map<UserEvent>(userEvent);
     }
-    public async Task<bool> DeleteUserEvent(string userId,int userEventId, CancellationToken cancellationToken)
+
+    public async Task<bool> DeleteUserEvent(string userId, int userEventId, CancellationToken cancellationToken)
     {
         var currentUser = await _usersRepository.GetById(userId, cancellationToken);
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUserEvent(userEventId, cancellationToken);
     }
+
     public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
         var userEvents = new infrastructure.Data.Models.UserEvent
@@ -65,5 +69,4 @@ public class UsersService : IUsersService
         var updatedUserEvent = await _usersRepository.UpdateUserEvent(userEvents, cancellationToken);
         return _mapper.Map<UserEvent>(updatedUserEvent);
     }
-    
 }

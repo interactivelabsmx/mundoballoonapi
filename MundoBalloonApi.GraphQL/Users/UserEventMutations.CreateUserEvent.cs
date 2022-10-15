@@ -1,3 +1,4 @@
+using HotChocolate.AspNetCore.Authorization;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DTOs.Entities;
 
@@ -5,10 +6,11 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserEventMutations
 {
+    [Authorize]
     public Task<UserEvent> CreateUserEvent(
         string name, string details,
-        [Service] IUsersService usersService,
-        CancellationToken cancellationToken, [GlobalState("currentUser")] CurrentUser currentUser)
+        [Service] IUsersService usersService, [GlobalState("currentUser")] CurrentUser currentUser,
+        CancellationToken cancellationToken)
     {
         return usersService.CreateUserEvent(currentUser.UserId, name, details, cancellationToken);
     }

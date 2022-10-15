@@ -14,10 +14,10 @@ public partial class UserEventQueries
         [Service] IMapper mapper, int userEventid)
     {
         var userEvent = await mundoBalloonContext.UserEvents
-        .Include(ue => ue.EventCartDetails)
-        .Include(ue => ue.User)
-        .AsNoTracking()
-        .FirstOrDefaultAsync(ue => ue.UserEventId == userEventid);
+            .Include(ue => ue.EventCartDetails)
+            .Include(ue => ue.User)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(ue => ue.UserEventId == userEventid);
         return mapper.Map<UserEvent>(userEvent);
     }
 }
