@@ -33,6 +33,17 @@ public class UsersRepository : IUsersRepository
 
         return user;
     }
+    public async Task<EventCartDetail> AddToEvent(EventCartDetail eventCartDetail, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            context.Add(eventCartDetail);
+            await context.SaveChangesAsync(cancellationToken);
+        }
+
+        return eventCartDetail;
+    }
 
     public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
     {

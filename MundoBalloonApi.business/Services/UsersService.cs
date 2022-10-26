@@ -69,4 +69,16 @@ public class UsersService : IUsersService
         var updatedUserEvent = await _usersRepository.UpdateUserEvent(userEvents, cancellationToken);
         return _mapper.Map<UserEvent>(updatedUserEvent);
     }
+    public async Task<EventCartDetail> AddToEvent(int productVariantId, int userEventId, double quantity,
+        CancellationToken cancellationToken)
+    {
+        var eventCartDetail = new infrastructure.Data.Models.EventCartDetail
+        {
+            ProductVariantId = productVariantId,
+            UserEventId = userEventId,
+            Quantity = quantity
+        };
+        eventCartDetail = await _usersRepository.AddToEvent(eventCartDetail, cancellationToken);
+        return _mapper.Map<EventCartDetail>(eventCartDetail);
+    }
 }
