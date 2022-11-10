@@ -7,11 +7,11 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserEventMutations
 {
     [Authorize]
-    public Task<EventCartDetail> AddToEvent(
+    public Task<EventCartDetail> AddToEventCart(
         int productVariantId, int userEventId, double quantity,
         [Service] IUsersService usersService,
         CancellationToken cancellationToken)
     {
-        return usersService.AddToEvent(productVariantId, userEventId,quantity, cancellationToken);
+        return usersService.AddToEventCart(productVariantId, userEventId,quantity, cancellationToken);
     }
 }

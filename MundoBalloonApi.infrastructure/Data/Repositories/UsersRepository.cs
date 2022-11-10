@@ -33,7 +33,7 @@ public class UsersRepository : IUsersRepository
 
         return user;
     }
-    public async Task<EventCartDetail> AddToEvent(EventCartDetail eventCartDetail, CancellationToken cancellationToken)
+    public async Task<EventCartDetail> AddToEventCart(EventCartDetail eventCartDetail, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
