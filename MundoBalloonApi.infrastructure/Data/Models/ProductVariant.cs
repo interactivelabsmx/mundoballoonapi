@@ -2,19 +2,29 @@
 
 public class ProductVariant : BaseEntity
 {
-    public int ProductVariantId { get; init; }
-    public string? Sku { get; init; }
-    public int ProductId { get; init; }
-    public string? ProductVariantName { get; init; }
-    public string? ProductVariantDescription { get; init; }
-    public double Price { get; init; }
-    public Product? Product { get; set; }
+    public int ProductVariantId { get; set; }
 
-    public ICollection<EventCartDetail> EventCartDetailProductVariants { get; set; } =
-        new HashSet<EventCartDetail>();
+    public string Sku { get; set; } = null!;
 
-    public ICollection<ProductVariantMedium> ProductVariantMedia { get; set; } = new HashSet<ProductVariantMedium>();
-    public ICollection<ProductVariantValue> ProductVariantValues { get; set; } = new HashSet<ProductVariantValue>();
-    public ICollection<UserCart> UserCartProductVariants { get; set; } = new HashSet<UserCart>();
-    public ICollection<ProductVariantReview> ProductVariantReviews { get; set; } = new HashSet<ProductVariantReview>();
+    public int ProductId { get; set; }
+
+    public string? ProductVariantName { get; set; }
+
+    public string? ProductVariantDescription { get; set; }
+
+    public decimal Price { get; set; }
+
+    public virtual ICollection<EventCartDetail> EventCartDetails { get; } = new List<EventCartDetail>();
+
+    public virtual Product Product { get; set; } = null!;
+
+    public virtual ICollection<ProductVariantMedium> ProductVariantMedia { get; } = new List<ProductVariantMedium>();
+
+    public virtual ICollection<ProductVariantReview> ProductVariantReviews { get; } = new List<ProductVariantReview>();
+
+    public virtual ICollection<ProductVariantValue> ProductVariantValues { get; } = new List<ProductVariantValue>();
+
+    public virtual ICollection<UserCart> UserCartProductVariants { get; } = new List<UserCart>();
+
+    public virtual ICollection<UserCart> UserCartSkuNavigations { get; } = new List<UserCart>();
 }

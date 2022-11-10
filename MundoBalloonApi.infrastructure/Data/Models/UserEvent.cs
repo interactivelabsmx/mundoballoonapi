@@ -2,12 +2,17 @@
 
 public class UserEvent : BaseEntity
 {
-    public int UserEventId { get; init; }
-    public string? UserId { get; init; }
-    public string? EventName { get; init; }
-    public DateTime? EventDate { get; init; }
-    public string? EventDetails { get; init; }
+    public int UserEventId { get; set; }
 
-    public User? User { get; set; }
-    public ICollection<EventCartDetail> EventCartDetails { get; set; } = new HashSet<EventCartDetail>();
+    public string? UserId { get; set; }
+
+    public string EventName { get; set; } = null!;
+
+    public DateTime EventDate { get; set; }
+
+    public string? EventDetails { get; set; }
+
+    public virtual ICollection<EventCartDetail> EventCartDetails { get; } = new List<EventCartDetail>();
+
+    public virtual User? User { get; set; }
 }

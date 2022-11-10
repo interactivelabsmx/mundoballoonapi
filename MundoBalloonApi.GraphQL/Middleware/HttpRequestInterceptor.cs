@@ -21,7 +21,7 @@ public static class HttpRequestInterceptor
             var lang = acceptLanguage.Contains('-') ? acceptLanguage.Split('-')[0] : acceptLanguage;
             var language = string.IsNullOrEmpty(acceptLanguage) ? "en" : lang;
             queryBuilder.SetProperty("language", language);
-            
+
             return ValueTask.CompletedTask;
         };
     }

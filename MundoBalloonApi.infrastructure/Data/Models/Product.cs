@@ -2,12 +2,17 @@
 
 public class Product : BaseEntity
 {
-    public int ProductId { get; init; }
-    public string? ProductName { get; init; }
-    public string? ProductDescription { get; init; }
-    public int ProductCategoryId { get; init; }
-    public double Price { get; init; }
+    public int ProductId { get; set; }
 
-    public ProductCategory? ProductCategory { get; set; }
-    public ICollection<ProductVariant> ProductVariants { get; } = new HashSet<ProductVariant>();
+    public string? ProductName { get; set; }
+
+    public string? ProductDescription { get; set; }
+
+    public int ProductCategoryId { get; set; }
+
+    public decimal Price { get; set; }
+
+    public virtual ProductCategory ProductCategory { get; set; } = null!;
+
+    public virtual ICollection<ProductVariant> ProductVariants { get; } = new List<ProductVariant>();
 }

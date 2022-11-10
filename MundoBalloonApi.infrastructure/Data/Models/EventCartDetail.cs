@@ -2,12 +2,15 @@
 
 public class EventCartDetail : BaseEntity
 {
-    public int EventCartDetailId { get; init; }
-    public int ProductVariantId { get; init; }
-    public double Quantity { get; init; }
-    public int? UserEventId { get; init; }
+    public int EventCartDetailId { get; set; }
 
-    public ProductVariant? ProductVariant { get; set; }
+    public int ProductVariantId { get; set; }
 
-    public UserEvent? UserEvent { get; set; }
+    public int UserEventId { get; set; }
+
+    public decimal Quantity { get; set; }
+
+    public virtual ProductVariant ProductVariant { get; set; } = null!;
+
+    public virtual UserEvent UserEvent { get; set; } = null!;
 }

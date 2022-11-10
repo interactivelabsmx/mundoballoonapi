@@ -1,13 +1,18 @@
-namespace MundoBalloonApi.infrastructure.Data.Models;
+﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
 public class ProductVariantReview : BaseEntity
 {
-    public int ProductVariantReviewId { get; init; }
-    public int ProductVariantId { get; init; }
-    public string? UserId { get; init; }
-    public int Rating { get; init; }
-    public string? Comments { get; init; }
+    public int ProductVariantReviewId { get; set; }
 
-    public ProductVariant? ProductVariant { get; set; }
-    public User? User { get; set; }
+    public int ProductVariantId { get; set; }
+
+    public string? UserId { get; set; }
+
+    public short Rating { get; set; }
+
+    public string? Comments { get; set; }
+
+    public virtual ProductVariant ProductVariant { get; set; } = null!;
+
+    public virtual User? User { get; set; }
 }

@@ -7,7 +7,6 @@ using MundoBalloonApi.graphql.Middleware;
 using MundoBalloonApi.graphql.Products;
 using MundoBalloonApi.graphql.Site;
 using MundoBalloonApi.graphql.Users;
-using MySqlConnector;
 
 namespace MundoBalloonApi.graphql;
 
@@ -24,8 +23,7 @@ public class Startup
     {
         var firebaseCredentialString = Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "";
         var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
-        var connectionString =
-            new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
+        var connectionString = Environment.GetEnvironmentVariable("MUNDOB_DB_STR_MS") ?? "";
 
         FirebaseApp.Create(new AppOptions
         {

@@ -2,9 +2,11 @@
 
 public class ProductCategory : BaseEntity
 {
-    public int ProductCategoryId { get; init; }
-    public string? ProductCategoryName { get; init; }
-    public string? ProductCategoryDescription { get; init; }
+    public int ProductCategoryId { get; set; }
 
-    public ICollection<Product> Products { get; set; } = new HashSet<Product>();
+    public string ProductCategoryName { get; set; } = null!;
+
+    public string ProductCategoryDescription { get; set; } = null!;
+
+    public virtual ICollection<Product> Products { get; } = new List<Product>();
 }

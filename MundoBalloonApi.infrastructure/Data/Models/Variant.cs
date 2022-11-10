@@ -2,14 +2,19 @@
 
 public class Variant : BaseEntity
 {
-    public int VariantId { get; init; }
-    public string? Variant1 { get; init; }
-    public string? VariantType { get; init; }
+    public int VariantId { get; set; }
+
+    public string? Variant1 { get; set; }
+
+    public int VariantTypeId { get; set; }
 
     public int? UiRegistryId { get; set; }
 
-    public UiRegistry? UiRegistry { get; set; }
+    public virtual ICollection<ProductVariantValue> ProductVariantValues { get; } = new List<ProductVariantValue>();
 
-    public ICollection<VariantValue> VariantValues { get; set; } = new HashSet<VariantValue>();
-    public ICollection<ProductVariantValue> ProductVariantValues { get; set; } = new HashSet<ProductVariantValue>();
+    public virtual UiRegistry? UiRegistry { get; set; }
+
+    public virtual VariantsType VariantType { get; set; } = null!;
+
+    public virtual ICollection<VariantValue> VariantValues { get; } = new List<VariantValue>();
 }

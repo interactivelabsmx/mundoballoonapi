@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.business.DTOs.Entities;
 
-public class ProductVariantMedium
+public class ProductVariantMedium : BaseDto
 {
     public int ProductVariantMediaId { get; set; } = 0;
     public int ProductVariantId { get; set; }

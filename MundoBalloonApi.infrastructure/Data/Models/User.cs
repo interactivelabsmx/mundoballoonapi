@@ -2,10 +2,15 @@
 
 public class User : BaseEntity
 {
-    public string UserId { get; init; } = string.Empty;
+    public string UserId { get; set; } = null!;
 
-    public ICollection<UserCart> UserCarts { get; } = new HashSet<UserCart>();
-    public ICollection<UserEvent> UserEvents { get; } = new HashSet<UserEvent>();
-    public ICollection<UserPaymentProfile>? UserPaymentProfiles { get; } = new HashSet<UserPaymentProfile>();
-    public ICollection<ProductVariantReview>? ProductVariantReviews { get; } = new HashSet<ProductVariantReview>();
+    public virtual ICollection<ProductVariantReview> ProductVariantReviews { get; } = new List<ProductVariantReview>();
+
+    public virtual ICollection<UserAddress> UserAddresses { get; } = new List<UserAddress>();
+
+    public virtual ICollection<UserCart> UserCarts { get; } = new List<UserCart>();
+
+    public virtual ICollection<UserEvent> UserEvents { get; } = new List<UserEvent>();
+
+    public virtual ICollection<UserPaymentProfile> UserPaymentProfiles { get; } = new List<UserPaymentProfile>();
 }

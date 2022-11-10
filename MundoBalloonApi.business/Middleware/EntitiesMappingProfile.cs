@@ -50,6 +50,7 @@ public class EntitiesMappingProfile : Profile
         CreateMap<Variant, DTOs.Entities.Variant>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1))
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));
+        CreateMap<VariantsType, VariantsType>();
         CreateMap<UiRegistry, DTOs.Entities.UiRegistry>();
         // USER
         CreateMap<User, DTOs.Entities.User>()

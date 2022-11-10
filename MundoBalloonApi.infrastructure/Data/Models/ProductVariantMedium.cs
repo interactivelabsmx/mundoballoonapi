@@ -2,13 +2,19 @@
 
 public class ProductVariantMedium : BaseEntity
 {
-    public int ProductVariantMediaId { get; init; }
-    public int ProductVariantId { get; init; }
-    public string? Name { get; init; }
-    public string? Description { get; init; }
-    public string? MediaType { get; init; }
-    public string? Url { get; init; }
-    public string? Quality { get; init; }
+    public int ProductVariantMediaId { get; set; }
 
-    public ProductVariant? ProductVariant { get; set; }
+    public int ProductVariantId { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public string? Description { get; set; }
+
+    public string MediaType { get; set; } = null!;
+
+    public string Url { get; set; } = null!;
+
+    public string? Quality { get; set; }
+
+    public virtual ProductVariant ProductVariant { get; set; } = null!;
 }
