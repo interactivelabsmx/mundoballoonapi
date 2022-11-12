@@ -9,4 +9,6 @@ public interface ICollectionsRepository
     Task<Variant> CreateVariant(Variant variant);
 
     Task<VariantValue> CreateVariantValue(VariantValue variant);
+
+    Task<VariantsType> CreateVariantsType(VariantsType variantsType);
 }
