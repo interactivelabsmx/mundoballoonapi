@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using MundoBalloonApi.infrastructure.Data.Models;
-using CountryCode = MundoBalloonApi.business.DTOs.Entities.CountryCode;
+using VariantsType = MundoBalloonApi.business.DTOs.Entities.VariantsType;
 
 namespace MundoBalloonApi.graphql.Collections;
 
@@ -9,9 +9,9 @@ public partial class CollectionQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<CountryCode> GetCountryCodes([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<VariantsType> GetVariantsType([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
-        return mapper.ProjectTo<CountryCode>(mundoBalloonContext.CountryCodes.Where(cc => cc.Supported == true));
+        return mapper.ProjectTo<VariantsType>(mundoBalloonContext.VariantsTypes);
     }
 }
