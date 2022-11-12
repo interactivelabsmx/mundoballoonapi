@@ -14,6 +14,7 @@ using UserEvent = MundoBalloonApi.infrastructure.Data.Models.UserEvent;
 using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymentProfile;
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
 using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
+using VariantsType = MundoBalloonApi.infrastructure.Data.Models.VariantsType;
 
 namespace MundoBalloonApi.business.Middleware;
 
@@ -21,6 +22,8 @@ public class EntitiesMappingProfile : Profile
 {
     public EntitiesMappingProfile()
     {
+        // COLLECTIONS
+        CreateMap<CountryCode, DTOs.Entities.CountryCode>();
         // PRODUCTS
         CreateMap<Product, DTOs.Entities.Product>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductName))
@@ -47,11 +50,11 @@ public class EntitiesMappingProfile : Profile
         CreateMap<ProductVariantMedium, DTOs.Entities.ProductVariantMedium>();
         CreateMap<ProductVariantReview, DTOs.Entities.ProductVariantReview>();
         CreateMap<ProductVariantValue, DTOs.Entities.ProductVariantValue>();
-        CreateMap<Variant, DTOs.Entities.Variant>()
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1))
-            .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));
-        CreateMap<VariantsType, VariantsType>();
         CreateMap<UiRegistry, DTOs.Entities.UiRegistry>();
+        CreateMap<VariantsType, DTOs.Entities.VariantsType>();
+        CreateMap<Variant, DTOs.Entities.Variant>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1));
+
         // USER
         CreateMap<User, DTOs.Entities.User>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))

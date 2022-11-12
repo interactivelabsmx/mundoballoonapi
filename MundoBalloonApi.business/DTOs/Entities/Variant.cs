@@ -11,7 +11,7 @@ public class Variant : BaseDto
 
     public UiRegistry? UiRegistry { get; set; }
 
-    public virtual VariantsType Type { get; set; } = null!;
+    public virtual VariantsType? VariantType { get; set; } = null!;
 
     public ICollection<VariantValue>? VariantValues { get; set; }
 }

@@ -9,4 +9,6 @@ public interface ICollectionsService
     Task<Variant> CreateVariant(Variant variant);
 
     Task<VariantValue> CreateVariantValue(VariantValue variantValue);
+
+    Task<VariantsType> CreateVariantsType(string variantsType);
 }
