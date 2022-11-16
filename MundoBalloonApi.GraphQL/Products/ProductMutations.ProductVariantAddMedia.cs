@@ -16,9 +16,11 @@ public partial class ProductMutations
     {
         var storageConfig = configuration.GetSection(AzureStorageConfig.ConfigName).Get<AzureStorageConfig>();
         await using var stream = file.OpenReadStream();
+        if (storageConfig == null) return null;
         var contentInfo = await StorageHelper.UploadFileToStorage(stream, file.Name, storageConfig, cancellationToken);
         if (contentInfo == null) return null;
         input.Url = contentInfo.ToString();
+
         return await productService.ProductVariantAddMedia(input);
     }
 }
