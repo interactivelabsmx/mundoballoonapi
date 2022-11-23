@@ -14,7 +14,5 @@ public class UserCart : BaseEntity
 
     public virtual ProductVariant? ProductVariant { get; set; }
 
-    public virtual ProductVariant SkuNavigation { get; set; } = null!;
-
     public virtual User User { get; set; } = null!;
 }

@@ -25,6 +25,4 @@ public class ProductVariant : BaseEntity
     public virtual ICollection<ProductVariantValue> ProductVariantValues { get; } = new List<ProductVariantValue>();
 
     public virtual ICollection<UserCart> UserCartProductVariants { get; } = new List<UserCart>();
-
-    public virtual ICollection<UserCart> UserCartSkuNavigations { get; } = new List<UserCart>();
 }
