@@ -33,6 +33,28 @@ public class UsersRepository : IUsersRepository
 
         return user;
     }
+    public async Task<EventCartDetail> AddToEventCart(EventCartDetail eventCartDetail, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            context.Add(eventCartDetail);
+            await context.SaveChangesAsync(cancellationToken);
+        }
+
+        return eventCartDetail;
+    }
+    public async Task<UserCart> AddToCart(UserCart userCart, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            context.Add(userCart);
+            await context.SaveChangesAsync(cancellationToken);
+        }
+
+        return userCart;
+    }
 
     public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
     {
