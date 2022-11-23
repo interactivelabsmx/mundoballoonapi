@@ -66,7 +66,7 @@ public class ProductService : IProductService
         {
             ProductVariantId = variantMedia.ProductVariantId,
             MediaType = variantMedia.MediaType,
-            Url = variantMedia.Url,
+            Url = variantMedia.Url ?? "",
             Quality = variantMedia.Quality,
             Name = variantMedia.Name,
             Description = variantMedia.Description
