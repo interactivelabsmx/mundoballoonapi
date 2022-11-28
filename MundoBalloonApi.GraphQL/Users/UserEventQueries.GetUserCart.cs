@@ -15,14 +15,6 @@ public partial class UserEventQueries
     public IQueryable<UserCart> GetUserCart([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-       /* var userCart = await(
-            from cart in mundoBalloonContext.UserCarts
-            where cart.UserId == userId
-            select cart
-        ).Include(uc => uc.ProductVariant)
-        .AsSplitQuery()
-        .AsNoTracking()
-        .FirstOrDefaultAsync(uc => uc.UserId == userId);*/
         return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId).Include(uc => uc.ProductVariant));
     }
 }
