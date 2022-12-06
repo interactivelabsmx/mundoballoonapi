@@ -8,10 +8,10 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserEventMutations
 {
     [AllowAnonymous]
-    public Task<bool> DeleteProductUser(
+    public Task<bool> DeleteUserCartProduct(
         [Service] IUsersService usersService, string sku,  [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {
-        return usersService.DeleteProductUser(currentUser.UserId, sku, cancellationToken);
+        return usersService.DeleteUserCartProduct(currentUser.UserId, sku, cancellationToken);
     }
 }

@@ -97,7 +97,7 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
-    public async Task<bool> DeleteProductUser(string sku, CancellationToken cancellationToken)
+    public async Task<bool> DeleteUserCartProduct(string sku, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         var userCart =
