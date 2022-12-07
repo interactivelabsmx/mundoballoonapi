@@ -49,7 +49,17 @@ public class UsersRepository : IUsersRepository
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
-            context.Add(userCart);
+            var alreadyOnCart = await context.UserCarts.Where(uc => uc.UserId == userCart.UserId && uc.ProductVariantId == userCart.ProductVariantId).FirstOrDefaultAsync(cancellationToken: cancellationToken);
+            if (alreadyOnCart != null)
+            {
+                alreadyOnCart.Quantity += 1;
+                context.UserCarts.Update(alreadyOnCart);
+            }
+            else
+            {
+                context.Add(userCart);
+            }
+
             await context.SaveChangesAsync(cancellationToken);
         }
 
