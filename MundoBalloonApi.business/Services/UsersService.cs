@@ -55,6 +55,10 @@ public class UsersService : IUsersService
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUserEvent(userEventId, cancellationToken);
     }
+    public async Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
+    {
+        return await _usersRepository.DeleteUserCartProduct(sku, cancellationToken);
+    }
 
     public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
