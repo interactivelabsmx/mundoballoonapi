@@ -20,6 +20,9 @@ public class MundoBalloonContext : DbContext
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserCart> UserCarts { get; set; } = default!;
     public DbSet<UserEvent> UserEvents { get; set; } = default!;
+    public DbSet<Orders> Orders { get; set; } = default!;
+    public DbSet<UserAddresses> UserAddresses { get; set; } = default!;
+    public DbSet<UserProfile> UserProfile { get; set; } = default!;
     public DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
     public DbSet<Variant> Variants { get; set; } = default!;
     public DbSet<VariantValue> VariantValues { get; set; } = default!;
@@ -255,7 +258,6 @@ public class MundoBalloonContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_product_variant_media_product_variants1");
         });
-
         modelBuilder.Entity<ProductVariantReview>(entity =>
         {
             entity.HasKey(e => e.ProductVariantReviewId)
@@ -426,11 +428,129 @@ public class MundoBalloonContext : DbContext
                 .HasPrincipalKey(p => p.ProductVariantId)
                 .HasForeignKey(d => d.ProductVariantId)
                 .HasConstraintName("fk_user_cart_product_variants2");
+
             entity.HasOne(d => d.User)
                 .WithMany(p => p.UserCarts)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_user_cart_Users1");
+        });
+          modelBuilder.Entity<Orders>( entity =>{
+             entity.HasKey(e => e.OrderId)
+                .HasName("PRIMARY");
+                
+            entity.ToTable("orders");
+            entity.Property(e=> e.OrderId).HasColumnName("order_id");
+            entity.HasIndex(e=> e.UserId, "fk_orders_users1_idx");
+            entity.HasIndex(e=> e.UserProfileId, "fk_orders_profile_idx");
+            entity.HasIndex(e=> e.UserAddressesId, "fk_orders_user_addresses1_idx");
+            entity.HasIndex(e=> e.ProductVariantId, "fk_orders_product_variants1_idx");
+            entity.HasIndex(e=> e.Sku, "fk_orders_product_variants2_idx");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+                
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("fk_orders_Users1");
+
+        });
+        modelBuilder.Entity<UserAddresses>( entity =>{
+            entity.ToTable("users_addresses");
+
+            entity.HasIndex(e=> e.UserId, "fk_user_addreses_users1_idx");
+            entity.Property(e=> e.UserAddressesId).HasColumnName("user_addresses_id");
+
+            entity.Property(e => e.Address1)
+                .HasColumnType("mediumtext")
+                .HasColumnName("address1");
+
+            entity.Property(e => e.Address2)
+                .HasColumnType("mediumtext")
+                .HasColumnName("address2");
+                
+            entity.Property(e => e.City)
+                .HasColumnType("varchar(40)")
+                .HasColumnName("city");
+                
+            entity.Property(e => e.State)
+                .HasColumnType("varchar(40)")
+                .HasColumnName("state");
+                
+            entity.Property(e => e.Country)
+                .HasColumnType("varchar(40)")
+                .HasColumnName("country");
+                
+            entity.Property(e => e.Zipcode)
+                .HasColumnType("varchar(40)")
+                .HasColumnName("zipcode");
+            entity.Property(e => e.IsBilling).HasColumnName("is_billing");
+
+            entity.Property(e => e.IsShipping).HasColumnName("is_shipping");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+                
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.UserAdrresses)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("fk_user_addreses_Users1");
+        });
+        modelBuilder.Entity<UserProfile>( entity =>{
+            entity.ToTable("user_profile");
+
+            entity.HasIndex(e => e.UserId, "fk_user_profile_users1_idx");
+
+            entity.Property(e => e.UserProfileId).HasColumnName("user_profile_id");
+
+            entity.Property(e => e.FirstName)
+                .HasColumnType("mediumtext")
+                .HasColumnName("first_name");
+
+            entity.Property(e => e.LastName)
+                .HasColumnType("varchar(40)")
+                .HasColumnName("last_name");
+
+            entity.Property(e => e.PhoneNumber)
+                .HasColumnType("smallint")
+                .HasColumnName("phone_number");
+            
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+                
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.UserProfiles)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("fk_user_profile_users1");
+
         });
 
         modelBuilder.Entity<UserEvent>(entity =>
