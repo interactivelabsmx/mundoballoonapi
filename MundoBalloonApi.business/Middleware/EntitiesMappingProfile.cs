@@ -13,8 +13,8 @@ using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
 using UserEvent = MundoBalloonApi.infrastructure.Data.Models.UserEvent;
 using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymentProfile;
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
-using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 using VariantsType = MundoBalloonApi.infrastructure.Data.Models.VariantsType;
+using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 
 namespace MundoBalloonApi.business.Middleware;
 
@@ -23,7 +23,7 @@ public class EntitiesMappingProfile : Profile
     public EntitiesMappingProfile()
     {
         // COLLECTIONS
-        CreateMap<CountryCode, DTOs.Entities.CountryCode>();
+        CreateMap<CountryCode, CountryCode>();
         // PRODUCTS
         CreateMap<Product, DTOs.Entities.Product>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductName))

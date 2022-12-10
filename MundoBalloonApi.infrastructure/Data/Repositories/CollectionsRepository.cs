@@ -48,7 +48,7 @@ public class CollectionsRepository : ICollectionsRepository
 
         return variant;
     }
-    
+
     public async Task<VariantsType> CreateVariantsType(VariantsType variantsType)
     {
         var context = await _contextFactory.CreateDbContextAsync();

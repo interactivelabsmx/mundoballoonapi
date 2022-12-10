@@ -28,13 +28,13 @@ public static class ServicesDataStartupExtensions
         string connectionString)
     {
         return services.AddPooledDbContextFactory<MundoBalloonContext>((serviceProvider, options) =>
-                options.UseSqlServer(connectionString));
-            //         .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>()))
-            // .AddEFSecondLevelCache(options =>
-            // {
-            //     options.UseEasyCachingCoreProvider(CacheProviderName);
-            //     options.CacheAllQueries(CacheExpirationMode.Sliding, TimeSpan.FromMinutes(15));
-            // })
-            // .AddEasyCaching(options => { options.WithJson().UseRedis(configuration, CacheProviderName); });
+                options.UseSqlServer(connectionString)
+                    .AddInterceptors(serviceProvider.GetRequiredService<SecondLevelCacheInterceptor>()))
+            .AddEFSecondLevelCache(options =>
+            {
+                options.UseEasyCachingCoreProvider(CacheProviderName);
+                options.CacheAllQueries(CacheExpirationMode.Sliding, TimeSpan.FromMinutes(15));
+            })
+            .AddEasyCaching(options => { options.WithJson().UseRedis(configuration, CacheProviderName); });
     }
 }

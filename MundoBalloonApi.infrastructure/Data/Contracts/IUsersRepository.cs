@@ -14,6 +14,6 @@ public interface IUsersRepository
     Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
     Task<bool> DeleteUserEvent(int userEventId, CancellationToken cancellationToken);
     Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
-    Task<EventCartDetail>AddToEventCart(EventCartDetail eventCartDetail, CancellationToken cancellationToken);
-    Task<UserCart>AddToCart(UserCart userCart, CancellationToken cancellationToken);
+    Task<EventCartDetail> AddToEventCart(EventCartDetail eventCartDetail, CancellationToken cancellationToken);
+    Task<UserCart> AddToCart(UserCart userCart, CancellationToken cancellationToken);
 }
