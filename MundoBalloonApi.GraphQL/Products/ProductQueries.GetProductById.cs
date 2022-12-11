@@ -24,6 +24,8 @@ public partial class ProductQueries
             .Include(p => p.ProductVariants)
             .ThenInclude(pv => pv.ProductVariantValues)
             .ThenInclude(pvv => pvv.VariantValue)
+            .Include(p => p.ProductVariants)
+            .ThenInclude(pv => pv.ProductVariantReviews)
             .AsSplitQuery()
             .AsNoTracking()
             .FirstOrDefaultAsync();
