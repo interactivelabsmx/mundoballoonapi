@@ -1,5 +1,4 @@
 using AutoMapper;
-using HotChocolate.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.DTOs.Entities;
@@ -15,6 +14,7 @@ public partial class UserEventQueries
     public IQueryable<UserCart> GetUserCart([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId).Include(uc => uc.ProductVariant));
+        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId)
+            .Include(uc => uc.ProductVariant));
     }
 }

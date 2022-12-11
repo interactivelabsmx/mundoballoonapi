@@ -12,6 +12,6 @@ public partial class UserEventMutations
         [Service] IUsersService usersService,
         CancellationToken cancellationToken)
     {
-        return usersService.AddToEventCart(productVariantId, userEventId,quantity, cancellationToken);
+        return usersService.AddToEventCart(productVariantId, userEventId, quantity, cancellationToken);
     }
 }

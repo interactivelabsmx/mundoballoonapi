@@ -544,13 +544,13 @@ public class MundoBalloonContext : DbContext
                 .WithMany(p => p.Variants)
                 .HasForeignKey(d => d.UiRegistryId)
                 .HasConstraintName("variants_ui_registry_null_fk");
-            
+
             entity.HasOne(d => d.VariantsType).WithMany(p => p.Variants)
                 .HasForeignKey(d => d.VariantTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("variants_variants_type_variant_type_id_fk");
         });
-        
+
         modelBuilder.Entity<UiRegistry>(entity =>
         {
             entity.ToTable("ui_registry");
@@ -614,11 +614,11 @@ public class MundoBalloonContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_variant_values_variants1");
         });
-        
+
         modelBuilder.Entity<VariantsType>(entity =>
         {
             entity.ToTable("variants_type");
-            
+
             entity.HasKey(e => e.VariantTypeId).HasName("pk_variants_type");
 
             entity.Property(e => e.VariantTypeId).HasColumnName("variant_type_id");

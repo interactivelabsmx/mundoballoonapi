@@ -1,5 +1,6 @@
 using AutoMapper;
 using MundoBalloonApi.business.DTOs.Entities;
+using CountryCode = MundoBalloonApi.infrastructure.Data.Models.CountryCode;
 using EventCartDetail = MundoBalloonApi.infrastructure.Data.Models.EventCartDetail;
 using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
 using ProductCategory = MundoBalloonApi.infrastructure.Data.Models.ProductCategory;
@@ -13,8 +14,8 @@ using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
 using UserEvent = MundoBalloonApi.infrastructure.Data.Models.UserEvent;
 using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymentProfile;
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
-using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 using VariantsType = MundoBalloonApi.infrastructure.Data.Models.VariantsType;
+using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 
 namespace MundoBalloonApi.business.Middleware;
 

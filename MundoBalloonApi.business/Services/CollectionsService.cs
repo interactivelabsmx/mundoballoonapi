@@ -48,10 +48,10 @@ public class CollectionsService : ICollectionsService
         await _collectionsRepository.CreateVariantValue(newVariant);
         return _mapper.Map<VariantValue>(newVariant);
     }
-    
+
     public async Task<VariantsType> CreateVariantsType(string variantsType)
     {
-        var newVariantType = new infrastructure.Data.Models.VariantsType(variantType: variantsType);
+        var newVariantType = new infrastructure.Data.Models.VariantsType(variantsType);
         await _collectionsRepository.CreateVariantsType(newVariantType);
         return _mapper.Map<VariantsType>(newVariantType);
     }
