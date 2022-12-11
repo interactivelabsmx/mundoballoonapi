@@ -33,7 +33,9 @@ public class UsersRepository : IUsersRepository
 
         return user;
     }
-    public async Task<EventCartDetail> AddToEventCart(EventCartDetail eventCartDetail, CancellationToken cancellationToken)
+
+    public async Task<EventCartDetail> AddToEventCart(EventCartDetail eventCartDetail,
+        CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
@@ -44,12 +46,15 @@ public class UsersRepository : IUsersRepository
 
         return eventCartDetail;
     }
+
     public async Task<UserCart> AddToCart(UserCart userCart, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
-            var alreadyOnCart = await context.UserCarts.Where(uc => uc.UserId == userCart.UserId && uc.ProductVariantId == userCart.ProductVariantId).FirstOrDefaultAsync(cancellationToken: cancellationToken);
+            var alreadyOnCart = await context.UserCarts
+                .Where(uc => uc.UserId == userCart.UserId && uc.ProductVariantId == userCart.ProductVariantId)
+                .FirstOrDefaultAsync(cancellationToken);
             if (alreadyOnCart != null)
             {
                 alreadyOnCart.Quantity += 1;
@@ -107,6 +112,7 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
+
     public async Task<bool> DeleteUserCartProduct(string sku, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -117,7 +123,7 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
- 
+
 
     public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {

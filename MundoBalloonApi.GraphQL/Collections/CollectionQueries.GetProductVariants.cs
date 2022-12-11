@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.graphql.Collections.Responses;
 using MundoBalloonApi.infrastructure.Data.Models;
-using VariantValue = MundoBalloonApi.business.DTOs.Entities.VariantValue;
 using Variant = MundoBalloonApi.business.DTOs.Entities.Variant;
+using VariantValue = MundoBalloonApi.business.DTOs.Entities.VariantValue;
 
 namespace MundoBalloonApi.graphql.Collections;
 
@@ -36,7 +36,7 @@ public partial class CollectionQueries
         return new ProductVariants
         {
             Variants = mapper.Map<List<Variant>>(variants),
-            VariantValues = mapper.Map<List<VariantValue>>(variantValues),
+            VariantValues = mapper.Map<List<VariantValue>>(variantValues)
         };
     }
 }

@@ -11,6 +11,6 @@ public partial class UserEventMutations
         [Service] IUsersService usersService, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {
-        return usersService.AddToCart(currentUser.UserId, sku, quantity, price,productVariantId, cancellationToken);
+        return usersService.AddToCart(currentUser.UserId, sku, quantity, price, productVariantId, cancellationToken);
     }
 }
