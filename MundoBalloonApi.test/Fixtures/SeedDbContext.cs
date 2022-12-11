@@ -24,7 +24,8 @@ public class SeedDbContext
         _context.SaveChanges();
 
         /* COLLECTIONS */
-        fakeData.Variants = fakeData.MakeVariants();
+        fakeData.VariantsTypes = fakeData.MakeVariantsTypes();
+        fakeData.Variants = fakeData.MakeVariants(fakeData.VariantsTypes);
         _context.Variants.AddRange(fakeData.Variants);
         _context.SaveChanges();
 

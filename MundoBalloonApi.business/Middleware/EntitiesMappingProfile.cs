@@ -54,8 +54,6 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1));
         CreateMap<UiRegistry, DTOs.Entities.UiRegistry>();
         CreateMap<VariantsType, DTOs.Entities.VariantsType>();
-        CreateMap<Variant, DTOs.Entities.Variant>()
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1));
         // USER
         CreateMap<User, DTOs.Entities.User>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
