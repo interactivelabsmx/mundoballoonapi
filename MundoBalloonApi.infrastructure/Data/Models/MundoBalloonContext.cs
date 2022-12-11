@@ -554,7 +554,7 @@ public class MundoBalloonContext : DbContext
         {
             entity.ToTable("ui_registry");
 
-            entity.HasComment("This is to tie some values to UI components to render them");
+            entity.ToTable(t => t.HasComment("This is to tie some values to UI components to render them"));
 
             entity.HasIndex(e => e.ComponentId, "ui_registry_component_id_index");
 
