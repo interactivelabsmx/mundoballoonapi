@@ -13,7 +13,7 @@ public class FakeData
 
     private readonly Faker<User> _userFaker;
 
-    private readonly Faker<Variant> _variantFaker;
+    private readonly Faker<VariantsType> _variantsTypeFaker;
 
     private Faker<Product>? _productFaker;
 
@@ -23,15 +23,18 @@ public class FakeData
 
     private Faker<ProductVariantReview>? _productVariantReviewFaker;
 
+    private Faker<Variant>? _variantFaker;
+
     private Faker<VariantValue>? _variantValueFaker;
 
     public FakeData()
     {
-        _variantFaker = VariantFakerBuilder();
+        _variantsTypeFaker = VariantsTypeFakerBuilder();
         _productCategoryFaker = ProductCategoryFakerBuilder();
         _userFaker = UserFakerBuilder();
     }
 
+    public List<VariantsType>? VariantsTypes { get; set; }
     public List<Variant>? Variants { get; set; }
     public List<VariantValue>? VariantValues { get; set; }
     public List<ProductCategory>? ProductCategories { get; set; }
@@ -41,20 +44,36 @@ public class FakeData
     public List<ProductVariantReview>? ProductVariantReviews { get; set; }
     public List<User>? Users { get; set; }
 
-    private static Faker<Variant> VariantFakerBuilder()
+    private static Faker<VariantsType> VariantsTypeFakerBuilder()
+    {
+        return new Faker<VariantsType>()
+            .RuleFor(v => v.VariantType, f => f.PickRandom(VariantType));
+    }
+
+    private VariantsType MakeVariantsType(int seed)
+    {
+        return _variantsTypeFaker?.UseSeed(seed).Generate() ?? new VariantsType();
+    }
+
+    public List<VariantsType> MakeVariantsTypes(int count = 10)
+    {
+        return Enumerable.Range(1, count).Select(MakeVariantsType).ToList();
+    }
+
+    private static Faker<Variant> VariantFakerBuilder(List<VariantsType> variantsTypes)
     {
         return new Faker<Variant>()
-            .RuleFor(v => v.Variant1, f => f.Commerce.Department())
-            .RuleFor(v => v.VariantType, f => f.PickRandom(VariantType));
+            .RuleFor(v => v.Variant1, f => f.Commerce.Department());
     }
 
     private Variant MakeVariant(int seed)
     {
-        return _variantFaker.UseSeed(seed).Generate();
+        return _variantFaker?.UseSeed(seed).Generate() ?? new Variant();
     }
 
-    public List<Variant> MakeVariants(int count = 10)
+    public List<Variant> MakeVariants(List<VariantsType> variantsTypes, int count = 10)
     {
+        _variantFaker ??= VariantFakerBuilder(variantsTypes);
         return Enumerable.Range(1, count).Select(MakeVariant).ToList();
     }
 

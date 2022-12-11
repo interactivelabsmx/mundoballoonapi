@@ -23,6 +23,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
     public DbSet<Variant> Variants { get; set; } = default!;
     public DbSet<VariantValue> VariantValues { get; set; } = default!;
+    public virtual DbSet<VariantsType> VariantsTypes { get; set; }
     public DbSet<CountryCode> CountryCodes { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -539,15 +540,15 @@ public class MundoBalloonContext : DbContext
                 .HasMaxLength(45)
                 .HasColumnName("variant");
 
-            entity.Property(e => e.VariantType)
-                .HasColumnType("enum('string','number','boolean')")
-                .HasColumnName("variant_type")
-                .HasDefaultValueSql("'string'");
-
             entity.HasOne(d => d.UiRegistry)
                 .WithMany(p => p.Variants)
                 .HasForeignKey(d => d.UiRegistryId)
                 .HasConstraintName("variants_ui_registry_null_fk");
+            
+            entity.HasOne(d => d.VariantsType).WithMany(p => p.Variants)
+                .HasForeignKey(d => d.VariantTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("variants_variants_type_variant_type_id_fk");
         });
         
         modelBuilder.Entity<UiRegistry>(entity =>
@@ -612,6 +613,28 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.VariantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_variant_values_variants1");
+        });
+        
+        modelBuilder.Entity<VariantsType>(entity =>
+        {
+            entity.ToTable("variants_type");
+            
+            entity.HasKey(e => e.VariantTypeId).HasName("pk_variants_type");
+
+            entity.Property(e => e.VariantTypeId).HasColumnName("variant_type_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)")
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at");
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)")
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.VariantType)
+                .HasMaxLength(45)
+                .IsUnicode(false)
+                .HasColumnName("variant_type");
         });
 
         modelBuilder.Entity<CountryCode>(entity =>
