@@ -2,7 +2,7 @@ namespace MundoBalloonApi.infrastructure.Data.Models;
 
 public class UserProfile : BaseEntity
 {
-    public int UserProfileId { get; set; }
+    public int? UserProfileId { get; set; }
     public string? UserId { get; set; }
     public string? FirstName { get; set; }
     

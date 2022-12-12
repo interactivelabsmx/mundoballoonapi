@@ -8,7 +8,7 @@ using UserCart = MundoBalloonApi.business.DTOs.Entities.UserCart;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserEventQueries
+public partial class UserCartMutations
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]

@@ -9,6 +9,7 @@ public class User : BaseEntity
     public ICollection<UserProfile> UserProfiles { get; } = new HashSet<UserProfile>();
     public ICollection<UserAddresses> UserAdrresses { get; } = new HashSet<UserAddresses>();
     public ICollection<Orders> Orders { get; } = new HashSet<Orders>();
+    public ICollection<OrderDetails> OrderDetails { get; } = new HashSet<OrderDetails>();
     public ICollection<UserPaymentProfile>? UserPaymentProfiles { get; } = new HashSet<UserPaymentProfile>();
     public ICollection<ProductVariantReview>? ProductVariantReviews { get; } = new HashSet<ProductVariantReview>();
 }

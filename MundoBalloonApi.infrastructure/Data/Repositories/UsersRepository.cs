@@ -12,16 +12,6 @@ public class UsersRepository : IUsersRepository
     {
         _contextFactory = contextFactory;
     }
-
-    public async Task<User?> GetById(string userId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            return await context.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
-        }
-    }
-
     public async Task<User> Create(User user, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -65,7 +55,14 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
-
+    public async Task<User?> GetById(string userId, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            return await context.Users.FirstOrDefaultAsync(u => u.UserId == userId, cancellationToken);
+        }
+    }
     public async Task<UserEvent?> GetByUserId(int userEventId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -75,6 +72,30 @@ public class UsersRepository : IUsersRepository
         }
     }
 
+    public async Task<UserAddresses?> GetUserAddresses(string userId, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            return await context.UserAddresses.FirstOrDefaultAsync(ue => ue.UserId == userId, cancellationToken);
+        }
+    }
+    public async Task<UserProfile?> GetUserProfile(string userId, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            return await context.UserProfile.FirstOrDefaultAsync(ue => ue.UserId == userId, cancellationToken);
+        }
+    }
+    public async Task<Orders?> GetOrders(string userId, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            return await context.Orders.FirstOrDefaultAsync(ue => ue.UserId == userId, cancellationToken);
+        }
+    }
     public async Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);

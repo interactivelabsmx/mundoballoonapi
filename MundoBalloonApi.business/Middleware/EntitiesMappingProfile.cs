@@ -15,6 +15,7 @@ using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymen
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
 using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 using Orders = MundoBalloonApi.infrastructure.Data.Models.Orders;
+using OrderDetails = MundoBalloonApi.infrastructure.Data.Models.OrderDetails;
 
 namespace MundoBalloonApi.business.Middleware;
 
@@ -79,7 +80,8 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
             .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
             .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber));
-        CreateMap<Orders,DTOs.Entities.Orders>()
+        CreateMap<Orders, DTOs.Entities.Orders>();
+        CreateMap<OrderDetails,DTOs.Entities.OrderDetails>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         // SAVED CARTS
         CreateMap<UserCart, DTOs.Entities.UserCart>()

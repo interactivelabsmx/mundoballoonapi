@@ -20,6 +20,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserCart> UserCarts { get; set; } = default!;
     public DbSet<UserEvent> UserEvents { get; set; } = default!;
+    public DbSet<OrderDetails> OrderDetails { get; set; } = default!;
     public DbSet<Orders> Orders { get; set; } = default!;
     public DbSet<UserAddresses> UserAddresses { get; set; } = default!;
     public DbSet<UserProfile> UserProfile { get; set; } = default!;
@@ -420,6 +421,7 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            
 
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
@@ -435,18 +437,33 @@ public class MundoBalloonContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_user_cart_Users1");
         });
-          modelBuilder.Entity<Orders>( entity =>{
-             entity.HasKey(e => e.OrderId)
+          modelBuilder.Entity<OrderDetails>( entity =>{
+             entity.HasKey(e => e.OrderDetailsId)
                 .HasName("PRIMARY");
                 
-            entity.ToTable("orders");
-            entity.Property(e=> e.OrderId).HasColumnName("order_id");
-            entity.HasIndex(e=> e.UserId, "fk_orders_users1_idx");
-            entity.HasIndex(e=> e.UserProfileId, "fk_orders_profile_idx");
-            entity.HasIndex(e=> e.UserAddressesId, "fk_orders_user_addresses1_idx");
-            entity.HasIndex(e=> e.ProductVariantId, "fk_orders_product_variants1_idx");
-            entity.HasIndex(e=> e.Sku, "fk_orders_product_variants2_idx");
+            entity.ToTable("order_details");
+            entity.Property(e=> e.OrderDetailsId).HasColumnName("order_details_id");
+            entity.HasIndex(e=> e.UserProfileId, "fk_order_details_profile1_idx");
+            entity.HasIndex(e=> e.UserAddressesId, "fk_order_details_user_addresses1_idx");
+            entity.HasIndex(e=> e.ProductVariantId, "fk_order_details_product_variants1_idx");
+            entity.HasIndex(e=> e.Sku, "fk_order_details_product_variants2_idx");
 
+            entity.Property(e => e.ProductVariantId)
+                .IsRequired()
+                .HasColumnType("int")
+                .HasColumnName("product_variant_id");
+            entity.Property(e => e.Sku)
+                .IsRequired()
+                .HasColumnType("varchar(45)")
+                .HasColumnName("sku");
+            entity.Property(e => e.UserAddressesId)
+                .IsRequired()
+                .HasColumnType("int")
+                .HasColumnName("user_address_id");
+            entity.Property(e => e.UserProfileId)
+                .IsRequired()
+                .HasColumnType("int")
+                .HasColumnName("user_profile_id");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
@@ -459,11 +476,36 @@ public class MundoBalloonContext : DbContext
                 
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
+        });
+         modelBuilder.Entity<Orders>( entity =>{
+             entity.HasKey(e => e.OrderId)
+                .HasName("PRIMARY");
+                
+            entity.ToTable("orders");
+            entity.Property(e=> e.OrderId).HasColumnName("order_id");
+            entity.HasIndex(e=> e.OrderDetailsId, "fk_orders_order_details1_idx");
+            entity.HasIndex(e=> e.UserId, "fk_orders_users1");
+
+            entity.Property(e => e.OrderDetailsId)
+                .IsRequired()
+                .HasColumnType("int")
+                .HasColumnName("order_details_id");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+                
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            
             entity.HasOne(d => d.User)
                 .WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("fk_orders_Users1");
-
+                .HasConstraintName("fk_user_addreses_Users1");
         });
         modelBuilder.Entity<UserAddresses>( entity =>{
             entity.ToTable("users_addresses");
@@ -523,11 +565,11 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.UserProfileId).HasColumnName("user_profile_id");
 
             entity.Property(e => e.FirstName)
-                .HasColumnType("mediumtext")
+                .HasColumnType("varchar(45)")
                 .HasColumnName("first_name");
 
             entity.Property(e => e.LastName)
-                .HasColumnType("varchar(40)")
+                .HasColumnType("varchar(45)")
                 .HasColumnName("last_name");
 
             entity.Property(e => e.PhoneNumber)
