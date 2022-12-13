@@ -539,6 +539,9 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.Variant1)
                 .HasMaxLength(45)
                 .HasColumnName("variant");
+    
+            entity.Property(e => e.VariantTypeId)
+                .HasColumnName("variant_type_id");
 
             entity.HasOne(d => d.UiRegistry)
                 .WithMany(p => p.Variants)
