@@ -3,11 +3,11 @@ using HotChocolate.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
-using Orders = MundoBalloonApi.business.DTOs.Entities.Orders;
+using Orders = MundoBalloonApi.infrastructure.Data.Models.Orders;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserCartQueries
+public partial class UserCartQueries 
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]

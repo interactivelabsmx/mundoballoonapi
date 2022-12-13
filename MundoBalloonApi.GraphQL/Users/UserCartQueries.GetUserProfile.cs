@@ -3,7 +3,7 @@ using HotChocolate.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
-using UserProfile = MundoBalloonApi.business.DTOs.Entities.UserProfile;
+using UserProfile = MundoBalloonApi.infrastructure.Data.Models.UserProfile;
 
 namespace MundoBalloonApi.graphql.Users;
 

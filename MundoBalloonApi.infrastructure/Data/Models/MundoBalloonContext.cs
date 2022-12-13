@@ -477,7 +477,7 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
 
         });
-         modelBuilder.Entity<Orders>( entity =>{
+       /*  modelBuilder.Entity<Orders>( entity =>{
              entity.HasKey(e => e.OrderId)
                 .HasName("PRIMARY");
                 
@@ -594,7 +594,7 @@ public class MundoBalloonContext : DbContext
                 .HasConstraintName("fk_user_profile_users1");
 
         });
-
+*/
         modelBuilder.Entity<UserEvent>(entity =>
         {
             entity.ToTable("user_event");
