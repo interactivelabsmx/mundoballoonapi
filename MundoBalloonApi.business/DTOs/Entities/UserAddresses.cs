@@ -10,7 +10,6 @@ public class UserAddresses
     public string State { get; init; } = string.Empty;
     public string Country { get; init; } = string.Empty;
     public string Zipcode { get; init; } = string.Empty;
-    
     public int IsBilling { get; init; }
     public int IsShipping { get; init; }
 }

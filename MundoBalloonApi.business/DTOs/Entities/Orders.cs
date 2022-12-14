@@ -1,8 +1,9 @@
 namespace MundoBalloonApi.business.DTOs.Entities;
 
-public class Orders 
+public class Orders
 {
-    public int OrderId { get; set; } 
-    public string UserId {get; set;} = string.Empty;
-    public int OrderDetailsId { get; set; } 
+    public int OrderId { get; init; }
+    public string UserId { get; init; } = string.Empty;
+    public int UserAddressesId { get; init; }
+    public int UserProfileId { get; init; }   
 }

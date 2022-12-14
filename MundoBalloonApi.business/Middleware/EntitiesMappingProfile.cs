@@ -1,6 +1,8 @@
 using AutoMapper;
 using MundoBalloonApi.business.DTOs.Entities;
 using EventCartDetail = MundoBalloonApi.infrastructure.Data.Models.EventCartDetail;
+using Orders = MundoBalloonApi.infrastructure.Data.Models.Orders;
+using OrderProductsDetails = MundoBalloonApi.infrastructure.Data.Models.OrderProductsDetails;
 using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
 using ProductCategory = MundoBalloonApi.infrastructure.Data.Models.ProductCategory;
 using ProductVariant = MundoBalloonApi.infrastructure.Data.Models.ProductVariant;
@@ -9,15 +11,13 @@ using ProductVariantReview = MundoBalloonApi.infrastructure.Data.Models.ProductV
 using ProductVariantValue = MundoBalloonApi.infrastructure.Data.Models.ProductVariantValue;
 using UiRegistry = MundoBalloonApi.infrastructure.Data.Models.UiRegistry;
 using User = MundoBalloonApi.infrastructure.Data.Models.User;
-using UserProfile = MundoBalloonApi.infrastructure.Data.Models.UserProfile;
 using UserAddresses = MundoBalloonApi.infrastructure.Data.Models.UserAddresses;
-using Orders = MundoBalloonApi.infrastructure.Data.Models.Orders;
+using UserProfile = MundoBalloonApi.infrastructure.Data.Models.UserProfile;
 using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
 using UserEvent = MundoBalloonApi.infrastructure.Data.Models.UserEvent;
 using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymentProfile;
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
 using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
-using OrderDetails = MundoBalloonApi.infrastructure.Data.Models.OrderDetails;
 
 namespace MundoBalloonApi.business.Middleware;
 
@@ -56,6 +56,8 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));
         CreateMap<UiRegistry, DTOs.Entities.UiRegistry>();
         // USER
+        CreateMap<Orders, DTOs.Entities.Orders>();
+        CreateMap<OrderProductsDetails, DTOs.Entities.OrderProductsDetails>();
         CreateMap<User, DTOs.Entities.User>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
@@ -81,8 +83,6 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
             .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
             .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber));
-        CreateMap<Orders, DTOs.Entities.Orders>();
-        CreateMap<OrderDetails,DTOs.Entities.OrderDetails>();
         // SAVED CARTS
         CreateMap<UserCart, DTOs.Entities.UserCart>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
