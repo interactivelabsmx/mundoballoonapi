@@ -63,8 +63,8 @@ public class EntitiesMappingProfile : Profile
         CreateMap<OrderProductsDetails, DTOs.Entities.OrderProductsDetails>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant))
             .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Orders))   
-            .ForMember(dest => dest.amount, opt => opt.MapFrom(src => src.amount))
-            .ForMember(dest => dest.price, opt => opt.MapFrom(src => src.price));   
+            .ForMember(dest => dest.amount, opt => opt.MapFrom(src => src.Amount))
+            .ForMember(dest => dest.price, opt => opt.MapFrom(src => src.Price));   
         CreateMap<User, DTOs.Entities.User>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))

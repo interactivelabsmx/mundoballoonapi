@@ -1,5 +1,3 @@
-using EntityFrameworkCore.EncryptColumn.Attribute;
-
 namespace MundoBalloonApi.infrastructure.Data.Models;
 
 public class Orders : BaseEntity

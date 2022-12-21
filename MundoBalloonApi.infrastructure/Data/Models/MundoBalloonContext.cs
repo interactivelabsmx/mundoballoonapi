@@ -1,19 +1,12 @@
-﻿using EntityFrameworkCore.EncryptColumn.Interfaces;
-using EntityFrameworkCore.EncryptColumn.Util;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MundoBalloonApi.infrastructure.Data.Models;
 
 public class MundoBalloonContext : DbContext
 {
-    private readonly IEncryptionProvider _provider;
     public MundoBalloonContext(DbContextOptions<MundoBalloonContext> options)
         : base(options)
-    {
-        /*
-        Initialize.EncryptionKey = "Mundo_Balloon_key";
-        this._provider = new GenerateEncryptionProvider();*/
-    }
+    {}
 
     public DbSet<EventCartDetail> EventCartDetails { get; set; } = default!;
     public DbSet<Orders> Orders { get; set; } = default!;
@@ -555,6 +548,16 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.PhoneNumber)
                 .HasColumnType("int")
                 .HasColumnName("phone_number");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
             entity.HasOne(d => d.User)
                 .WithMany(p => p.UserProfiles)
                 .HasForeignKey(d => d.UserId)
@@ -624,10 +627,10 @@ public class MundoBalloonContext : DbContext
            entity.Property(e => e.OrderId)
                .HasColumnType("int")
                .HasColumnName("order_id");
-           entity.Property(e => e.amount)
+           entity.Property(e => e.Amount)
                .HasColumnType("int")
                .HasColumnName("amount");
-           entity.Property(e => e.price)
+           entity.Property(e => e.Price)
                .HasColumnType("decimal(10,2)")
                .HasColumnName("price");
            entity.Property(e => e.OrderId)
