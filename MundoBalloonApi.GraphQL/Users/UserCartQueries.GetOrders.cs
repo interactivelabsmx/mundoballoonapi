@@ -15,7 +15,10 @@ public partial class UserCartQueries
     public IQueryable<Orders> GetOrders([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, string userId)
     {
-        return mapper.ProjectTo<Orders>(mundoBalloonContext.Orders.Where(uc => uc.UserId == userId).Include(uc => uc.UserAddresses ));
+        return mapper.ProjectTo<Orders>(mundoBalloonContext.Orders.Where(uc => uc.UserId == userId)
+        .Include(uc => uc.UserProfile )
+        .Include(uc=> uc.User)
+        .Include(uc => uc.UserAddresses));
     }
     
 }

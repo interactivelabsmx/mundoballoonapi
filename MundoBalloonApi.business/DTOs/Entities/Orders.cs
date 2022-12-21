@@ -6,4 +6,7 @@ public class Orders
     public string UserId { get; init; } = string.Empty;
     public int UserAddressesId { get; init; }
     public int UserProfileId { get; init; }   
+    public User? User { get; set; }
+    public UserAddresses? Addresses { get; set; }
+    public UserProfile? Profile { get; set; }
 }

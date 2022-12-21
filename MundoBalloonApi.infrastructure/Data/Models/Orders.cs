@@ -11,4 +11,7 @@ public class Orders : BaseEntity
     public User? User { get; set; }
     public UserProfile? UserProfile { get; set; }
     public UserAddresses? UserAddresses { get; set; }
+
+    public ICollection<OrderProductsDetails> OrdersOrderProductsDetails { get; set; } =
+        new HashSet<OrderProductsDetails>();
 }

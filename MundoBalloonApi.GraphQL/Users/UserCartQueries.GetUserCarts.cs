@@ -8,13 +8,14 @@ using UserCart = MundoBalloonApi.business.DTOs.Entities.UserCart;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserCartMutations
+public partial class UserCartQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<UserCart> GetUserCart([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<UserCart> GetUserCarts([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId).Include(uc => uc.ProductVariant));
+        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId)
+        .Include(uc => uc.ProductVariant));
     }
 }

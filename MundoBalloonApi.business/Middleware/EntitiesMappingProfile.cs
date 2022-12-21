@@ -56,8 +56,15 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));
         CreateMap<UiRegistry, DTOs.Entities.UiRegistry>();
         // USER
-        CreateMap<Orders, DTOs.Entities.Orders>();
-        CreateMap<OrderProductsDetails, DTOs.Entities.OrderProductsDetails>();
+        CreateMap<Orders, DTOs.Entities.Orders>()
+            .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User))
+            .ForMember(dest => dest.Profile, opt => opt.MapFrom(src => src.UserProfile))
+            .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.UserAddresses));
+        CreateMap<OrderProductsDetails, DTOs.Entities.OrderProductsDetails>()
+            .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant))
+            .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Orders))   
+            .ForMember(dest => dest.amount, opt => opt.MapFrom(src => src.amount))
+            .ForMember(dest => dest.price, opt => opt.MapFrom(src => src.price));   
         CreateMap<User, DTOs.Entities.User>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))

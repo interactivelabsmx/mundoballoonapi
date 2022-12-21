@@ -15,7 +15,8 @@ public partial class UserCartQueries
     public IQueryable<OrderProductsDetails> GetOrdersProductDetails([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int orderDetailsProductsId)
     {
-        return mapper.ProjectTo<OrderProductsDetails>(mundoBalloonContext.OrderProductDetails.Where(uc => uc.OrderDetailsProductsId == orderDetailsProductsId));
+        return mapper.ProjectTo<OrderProductsDetails>(mundoBalloonContext.OrderProductDetails.Where(uc => uc.OrderDetailsProductsId == orderDetailsProductsId)
+        .Include(uc=> uc.Orders).Include(uc => uc.ProductVariant));
     }
     
 }

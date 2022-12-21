@@ -1,17 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
+using Microsoft.EntityFrameworkCore;
 
 namespace MundoBalloonApi.infrastructure.Data.Models;
 
 public class MundoBalloonContext : DbContext
 {
+    private readonly IEncryptionProvider _provider;
     public MundoBalloonContext(DbContextOptions<MundoBalloonContext> options)
         : base(options)
     {
+        /*
+        Initialize.EncryptionKey = "Mundo_Balloon_key";
+        this._provider = new GenerateEncryptionProvider();*/
     }
 
     public DbSet<EventCartDetail> EventCartDetails { get; set; } = default!;
     public DbSet<Orders> Orders { get; set; } = default!;
-    public DbSet<OrderProductsDetails> OrderProductDetails { get; set;} = default!;
+    public DbSet<OrderProductsDetails> OrderProductDetails { get; set; } = default!;
     public DbSet<Product> Products { get; set; } = default!;
     public DbSet<ProductCategory> ProductCategories { get; set; } = default!;
     public DbSet<ProductVariant> ProductVariants { get; set; } = default!;
@@ -585,39 +591,68 @@ public class MundoBalloonContext : DbContext
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-            
+
             entity.HasOne(d => d.User)
                 .WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("fk_orders_users1");            
+                .HasConstraintName("fk_orders_users1");
+
+            entity.HasOne(d => d.UserProfile)
+                .WithMany(p => p.UserProfileOrder)
+                .HasForeignKey(d => d.UserProfileId)
+                .HasConstraintName("fk_orders_user_profile1");
+
+            entity.HasOne(d => d.UserAddresses)
+                .WithMany(p => p.OrdersUserAddresses)
+                .HasForeignKey(d => d.UserAddressesId)
+                .HasConstraintName("fk_orders_user_addresses1");
+
         });
-         modelBuilder.Entity<OrderProductsDetails>(entity =>
-        {
-            entity.ToTable("order_products_details");
-            entity.HasIndex(e => e.ProductVariantId, "fk_orders_product_variants1_idx");
-            entity.HasIndex(e => e.OrderId, "fk_order_products_details_order_idx");
+        modelBuilder.Entity<OrderProductsDetails>(entity =>
+       {
+           entity.ToTable("order_products_details");
+           entity.HasIndex(e => e.ProductVariantId, "fk_orders_product_variants1_idx");
+           entity.HasIndex(e => e.OrderId, "fk_order_products_details_order_idx");
 
-            entity.Property(e => e.OrderDetailsProductsId).HasColumnName("order_details_products_id");
-            entity.HasKey(e => e.OrderDetailsProductsId)
-                .HasName("PRIMARY");
+           entity.Property(e => e.OrderDetailsProductsId).HasColumnName("order_details_products_id");
+           entity.HasKey(e => e.OrderDetailsProductsId)
+               .HasName("PRIMARY");
 
-            entity.Property(e => e.ProductVariantId)
-                .HasColumnType("int")
-                .HasColumnName("product_variant_id");
-            entity.Property(e => e.OrderId)
-                .HasColumnType("int")
-                .HasColumnName("order_id");
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");           
-        });
+           entity.Property(e => e.ProductVariantId)
+               .HasColumnType("int")
+               .HasColumnName("product_variant_id");
+           entity.Property(e => e.OrderId)
+               .HasColumnType("int")
+               .HasColumnName("order_id");
+           entity.Property(e => e.amount)
+               .HasColumnType("int")
+               .HasColumnName("amount");
+           entity.Property(e => e.price)
+               .HasColumnType("decimal(10,2)")
+               .HasColumnName("price");
+           entity.Property(e => e.OrderId)
+               .HasColumnType("int")
+               .HasColumnName("order_id");
+           entity.Property(e => e.CreatedAt)
+               .HasColumnType("timestamp(6)")
+               .HasColumnName("created_at")
+               .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+           entity.Property(e => e.UpdatedAt)
+               .HasColumnType("timestamp(6)")
+               .HasColumnName("updated_at")
+               .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+           entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+           entity.HasOne(d => d.ProductVariant)
+               .WithMany(p => p.OrderProductsDetailsProductVariants)
+               .HasPrincipalKey(p => p.ProductVariantId)
+               .HasForeignKey(d => d.ProductVariantId)
+               .HasConstraintName("fk_order_products_details_product_variant1");
+           entity.HasOne(d => d.Orders)
+               .WithMany(p => p.OrdersOrderProductsDetails)
+               .HasPrincipalKey(p => p.OrderId)
+               .HasForeignKey(d => d.OrderId)
+               .HasConstraintName("fk_order_products_details_orders1");
+       });
         modelBuilder.Entity<UserPaymentProfile>(entity =>
         {
             entity.HasKey(e => e.UserProfileId)

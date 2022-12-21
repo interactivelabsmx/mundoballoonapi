@@ -71,7 +71,6 @@ public class UsersRepository : IUsersRepository
             return await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId, cancellationToken);
         }
     }
-
     public async Task<UserAddresses?> GetUserAddresses(string userId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -94,6 +93,14 @@ public class UsersRepository : IUsersRepository
         await using (context)
         {
             return await context.Orders.FirstOrDefaultAsync(ue => ue.UserId == userId, cancellationToken);
+        }
+    }
+    public async Task<UserCart?> GetUserCarts(CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            return await context.UserCarts.FirstOrDefaultAsync(cancellationToken);
         }
     }
     public async Task<OrderProductsDetails?> GetOrderProductsDetails(int orderId, CancellationToken cancellationToken)
