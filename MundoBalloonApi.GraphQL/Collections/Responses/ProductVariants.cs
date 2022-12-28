@@ -1,10 +1,9 @@
 using MundoBalloonApi.business.DTOs.Entities;
 
-namespace MundoBalloonApi.business.DTOs.Product;
+namespace MundoBalloonApi.graphql.Collections.Responses;
 
-public record ProductQuickView
+public class ProductVariants
 {
-    public Entities.Product? Product { get; init; }
     public IEnumerable<Variant>? Variants { get; init; }
     public IEnumerable<VariantValue>? VariantValues { get; init; }
 }

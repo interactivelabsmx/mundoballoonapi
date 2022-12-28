@@ -15,19 +15,17 @@ public partial class ProductQueries
     {
         var productQuery = await (
                 from product in mundoBalloonContext.Products
-                join productCategory in mundoBalloonContext.ProductCategories
-                    on product.ProductCategoryId equals productCategory.ProductCategoryId
-                join productVariant in mundoBalloonContext.ProductVariants
-                    on product.ProductId equals productVariant.ProductId
-                join medium in mundoBalloonContext.ProductVariantMedia
-                    on productVariant.ProductVariantId equals medium.ProductVariantId
-                join productVariantValue in mundoBalloonContext.ProductVariantValues
-                    on productVariant.ProductVariantId equals productVariantValue.ProductVariantId
-                join variantValue in mundoBalloonContext.VariantValues
-                    on productVariantValue.VariantValueId equals variantValue.VariantValueId
                 where product.ProductId == productId
                 select product
             )
+            .Include(p => p.ProductCategory)
+            .Include(p => p.ProductVariants)
+            .ThenInclude(pv => pv.ProductVariantMedia)
+            .Include(p => p.ProductVariants)
+            .ThenInclude(pv => pv.ProductVariantValues)
+            .ThenInclude(pvv => pvv.VariantValue)
+            .Include(p => p.ProductVariants)
+            .ThenInclude(pv => pv.ProductVariantReviews)
             .AsSplitQuery()
             .AsNoTracking()
             .FirstOrDefaultAsync();

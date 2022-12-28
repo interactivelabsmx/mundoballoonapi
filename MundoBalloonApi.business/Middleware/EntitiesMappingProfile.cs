@@ -1,5 +1,6 @@
 using AutoMapper;
 using MundoBalloonApi.business.DTOs.Entities;
+using CountryCode = MundoBalloonApi.infrastructure.Data.Models.CountryCode;
 using EventCartDetail = MundoBalloonApi.infrastructure.Data.Models.EventCartDetail;
 using Orders = MundoBalloonApi.infrastructure.Data.Models.Orders;
 using OrderProductsDetails = MundoBalloonApi.infrastructure.Data.Models.OrderProductsDetails;
@@ -17,6 +18,7 @@ using UserCart = MundoBalloonApi.infrastructure.Data.Models.UserCart;
 using UserEvent = MundoBalloonApi.infrastructure.Data.Models.UserEvent;
 using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymentProfile;
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
+using VariantsType = MundoBalloonApi.infrastructure.Data.Models.VariantsType;
 using VariantValue = MundoBalloonApi.infrastructure.Data.Models.VariantValue;
 
 namespace MundoBalloonApi.business.Middleware;
@@ -25,6 +27,8 @@ public class EntitiesMappingProfile : Profile
 {
     public EntitiesMappingProfile()
     {
+        // COLLECTIONS
+        CreateMap<CountryCode, DTOs.Entities.CountryCode>();
         // PRODUCTS
         CreateMap<Product, DTOs.Entities.Product>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ProductName))
@@ -52,9 +56,9 @@ public class EntitiesMappingProfile : Profile
         CreateMap<ProductVariantReview, DTOs.Entities.ProductVariantReview>();
         CreateMap<ProductVariantValue, DTOs.Entities.ProductVariantValue>();
         CreateMap<Variant, DTOs.Entities.Variant>()
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1))
-            .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.VariantType));
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Variant1));
         CreateMap<UiRegistry, DTOs.Entities.UiRegistry>();
+        CreateMap<VariantsType, DTOs.Entities.VariantsType>();
         // USER
         CreateMap<Orders, DTOs.Entities.Orders>()
             .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User))
