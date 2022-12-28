@@ -14,7 +14,9 @@ public partial class UserEventQueries
     public IQueryable<UserCart> GetUserCart([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId)
-            .Include(uc => uc.ProductVariant));
+        var userCart = mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId)
+            .Include(uc => uc.ProductVariant)
+            .ThenInclude(pv => pv!.ProductVariantMedia);
+        return mapper.ProjectTo<UserCart>(userCart);
     }
 }
