@@ -11,13 +11,13 @@ public partial class UserEventQueries
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<UserEvent?> GetUserEventById([ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper, int userEventid)
+        [Service] IMapper mapper, int userEventId)
     {
         var userEvent = await mundoBalloonContext.UserEvents
             .Include(ue => ue.EventCartDetails)
             .Include(ue => ue.User)
             .AsNoTracking()
-            .FirstOrDefaultAsync(ue => ue.UserEventId == userEventid);
+            .FirstOrDefaultAsync(ue => ue.UserEventId == userEventId);
         return mapper.Map<UserEvent>(userEvent);
     }
 }

@@ -7,7 +7,7 @@ public interface IUsersRepository
     Task<User?> GetById(string userId, CancellationToken cancellationToken);
     Task<User> Create(User user, CancellationToken cancellationToken);
     Task<bool> DeleteUser(string userId, CancellationToken cancellationToken);
-    Task<UserEvent?> GetByUserId(int UserEventId, CancellationToken cancellationToken);
+    Task<UserEvent?> GetByUserId(int userEventId, CancellationToken cancellationToken);
     Task<UserEvent> CreateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
     Task<bool> DeleteUserEvent(int userEventId, CancellationToken cancellationToken);
     Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
@@ -28,8 +28,8 @@ public interface IUsersRepository
     Task<UserProfile> AddUserProfile(UserProfile userProfile, CancellationToken cancellationToken);
     Task<UserProfile> UpdateUserProfile(UserProfile userProfiles, CancellationToken cancellationToken);
     Task<UserAddresses> UpdateUserAddresses(UserAddresses userAddresses, CancellationToken cancellationToken);
-    Task<bool> DeleteOrder(int orderId, CancellationToken cancellationToken);
-    Task<bool> DeleteUserAddress(int userAddressesId, CancellationToken cancellationToken);
-    Task<bool> DeleteUserProfile(int userProfileId, CancellationToken cancellationToken);
+    Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken);
+    Task<bool> DeleteUserAddress(string userId, int userAddressesId, CancellationToken cancellationToken);
+    Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken);
     Task<bool> DeleteOrderProductDetails(int orderDetailsProductId, CancellationToken cancellationToken);
 }

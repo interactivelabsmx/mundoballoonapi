@@ -6,7 +6,7 @@ namespace MundoBalloonApi.business.Contracts;
 public interface ISiteService
 {
     Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts(bool includeBestSellingProducts,
-        bool includeNewestProducts);
+        bool includeNewestProducts, CancellationToken cancellationToken);
 
     List<NavOption> GetNavOptions(string language);
 }

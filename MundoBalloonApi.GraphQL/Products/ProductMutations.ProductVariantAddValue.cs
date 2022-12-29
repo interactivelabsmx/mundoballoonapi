@@ -9,8 +9,8 @@ public partial class ProductMutations
     [Authorize(Roles = new[] { "ADMIN" })]
     public Task<ProductVariant> ProductVariantAddValue(
         ProductVariantValue input,
-        [Service] IProductService productService)
+        [Service] IProductService productService, CancellationToken cancellationToken)
     {
-        return productService.ProductVariantAddValue(input);
+        return productService.ProductVariantAddValue(input, cancellationToken);
     }
 }

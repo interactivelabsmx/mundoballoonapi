@@ -220,21 +220,23 @@ public class UsersRepository : IUsersRepository
         return true;
     }
 
-    public async Task<bool> DeleteOrder(int orderId, CancellationToken cancellationToken)
+    public async Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var order = await context.Orders.FirstOrDefaultAsync(u => u.OrderId == orderId, cancellationToken);
+        var order = await context.Orders.FirstOrDefaultAsync(u => u.OrderId == orderId && u.UserId == userId,
+            cancellationToken);
         if (order == null) return false;
         context.Orders.Remove(order);
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
 
-    public async Task<bool> DeleteUserAddress(int userAddressesId, CancellationToken cancellationToken)
+    public async Task<bool> DeleteUserAddress(string userId, int userAddressesId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         var userAddresses =
-            await context.UserAddresses.FirstOrDefaultAsync(u => u.UserAddressesId == userAddressesId,
+            await context.UserAddresses.FirstOrDefaultAsync(
+                u => u.UserAddressesId == userAddressesId && u.UserId == userId,
                 cancellationToken);
         if (userAddresses == null) return false;
         context.UserAddresses.Remove(userAddresses);
@@ -242,11 +244,12 @@ public class UsersRepository : IUsersRepository
         return true;
     }
 
-    public async Task<bool> DeleteUserProfile(int userProfileId, CancellationToken cancellationToken)
+    public async Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         var userProfile =
-            await context.UserProfiles.FirstOrDefaultAsync(u => u.UserProfileId == userProfileId, cancellationToken);
+            await context.UserProfiles.FirstOrDefaultAsync(u => u.UserProfileId == userProfileId && u.UserId == userId,
+                cancellationToken);
         if (userProfile == null) return false;
         context.UserProfiles.Remove(userProfile);
         await context.SaveChangesAsync(cancellationToken);

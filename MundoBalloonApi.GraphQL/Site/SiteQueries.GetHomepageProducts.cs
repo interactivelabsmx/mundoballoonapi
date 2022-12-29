@@ -9,8 +9,10 @@ public partial class SiteQueries
 {
     [AllowAnonymous]
     public async Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts(
-        [Service] ISiteService siteService, bool includeBestSellingProducts, bool includeNewestProducts)
+        [Service] ISiteService siteService, bool includeBestSellingProducts, bool includeNewestProducts,
+        CancellationToken cancellationToken)
     {
-        return await siteService.GetHomepageProducts(includeBestSellingProducts, includeNewestProducts);
+        return await siteService.GetHomepageProducts(includeBestSellingProducts, includeNewestProducts,
+            cancellationToken);
     }
 }

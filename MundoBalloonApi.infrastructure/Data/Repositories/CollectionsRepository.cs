@@ -13,49 +13,50 @@ public class CollectionsRepository : ICollectionsRepository
         _contextFactory = contextFactory;
     }
 
-    public async Task<ProductCategory> CreateProductCategory(ProductCategory productCategory)
+    public async Task<ProductCategory> CreateProductCategory(ProductCategory productCategory,
+        CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             context.ProductCategories.Add(productCategory);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
 
         return productCategory;
     }
 
-    public async Task<Variant> CreateVariant(Variant variant)
+    public async Task<Variant> CreateVariant(Variant variant, CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             context.Variants.Add(variant);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
 
         return variant;
     }
 
-    public async Task<VariantValue> CreateVariantValue(VariantValue variant)
+    public async Task<VariantValue> CreateVariantValue(VariantValue variant, CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             context.VariantValues.Add(variant);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
 
         return variant;
     }
 
-    public async Task<VariantsType> CreateVariantsType(VariantsType variantsType)
+    public async Task<VariantsType> CreateVariantsType(VariantsType variantsType, CancellationToken cancellationToken)
     {
-        var context = await _contextFactory.CreateDbContextAsync();
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             context.VariantsTypes.Add(variantsType);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
 
         return variantsType;

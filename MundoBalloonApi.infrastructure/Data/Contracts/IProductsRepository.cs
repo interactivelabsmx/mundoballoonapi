@@ -6,25 +6,27 @@ public interface IProductsRepository
 {
     IQueryable<Product> GetProducts();
 
-    Task<Product> CreateProduct(Product product);
+    Task<Product> CreateProduct(Product product, CancellationToken cancellationToken);
 
-    Task<bool> DeleteProduct(int productId);
+    Task<bool> DeleteProduct(int productId, CancellationToken cancellationToken);
 
-    Task<bool> DeleteProductVariant(int productVariantId);
+    Task<bool> DeleteProductVariant(int productVariantId, CancellationToken cancellationToken);
 
-    Task<Product> UpdateProduct(Product product);
+    Task<Product> UpdateProduct(Product product, CancellationToken cancellationToken);
 
-    Task<ProductVariant> CreateProductVariant(ProductVariant productVariant);
+    Task<ProductVariant> CreateProductVariant(ProductVariant productVariant, CancellationToken cancellationToken);
 
-    Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue);
+    Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue, CancellationToken cancellationToken);
 
-    Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId);
+    Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId,
+        CancellationToken cancellationToken);
 
-    Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia);
+    Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia, CancellationToken cancellationToken);
 
-    Task<bool> DeleteProductVariantMedia(int productVariantMediaId);
+    Task<bool> DeleteProductVariantMedia(int productVariantMediaId, CancellationToken cancellationToken);
 
-    Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant);
+    Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant, CancellationToken cancellationToken);
 
-    Task<ProductVariant> AddProductVariantReview(ProductVariantReview variantReview);
+    Task<ProductVariant> AddProductVariantReview(ProductVariantReview variantReview,
+        CancellationToken cancellationToken);
 }

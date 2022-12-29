@@ -9,8 +9,8 @@ public partial class ProductMutations
     [Authorize(Roles = new[] { "ADMIN" })]
     public Task<Product> CreateProduct(
         Product input,
-        [Service] IProductService productService)
+        [Service] IProductService productService, CancellationToken cancellationToken)
     {
-        return productService.CreateProduct(input);
+        return productService.CreateProduct(input, cancellationToken);
     }
 }

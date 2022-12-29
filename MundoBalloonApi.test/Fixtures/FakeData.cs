@@ -52,7 +52,7 @@ public class FakeData
 
     private VariantsType MakeVariantsType(int seed)
     {
-        return _variantsTypeFaker?.UseSeed(seed).Generate() ?? new VariantsType();
+        return _variantsTypeFaker.UseSeed(seed).Generate() ?? new VariantsType();
     }
 
     public List<VariantsType> MakeVariantsTypes(int count = 10)
@@ -60,7 +60,7 @@ public class FakeData
         return Enumerable.Range(1, count).Select(MakeVariantsType).ToList();
     }
 
-    private static Faker<Variant> VariantFakerBuilder(List<VariantsType> variantsTypes)
+    private static Faker<Variant> VariantFakerBuilder()
     {
         return new Faker<Variant>()
             .RuleFor(v => v.Variant1, f => f.Commerce.Department());
@@ -73,7 +73,7 @@ public class FakeData
 
     public List<Variant> MakeVariants(List<VariantsType> variantsTypes, int count = 10)
     {
-        _variantFaker ??= VariantFakerBuilder(variantsTypes);
+        _variantFaker ??= VariantFakerBuilder();
         return Enumerable.Range(1, count).Select(MakeVariant).ToList();
     }
 

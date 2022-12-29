@@ -12,15 +12,15 @@ public partial class ProductMutations
         IFile file,
         ProductVariantMedium input,
         [Service] IProductService productService, [Service] IConfiguration configuration,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var storageConfig = configuration.GetSection(AzureStorageConfig.ConfigName).Get<AzureStorageConfig>();
         await using var stream = file.OpenReadStream();
-        if (storageConfig == null) return await productService.ProductVariantAddMedia(input);
+        if (storageConfig == null) return await productService.ProductVariantAddMedia(input, cancellationToken);
         var contentInfo = await StorageHelper.UploadFileToStorage(stream, file.Name, storageConfig, cancellationToken);
         if (contentInfo == null) return null;
         input.Url = contentInfo.ToString();
 
-        return await productService.ProductVariantAddMedia(input);
+        return await productService.ProductVariantAddMedia(input, cancellationToken);
     }
 }

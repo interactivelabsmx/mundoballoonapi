@@ -7,6 +7,6 @@ public class OrderProductsDetails : BaseEntity
     public int ProductVariantId { get; init; }
     public int Amount { get; init; }
     public decimal Price { get; init; }
-    public Orders? Orders { get; set; }
+    public Orders? Order { get; set; }
     public ProductVariant? ProductVariant { get; set; }
 }

@@ -61,14 +61,10 @@ public class EntitiesMappingProfile : Profile
         CreateMap<VariantsType, DTOs.Entities.VariantsType>();
         // USER
         CreateMap<Orders, DTOs.Entities.Orders>()
-            .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User))
             .ForMember(dest => dest.Profile, opt => opt.MapFrom(src => src.UserProfile))
             .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.UserAddresses));
         CreateMap<OrderProductsDetails, DTOs.Entities.OrderProductsDetails>()
-            .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant))
-            .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Orders))
-            .ForMember(dest => dest.amount, opt => opt.MapFrom(src => src.Amount))
-            .ForMember(dest => dest.price, opt => opt.MapFrom(src => src.Price));
+            .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         CreateMap<User, DTOs.Entities.User>()
             .ForMember(dest => dest.PaymentProfiles, opt => opt.MapFrom(src => src.UserPaymentProfiles))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserCarts))
@@ -83,17 +79,8 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.EventDate))
             .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.EventDetails))
             .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.EventCartDetails));
-        CreateMap<UserAddresses, DTOs.Entities.UserAddresses>()
-            .ForMember(dest => dest.Address1, opt => opt.MapFrom(src => src.Address1))
-            .ForMember(dest => dest.Address2, opt => opt.MapFrom(src => src.Address2))
-            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
-            .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State))
-            .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country))
-            .ForMember(dest => dest.Zipcode, opt => opt.MapFrom(src => src.Zipcode));
-        CreateMap<UserProfile, DTOs.Entities.UserProfile>()
-            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
-            .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
-            .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber));
+        CreateMap<UserAddresses, DTOs.Entities.UserAddresses>();
+        CreateMap<UserProfile, DTOs.Entities.UserProfile>();
         // SAVED CARTS
         CreateMap<UserCart, DTOs.Entities.UserCart>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));

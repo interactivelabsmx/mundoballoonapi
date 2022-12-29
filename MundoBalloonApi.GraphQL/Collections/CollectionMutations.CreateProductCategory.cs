@@ -8,8 +8,8 @@ public partial class CollectionMutations
 {
     [Authorize(Roles = new[] { "ADMIN" })]
     public Task<ProductCategory> CreateProductCategory(ProductCategory input,
-        [Service] ICollectionsService collectionsService)
+        [Service] ICollectionsService collectionsService, CancellationToken cancellationToken)
     {
-        return collectionsService.CreateProductCategory(input);
+        return collectionsService.CreateProductCategory(input, cancellationToken);
     }
 }

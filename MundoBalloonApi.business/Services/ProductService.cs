@@ -16,7 +16,7 @@ public class ProductService : IProductService
         _mapper = mapper;
     }
 
-    public async Task<Product> CreateProduct(Product createProductRequest)
+    public async Task<Product> CreateProduct(Product createProductRequest, CancellationToken cancellationToken)
     {
         var product = new infrastructure.Data.Models.Product
         {
@@ -25,11 +25,11 @@ public class ProductService : IProductService
             Price = createProductRequest.Price,
             ProductCategoryId = createProductRequest.ProductCategoryId
         };
-        product = await _productsRepository.CreateProduct(product);
+        product = await _productsRepository.CreateProduct(product, cancellationToken);
         return _mapper.Map<Product>(product);
     }
 
-    public async Task<ProductVariant> CreateProductVariant(ProductVariant request)
+    public async Task<ProductVariant> CreateProductVariant(ProductVariant request, CancellationToken cancellationToken)
     {
         var productVariant = new infrastructure.Data.Models.ProductVariant
         {
@@ -39,11 +39,12 @@ public class ProductService : IProductService
             ProductVariantDescription = request.Description,
             Price = request.Price
         };
-        productVariant = await _productsRepository.CreateProductVariant(productVariant);
+        productVariant = await _productsRepository.CreateProductVariant(productVariant, cancellationToken);
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue)
+    public async Task<ProductVariant> ProductVariantAddValue(ProductVariantValue variantValue,
+        CancellationToken cancellationToken)
     {
         var variantValueModel = new infrastructure.Data.Models.ProductVariantValue
         {
@@ -51,16 +52,19 @@ public class ProductService : IProductService
             VariantId = variantValue.VariantId,
             VariantValueId = variantValue.VariantValueId
         };
-        var productVariant = await _productsRepository.ProductVariantAddValue(variantValueModel);
+        var productVariant = await _productsRepository.ProductVariantAddValue(variantValueModel, cancellationToken);
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId)
+    public async Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId,
+        CancellationToken cancellationToken)
     {
-        return await _productsRepository.DeleteProductVariantValue(productVariantId, variantId, variantValueId);
+        return await _productsRepository.DeleteProductVariantValue(productVariantId, variantId, variantValueId,
+            cancellationToken);
     }
 
-    public async Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia)
+    public async Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia,
+        CancellationToken cancellationToken)
     {
         var variantMediaModel = new infrastructure.Data.Models.ProductVariantMedium
         {
@@ -71,11 +75,12 @@ public class ProductService : IProductService
             Name = variantMedia.Name,
             Description = variantMedia.Description
         };
-        var productVariant = await _productsRepository.ProductVariantAddMedia(variantMediaModel);
+        var productVariant = await _productsRepository.ProductVariantAddMedia(variantMediaModel, cancellationToken);
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<ProductVariant> AddProductVariantReview(ProductVariantReview review)
+    public async Task<ProductVariant> AddProductVariantReview(ProductVariantReview review,
+        CancellationToken cancellationToken)
     {
         var reviewModel = new infrastructure.Data.Models.ProductVariantReview
         {
@@ -84,26 +89,26 @@ public class ProductService : IProductService
             Rating = review.Rating,
             Comments = review.Comments
         };
-        var productReview = await _productsRepository.AddProductVariantReview(reviewModel);
+        var productReview = await _productsRepository.AddProductVariantReview(reviewModel, cancellationToken);
         return _mapper.Map<ProductVariant>(productReview);
     }
 
-    public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId)
+    public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId, CancellationToken cancellationToken)
     {
-        return await _productsRepository.DeleteProductVariantMedia(productVariantMediaId);
+        return await _productsRepository.DeleteProductVariantMedia(productVariantMediaId, cancellationToken);
     }
 
-    public async Task<bool> DeleteProduct(int productId)
+    public async Task<bool> DeleteProduct(int productId, CancellationToken cancellationToken)
     {
-        return await _productsRepository.DeleteProduct(productId);
+        return await _productsRepository.DeleteProduct(productId, cancellationToken);
     }
 
-    public async Task<bool> DeleteProductVariant(int productVariantId)
+    public async Task<bool> DeleteProductVariant(int productVariantId, CancellationToken cancellationToken)
     {
-        return await _productsRepository.DeleteProductVariant(productVariantId);
+        return await _productsRepository.DeleteProductVariant(productVariantId, cancellationToken);
     }
 
-    public async Task<Product> UpdateProduct(ProductEntity productEntity)
+    public async Task<Product> UpdateProduct(ProductEntity productEntity, CancellationToken cancellationToken)
     {
         var product = new infrastructure.Data.Models.Product
         {
@@ -113,11 +118,12 @@ public class ProductService : IProductService
             Price = productEntity.Price,
             ProductCategoryId = productEntity.ProductCategoryId
         };
-        var updatedProduct = await _productsRepository.UpdateProduct(product);
+        var updatedProduct = await _productsRepository.UpdateProduct(product, cancellationToken);
         return _mapper.Map<Product>(updatedProduct);
     }
 
-    public async Task<ProductVariant> UpdateProductVariant(ProductVariantEntity productVariantEntity)
+    public async Task<ProductVariant> UpdateProductVariant(ProductVariantEntity productVariantEntity,
+        CancellationToken cancellationToken)
     {
         var productVariant = new infrastructure.Data.Models.ProductVariant
         {
@@ -128,7 +134,7 @@ public class ProductService : IProductService
             ProductVariantDescription = productVariantEntity.Description,
             Price = productVariantEntity.Price
         };
-        var updateProductVariant = await _productsRepository.UpdateProductVariant(productVariant);
+        var updateProductVariant = await _productsRepository.UpdateProductVariant(productVariant, cancellationToken);
         return _mapper.Map<ProductVariant>(updateProductVariant);
     }
 }

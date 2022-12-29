@@ -20,23 +20,23 @@ public class SiteService : ISiteService
 
     public async Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts(
         bool includeBestSellingProducts,
-        bool includeNewestProducts)
+        bool includeNewestProducts, CancellationToken cancellationToken)
     {
         var homepageProducts = new Dictionary<string, List<Product>>();
 
-        var products = await _productsRepository.GetProducts().ToListAsync();
+        var products = await _productsRepository.GetProducts().ToListAsync(cancellationToken);
         var productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
         homepageProducts.Add("Featured", productsDto);
 
         if (includeBestSellingProducts)
         {
-            products = await _productsRepository.GetProducts().ToListAsync();
+            products = await _productsRepository.GetProducts().ToListAsync(cancellationToken);
             productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
             homepageProducts.Add("Best Selling", productsDto);
         }
 
         if (!includeNewestProducts) return homepageProducts;
-        products = await _productsRepository.GetProducts().ToListAsync();
+        products = await _productsRepository.GetProducts().ToListAsync(cancellationToken);
         productsDto = _mapper.Map<List<infrastructure.Data.Models.Product>, List<Product>>(products);
         homepageProducts.Add("Newest", productsDto);
 

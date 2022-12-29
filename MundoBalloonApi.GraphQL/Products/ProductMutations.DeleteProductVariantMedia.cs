@@ -7,8 +7,8 @@ public partial class ProductMutations
 {
     [Authorize(Roles = new[] { "ADMIN" })]
     public Task<bool> DeleteProductVariantMedia(
-        [Service] IProductService productService, int productVariantMediaId)
+        [Service] IProductService productService, int productVariantMediaId, CancellationToken cancellationToken)
     {
-        return productService.DeleteProductVariantMedia(productVariantMediaId);
+        return productService.DeleteProductVariantMedia(productVariantMediaId, cancellationToken);
     }
 }

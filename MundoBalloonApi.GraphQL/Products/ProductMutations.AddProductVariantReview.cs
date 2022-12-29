@@ -10,8 +10,8 @@ public partial class ProductMutations
     public async Task<ProductVariant?> AddProductVariantReview(
         ProductVariantReview input,
         [Service] IProductService productService,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
-        return await productService.AddProductVariantReview(input);
+        return await productService.AddProductVariantReview(input, cancellationToken);
     }
 }

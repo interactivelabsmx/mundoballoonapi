@@ -28,7 +28,7 @@ public interface IUsersService
     Task<UserProfile> AddUserProfile(string userId, string firstName, string lastName, int phoneNumber,
         CancellationToken cancellationToken);
 
-    Task<UserProfile> UpdateUserProfile(int userProfileId, string userId, string firstName, string lastName,
+    Task<UserProfile> UpdateUserProfile(string userId, int userProfileId, string firstName, string lastName,
         int phoneNumber, CancellationToken cancellationToken);
 
     Task<UserAddresses> UpdateUserAddresses(int userAddressesId, string userId, string address1, string address2,
@@ -36,6 +36,6 @@ public interface IUsersService
 
     Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken);
     Task<bool> DeleteUserAddresses(string userId, int userAddressesId, CancellationToken cancellationToken);
-    Task<bool> DeleteOrderProductDetails(string userId, int orderDetailsProductId, CancellationToken cancellationToken);
+    Task<bool> DeleteOrderProductDetails(int orderDetailsProductId, CancellationToken cancellationToken);
     Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken);
 }

@@ -15,10 +15,6 @@ public partial class ProductQueries
     public IQueryable<Product> GetSearchProducts([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
-        var productQuery = from product in mundoBalloonContext.Products
-            join productVariant in mundoBalloonContext.ProductVariants
-                on product.ProductId equals productVariant.ProductId
-            select product;
         return mapper.ProjectTo<Product>(mundoBalloonContext.Products);
     }
 }

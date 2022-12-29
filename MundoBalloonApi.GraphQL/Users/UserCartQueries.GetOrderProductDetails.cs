@@ -16,6 +16,6 @@ public partial class UserCartQueries
     {
         return mapper.ProjectTo<OrderProductsDetails>(mundoBalloonContext.OrderProductDetails
             .Where(uc => uc.OrderDetailsProductsId == orderDetailsProductsId)
-            .Include(uc => uc.Orders).Include(uc => uc.ProductVariant));
+            .Include(uc => uc.Order).Include(uc => uc.ProductVariant));
     }
 }

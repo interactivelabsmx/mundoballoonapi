@@ -656,7 +656,7 @@ public class MundoBalloonContext : DbContext
                 .HasPrincipalKey(p => p.ProductVariantId)
                 .HasForeignKey(d => d.ProductVariantId)
                 .HasConstraintName("fk_order_products_details_product_variant1");
-            entity.HasOne(d => d.Orders)
+            entity.HasOne(d => d.Order)
                 .WithMany(p => p.OrdersOrderProductsDetails)
                 .HasPrincipalKey(p => p.OrderId)
                 .HasForeignKey(d => d.OrderId)

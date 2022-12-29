@@ -63,20 +63,20 @@ public class UsersService : IUsersService
 
     public async Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken)
     {
-        return await _usersRepository.DeleteOrder(orderId, cancellationToken);
+        return await _usersRepository.DeleteOrder(userId, orderId, cancellationToken);
     }
 
     public async Task<bool> DeleteUserAddresses(string userId, int userAddressesId, CancellationToken cancellationToken)
     {
-        return await _usersRepository.DeleteUserAddress(userAddressesId, cancellationToken);
+        return await _usersRepository.DeleteUserAddress(userId, userAddressesId, cancellationToken);
     }
 
     public async Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken)
     {
-        return await _usersRepository.DeleteUserProfile(userProfileId, cancellationToken);
+        return await _usersRepository.DeleteUserProfile(userId, userProfileId, cancellationToken);
     }
 
-    public async Task<bool> DeleteOrderProductDetails(string userId, int orderDetailsProductId,
+    public async Task<bool> DeleteOrderProductDetails(int orderDetailsProductId,
         CancellationToken cancellationToken)
     {
         return await _usersRepository.DeleteOrderProductDetails(orderDetailsProductId, cancellationToken);
@@ -96,7 +96,7 @@ public class UsersService : IUsersService
         return _mapper.Map<UserEvent>(updatedUserEvent);
     }
 
-    public async Task<UserProfile> UpdateUserProfile(int userProfileId, string userId, string firstName,
+    public async Task<UserProfile> UpdateUserProfile(string userId, int userProfileId, string firstName,
         string lastName, int phoneNumber
         , CancellationToken cancellationToken)
     {
@@ -115,7 +115,7 @@ public class UsersService : IUsersService
     public async Task<UserAddresses> UpdateUserAddresses(int userAddressesId, string userId, string address1,
         string address2, string city, string state, string country, string zipCode, CancellationToken cancellationToken)
     {
-        var userAddressess = new infrastructure.Data.Models.UserAddresses
+        var userAddress = new infrastructure.Data.Models.UserAddresses
         {
             UserAddressesId = userAddressesId,
             UserId = userId,
@@ -126,8 +126,8 @@ public class UsersService : IUsersService
             Country = country,
             Zipcode = zipCode
         };
-        var UpdateUserAddresses = await _usersRepository.UpdateUserAddresses(userAddressess, cancellationToken);
-        return _mapper.Map<UserAddresses>(UpdateUserAddresses);
+        var updateUserAddresses = await _usersRepository.UpdateUserAddresses(userAddress, cancellationToken);
+        return _mapper.Map<UserAddresses>(updateUserAddresses);
     }
 
     public async Task<EventCartDetail> AddToEventCart(int productVariantId, int userEventId, double quantity,

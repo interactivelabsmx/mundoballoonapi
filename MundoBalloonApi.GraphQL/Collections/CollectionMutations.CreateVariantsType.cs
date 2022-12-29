@@ -8,8 +8,8 @@ public partial class CollectionMutations
 {
     [Authorize(Roles = new[] { "ADMIN" })]
     public Task<VariantsType> CreateVariantsType(string variantsType,
-        [Service] ICollectionsService collectionsService)
+        [Service] ICollectionsService collectionsService, CancellationToken cancellationToken)
     {
-        return collectionsService.CreateVariantsType(variantsType);
+        return collectionsService.CreateVariantsType(variantsType, cancellationToken);
     }
 }

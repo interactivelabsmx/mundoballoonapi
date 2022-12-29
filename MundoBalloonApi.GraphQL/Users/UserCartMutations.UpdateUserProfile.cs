@@ -12,7 +12,7 @@ public partial class UserCartMutations
         [Service] IUsersService usersService,
         CancellationToken cancellationToken)
     {
-        return usersService.UpdateUserProfile(userProfileId, currentUser.UserId, firstName, lastName, phoneNumber,
+        return usersService.UpdateUserProfile(currentUser.UserId, userProfileId, firstName, lastName, phoneNumber,
             cancellationToken);
     }
 }
