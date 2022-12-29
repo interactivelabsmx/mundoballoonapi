@@ -17,7 +17,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<ProductVariantMedium> ProductVariantMedia { get; set; } = default!;
     public DbSet<ProductVariantValue> ProductVariantValues { get; set; } = default!;
     public DbSet<ProductVariantReview> ProductVariantReviews { get; set; } = default!;
-    public virtual DbSet<UiRegistry> UiRegistries { get; set; } = null!;
+    public DbSet<UiRegistry> UiRegistries { get; set; } = null!;
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<UserCart> UserCarts { get; set; } = default!;
     public DbSet<UserEvent> UserEvents { get; set; } = default!;
@@ -26,7 +26,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<UserPaymentProfile> UserPaymentProfiles { get; set; } = default!;
     public DbSet<Variant> Variants { get; set; } = default!;
     public DbSet<VariantValue> VariantValues { get; set; } = default!;
-    public virtual DbSet<VariantsType> VariantsTypes { get; set; }
+    public DbSet<VariantsType> VariantsTypes { get; set; } = default!;
     public DbSet<CountryCode> CountryCodes { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
