@@ -6,5 +6,5 @@ public class UserProfile
     public string UserId { get; init; } = string.Empty;
     public string FirstName { get; init; } = string.Empty;
     public string LastName { get; init; } = string.Empty;
-    public int PhoneNumber { get; init; } 
+    public int PhoneNumber { get; init; }
 }

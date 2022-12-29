@@ -7,10 +7,12 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserCartMutations
 {
     [Authorize]
-    public Task<UserProfile> UpdateUserProfile(int userProfileId, [GlobalState("currentUser")] CurrentUser currentUser, string firstName, string lastName, int phoneNumber,
-    [Service] IUsersService usersService,
-    CancellationToken cancellationToken)
+    public Task<UserProfile> UpdateUserProfile(int userProfileId, [GlobalState("currentUser")] CurrentUser currentUser,
+        string firstName, string lastName, int phoneNumber,
+        [Service] IUsersService usersService,
+        CancellationToken cancellationToken)
     {
-        return usersService.UpdateUserProfile(userProfileId, currentUser.UserId, firstName, lastName, phoneNumber, cancellationToken);
+        return usersService.UpdateUserProfile(userProfileId, currentUser.UserId, firstName, lastName, phoneNumber,
+            cancellationToken);
     }
 }

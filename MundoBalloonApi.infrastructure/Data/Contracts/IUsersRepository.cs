@@ -20,14 +20,16 @@ public interface IUsersRepository
     Task<UserCart?> GetUserCarts(CancellationToken cancellationToken);
     Task<OrderProductsDetails?> GetOrderProductsDetails(int orderId, CancellationToken cancellationToken);
     Task<Orders> AddOrder(Orders order, CancellationToken cancellationToken);
-    Task<OrderProductsDetails> AddOrderProductDetails(OrderProductsDetails orderProductsDetails, CancellationToken cancellationToken);
+
+    Task<OrderProductsDetails> AddOrderProductDetails(OrderProductsDetails orderProductsDetails,
+        CancellationToken cancellationToken);
+
     Task<UserAddresses> AddUserAddresses(UserAddresses userAddresses, CancellationToken cancellationToken);
     Task<UserProfile> AddUserProfile(UserProfile userProfile, CancellationToken cancellationToken);
-    Task <UserProfile> UpdateUserProfile(UserProfile userProfiles, CancellationToken cancellationToken);
-    Task <UserAddresses> UpdateUserAddresses(UserAddresses userAddresses, CancellationToken cancellationToken);
+    Task<UserProfile> UpdateUserProfile(UserProfile userProfiles, CancellationToken cancellationToken);
+    Task<UserAddresses> UpdateUserAddresses(UserAddresses userAddresses, CancellationToken cancellationToken);
     Task<bool> DeleteOrder(int orderId, CancellationToken cancellationToken);
     Task<bool> DeleteUserAddress(int userAddressesId, CancellationToken cancellationToken);
     Task<bool> DeleteUserProfile(int userProfileId, CancellationToken cancellationToken);
     Task<bool> DeleteOrderProductDetails(int orderDetailsProductId, CancellationToken cancellationToken);
 }
-

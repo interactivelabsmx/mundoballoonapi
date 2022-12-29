@@ -14,5 +14,4 @@ public partial class UserCartQueries
     {
         return mapper.ProjectTo<UserAddresses>(mundoBalloonContext.UserAddresses.Where(uc => uc.UserId == userId));
     }
-    
 }

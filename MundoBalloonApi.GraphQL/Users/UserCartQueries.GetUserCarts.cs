@@ -15,6 +15,6 @@ public partial class UserCartQueries
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
         return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId)
-        .Include(uc => uc.ProductVariant));
+            .Include(uc => uc.ProductVariant));
     }
 }

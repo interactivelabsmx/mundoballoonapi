@@ -18,11 +18,22 @@ public interface IUsersService
 
     Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken);
     Task<Orders> AddOrder(string userId, int userAddressesId, int userProfileId, CancellationToken cancellationToken);
-    Task<OrderProductsDetails> AddOrderProductDetails(int orderId, int productVariantId, int amount, decimal price, CancellationToken cancellationToken);
-    Task<UserAddresses> AddUserAddresses(string userId, string address1, string address2, string city, string state, string country, string zipCode, CancellationToken cancellationToken);
-    Task<UserProfile> AddUserProfile(string userId, string firstName, string lastName, int phoneNumber, CancellationToken cancellationToken);
-    Task<UserProfile> UpdateUserProfile(int userProfileId,string userId, string firstName, string lastName, int phoneNumber, CancellationToken cancellationToken);
-    Task<UserAddresses> UpdateUserAddresses(int userAddressesId, string userId, string address1, string address2, string city, string state, string country, string zipCode, CancellationToken cancellationToken);
+
+    Task<OrderProductsDetails> AddOrderProductDetails(int orderId, int productVariantId, int amount, decimal price,
+        CancellationToken cancellationToken);
+
+    Task<UserAddresses> AddUserAddresses(string userId, string address1, string address2, string city, string state,
+        string country, string zipCode, CancellationToken cancellationToken);
+
+    Task<UserProfile> AddUserProfile(string userId, string firstName, string lastName, int phoneNumber,
+        CancellationToken cancellationToken);
+
+    Task<UserProfile> UpdateUserProfile(int userProfileId, string userId, string firstName, string lastName,
+        int phoneNumber, CancellationToken cancellationToken);
+
+    Task<UserAddresses> UpdateUserAddresses(int userAddressesId, string userId, string address1, string address2,
+        string city, string state, string country, string zipCode, CancellationToken cancellationToken);
+
     Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken);
     Task<bool> DeleteUserAddresses(string userId, int userAddressesId, CancellationToken cancellationToken);
     Task<bool> DeleteOrderProductDetails(string userId, int orderDetailsProductId, CancellationToken cancellationToken);

@@ -8,7 +8,8 @@ public partial class UserCartMutations
 {
     [Authorize]
     public Task<bool> DeleteOrderProductDetails(
-        [Service] IUsersService usersService, int orderDetailsProductId, [GlobalState("currentUser")] CurrentUser currentUser,
+        [Service] IUsersService usersService, int orderDetailsProductId,
+        [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {
         return usersService.DeleteOrderProductDetails(currentUser.UserId, orderDetailsProductId, cancellationToken);

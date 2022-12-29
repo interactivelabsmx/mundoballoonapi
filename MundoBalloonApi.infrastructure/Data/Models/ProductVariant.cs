@@ -12,6 +12,7 @@ public class ProductVariant : BaseEntity
 
     public ICollection<EventCartDetail> EventCartDetailProductVariants { get; set; } =
         new HashSet<EventCartDetail>();
+
     public ICollection<OrderProductsDetails> OrderProductsDetailsProductVariants { get; set; } =
         new HashSet<OrderProductsDetails>();
 
