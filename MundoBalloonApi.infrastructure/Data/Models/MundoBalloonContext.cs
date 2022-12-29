@@ -260,6 +260,7 @@ public class MundoBalloonContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_product_variant_media_product_variants1");
         });
+
         modelBuilder.Entity<ProductVariantReview>(entity =>
         {
             entity.HasKey(e => e.ProductVariantReviewId)
@@ -438,6 +439,7 @@ public class MundoBalloonContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_user_cart_Users1");
         });
+
         modelBuilder.Entity<UserEvent>(entity =>
         {
             entity.ToTable("user_event");
@@ -479,6 +481,7 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("fk_user_event_Users1");
         });
+
         modelBuilder.Entity<UserAddresses>(entity =>
         {
             entity.ToTable("user_addresses");
@@ -530,6 +533,7 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("fk_user_addreses_Users1");
         });
+
         modelBuilder.Entity<UserProfile>(entity =>
         {
             entity.ToTable("user_profile");
@@ -565,6 +569,7 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("fk_user_profile_users1");
         });
+
         modelBuilder.Entity<Orders>(entity =>
         {
             entity.ToTable("orders");
@@ -611,6 +616,7 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.UserAddressesId)
                 .HasConstraintName("fk_orders_user_addresses1");
         });
+
         modelBuilder.Entity<OrderProductsDetails>(entity =>
         {
             entity.ToTable("order_products_details");
@@ -656,6 +662,7 @@ public class MundoBalloonContext : DbContext
                 .HasForeignKey(d => d.OrderId)
                 .HasConstraintName("fk_order_products_details_orders1");
         });
+
         modelBuilder.Entity<UserPaymentProfile>(entity =>
         {
             entity.HasKey(e => e.UserProfileId)
