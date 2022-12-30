@@ -2,7 +2,7 @@
 
 public class UserEvent : BaseDto
 {
-    public int UserEventId { get; set; } = 0;
+    public int UserEventId { get; set; }
     public string UserId { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public DateTime? Date { get; set; }

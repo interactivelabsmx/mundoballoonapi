@@ -15,5 +15,5 @@ public class VariantsType : BaseEntity
 
     public string? VariantType { get; set; }
 
-    public virtual ICollection<Variant> Variants { get; } = new List<Variant>();
+    public ICollection<Variant> Variants { get; set; } = new List<Variant>();
 }

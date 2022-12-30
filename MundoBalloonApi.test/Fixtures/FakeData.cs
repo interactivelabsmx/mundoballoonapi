@@ -60,10 +60,11 @@ public class FakeData
         return Enumerable.Range(1, count).Select(MakeVariantsType).ToList();
     }
 
-    private static Faker<Variant> VariantFakerBuilder()
+    private static Faker<Variant> VariantFakerBuilder(List<VariantsType> variantsTypes)
     {
         return new Faker<Variant>()
-            .RuleFor(v => v.Variant1, f => f.Commerce.Department());
+            .RuleFor(v => v.Variant1, f => f.Commerce.Department())
+            .RuleFor(v => v.VariantsType, f =>  f.PickRandom(variantsTypes));
     }
 
     private Variant MakeVariant(int seed)
@@ -73,7 +74,7 @@ public class FakeData
 
     public List<Variant> MakeVariants(List<VariantsType> variantsTypes, int count = 10)
     {
-        _variantFaker ??= VariantFakerBuilder();
+        _variantFaker ??= VariantFakerBuilder(variantsTypes);
         return Enumerable.Range(1, count).Select(MakeVariant).ToList();
     }
 

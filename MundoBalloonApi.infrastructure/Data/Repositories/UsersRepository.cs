@@ -209,11 +209,11 @@ public class UsersRepository : IUsersRepository
         return true;
     }
 
-    public async Task<bool> DeleteUserCartProduct(string sku, CancellationToken cancellationToken)
+    public async Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         var userCart =
-            await context.UserCarts.FirstOrDefaultAsync(ue => ue.Sku == sku, cancellationToken);
+            await context.UserCarts.FirstOrDefaultAsync(ue => ue.Sku == sku && ue.UserId == userId, cancellationToken);
         if (userCart == null) return false;
         context.UserCarts.Remove(userCart);
         await context.SaveChangesAsync(cancellationToken);

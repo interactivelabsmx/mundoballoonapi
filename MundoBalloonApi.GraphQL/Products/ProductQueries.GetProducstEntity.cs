@@ -15,8 +15,8 @@ public partial class ProductQueries
         return mundoBalloonContext.Products.Select(p => new ProductEntity
         {
             ProductId = p.ProductId,
-            Name = p.ProductName ?? string.Empty,
-            Description = p.ProductDescription ?? string.Empty,
+            Name = p.ProductName,
+            Description = p.ProductDescription,
             Price = p.Price,
             ProductCategoryId = p.ProductCategoryId
         });

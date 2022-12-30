@@ -58,7 +58,7 @@ public class UsersService : IUsersService
 
     public async Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
     {
-        return await _usersRepository.DeleteUserCartProduct(sku, cancellationToken);
+        return await _usersRepository.DeleteUserCartProduct(userId, sku, cancellationToken);
     }
 
     public async Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken)

@@ -4,7 +4,7 @@ public class UiRegistry : BaseEntity
 {
     public int UiRegistryId { get; set; }
     public string ComponentId { get; set; } = null!;
-    public bool Deprecated { get; set; } = false;
+    public bool Deprecated { get; set; }
 
-    public virtual ICollection<Variant> Variants { get; set; } = new HashSet<Variant>();
+    public ICollection<Variant> Variants { get; set; } = new HashSet<Variant>();
 }

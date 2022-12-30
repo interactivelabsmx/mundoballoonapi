@@ -922,11 +922,18 @@ public class MundoBalloonContext : DbContext
                         var utcNow = DateTime.UtcNow;
                         trackable.UpdatedAt = utcNow;
                         break;
-
                     case EntityState.Deleted:
                         entry.State = EntityState.Modified;
                         trackable.IsDeleted = true;
                         break;
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    case EntityState.Added:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
     }
 }
