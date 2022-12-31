@@ -36,7 +36,6 @@ public class Startup
             .AddAutoMapper(typeof(EntitiesMappingProfile))
             .AddDbServices(Configuration, connectionString)
             .AddHttpContextAccessor()
-            .AddInputValidationServices()
             .AddAuthenticationServices()
             .AddRedisRateLimiting();
 
