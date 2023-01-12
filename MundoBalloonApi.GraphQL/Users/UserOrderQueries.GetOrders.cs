@@ -6,7 +6,7 @@ using Orders = MundoBalloonApi.business.DTOs.Entities.Orders;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserCartQueries
+public partial class UserOrderQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]

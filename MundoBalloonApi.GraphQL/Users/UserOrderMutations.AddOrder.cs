@@ -4,14 +4,14 @@ using MundoBalloonApi.business.DTOs.Entities;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserCartMutations
+public partial class UserOrderMutations
 {
     [Authorize]
-    public Task<OrderProductsDetails> AddOrderProductDetails(
-        int orderId, int productVariantId, int amount, decimal price,
+    public Task<Orders> AddOrder(
+        [GlobalState("currentUser")] CurrentUser currentUser, int userAddressesId, int userProfileId,
         [Service] IUsersService usersService,
         CancellationToken cancellationToken)
     {
-        return usersService.AddOrderProductDetails(orderId, productVariantId, amount, price, cancellationToken);
+        return usersService.AddOrder(currentUser.UserId, userAddressesId, userProfileId, cancellationToken);
     }
 }

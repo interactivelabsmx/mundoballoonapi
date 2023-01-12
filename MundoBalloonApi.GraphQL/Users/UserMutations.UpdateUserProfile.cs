@@ -4,7 +4,7 @@ using MundoBalloonApi.business.DTOs.Entities;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserCartMutations
+public partial class UserMutations
 {
     [Authorize]
     public Task<UserProfile> UpdateUserProfile(int userProfileId, [GlobalState("currentUser")] CurrentUser currentUser,

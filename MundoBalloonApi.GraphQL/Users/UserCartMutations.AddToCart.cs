@@ -4,7 +4,7 @@ using MundoBalloonApi.business.DTOs.Entities;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserEventMutations
+public partial class UserCartMutations
 {
     [Authorize]
     public Task<UserCart> AddToCart(string sku, double quantity, double price, int productVariantId,

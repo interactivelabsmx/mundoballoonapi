@@ -5,7 +5,7 @@ using UserAddresses = MundoBalloonApi.business.DTOs.Entities.UserAddresses;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserCartQueries
+public partial class UserQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]

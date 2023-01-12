@@ -4,7 +4,7 @@ using MundoBalloonApi.business.DTOs.Entities;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserEventMutations
+public partial class UserCartMutations
 {
     [AllowAnonymous]
     public Task<bool> DeleteUserCartProduct(

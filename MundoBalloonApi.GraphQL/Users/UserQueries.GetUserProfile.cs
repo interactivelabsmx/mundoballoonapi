@@ -5,7 +5,7 @@ using UserProfile = MundoBalloonApi.business.DTOs.Entities.UserProfile;
 
 namespace MundoBalloonApi.graphql.Users;
 
-public partial class UserCartQueries
+public partial class UserQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
