@@ -216,4 +216,19 @@ public class UsersService : IUsersService
         userProfile = await _usersRepository.AddUserProfile(userProfile, cancellationToken);
         return _mapper.Map<UserProfile>(userProfile);
     }
+
+    public async Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(Orders order, IEnumerable<OrderProductsDetails> productsDetails, CancellationToken cancellationToken)
+    {
+        if (order.OrderId == null) return productsDetails;
+        var items = productsDetails.Select(item => new infrastructure.Data.Models.OrderProductsDetails()
+        {
+            OrderId = (int)order.OrderId,
+            ProductVariantId = item.ProductVariantId,
+            Amount = item.Amount,
+            Price = item.Price,
+        });
+        var savedItems = await _usersRepository.AddOrderProductDetailsRange(items, cancellationToken);
+        return _mapper.Map<IEnumerable<OrderProductsDetails>>(savedItems);
+    }
+
 }

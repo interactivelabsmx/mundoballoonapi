@@ -304,4 +304,18 @@ public class UsersRepository : IUsersRepository
 
         return userAddresses;
     }
+
+    public async Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(IEnumerable<OrderProductsDetails> items,
+        CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        var addOrderProductDetailsRange = items as OrderProductsDetails[] ?? items.ToArray();
+        await using (context)
+        {
+            await context.AddRangeAsync(addOrderProductDetailsRange, cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+        }
+
+        return addOrderProductDetailsRange;
+    }
 }
