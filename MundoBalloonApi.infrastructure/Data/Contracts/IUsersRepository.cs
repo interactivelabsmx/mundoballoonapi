@@ -20,10 +20,8 @@ public interface IUsersRepository
     Task<UserCart?> GetUserCarts(CancellationToken cancellationToken);
     Task<OrderProductsDetails?> GetOrderProductsDetails(int orderId, CancellationToken cancellationToken);
     Task<Orders> AddOrder(Orders order, CancellationToken cancellationToken);
-
     Task<OrderProductsDetails> AddOrderProductDetails(OrderProductsDetails orderProductsDetails,
         CancellationToken cancellationToken);
-
     Task<UserAddresses> AddUserAddresses(UserAddresses userAddresses, CancellationToken cancellationToken);
     Task<UserProfile> AddUserProfile(UserProfile userProfile, CancellationToken cancellationToken);
     Task<UserProfile> UpdateUserProfile(UserProfile userProfiles, CancellationToken cancellationToken);
@@ -32,4 +30,7 @@ public interface IUsersRepository
     Task<bool> DeleteUserAddress(string userId, int userAddressesId, CancellationToken cancellationToken);
     Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken);
     Task<bool> DeleteOrderProductDetails(int orderDetailsProductId, CancellationToken cancellationToken);
+
+    Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(IEnumerable<OrderProductsDetails> items,
+        CancellationToken cancellationToken);
 }

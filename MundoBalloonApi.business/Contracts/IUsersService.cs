@@ -6,8 +6,11 @@ public interface IUsersService
 {
     Task<User> CreateOrGetUser(string userId, CancellationToken cancellationToken);
     Task<bool> DeleteUser(string userId, CancellationToken cancellationToken);
+
     Task<UserEvent> CreateUserEvent(string userId, string name, string details, CancellationToken cancellationToken);
+
     Task<bool> DeleteUserEvent(string userId, int userEventId, CancellationToken cancellationToken);
+
     Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
 
     Task<EventCartDetail> AddToEventCart(int productVariantId, int userEventId, double quantity,
@@ -35,7 +38,13 @@ public interface IUsersService
         string city, string state, string country, string zipCode, CancellationToken cancellationToken);
 
     Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken);
+
     Task<bool> DeleteUserAddresses(string userId, int userAddressesId, CancellationToken cancellationToken);
+
     Task<bool> DeleteOrderProductDetails(int orderDetailsProductId, CancellationToken cancellationToken);
+
     Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken);
+
+    Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(Orders order,
+        IEnumerable<OrderProductsDetails> productsDetails, CancellationToken cancellationToken);
 }
