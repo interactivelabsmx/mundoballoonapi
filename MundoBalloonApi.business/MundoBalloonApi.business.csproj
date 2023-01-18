@@ -13,7 +13,7 @@
         <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="12.0.0" />
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
         <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
     </ItemGroup>
     <ItemGroup>
