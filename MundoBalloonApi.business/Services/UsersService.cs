@@ -36,13 +36,14 @@ public class UsersService : IUsersService
         return await _usersRepository.DeleteUser(userId, cancellationToken);
     }
 
-    public async Task<UserEvent> CreateUserEvent(string userId, string name, string details,
+    public async Task<UserEvent> CreateUserEvent(string userId, string name, string details, DateTime date,
         CancellationToken cancellationToken)
     {
         var userEvent = new infrastructure.Data.Models.UserEvent
         {
             UserId = userId,
             EventName = name,
+            EventDate = date,
             EventDetails = details
         };
         userEvent = await _usersRepository.CreateUserEvent(userEvent, cancellationToken);

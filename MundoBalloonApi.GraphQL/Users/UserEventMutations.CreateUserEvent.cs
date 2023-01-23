@@ -8,10 +8,10 @@ public partial class UserEventMutations
 {
     [Authorize]
     public Task<UserEvent> CreateUserEvent(
-        string name, string details,
+        string name, string details, DateTime date,
         [Service] IUsersService usersService, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {
-        return usersService.CreateUserEvent(currentUser.UserId, name, details, cancellationToken);
+        return usersService.CreateUserEvent(currentUser.UserId, name, details, date, cancellationToken);
     }
 }
