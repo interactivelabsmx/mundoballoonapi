@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
 using Orders = MundoBalloonApi.business.DTOs.Entities.Orders;
 
@@ -11,9 +12,9 @@ public partial class UserOrderQueries
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<Orders> GetOrders([ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper, string userId)
+        [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-        return mapper.ProjectTo<Orders>(mundoBalloonContext.Orders.Where(uc => uc.UserId == userId)
+        return mapper.ProjectTo<Orders>(mundoBalloonContext.Orders.Where(uc => uc.UserId == currentUser.UserId)
             .Include(uc => uc.UserProfile)
             .Include(uc => uc.User)
             .Include(uc => uc.UserAddresses));

@@ -35,7 +35,6 @@ public class UsersService : IUsersService
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUser(userId, cancellationToken);
     }
-
     public async Task<UserEvent> CreateUserEvent(string userId, string name, string details,
         CancellationToken cancellationToken)
     {
@@ -54,6 +53,12 @@ public class UsersService : IUsersService
         var currentUser = await _usersRepository.GetById(userId, cancellationToken);
         if (currentUser != null) return false;
         return await _usersRepository.DeleteUserEvent(userEventId, cancellationToken);
+    }
+    public async Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId, CancellationToken cancellationToken)
+    {
+        var currentUser = await _usersRepository.GetById(userId, cancellationToken);
+        if (currentUser != null) return false;
+        return await _usersRepository.DeleteProductVariantReview(productVariantReviewId,userId, cancellationToken);
     }
 
     public async Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
@@ -110,6 +115,18 @@ public class UsersService : IUsersService
         };
         var updateUserProfile = await _usersRepository.UpdateUserProfile(userProfiles, cancellationToken);
         return _mapper.Map<UserProfile>(updateUserProfile);
+    }
+    public async Task<ProductVariantReview> UpdateProductVariantReview(int productVariantId,int productVariantReviewId, string userId, int rating, string comments, CancellationToken cancellationToken)
+    {
+        var productVariantReview = new infrastructure.Data.Models.ProductVariantReview
+        {
+            ProductVariantId =productVariantId,
+            ProductVariantReviewId = productVariantReviewId,
+            Rating = rating,
+            Comments = comments
+        };
+        var updateProductVariantReview = await _usersRepository.UpdateProductVariantReview(productVariantReview, cancellationToken);
+        return _mapper.Map<ProductVariantReview>(updateProductVariantReview);
     }
 
     public async Task<UserAddresses> UpdateUserAddresses(int userAddressesId, string userId, string address1,
@@ -230,5 +247,4 @@ public class UsersService : IUsersService
         var savedItems = await _usersRepository.AddOrderProductDetailsRange(items, cancellationToken);
         return _mapper.Map<IEnumerable<OrderProductsDetails>>(savedItems);
     }
-
 }
