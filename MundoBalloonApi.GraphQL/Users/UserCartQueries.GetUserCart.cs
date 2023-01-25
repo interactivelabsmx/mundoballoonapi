@@ -10,15 +10,15 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserCartQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<UserCart> GetUserCart([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {
-        var products = mapper.ProjectTo<UserCartProduct>(mundoBalloonContext.UserCartProducts
+        var products = mapper.Map<IEnumerable<UserCartProduct>>(mundoBalloonContext.UserCartProducts
             .Where(uc => uc.UserId == currentUser.UserId)
-            .Include(uc => uc.ProductVariant));
+            .Include(uc => uc.ProductVariant).AsAsyncEnumerable());
         var subtotal = await mundoBalloonContext.UserCartProducts.Where(uc => uc.UserId == currentUser.UserId)
             .SumAsync(cp => cp.Price, cancellationToken);
         const int tax = 0;

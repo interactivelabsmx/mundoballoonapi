@@ -6,7 +6,7 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserCartMutations
 {
-    [AllowAnonymous]
+    [Authorize]
     public Task<bool> DeleteUserCartProduct(
         [Service] IUsersService usersService, string sku, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)

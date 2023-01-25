@@ -9,7 +9,7 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserCartQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<UserCartProduct> GetUserCartProducts([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
