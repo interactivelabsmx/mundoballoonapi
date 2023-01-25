@@ -64,7 +64,7 @@ public class FakeData
     {
         return new Faker<Variant>()
             .RuleFor(v => v.Variant1, f => f.Commerce.Department())
-            .RuleFor(v => v.VariantsType, f =>  f.PickRandom(variantsTypes));
+            .RuleFor(v => v.VariantsType, f => f.PickRandom(variantsTypes));
     }
 
     private Variant MakeVariant(int seed)

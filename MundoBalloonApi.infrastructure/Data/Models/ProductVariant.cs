@@ -18,6 +18,6 @@ public class ProductVariant : BaseEntity
 
     public ICollection<ProductVariantMedium> ProductVariantMedia { get; set; } = new HashSet<ProductVariantMedium>();
     public ICollection<ProductVariantValue> ProductVariantValues { get; set; } = new HashSet<ProductVariantValue>();
-    public ICollection<UserCart> UserCartProductVariants { get; set; } = new HashSet<UserCart>();
+    public ICollection<UserCartProduct> UserCartProductVariants { get; set; } = new HashSet<UserCartProduct>();
     public ICollection<ProductVariantReview> ProductVariantReviews { get; set; } = new HashSet<ProductVariantReview>();
 }

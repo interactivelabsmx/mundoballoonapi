@@ -13,8 +13,9 @@ public partial class UserOrderMutations
         [Service] IUsersService usersService,
         CancellationToken cancellationToken)
     {
-        if (input.Order == null || input.OrderItems == null) return new Orders() {};
-        var order = await usersService.AddOrder(currentUser.UserId, input.Order.UserAddressesId, input.Order.UserProfileId, cancellationToken);
+        if (input.Order == null || input.OrderItems == null) return new Orders();
+        var order = await usersService.AddOrder(currentUser.UserId, input.Order.UserAddressesId,
+            input.Order.UserProfileId, cancellationToken);
         await usersService.AddOrderProductDetailsRange(order, input.OrderItems, cancellationToken);
         return order;
     }

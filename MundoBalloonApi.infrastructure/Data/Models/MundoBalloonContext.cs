@@ -20,7 +20,7 @@ public class MundoBalloonContext : DbContext
     public DbSet<ProductVariantReview> ProductVariantReviews { get; set; } = default!;
     public DbSet<UiRegistry> UiRegistries { get; set; } = null!;
     public DbSet<User> Users { get; set; } = default!;
-    public DbSet<UserCart> UserCarts { get; set; } = default!;
+    public DbSet<UserCartProduct> UserCartProducts { get; set; } = default!;
     public DbSet<UserEvent> UserEvents { get; set; } = default!;
     public DbSet<UserAddresses> UserAddresses { get; set; } = default!;
     public DbSet<UserProfile> UserProfiles { get; set; } = default!;
@@ -386,7 +386,7 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
-        modelBuilder.Entity<UserCart>(entity =>
+        modelBuilder.Entity<UserCartProduct>(entity =>
         {
             entity.HasKey(e => new { e.UserId, e.Sku })
                 .HasName("PRIMARY")

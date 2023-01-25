@@ -144,11 +144,11 @@ public class UsersService : IUsersService
         return _mapper.Map<EventCartDetail>(eventCartDetail);
     }
 
-    public async Task<UserCart> AddToCart(string userId, string sku, double quantity, double price,
+    public async Task<UserCartProduct> AddToCart(string userId, string sku, double quantity, double price,
         int productVariantId,
         CancellationToken cancellationToken)
     {
-        var userCart = new infrastructure.Data.Models.UserCart
+        var userCart = new infrastructure.Data.Models.UserCartProduct
         {
             UserId = userId,
             Sku = sku,
@@ -157,7 +157,7 @@ public class UsersService : IUsersService
             ProductVariantId = productVariantId
         };
         userCart = await _usersRepository.AddToCart(userCart, cancellationToken);
-        return _mapper.Map<UserCart>(userCart);
+        return _mapper.Map<UserCartProduct>(userCart);
     }
 
     public async Task<Orders> AddOrder(string userId, int userAddressesId, int userProfileId,
@@ -218,18 +218,18 @@ public class UsersService : IUsersService
         return _mapper.Map<UserProfile>(userProfile);
     }
 
-    public async Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(Orders order, IEnumerable<OrderProductsDetails> productsDetails, CancellationToken cancellationToken)
+    public async Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(Orders order,
+        IEnumerable<OrderProductsDetails> productsDetails, CancellationToken cancellationToken)
     {
         if (order.OrderId == null) return productsDetails;
-        var items = productsDetails.Select(item => new infrastructure.Data.Models.OrderProductsDetails()
+        var items = productsDetails.Select(item => new infrastructure.Data.Models.OrderProductsDetails
         {
             OrderId = (int)order.OrderId,
             ProductVariantId = item.ProductVariantId,
             Amount = item.Amount,
-            Price = item.Price,
+            Price = item.Price
         });
         var savedItems = await _usersRepository.AddOrderProductDetailsRange(items, cancellationToken);
         return _mapper.Map<IEnumerable<OrderProductsDetails>>(savedItems);
     }
-
 }
