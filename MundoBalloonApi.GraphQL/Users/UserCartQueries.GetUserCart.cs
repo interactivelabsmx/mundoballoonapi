@@ -18,7 +18,8 @@ public partial class UserCartQueries
     {
         var products = mapper.Map<IEnumerable<UserCartProduct>>(mundoBalloonContext.UserCartProducts
             .Where(uc => uc.UserId == currentUser.UserId)
-            .Include(uc => uc.ProductVariant).AsAsyncEnumerable());
+            .Include(uc => uc.ProductVariant)
+            .ThenInclude(pv => pv!.ProductVariantMedia).AsAsyncEnumerable());
         var subtotal = await mundoBalloonContext.UserCartProducts.Where(uc => uc.UserId == currentUser.UserId)
             .SumAsync(cp => cp.Price, cancellationToken);
         const int tax = 0;
