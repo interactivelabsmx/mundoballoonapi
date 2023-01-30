@@ -8,7 +8,7 @@ namespace MundoBalloonApi.graphql.Users;
 
 public partial class UserQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<UserProfile> GetUserProfile([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)

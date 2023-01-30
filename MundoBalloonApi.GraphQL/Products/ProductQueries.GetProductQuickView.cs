@@ -8,7 +8,7 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<Product> GetProductQuickView([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)

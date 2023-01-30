@@ -6,7 +6,7 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
     [UseSorting]

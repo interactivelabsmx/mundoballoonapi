@@ -10,7 +10,7 @@ namespace MundoBalloonApi.graphql.Collections;
 
 public partial class CollectionQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public ProductVariants GetProductVariants([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)

@@ -5,7 +5,7 @@ namespace MundoBalloonApi.graphql.Site;
 [ExtendObjectType(Name = "Query")]
 public partial class SiteQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     public string[] GetSortOptions()
     {
         return new[] { "Price", "Newest" };

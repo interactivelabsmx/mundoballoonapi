@@ -11,10 +11,10 @@ public partial class UserCartQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<UserCart> GetUserCarts([ScopedService] MundoBalloonContext mundoBalloonContext,
-        [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
+    public IQueryable<UserCart> GetUserCartsByProductId([ScopedService] MundoBalloonContext mundoBalloonContext,
+        [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser, int productId)
     {
         return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId)
-            .Include(uc => uc.ProductVariant));
+            .Include(uc => uc.ProductVariant).Where(uc=> uc.ProductVariant.ProductId == productId));
     }
 }

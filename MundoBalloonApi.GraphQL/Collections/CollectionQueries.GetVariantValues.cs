@@ -7,7 +7,7 @@ namespace MundoBalloonApi.graphql.Collections;
 
 public partial class CollectionQueries
 {
-    [AllowAnonymous]
+    [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<VariantValue> GetVariantValues([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int variantId)
