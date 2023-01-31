@@ -13,6 +13,7 @@ public partial class UserQueries
     public IQueryable<UserProfile> GetUserProfile([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-        return mapper.ProjectTo<UserProfile>(mundoBalloonContext.UserProfiles.Where(uc => uc.UserId == currentUser.UserId));
+        return mapper.ProjectTo<UserProfile>(
+            mundoBalloonContext.UserProfiles.Where(uc => uc.UserId == currentUser.UserId));
     }
 }

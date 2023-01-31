@@ -1,6 +1,6 @@
 ﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-public class UserCart : BaseEntity
+public class UserCartProduct : BaseEntity
 {
     public string? UserId { get; init; }
     public string? Sku { get; init; }
