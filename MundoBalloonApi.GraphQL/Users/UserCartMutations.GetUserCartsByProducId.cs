@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
-using UserCart = MundoBalloonApi.business.DTOs.Entities.UserCart;
+using UserCart = MundoBalloonApi.business.DTOs.Entities.UserCartProduct;
 
 namespace MundoBalloonApi.graphql.Users;
 
@@ -14,7 +14,7 @@ public partial class UserCartQueries
     public IQueryable<UserCart> GetUserCartsByProductId([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser, int productId)
     {
-        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCarts.Where(uc => uc.UserId == currentUser.UserId)
+        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCartProducts.Where(uc => uc.UserId == currentUser.UserId)
             .Include(uc => uc.ProductVariant).Where(uc=> uc.ProductVariant.ProductId == productId));
     }
 }
