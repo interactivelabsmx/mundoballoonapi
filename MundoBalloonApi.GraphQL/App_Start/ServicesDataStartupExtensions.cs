@@ -21,7 +21,8 @@ public static class ServicesDataStartupExtensions
             .AddScoped<IUsersService, UsersService>()
             .AddScoped<ISiteService, SiteService>()
             .AddScoped<IProductService, ProductService>()
-            .AddScoped<ICollectionsService, CollectionsService>();
+            .AddScoped<ICollectionsService, CollectionsService>()
+            .AddScoped<IPaymentsService, PaymentsService>();
     }
 
     public static IServiceCollection AddDbServices(this IServiceCollection services, IConfiguration configuration,
