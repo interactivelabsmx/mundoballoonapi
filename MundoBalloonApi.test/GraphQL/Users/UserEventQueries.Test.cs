@@ -8,38 +8,39 @@ using Xunit;
 namespace MundoBalloonApi.test.GraphQL.Users;
 
 [Collection("FirebaseInitializer")]
-public class UserQueriesTest : BaseServiceCollection
+public class UserEventQueriesTest : BaseServiceCollection
 {
+    //GetUserEvents require CurrentUser
+    //GetUserEventsById
     [Fact]
-    public async Task GetUserById_OK()
+    public async Task GetUserEventsById_OK()
     {
         // Arrange
         var db = await ContextFactory?.CreateDbContextAsync()!;
         await using (db)
         {
-            db.Users.Add(new User
+            db.UserEvents.Add(new UserEvent
             {
-                // This is an actual firebase user
-                UserId = "Mgq4doWHJNdRNmCVwz61XNOwKO92"
+                // This is an actual UserEventId
+                UserEventId = 2,
+                EventName = "Test"
             });
             await db.SaveChangesAsync();
         }
 
         // Act
         const string query = @"
-          query GetUserById($userId: String!) {
-              userById(userId: $userId) {
-                userId
+          query GetUserEventById($userEventId: Int!) {
+              userEventById(userEventId: $userEventId) {
+                userEventId
+                name
               }
             }
         ";
         var request = new QueryRequestBuilder().SetQuery(query)
-            .SetVariableValue("userId", "Mgq4doWHJNdRNmCVwz61XNOwKO92").Create();
+            .SetVariableValue("userEventId", 2).Create();
         var result = await Executor?.ExecuteRequestAsync(request)!;
         // Assert
         (await result.ToJsonAsync()).MatchSnapshot();
     }
-    //GetLoggedInUser require currentUser
-    //GetUserAddressess require currentUser
-    //GetUserProfile require currentUser
 }
