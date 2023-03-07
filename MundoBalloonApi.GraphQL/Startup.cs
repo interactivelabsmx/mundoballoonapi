@@ -4,6 +4,7 @@ using Google.Apis.Auth.OAuth2;
 using MundoBalloonApi.business.Middleware;
 using MundoBalloonApi.graphql.Collections;
 using MundoBalloonApi.graphql.Middleware;
+using MundoBalloonApi.graphql.Payments;
 using MundoBalloonApi.graphql.Products;
 using MundoBalloonApi.graphql.Site;
 using MundoBalloonApi.graphql.Users;
@@ -57,6 +58,7 @@ public class Startup
             .AddTypeExtension<UserOrderMutations>()
             .AddTypeExtension<ProductMutations>()
             .AddTypeExtension<CollectionMutations>()
+            .AddTypeExtension<PaymentsMutations>()
             .AddSorting()
             .AddFiltering()
             .AddAuthorization()
