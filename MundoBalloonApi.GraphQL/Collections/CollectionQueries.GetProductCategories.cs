@@ -7,7 +7,7 @@ namespace MundoBalloonApi.graphql.Collections;
 
 public partial class CollectionQueries
 {
-    [Authorize]
+    [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductCategory> GetProductCategories([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)

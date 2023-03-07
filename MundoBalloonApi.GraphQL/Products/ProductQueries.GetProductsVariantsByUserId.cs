@@ -8,7 +8,7 @@ namespace MundoBalloonApi.graphql.Products;
 
 public partial class ProductQueries
 {
-    [Authorize]
+    [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductVariant> GetProductsVariantsByUserId([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, string userId)

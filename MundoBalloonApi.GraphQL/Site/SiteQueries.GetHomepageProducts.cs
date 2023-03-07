@@ -7,7 +7,7 @@ namespace MundoBalloonApi.graphql.Site;
 [ExtendObjectType(Name = "Query")]
 public partial class SiteQueries
 {
-    [Authorize]
+    [AllowAnonymous]
     public async Task<IReadOnlyDictionary<string, List<Product>>> GetHomepageProducts(
         [Service] ISiteService siteService, bool includeBestSellingProducts, bool includeNewestProducts,
         CancellationToken cancellationToken)
