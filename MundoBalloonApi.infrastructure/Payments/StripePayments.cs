@@ -3,7 +3,7 @@ using Stripe;
 
 namespace MundoBalloonApi.infrastructure.Payments;
 
-public class StripePayments
+public class StripePayments : IStripePayments
 {
     private const string MetadataFirebaseUserId = "firebase_user_id";
 
@@ -39,11 +39,6 @@ public class StripePayments
         CancellationToken cancellationToken)
     {
         return CustomerService.CreateAsync(customerCreateOptions, null, cancellationToken);
-    }
-
-    public Task<Customer?> GetCustomerById(string id, CancellationToken cancellationToken)
-    {
-        return CustomerService.GetAsync(id, null, null, cancellationToken);
     }
 
     public async Task<Customer?> GetCustomerByUserId(string userId, CancellationToken cancellationToken)
