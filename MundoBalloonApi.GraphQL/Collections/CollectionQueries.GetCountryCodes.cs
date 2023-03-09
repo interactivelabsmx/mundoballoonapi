@@ -9,7 +9,7 @@ public partial class CollectionQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<CountryCode> GetCountryCodes([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<CountryCode> GetCountryCodes(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
         return mapper.ProjectTo<CountryCode>(mundoBalloonContext.CountryCodes.Where(cc => cc.Supported == true));

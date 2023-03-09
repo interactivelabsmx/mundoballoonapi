@@ -9,7 +9,7 @@ public partial class CollectionQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<VariantsType> GetVariantsType([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<VariantsType> GetVariantsType(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
         return mapper.ProjectTo<VariantsType>(mundoBalloonContext.VariantsTypes);

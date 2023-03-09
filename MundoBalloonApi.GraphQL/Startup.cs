@@ -8,6 +8,7 @@ using MundoBalloonApi.graphql.Payments;
 using MundoBalloonApi.graphql.Products;
 using MundoBalloonApi.graphql.Site;
 using MundoBalloonApi.graphql.Users;
+using MundoBalloonApi.infrastructure.Data.Models;
 using MySqlConnector;
 
 namespace MundoBalloonApi.graphql;
@@ -24,7 +25,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         var firebaseCredentialString = Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "";
-        var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
+        // var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
         var connectionString =
             new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
 
@@ -38,10 +39,14 @@ public class Startup
             .AddDbServices(Configuration, connectionString)
             .AddHttpContextAccessor()
             .AddAuthenticationServices()
+            .AddAuthorization()
             .AddRedisRateLimiting();
 
         services
             .AddGraphQLServer()
+            .RegisterDbContext<MundoBalloonContext>(DbContextKind.Pooled)
+            .AddAuthorization()
+            .AddHttpRequestInterceptor(HttpRequestInterceptor.GetHttpRequestInterceptorDelegate())
             .AddType<UploadType>()
             .AddQueryType()
             .AddTypeExtension<SiteQueries>()
@@ -61,12 +66,10 @@ public class Startup
             .AddTypeExtension<PaymentsMutations>()
             .AddSorting()
             .AddFiltering()
-            .AddAuthorization()
-            .AddHttpRequestInterceptor(HttpRequestInterceptor.GetHttpRequestInterceptorDelegate())
             .AddInstrumentation();
 
         services
-            .AddOpenTelemetryLogging(logConnectionString)
+            // .AddOpenTelemetryLogging(logConnectionString)
             .AddCorsServices();
     }
 
@@ -76,9 +79,11 @@ public class Startup
 
         if (!env.IsDevelopment()) app.UseHsts();
 
+        app.UseRouting();
+
         app.UseAuthentication();
 
-        app.UseRouting();
+        app.UseAuthorization();
 
         if (env.IsDevelopment()) app.UseCors();
 

@@ -1,5 +1,6 @@
 using AutoMapper;
 using MundoBalloonApi.business.DTOs.Entities;
+using Stripe;
 using CountryCode = MundoBalloonApi.infrastructure.Data.Models.CountryCode;
 using EventCartDetail = MundoBalloonApi.infrastructure.Data.Models.EventCartDetail;
 using OrderProductsDetails = MundoBalloonApi.infrastructure.Data.Models.OrderProductsDetails;
@@ -87,5 +88,8 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         CreateMap<EventCartDetail, DTOs.Entities.EventCartDetail>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
+        // CUSTOMER
+        CreateMap<Customer, DTOs.Customer.Customer>();
+        CreateMap<Address, DTOs.Customer.Address>();
     }
 }

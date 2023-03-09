@@ -11,7 +11,7 @@ public partial class UserOrderQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<Orders> GetOrders([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<Orders> GetOrders(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
         return mapper.ProjectTo<Orders>(mundoBalloonContext.Orders.Where(uc => uc.UserId == currentUser.UserId)

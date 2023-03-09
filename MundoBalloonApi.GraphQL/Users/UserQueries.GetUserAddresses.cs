@@ -10,7 +10,7 @@ public partial class UserQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<UserAddresses> GetUserAddresses([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<UserAddresses> GetUserAddresses(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
         return mapper.ProjectTo<UserAddresses>(

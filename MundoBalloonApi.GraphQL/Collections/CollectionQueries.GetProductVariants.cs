@@ -12,7 +12,7 @@ public partial class CollectionQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public ProductVariants GetProductVariants([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public ProductVariants GetProductVariants(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)
     {
         var variantValues = (

@@ -10,7 +10,7 @@ public partial class ProductQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public async Task<Product> GetProductQuickView([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public async Task<Product> GetProductQuickView(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)
     {
         var productQuery = await mundoBalloonContext.Products

@@ -29,6 +29,6 @@ public class GetHomepageProductsTest : BaseServiceCollection
         var request = new QueryRequestBuilder().SetQuery(query).SetVariableValue("userId", "1").Create();
         var result = await Executor?.ExecuteRequestAsync(request)!;
         // Assert
-        (await result.ToJsonAsync()).MatchSnapshot();
+        result.ToJson().MatchSnapshot();
     }
 }

@@ -1,5 +1,5 @@
 using AutoMapper;
-using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
@@ -11,7 +11,7 @@ public partial class UserQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public async Task<User?> GetLoggedInUser([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public async Task<User?> GetLoggedInUser(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {

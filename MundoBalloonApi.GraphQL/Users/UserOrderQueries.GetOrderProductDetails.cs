@@ -11,7 +11,7 @@ public partial class UserOrderQueries
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<OrderProductsDetails> GetOrdersProductDetails(
-        [ScopedService] MundoBalloonContext mundoBalloonContext,
+        MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int orderDetailsProductsId)
     {
         return mapper.ProjectTo<OrderProductsDetails>(mundoBalloonContext.OrderProductDetails
