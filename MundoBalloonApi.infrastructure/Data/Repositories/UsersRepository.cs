@@ -121,6 +121,7 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
+
     public async Task<User?> GetById(string userId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -219,10 +220,13 @@ public class UsersRepository : IUsersRepository
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }
-    public async Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId, CancellationToken cancellationToken)
+
+    public async Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId,
+        CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var productVariantReview = await context.ProductVariantReviews.FirstOrDefaultAsync(u => u.UserId == userId && u.ProductVariantId == productVariantReviewId, cancellationToken);
+        var productVariantReview = await context.ProductVariantReviews.FirstOrDefaultAsync(
+            u => u.UserId == userId && u.ProductVariantId == productVariantReviewId, cancellationToken);
         if (productVariantReview == null) return false;
         context.ProductVariantReviews.Remove(productVariantReview);
         await context.SaveChangesAsync(cancellationToken);
@@ -288,7 +292,9 @@ public class UsersRepository : IUsersRepository
 
         return userEvent;
     }
-    public async Task<ProductVariantReview> UpdateProductVariantReview(ProductVariantReview productVariantReview, CancellationToken cancellationToken)
+
+    public async Task<ProductVariantReview> UpdateProductVariantReview(ProductVariantReview productVariantReview,
+        CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)

@@ -55,6 +55,7 @@ public class ProductService : IProductService
         var productVariant = await _productsRepository.ProductVariantAddValue(variantValueModel, cancellationToken);
         return _mapper.Map<ProductVariant>(productVariant);
     }
+
     public async Task<bool> DeleteProductVariantValue(int productVariantId, int variantId, int variantValueId,
         CancellationToken cancellationToken)
     {
@@ -78,7 +79,8 @@ public class ProductService : IProductService
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<ProductVariantReview> AddProductVariantReview(int productVariantId, string userId, int rating, string comments,
+    public async Task<ProductVariantReview> AddProductVariantReview(int productVariantId, string userId, int rating,
+        string comments,
         CancellationToken cancellationToken)
     {
         var reviewModel = new infrastructure.Data.Models.ProductVariantReview

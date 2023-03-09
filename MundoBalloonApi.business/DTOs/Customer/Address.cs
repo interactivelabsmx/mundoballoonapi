@@ -8,4 +8,4 @@ public record Address
     public string Line2 { get; set; } = "";
     public string PostalCode { get; set; } = "";
     public string State { get; set; } = "";
-};
+}

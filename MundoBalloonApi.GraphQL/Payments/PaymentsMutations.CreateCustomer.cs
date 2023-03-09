@@ -1,8 +1,8 @@
 using FirebaseAdmin.Auth;
 using HotChocolate.Authorization;
 using MundoBalloonApi.business.Contracts;
+using MundoBalloonApi.business.DTOs.Customer;
 using MundoBalloonApi.business.DTOs.Entities;
-using Customer = MundoBalloonApi.business.DTOs.Customer.Customer;
 
 namespace MundoBalloonApi.graphql.Payments;
 

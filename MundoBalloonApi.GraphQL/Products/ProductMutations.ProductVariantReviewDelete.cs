@@ -1,4 +1,4 @@
-using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Authorization;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.business.DTOs.Entities;
 
@@ -8,9 +8,10 @@ public partial class ProductMutations
 {
     [Authorize]
     public Task<bool> DeleteProductVariantReview(
-        [Service] IUsersService usersService,int productVariantReviewId, [GlobalState("currentUser")] CurrentUser currentUser,
+        [Service] IUsersService usersService, int productVariantReviewId,
+        [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {
-        return usersService.DeleteProductVariantReview(productVariantReviewId,currentUser.UserId, cancellationToken);
+        return usersService.DeleteProductVariantReview(productVariantReviewId, currentUser.UserId, cancellationToken);
     }
 }

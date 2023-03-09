@@ -14,7 +14,8 @@ public partial class UserCartQueries
     public IQueryable<UserCart> GetUserCartsByProductId([ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser, int productId)
     {
-        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCartProducts.Where(uc => uc.UserId == currentUser.UserId)
-            .Include(uc => uc.ProductVariant).Where(uc=> uc.ProductVariant.ProductId == productId));
+        return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCartProducts
+            .Where(uc => uc.UserId == currentUser.UserId)
+            .Include(uc => uc.ProductVariant).Where(uc => uc.ProductVariant.ProductId == productId));
     }
 }

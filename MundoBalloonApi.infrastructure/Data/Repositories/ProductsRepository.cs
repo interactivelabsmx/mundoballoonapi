@@ -151,7 +151,7 @@ public class ProductsRepository : IProductsRepository
             context.Add(variantReview);
             await context.SaveChangesAsync(cancellationToken);
         }
-            return variantReview;
-    }
 
+        return variantReview;
+    }
 }

@@ -10,10 +10,11 @@ public partial class ProductQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<ProductVariantReview> GetProductVariantReviews([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<ProductVariantReview> GetProductVariantReviews(
+        [ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)
     {
         return mapper.ProjectTo<ProductVariantReview>(mundoBalloonContext.ProductVariantReviews.Where
-        (p=> p.ProductVariant.ProductId == productId ).Include(p=>p.ProductVariant));
+            (p => p.ProductVariant.ProductId == productId).Include(p => p.ProductVariant));
     }
 }

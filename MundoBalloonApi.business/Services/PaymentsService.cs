@@ -10,8 +10,8 @@ namespace MundoBalloonApi.business.Services;
 
 public class PaymentsService : IPaymentsService
 {
-    private readonly StripePayments _stripePayments;
     private readonly IMapper _mapper;
+    private readonly StripePayments _stripePayments;
 
     public PaymentsService(IConfiguration configuration, IMapper mapper)
     {

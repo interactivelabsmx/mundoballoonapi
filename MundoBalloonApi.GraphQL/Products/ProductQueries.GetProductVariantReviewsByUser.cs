@@ -10,9 +10,11 @@ public partial class ProductQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<ProductVariantReview> GetProductVariantReviewsByUser([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<ProductVariantReview> GetProductVariantReviewsByUser(
+        [ScopedService] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
-        return mapper.ProjectTo<ProductVariantReview>(mundoBalloonContext.ProductVariantReviews.Where(p=> p.UserId == currentUser.UserId));
+        return mapper.ProjectTo<ProductVariantReview>(
+            mundoBalloonContext.ProductVariantReviews.Where(p => p.UserId == currentUser.UserId));
     }
 }
