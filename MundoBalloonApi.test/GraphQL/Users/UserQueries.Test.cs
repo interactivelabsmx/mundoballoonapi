@@ -37,7 +37,7 @@ public class UserQueriesTest : BaseServiceCollection
             .SetVariableValue("userId", "Mgq4doWHJNdRNmCVwz61XNOwKO92").Create();
         var result = await Executor?.ExecuteRequestAsync(request)!;
         // Assert
-        (await result.ToJsonAsync()).MatchSnapshot();
+        result.ToJson().MatchSnapshot();
     }
     //GetLoggedInUser require currentUser
     //GetUserAddressess require currentUser

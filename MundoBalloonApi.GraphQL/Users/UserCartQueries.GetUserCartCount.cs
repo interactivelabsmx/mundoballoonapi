@@ -10,7 +10,7 @@ public partial class UserCartQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public Task<int> GetUserCartCount([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public Task<int> GetUserCartCount(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
     {

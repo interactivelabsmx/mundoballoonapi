@@ -9,7 +9,7 @@ public partial class ProductQueries
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductVariantEntity> GetProductVariantsEntityById(int productId,
-        [ScopedService] MundoBalloonContext mundoBalloonContext)
+        MundoBalloonContext mundoBalloonContext)
     {
         return mundoBalloonContext.ProductVariants.Where(pv => pv.ProductId == productId).Select(p =>
             new ProductVariantEntity

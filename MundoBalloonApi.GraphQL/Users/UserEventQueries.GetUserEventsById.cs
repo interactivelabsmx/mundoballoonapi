@@ -10,7 +10,7 @@ public partial class UserEventQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public async Task<UserEvent?> GetUserEventById([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public async Task<UserEvent?> GetUserEventById(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int userEventId)
     {
         var userEvent = await mundoBalloonContext.UserEvents

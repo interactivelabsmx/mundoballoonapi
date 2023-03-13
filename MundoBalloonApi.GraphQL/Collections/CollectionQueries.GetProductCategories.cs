@@ -9,7 +9,7 @@ public partial class CollectionQueries
 {
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<ProductCategory> GetProductCategories([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<ProductCategory> GetProductCategories(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {
         return mapper.ProjectTo<ProductCategory>(mundoBalloonContext.ProductCategories);

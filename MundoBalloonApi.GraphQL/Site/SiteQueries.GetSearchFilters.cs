@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MundoBalloonApi.graphql.Site;
 
-[ExtendObjectType(Name = "Query")]
 public partial class SiteQueries
 {
     [AllowAnonymous]

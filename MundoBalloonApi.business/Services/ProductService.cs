@@ -79,18 +79,19 @@ public class ProductService : IProductService
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<ProductVariant> AddProductVariantReview(ProductVariantReview review,
+    public async Task<ProductVariantReview> AddProductVariantReview(int productVariantId, string userId, int rating,
+        string comments,
         CancellationToken cancellationToken)
     {
         var reviewModel = new infrastructure.Data.Models.ProductVariantReview
         {
-            ProductVariantId = review.ProductVariantId,
-            UserId = review.UserId,
-            Rating = review.Rating,
-            Comments = review.Comments
+            ProductVariantId = productVariantId,
+            UserId = userId,
+            Rating = rating,
+            Comments = comments
         };
         var productReview = await _productsRepository.AddProductVariantReview(reviewModel, cancellationToken);
-        return _mapper.Map<ProductVariant>(productReview);
+        return _mapper.Map<ProductVariantReview>(productReview);
     }
 
     public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId, CancellationToken cancellationToken)

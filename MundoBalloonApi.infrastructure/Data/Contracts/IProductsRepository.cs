@@ -27,6 +27,6 @@ public interface IProductsRepository
 
     Task<ProductVariant> UpdateProductVariant(ProductVariant productVariant, CancellationToken cancellationToken);
 
-    Task<ProductVariant> AddProductVariantReview(ProductVariantReview variantReview,
+    Task<ProductVariantReview> AddProductVariantReview(ProductVariantReview variantReview,
         CancellationToken cancellationToken);
 }

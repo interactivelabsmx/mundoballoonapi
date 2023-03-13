@@ -35,4 +35,10 @@ public interface IUsersRepository
 
     Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(IEnumerable<OrderProductsDetails> items,
         CancellationToken cancellationToken);
+
+    Task<ProductVariantReview> UpdateProductVariantReview(ProductVariantReview productVariantReview,
+        CancellationToken cancellationToken);
+
+    Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId,
+        CancellationToken cancellationToken);
 }

@@ -1,5 +1,5 @@
 using AutoMapper;
-using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.business.DTOs.Entities;
 using MundoBalloonApi.infrastructure.Data.Models;
@@ -10,7 +10,7 @@ public partial class UserQueries
 {
     [Authorize(Roles = new[] { "ADMIN" })]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public async Task<FirebaseUser?> GetUserById(string userId, [ScopedService] MundoBalloonContext mundoBalloonContext,
+    public async Task<FirebaseUser?> GetUserById(string userId, MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper,
         CancellationToken cancellationToken)
     {

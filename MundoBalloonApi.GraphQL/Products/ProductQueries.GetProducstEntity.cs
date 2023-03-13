@@ -10,7 +10,7 @@ public partial class ProductQueries
     [UseDbContext(typeof(MundoBalloonContext))]
     [UsePaging]
     [UseSorting]
-    public IQueryable<ProductEntity> GetProductsEntity([ScopedService] MundoBalloonContext mundoBalloonContext)
+    public IQueryable<ProductEntity> GetProductsEntity(MundoBalloonContext mundoBalloonContext)
     {
         return mundoBalloonContext.Products.Select(p => new ProductEntity
         {

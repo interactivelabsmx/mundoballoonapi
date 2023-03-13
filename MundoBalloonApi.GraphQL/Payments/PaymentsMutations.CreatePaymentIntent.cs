@@ -1,17 +1,16 @@
-using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Authorization;
 using MundoBalloonApi.business.Contracts;
-using Stripe;
 
 namespace MundoBalloonApi.graphql.Payments;
 
 public partial class PaymentsMutations
 {
     [Authorize]
-    public async Task<string> CreatePaymentIntent(long amount,
+    public async Task<string> CreatePaymentIntent(long amount, string customerId,
         [Service] IPaymentsService paymentsService,
         CancellationToken cancellationToken)
     {
-        var paymentIntent = await paymentsService.CreatePaymentIntent(amount, cancellationToken);
+        var paymentIntent = await paymentsService.CreatePaymentIntent(amount, customerId, cancellationToken);
         return paymentIntent?.ClientSecret ?? "";
     }
 }

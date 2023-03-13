@@ -1,28 +1,66 @@
+using FirebaseAdmin.Auth;
 using Stripe;
 
 namespace MundoBalloonApi.infrastructure.Payments;
 
-public class StripePayments
+public class StripePayments : IStripePayments
 {
+    private const string MetadataFirebaseUserId = "firebase_user_id";
 
     public StripePayments(string stripeApiKey)
     {
         StripeConfiguration.ApiKey = stripeApiKey;
+        CustomerService = new CustomerService();
+        PaymentIntentService = new PaymentIntentService();
     }
 
-    public Task<PaymentIntent?> CreatePaymentIntent(long amount, CancellationToken cancellationToken)
+    private CustomerService CustomerService { get; }
+    private PaymentIntentService PaymentIntentService { get; }
+
+    public async Task<PaymentIntent?> CreatePaymentIntent(long amount, string customerId,
+        CancellationToken cancellationToken)
     {
-        var paymentIntentService = new PaymentIntentService();
-        var paymentIntent = paymentIntentService.CreateAsync(new PaymentIntentCreateOptions
+        var paymentIntent = await PaymentIntentService.CreateAsync(new PaymentIntentCreateOptions
         {
+            Customer = customerId,
+            SetupFutureUsage = "off_session",
             Amount = amount,
             Currency = "usd",
             AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
             {
-                Enabled = true,
-            },
+                Enabled = true
+            }
         }, null, cancellationToken);
 
         return paymentIntent;
+    }
+
+    public Task<Customer?> CreateCustomer(CustomerCreateOptions customerCreateOptions,
+        CancellationToken cancellationToken)
+    {
+        return CustomerService.CreateAsync(customerCreateOptions, null, cancellationToken);
+    }
+
+    public async Task<Customer?> GetCustomerByUserId(string userId, CancellationToken cancellationToken)
+    {
+        var result = await CustomerService.SearchAsync(
+            new CustomerSearchOptions { Query = $"metadata['{MetadataFirebaseUserId}']:'{userId}'" }, null,
+            cancellationToken);
+        var customer = result.Data.FirstOrDefault(c => c.Metadata.ContainsValue(userId));
+        return customer;
+    }
+
+    public CustomerCreateOptions FirebaseUserToCustomer(UserRecord user)
+    {
+        return new CustomerCreateOptions
+        {
+            Email = user.Email,
+            Phone = user.PhoneNumber,
+            Name = user.DisplayName,
+            Metadata = new Dictionary<string, string>
+            {
+                { MetadataFirebaseUserId, user.Uid }
+            }
+        };
     }
 }

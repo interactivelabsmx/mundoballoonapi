@@ -48,4 +48,10 @@ public interface IUsersService
 
     Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(Orders order,
         IEnumerable<OrderProductsDetails> productsDetails, CancellationToken cancellationToken);
+
+    Task<ProductVariantReview> UpdateProductVariantReview(int productVariantId, int productVariantReviewId,
+        string userId, int rating, string comments, CancellationToken cancellationToken);
+
+    Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId,
+        CancellationToken cancellationToken);
 }

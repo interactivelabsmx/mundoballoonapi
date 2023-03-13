@@ -142,18 +142,16 @@ public class ProductsRepository : IProductsRepository
         return productVariant;
     }
 
-    public async Task<ProductVariant> AddProductVariantReview(ProductVariantReview variantReview,
+    public async Task<ProductVariantReview> AddProductVariantReview(ProductVariantReview variantReview,
         CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
-            var productVariant =
-                await context.ProductVariants.FirstAsync(pv => pv.ProductVariantId == variantReview.ProductVariantId,
-                    cancellationToken);
-            productVariant.ProductVariantReviews.Add(variantReview);
+            context.Add(variantReview);
             await context.SaveChangesAsync(cancellationToken);
-            return productVariant;
         }
+
+        return variantReview;
     }
 }
