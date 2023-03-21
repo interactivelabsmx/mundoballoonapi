@@ -20,7 +20,7 @@ public class StripePayments : IStripePayments
     public async Task<PaymentIntent?> CreatePaymentIntent(long amount, string customerId,
         CancellationToken cancellationToken)
     {
-        var paymentIntent = await PaymentIntentService.CreateAsync(new PaymentIntentCreateOptions
+        return await PaymentIntentService.CreateAsync(new PaymentIntentCreateOptions
         {
             Customer = customerId,
             SetupFutureUsage = "off_session",
@@ -31,8 +31,6 @@ public class StripePayments : IStripePayments
                 Enabled = true
             }
         }, null, cancellationToken);
-
-        return paymentIntent;
     }
 
     public Task<Customer?> CreateCustomer(CustomerCreateOptions customerCreateOptions,
@@ -46,8 +44,32 @@ public class StripePayments : IStripePayments
         var result = await CustomerService.SearchAsync(
             new CustomerSearchOptions { Query = $"metadata['{MetadataFirebaseUserId}']:'{userId}'" }, null,
             cancellationToken);
-        var customer = result.Data.FirstOrDefault(c => c.Metadata.ContainsValue(userId));
-        return customer;
+        return result.Data.FirstOrDefault(c => c.Metadata.ContainsValue(userId));
+    }
+
+    public Task<Customer?> GetCustomerByCustomerId(string customerId, CancellationToken cancellationToken)
+    {
+        return CustomerService.GetAsync(customerId, null, null,
+            cancellationToken);
+    }
+
+    public Task<Customer?> UpdateCustomerAddress(string customerId, string name, Address address,
+        CancellationToken cancellationToken)
+    {
+        var options = new CustomerUpdateOptions
+        {
+            Name = name,
+            Address = new AddressOptions
+            {
+                City = address.City,
+                Country = address.Country,
+                Line1 = address.Line1,
+                Line2 = address.Line2,
+                PostalCode = address.PostalCode,
+                State = address.State
+            }
+        };
+        return CustomerService.UpdateAsync(customerId, options, null, cancellationToken);
     }
 
     public CustomerCreateOptions FirebaseUserToCustomer(UserRecord user)

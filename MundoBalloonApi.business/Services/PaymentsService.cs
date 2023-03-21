@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using MundoBalloonApi.business.Contracts;
 using MundoBalloonApi.infrastructure.Payments;
 using Stripe;
+using Address = MundoBalloonApi.business.DTOs.Customer.Address;
 using Customer = MundoBalloonApi.business.DTOs.Customer.Customer;
 
 namespace MundoBalloonApi.business.Services;
@@ -33,5 +34,13 @@ public class PaymentsService : IPaymentsService
         var customerCreateOptions = _stripePayments.FirebaseUserToCustomer(user);
         var newCustomer = await _stripePayments.CreateCustomer(customerCreateOptions, cancellationToken);
         return newCustomer != null ? _mapper.Map<Customer>(newCustomer) : null;
+    }
+
+    public async Task<Customer?> UpdateCustomerAddress(string customerId, string name, Address address,
+        CancellationToken cancellationToken)
+    {
+        var stripeAddress = _mapper.Map<Stripe.Address>(address);
+        var customer = await _stripePayments.UpdateCustomerAddress(customerId, name, stripeAddress, cancellationToken);
+        return _mapper.Map<Customer>(customer);
     }
 }

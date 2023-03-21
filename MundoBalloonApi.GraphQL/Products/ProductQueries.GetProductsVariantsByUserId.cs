@@ -10,7 +10,7 @@ public partial class ProductQueries
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductVariant> GetProductsVariantsByUserId(
-        [ScopedService] MundoBalloonContext mundoBalloonContext,
+        [Service(ServiceKind.Pooled)] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, string userId)
     {
         return mapper.ProjectTo<ProductVariant>(mundoBalloonContext.ProductVariants);

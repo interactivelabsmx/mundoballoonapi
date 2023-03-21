@@ -10,7 +10,7 @@ public partial class ProductQueries
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductVariantReview> GetProductVariantReviewsByRating(
-        [ScopedService] MundoBalloonContext mundoBalloonContext,
+        [Service(ServiceKind.Pooled)] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int rating)
     {
         return mapper.ProjectTo<ProductVariantReview>(

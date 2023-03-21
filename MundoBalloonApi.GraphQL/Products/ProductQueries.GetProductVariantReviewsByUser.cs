@@ -11,7 +11,7 @@ public partial class ProductQueries
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductVariantReview> GetProductVariantReviewsByUser(
-        [ScopedService] MundoBalloonContext mundoBalloonContext,
+        [Service(ServiceKind.Pooled)] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
         return mapper.ProjectTo<ProductVariantReview>(

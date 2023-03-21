@@ -11,7 +11,8 @@ public partial class UserCartQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]
-    public IQueryable<UserCart> GetUserCartsByProductId([ScopedService] MundoBalloonContext mundoBalloonContext,
+    public IQueryable<UserCart> GetUserCartsByProductId(
+        [Service(ServiceKind.Pooled)] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser, int productId)
     {
         return mapper.ProjectTo<UserCart>(mundoBalloonContext.UserCartProducts

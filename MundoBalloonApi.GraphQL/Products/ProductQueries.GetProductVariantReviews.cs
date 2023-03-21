@@ -11,7 +11,7 @@ public partial class ProductQueries
     [AllowAnonymous]
     [UseDbContext(typeof(MundoBalloonContext))]
     public IQueryable<ProductVariantReview> GetProductVariantReviews(
-        [ScopedService] MundoBalloonContext mundoBalloonContext,
+        [Service(ServiceKind.Pooled)] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)
     {
         return mapper.ProjectTo<ProductVariantReview>(mundoBalloonContext.ProductVariantReviews.Where

@@ -17,7 +17,6 @@ public partial class PaymentsMutations
         var user = await FirebaseAuth.DefaultInstance.GetUserAsync(currentUser.UserId, cancellationToken);
         if (user == null) return null;
 
-        var customer = await paymentsService.CreateCustomer(user, cancellationToken);
-        return customer;
+        return await paymentsService.CreateCustomer(user, cancellationToken);
     }
 }
