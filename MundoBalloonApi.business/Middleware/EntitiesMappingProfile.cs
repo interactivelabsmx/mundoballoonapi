@@ -91,5 +91,6 @@ public class EntitiesMappingProfile : Profile
         // CUSTOMER
         CreateMap<Customer, DTOs.Customer.Customer>();
         CreateMap<Address, DTOs.Customer.Address>();
+        CreateMap<DTOs.Customer.Address, Address>();
     }
 }
