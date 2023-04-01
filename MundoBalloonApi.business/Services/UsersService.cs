@@ -75,16 +75,6 @@ public class UsersService : IUsersService
         return await _usersRepository.DeleteOrder(userId, orderId, cancellationToken);
     }
 
-    public async Task<bool> DeleteUserAddresses(string userId, int userAddressesId, CancellationToken cancellationToken)
-    {
-        return await _usersRepository.DeleteUserAddress(userId, userAddressesId, cancellationToken);
-    }
-
-    public async Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken)
-    {
-        return await _usersRepository.DeleteUserProfile(userId, userProfileId, cancellationToken);
-    }
-
     public async Task<bool> DeleteOrderProductDetails(int orderDetailsProductId,
         CancellationToken cancellationToken)
     {
@@ -105,22 +95,6 @@ public class UsersService : IUsersService
         return _mapper.Map<UserEvent>(updatedUserEvent);
     }
 
-    public async Task<UserProfile> UpdateUserProfile(string userId, int userProfileId, string firstName,
-        string lastName, int phoneNumber
-        , CancellationToken cancellationToken)
-    {
-        var userProfiles = new infrastructure.Data.Models.UserProfile
-        {
-            UserId = userId,
-            UserProfileId = userProfileId,
-            FirstName = firstName,
-            LastName = lastName,
-            PhoneNumber = phoneNumber
-        };
-        var updateUserProfile = await _usersRepository.UpdateUserProfile(userProfiles, cancellationToken);
-        return _mapper.Map<UserProfile>(updateUserProfile);
-    }
-
     public async Task<ProductVariantReview> UpdateProductVariantReview(int productVariantId, int productVariantReviewId,
         string userId, int rating, string comments, CancellationToken cancellationToken)
     {
@@ -134,24 +108,6 @@ public class UsersService : IUsersService
         var updateProductVariantReview =
             await _usersRepository.UpdateProductVariantReview(productVariantReview, cancellationToken);
         return _mapper.Map<ProductVariantReview>(updateProductVariantReview);
-    }
-
-    public async Task<UserAddresses> UpdateUserAddresses(int userAddressesId, string userId, string address1,
-        string address2, string city, string state, string country, string zipCode, CancellationToken cancellationToken)
-    {
-        var userAddress = new infrastructure.Data.Models.UserAddresses
-        {
-            UserAddressesId = userAddressesId,
-            UserId = userId,
-            Address1 = address1,
-            Address2 = address2,
-            City = city,
-            State = state,
-            Country = country,
-            Zipcode = zipCode
-        };
-        var updateUserAddresses = await _usersRepository.UpdateUserAddresses(userAddress, cancellationToken);
-        return _mapper.Map<UserAddresses>(updateUserAddresses);
     }
 
     public async Task<EventCartDetail> AddToEventCart(int productVariantId, int userEventId, double quantity,
@@ -183,14 +139,12 @@ public class UsersService : IUsersService
         return _mapper.Map<UserCartProduct>(userCart);
     }
 
-    public async Task<Orders> AddOrder(string userId, int userAddressesId, int userProfileId,
-        CancellationToken cancellationToken)
+    public async Task<Orders> AddOrder(string userId, string paymentId, CancellationToken cancellationToken)
     {
         var order = new infrastructure.Data.Models.Orders
         {
             UserId = userId,
-            UserAddressesId = userAddressesId,
-            UserProfileId = userProfileId
+            PaymentId = paymentId
         };
         order = await _usersRepository.AddOrder(order, cancellationToken);
         return _mapper.Map<Orders>(order);
@@ -208,37 +162,6 @@ public class UsersService : IUsersService
         };
         orderProductsDetails = await _usersRepository.AddOrderProductDetails(orderProductsDetails, cancellationToken);
         return _mapper.Map<OrderProductsDetails>(orderProductsDetails);
-    }
-
-    public async Task<UserAddresses> AddUserAddresses(string userId, string address1, string address2, string city,
-        string state, string country, string zipCode, CancellationToken cancellationToken)
-    {
-        var userAddresses = new infrastructure.Data.Models.UserAddresses
-        {
-            UserId = userId,
-            Address1 = address1,
-            Address2 = address2,
-            City = city,
-            State = state,
-            Country = country,
-            Zipcode = zipCode
-        };
-        userAddresses = await _usersRepository.AddUserAddresses(userAddresses, cancellationToken);
-        return _mapper.Map<UserAddresses>(userAddresses);
-    }
-
-    public async Task<UserProfile> AddUserProfile(string userId, string firstName, string lastName, int phoneNumber,
-        CancellationToken cancellationToken)
-    {
-        var userProfile = new infrastructure.Data.Models.UserProfile
-        {
-            UserId = userId,
-            FirstName = firstName,
-            LastName = lastName,
-            PhoneNumber = phoneNumber
-        };
-        userProfile = await _usersRepository.AddUserProfile(userProfile, cancellationToken);
-        return _mapper.Map<UserProfile>(userProfile);
     }
 
     public async Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(Orders order,

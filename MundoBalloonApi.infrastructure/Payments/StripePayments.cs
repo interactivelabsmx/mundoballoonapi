@@ -43,7 +43,7 @@ public class StripePayments : IStripePayments
     {
         var result = await CustomerService.SearchAsync(
             new CustomerSearchOptions { Query = $"metadata['{MetadataFirebaseUserId}']:'{userId}'" }, null,
-                cancellationToken);
+            cancellationToken);
         return result.Data.FirstOrDefault(c => c.Metadata.ContainsValue(userId));
     }
 

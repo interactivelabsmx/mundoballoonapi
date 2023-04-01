@@ -87,31 +87,6 @@ public class UsersRepository : IUsersRepository
         return orderProductsDetails;
     }
 
-    public async Task<UserAddresses> AddUserAddresses(UserAddresses userAddresses, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            context.Add(userAddresses);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return userAddresses;
-    }
-
-    public async Task<UserProfile> AddUserProfile(UserProfile userProfile, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            context.Add(userProfile);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return userProfile;
-    }
-
-
     public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -137,24 +112,6 @@ public class UsersRepository : IUsersRepository
         await using (context)
         {
             return await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId, cancellationToken);
-        }
-    }
-
-    public async Task<UserAddresses?> GetUserAddresses(string userId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            return await context.UserAddresses.FirstOrDefaultAsync(ue => ue.UserId == userId, cancellationToken);
-        }
-    }
-
-    public async Task<UserProfile?> GetUserProfile(string userId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            return await context.UserProfiles.FirstOrDefaultAsync(ue => ue.UserId == userId, cancellationToken);
         }
     }
 
@@ -244,31 +201,6 @@ public class UsersRepository : IUsersRepository
         return true;
     }
 
-    public async Task<bool> DeleteUserAddress(string userId, int userAddressesId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var userAddresses =
-            await context.UserAddresses.FirstOrDefaultAsync(
-                u => u.UserAddressesId == userAddressesId && u.UserId == userId,
-                cancellationToken);
-        if (userAddresses == null) return false;
-        context.UserAddresses.Remove(userAddresses);
-        await context.SaveChangesAsync(cancellationToken);
-        return true;
-    }
-
-    public async Task<bool> DeleteUserProfile(string userId, int userProfileId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var userProfile =
-            await context.UserProfiles.FirstOrDefaultAsync(u => u.UserProfileId == userProfileId && u.UserId == userId,
-                cancellationToken);
-        if (userProfile == null) return false;
-        context.UserProfiles.Remove(userProfile);
-        await context.SaveChangesAsync(cancellationToken);
-        return true;
-    }
-
     public async Task<bool> DeleteOrderProductDetails(int orderProductsDetailsId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -304,31 +236,6 @@ public class UsersRepository : IUsersRepository
         }
 
         return productVariantReview;
-    }
-
-    public async Task<UserProfile> UpdateUserProfile(UserProfile userProfile, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            context.UserProfiles.Update(userProfile);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return userProfile;
-    }
-
-    public async Task<UserAddresses> UpdateUserAddresses(UserAddresses userAddresses,
-        CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            context.UserAddresses.Update(userAddresses);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return userAddresses;
     }
 
     public async Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(

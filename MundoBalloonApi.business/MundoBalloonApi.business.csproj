@@ -13,11 +13,11 @@
         <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="12.0.1" />
-        <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
-        <PackageReference Include="Stripe.net" Version="41.12.0" />
+        <PackageReference Include="AutoMapper" Version="12.0.1"/>
+        <PackageReference Include="FirebaseAdmin" Version="2.3.0"/>
+        <PackageReference Include="Stripe.net" Version="41.12.0"/>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj" />
+        <ProjectReference Include="..\MundoBalloonApi.infrastructure\MundoBalloonApi.infrastructure.csproj"/>
     </ItemGroup>
 </Project>

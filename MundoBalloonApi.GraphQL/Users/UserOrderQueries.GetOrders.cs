@@ -15,8 +15,6 @@ public partial class UserOrderQueries
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {
         return mapper.ProjectTo<Orders>(mundoBalloonContext.Orders.Where(uc => uc.UserId == currentUser.UserId)
-            .Include(uc => uc.UserProfile)
-            .Include(uc => uc.User)
-            .Include(uc => uc.UserAddresses));
+            .Include(uc => uc.User));
     }
 }

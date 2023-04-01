@@ -14,8 +14,7 @@ public partial class UserOrderMutations
         CancellationToken cancellationToken)
     {
         if (input.Order == null || input.OrderItems == null) return new Orders();
-        var order = await usersService.AddOrder(currentUser.UserId, input.Order.UserAddressesId,
-            input.Order.UserProfileId, cancellationToken);
+        var order = await usersService.AddOrder(currentUser.UserId, input.Order.PaymentId, cancellationToken);
         await usersService.AddOrderProductDetailsRange(order, input.OrderItems, cancellationToken);
         return order;
     }
