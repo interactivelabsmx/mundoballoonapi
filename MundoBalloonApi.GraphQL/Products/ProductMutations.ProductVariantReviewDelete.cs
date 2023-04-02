@@ -8,10 +8,11 @@ public partial class ProductMutations
 {
     [Authorize]
     public Task<bool> DeleteProductVariantReview(
-        [Service] IUsersService usersService, int productVariantReviewId,
+        int productVariantReviewId,
         [GlobalState("currentUser")] CurrentUser currentUser,
+        [Service] IProductService productService,
         CancellationToken cancellationToken)
     {
-        return usersService.DeleteProductVariantReview(productVariantReviewId, currentUser.UserId, cancellationToken);
+        return productService.DeleteProductVariantReview(productVariantReviewId, currentUser.UserId, cancellationToken);
     }
 }

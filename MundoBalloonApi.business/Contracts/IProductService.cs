@@ -15,9 +15,6 @@ public interface IProductService
 
     Task<ProductVariant> ProductVariantAddMedia(ProductVariantMedium variantMedia, CancellationToken cancellationToken);
 
-    Task<ProductVariantReview> AddProductVariantReview(int productVariantId, string userId, int rating, string comments,
-        CancellationToken cancellationToken);
-
     Task<bool> DeleteProductVariantMedia(int productVariantMediaId, CancellationToken cancellationToken);
 
     Task<bool> DeleteProduct(int productId, CancellationToken cancellationToken);
@@ -27,5 +24,21 @@ public interface IProductService
     Task<Product> UpdateProduct(ProductEntity productEntity, CancellationToken cancellationToken);
 
     Task<ProductVariant> UpdateProductVariant(ProductVariantEntity productVariantEntity,
+        CancellationToken cancellationToken);
+
+
+    Task<ProductVariantReview> AddProductVariantReview(int productVariantId, string userId, int rating, string comments,
+        CancellationToken cancellationToken);
+
+    Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId,
+        CancellationToken cancellationToken);
+
+    Task<ProductVariantReview> UpdateProductVariantReview(int productVariantId, int productVariantReviewId,
+        string userId, int rating, string comments, CancellationToken cancellationToken);
+
+    Task<IQueryable<UserCartProduct>> GetUserCartProducts(string userId,
+        CancellationToken cancellationToken);
+
+    Task<bool> DeleteUserCartProducts(IEnumerable<UserCartProduct> items,
         CancellationToken cancellationToken);
 }

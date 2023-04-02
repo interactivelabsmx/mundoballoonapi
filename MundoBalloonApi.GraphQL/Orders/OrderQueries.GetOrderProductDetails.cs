@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using MundoBalloonApi.infrastructure.Data.Models;
 using OrderProductsDetails = MundoBalloonApi.business.DTOs.Entities.OrderProductsDetails;
 
-namespace MundoBalloonApi.graphql.Users;
+namespace MundoBalloonApi.graphql.Orders;
 
-public partial class UserOrderQueries
+public partial class OrderQueries
 {
     [Authorize]
     [UseDbContext(typeof(MundoBalloonContext))]

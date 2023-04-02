@@ -29,4 +29,16 @@ public interface IProductsRepository
 
     Task<ProductVariantReview> AddProductVariantReview(ProductVariantReview variantReview,
         CancellationToken cancellationToken);
+
+    Task<ProductVariantReview> UpdateProductVariantReview(ProductVariantReview productVariantReview,
+        CancellationToken cancellationToken);
+
+    Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId,
+        CancellationToken cancellationToken);
+
+    Task<IQueryable<UserCartProduct>> GetUserCartProducts(string userId,
+        CancellationToken cancellationToken);
+
+    Task<bool> DeleteUserCartProducts(IEnumerable<UserCartProduct> entities,
+        CancellationToken cancellationToken);
 }

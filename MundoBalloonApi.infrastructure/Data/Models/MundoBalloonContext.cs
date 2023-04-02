@@ -529,9 +529,9 @@ public class MundoBalloonContext : DbContext
             entity.Property(e => e.OrderId)
                 .HasColumnType("int")
                 .HasColumnName("order_id");
-            entity.Property(e => e.Amount)
-                .HasColumnType("int")
-                .HasColumnName("amount");
+            entity.Property(e => e.Quantity)
+                .HasColumnType("decimal(10,2)")
+                .HasColumnName("quantity");
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(10,2)")
                 .HasColumnName("price");

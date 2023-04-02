@@ -15,14 +15,16 @@ public static class ServicesDataStartupExtensions
     public static IServiceCollection AddMundoBServices(this IServiceCollection services)
     {
         return services
-            .AddScoped<IUsersRepository, UsersRepository>()
-            .AddScoped<IProductsRepository, ProductsRepository>()
             .AddScoped<ICollectionsRepository, CollectionsRepository>()
-            .AddScoped<IUsersService, UsersService>()
-            .AddScoped<ISiteService, SiteService>()
-            .AddScoped<IProductService, ProductService>()
+            .AddScoped<IOrdersRepository, OrdersRepository>()
+            .AddScoped<IProductsRepository, ProductsRepository>()
+            .AddScoped<IUsersRepository, UsersRepository>()
             .AddScoped<ICollectionsService, CollectionsService>()
-            .AddScoped<IPaymentsService, PaymentsService>();
+            .AddScoped<IOrdersService, OrdersService>()
+            .AddScoped<IPaymentsService, PaymentsService>()
+            .AddScoped<IProductService, ProductService>()
+            .AddScoped<ISiteService, SiteService>()
+            .AddScoped<IUsersService, UsersService>();
     }
 
     public static IServiceCollection AddDbServices(this IServiceCollection services, IConfiguration configuration,

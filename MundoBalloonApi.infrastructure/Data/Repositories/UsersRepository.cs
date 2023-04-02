@@ -62,31 +62,6 @@ public class UsersRepository : IUsersRepository
         return userCart;
     }
 
-    public async Task<Orders> AddOrder(Orders orders, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            context.Add(orders);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return orders;
-    }
-
-    public async Task<OrderProductsDetails> AddOrderProductDetails(OrderProductsDetails orderProductsDetails,
-        CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            context.Add(orderProductsDetails);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return orderProductsDetails;
-    }
-
     public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -115,31 +90,12 @@ public class UsersRepository : IUsersRepository
         }
     }
 
-    public async Task<Orders?> GetOrders(string userId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            return await context.Orders.FirstOrDefaultAsync(ue => ue.UserId == userId, cancellationToken);
-        }
-    }
-
     public async Task<UserCartProduct?> GetUserCarts(CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
         await using (context)
         {
             return await context.UserCartProducts.FirstOrDefaultAsync(cancellationToken);
-        }
-    }
-
-    public async Task<OrderProductsDetails?> GetOrderProductsDetails(int orderId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            return await context.OrderProductDetails.FirstOrDefaultAsync(ue => ue.OrderId == orderId,
-                cancellationToken);
         }
     }
 
@@ -178,41 +134,6 @@ public class UsersRepository : IUsersRepository
         return true;
     }
 
-    public async Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId,
-        CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var productVariantReview = await context.ProductVariantReviews.FirstOrDefaultAsync(
-            u => u.UserId == userId && u.ProductVariantId == productVariantReviewId, cancellationToken);
-        if (productVariantReview == null) return false;
-        context.ProductVariantReviews.Remove(productVariantReview);
-        await context.SaveChangesAsync(cancellationToken);
-        return true;
-    }
-
-    public async Task<bool> DeleteOrder(string userId, int orderId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var order = await context.Orders.FirstOrDefaultAsync(u => u.OrderId == orderId && u.UserId == userId,
-            cancellationToken);
-        if (order == null) return false;
-        context.Orders.Remove(order);
-        await context.SaveChangesAsync(cancellationToken);
-        return true;
-    }
-
-    public async Task<bool> DeleteOrderProductDetails(int orderProductsDetailsId, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var orderProductsDetails =
-            await context.OrderProductDetails.FirstOrDefaultAsync(
-                u => u.OrderDetailsProductsId == orderProductsDetailsId, cancellationToken);
-        if (orderProductsDetails == null) return false;
-        context.OrderProductDetails.Remove(orderProductsDetails);
-        await context.SaveChangesAsync(cancellationToken);
-        return true;
-    }
-
     public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -223,33 +144,5 @@ public class UsersRepository : IUsersRepository
         }
 
         return userEvent;
-    }
-
-    public async Task<ProductVariantReview> UpdateProductVariantReview(ProductVariantReview productVariantReview,
-        CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        await using (context)
-        {
-            context.ProductVariantReviews.Update(productVariantReview);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return productVariantReview;
-    }
-
-    public async Task<IEnumerable<OrderProductsDetails>> AddOrderProductDetailsRange(
-        IEnumerable<OrderProductsDetails> items,
-        CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var addOrderProductDetailsRange = items as OrderProductsDetails[] ?? items.ToArray();
-        await using (context)
-        {
-            await context.AddRangeAsync(addOrderProductDetailsRange, cancellationToken);
-            await context.SaveChangesAsync(cancellationToken);
-        }
-
-        return addOrderProductDetailsRange;
     }
 }

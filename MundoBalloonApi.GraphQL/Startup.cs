@@ -4,6 +4,7 @@ using Google.Apis.Auth.OAuth2;
 using MundoBalloonApi.business.Middleware;
 using MundoBalloonApi.graphql.Collections;
 using MundoBalloonApi.graphql.Middleware;
+using MundoBalloonApi.graphql.Orders;
 using MundoBalloonApi.graphql.Payments;
 using MundoBalloonApi.graphql.Products;
 using MundoBalloonApi.graphql.Site;
@@ -25,7 +26,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         var firebaseCredentialString = Environment.GetEnvironmentVariable("FIREBASE_PRIVATE_KEY") ?? "";
-        // var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
+        var logConnectionString = Environment.GetEnvironmentVariable("MUNDOB_LOG_STR") ?? "";
         var connectionString =
             new MySqlConnectionStringBuilder(Environment.GetEnvironmentVariable("MUNDOB_DB_STR") ?? "").ToString();
 
@@ -53,14 +54,14 @@ public class Startup
             .AddTypeExtension<UserQueries>()
             .AddTypeExtension<UserEventQueries>()
             .AddTypeExtension<UserCartQueries>()
-            .AddTypeExtension<UserOrderQueries>()
+            .AddTypeExtension<OrderQueries>()
             .AddTypeExtension<ProductQueries>()
             .AddTypeExtension<CollectionQueries>()
             .AddMutationType()
             .AddTypeExtension<UserMutations>()
             .AddTypeExtension<UserCartMutations>()
             .AddTypeExtension<UserEventMutations>()
-            .AddTypeExtension<UserOrderMutations>()
+            .AddTypeExtension<OrderMutations>()
             .AddTypeExtension<ProductMutations>()
             .AddTypeExtension<CollectionMutations>()
             .AddTypeExtension<PaymentsMutations>()
@@ -69,7 +70,7 @@ public class Startup
             .AddInstrumentation();
 
         services
-            // .AddOpenTelemetryLogging(logConnectionString)
+            .AddOpenTelemetryLogging(logConnectionString)
             .AddCorsServices();
     }
 

@@ -79,21 +79,6 @@ public class ProductService : IProductService
         return _mapper.Map<ProductVariant>(productVariant);
     }
 
-    public async Task<ProductVariantReview> AddProductVariantReview(int productVariantId, string userId, int rating,
-        string comments,
-        CancellationToken cancellationToken)
-    {
-        var reviewModel = new infrastructure.Data.Models.ProductVariantReview
-        {
-            ProductVariantId = productVariantId,
-            UserId = userId,
-            Rating = rating,
-            Comments = comments
-        };
-        var productReview = await _productsRepository.AddProductVariantReview(reviewModel, cancellationToken);
-        return _mapper.Map<ProductVariantReview>(productReview);
-    }
-
     public async Task<bool> DeleteProductVariantMedia(int productVariantMediaId, CancellationToken cancellationToken)
     {
         return await _productsRepository.DeleteProductVariantMedia(productVariantMediaId, cancellationToken);
@@ -137,5 +122,55 @@ public class ProductService : IProductService
         };
         var updateProductVariant = await _productsRepository.UpdateProductVariant(productVariant, cancellationToken);
         return _mapper.Map<ProductVariant>(updateProductVariant);
+    }
+
+    public async Task<ProductVariantReview> AddProductVariantReview(int productVariantId, string userId, int rating,
+        string comments,
+        CancellationToken cancellationToken)
+    {
+        var reviewModel = new infrastructure.Data.Models.ProductVariantReview
+        {
+            ProductVariantId = productVariantId,
+            UserId = userId,
+            Rating = rating,
+            Comments = comments
+        };
+        var productReview = await _productsRepository.AddProductVariantReview(reviewModel, cancellationToken);
+        return _mapper.Map<ProductVariantReview>(productReview);
+    }
+
+    public async Task<bool> DeleteProductVariantReview(int productVariantReviewId, string userId,
+        CancellationToken cancellationToken)
+    {
+        return await _productsRepository.DeleteProductVariantReview(productVariantReviewId, userId, cancellationToken);
+    }
+
+    public async Task<ProductVariantReview> UpdateProductVariantReview(int productVariantId, int productVariantReviewId,
+        string userId, int rating, string comments, CancellationToken cancellationToken)
+    {
+        var productVariantReview = new infrastructure.Data.Models.ProductVariantReview
+        {
+            ProductVariantId = productVariantId,
+            ProductVariantReviewId = productVariantReviewId,
+            Rating = rating,
+            Comments = comments
+        };
+        var updateProductVariantReview =
+            await _productsRepository.UpdateProductVariantReview(productVariantReview, cancellationToken);
+        return _mapper.Map<ProductVariantReview>(updateProductVariantReview);
+    }
+
+    public async Task<IQueryable<UserCartProduct>> GetUserCartProducts(string userId,
+        CancellationToken cancellationToken)
+    {
+        var userCartProducts = await _productsRepository.GetUserCartProducts(userId, cancellationToken);
+        return _mapper.ProjectTo<UserCartProduct>(userCartProducts);
+    }
+
+    public Task<bool> DeleteUserCartProducts(IEnumerable<UserCartProduct> items,
+        CancellationToken cancellationToken)
+    {
+        var entities = _mapper.Map<IEnumerable<infrastructure.Data.Models.UserCartProduct>>(items);
+        return _productsRepository.DeleteUserCartProducts(entities, cancellationToken);
     }
 }
