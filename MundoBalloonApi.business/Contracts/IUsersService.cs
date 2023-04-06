@@ -14,10 +14,10 @@ public interface IUsersService
 
     Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
 
-    Task<EventCartDetail> AddToEventCart(int productVariantId, int userEventId, decimal quantity,
+    Task<EventCartDetail> AddToEventCart(int productVariantId, int userEventId, double quantity,
         CancellationToken cancellationToken);
 
-    Task<UserCartProduct> AddToCart(string userId, string sku, decimal quantity, decimal price, int productVariantId,
+    Task<UserCartProduct> AddToCart(string userId, string sku, double quantity, double price, int productVariantId,
         CancellationToken cancellationToken);
 
     Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken);

@@ -8,7 +8,7 @@ public partial class UserEventMutations
 {
     [Authorize]
     public Task<EventCartDetail> AddToEventCart(
-        int productVariantId, int userEventId, decimal quantity,
+        int productVariantId, int userEventId, double quantity,
         [Service] IUsersService usersService,
         CancellationToken cancellationToken)
     {

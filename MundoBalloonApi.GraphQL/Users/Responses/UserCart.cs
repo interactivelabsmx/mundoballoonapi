@@ -5,7 +5,7 @@ namespace MundoBalloonApi.graphql.Users.Responses;
 public class UserCart
 {
     public IEnumerable<UserCartProduct>? Products { get; set; }
-    public decimal Subtotal { get; set; }
-    public decimal Tax { get; set; }
-    public decimal Total { get; set; }
+    public double Subtotal { get; set; }
+    public double Tax { get; set; }
+    public double Total { get; set; }
 }

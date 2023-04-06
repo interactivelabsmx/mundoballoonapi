@@ -530,10 +530,10 @@ public class MundoBalloonContext : DbContext
                 .HasColumnType("int")
                 .HasColumnName("order_id");
             entity.Property(e => e.Quantity)
-                .HasColumnType("decimal(10,2)")
+                .HasPrecision(10, 2)
                 .HasColumnName("quantity");
             entity.Property(e => e.Price)
-                .HasColumnType("decimal(10,2)")
+                .HasPrecision(10, 2)
                 .HasColumnName("price");
             entity.Property(e => e.OrderId)
                 .HasColumnType("int")

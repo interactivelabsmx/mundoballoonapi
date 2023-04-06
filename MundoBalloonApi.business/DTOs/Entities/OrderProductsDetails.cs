@@ -7,7 +7,7 @@ public class OrderProductsDetails
     public int? OrderId { get; init; }
     public int ProductVariantId { get; init; }
     public int Amount { get; init; }
-    public decimal Price { get; init; }
+    public double Price { get; init; }
     public ProductVariant? Variant { get; set; }
     public Orders? Order { get; set; }
 }

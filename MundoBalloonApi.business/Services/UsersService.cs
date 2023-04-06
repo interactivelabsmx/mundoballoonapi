@@ -76,7 +76,7 @@ public class UsersService : IUsersService
         return _mapper.Map<UserEvent>(updatedUserEvent);
     }
 
-    public async Task<EventCartDetail> AddToEventCart(int productVariantId, int userEventId, decimal quantity,
+    public async Task<EventCartDetail> AddToEventCart(int productVariantId, int userEventId, double quantity,
         CancellationToken cancellationToken)
     {
         var eventCartDetail = new infrastructure.Data.Models.EventCartDetail
@@ -89,7 +89,7 @@ public class UsersService : IUsersService
         return _mapper.Map<EventCartDetail>(eventCartDetail);
     }
 
-    public async Task<UserCartProduct> AddToCart(string userId, string sku, decimal quantity, decimal price,
+    public async Task<UserCartProduct> AddToCart(string userId, string sku, double quantity, double price,
         int productVariantId,
         CancellationToken cancellationToken)
     {
