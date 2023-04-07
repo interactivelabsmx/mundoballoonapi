@@ -62,6 +62,54 @@ public class UsersRepository : IUsersRepository
         return userCart;
     }
 
+    public async Task<UserCartProduct?> AddItemToCart(string userId, string sku, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            var cartProduct = await context.UserCartProducts
+                .Where(uc => uc.Sku == sku && uc.UserId == userId)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (cartProduct != null)
+            {
+                cartProduct.Quantity += 1;
+                context.UserCartProducts.Update(cartProduct);
+            }
+
+            await context.SaveChangesAsync(cancellationToken);
+            return cartProduct;
+        }
+    }
+
+    public async Task<UserCartProduct?> SubtractItemToCart(string userId, string sku,
+        CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        await using (context)
+        {
+            var cartProduct = await context.UserCartProducts
+                .Where(uc => uc.Sku == sku && uc.UserId == userId)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (cartProduct == null || cartProduct.Quantity <= 1) return cartProduct;
+            cartProduct.Quantity -= 1;
+            context.UserCartProducts.Update(cartProduct);
+            await context.SaveChangesAsync(cancellationToken);
+            return cartProduct;
+        }
+    }
+
+    public async Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
+    {
+        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+        var userCart =
+            await context.UserCartProducts.FirstOrDefaultAsync(ue => ue.Sku == sku && ue.UserId == userId,
+                cancellationToken);
+        if (userCart == null) return false;
+        context.UserCartProducts.Remove(userCart);
+        await context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
     public async Task<bool> DeleteUser(string userId, CancellationToken cancellationToken)
     {
         var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
@@ -118,18 +166,6 @@ public class UsersRepository : IUsersRepository
             await context.UserEvents.FirstOrDefaultAsync(ue => ue.UserEventId == userEventId, cancellationToken);
         if (userEvent == null) return false;
         context.UserEvents.Remove(userEvent);
-        await context.SaveChangesAsync(cancellationToken);
-        return true;
-    }
-
-    public async Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
-    {
-        var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
-        var userCart =
-            await context.UserCartProducts.FirstOrDefaultAsync(ue => ue.Sku == sku && ue.UserId == userId,
-                cancellationToken);
-        if (userCart == null) return false;
-        context.UserCartProducts.Remove(userCart);
         await context.SaveChangesAsync(cancellationToken);
         return true;
     }

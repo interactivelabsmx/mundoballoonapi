@@ -6,7 +6,7 @@ public class EventCartDetail : BaseEntity
     public int ProductVariantId { get; init; }
     public int UserEventId { get; init; }
     public double Quantity { get; init; }
-    
+
 
     public ProductVariant? ProductVariant { get; set; }
 

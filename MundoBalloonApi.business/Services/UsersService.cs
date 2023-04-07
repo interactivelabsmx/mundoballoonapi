@@ -57,11 +57,6 @@ public class UsersService : IUsersService
         return await _usersRepository.DeleteUserEvent(userEventId, cancellationToken);
     }
 
-    public async Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
-    {
-        return await _usersRepository.DeleteUserCartProduct(userId, sku, cancellationToken);
-    }
-
     public async Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken)
     {
         var userEvents = new infrastructure.Data.Models.UserEvent
@@ -93,7 +88,7 @@ public class UsersService : IUsersService
         int productVariantId,
         CancellationToken cancellationToken)
     {
-        var userCart = new infrastructure.Data.Models.UserCartProduct
+        var userCartProduct = new infrastructure.Data.Models.UserCartProduct
         {
             UserId = userId,
             Sku = sku,
@@ -101,7 +96,25 @@ public class UsersService : IUsersService
             Price = price,
             ProductVariantId = productVariantId
         };
-        userCart = await _usersRepository.AddToCart(userCart, cancellationToken);
-        return _mapper.Map<UserCartProduct>(userCart);
+        var cartProduct = await _usersRepository.AddToCart(userCartProduct, cancellationToken);
+        return _mapper.Map<UserCartProduct>(cartProduct);
+    }
+
+    public async Task<UserCartProduct?> AddItemToCart(string userId, string sku, CancellationToken cancellationToken)
+    {
+        var cartProduct = await _usersRepository.AddItemToCart(userId, sku, cancellationToken);
+        return _mapper.Map<UserCartProduct>(cartProduct);
+    }
+
+    public Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken)
+    {
+        return _usersRepository.DeleteUserCartProduct(userId, sku, cancellationToken);
+    }
+
+    public async Task<UserCartProduct?> SubtractItemToCart(string userId, string sku,
+        CancellationToken cancellationToken)
+    {
+        var cartProduct = await _usersRepository.AddItemToCart(userId, sku, cancellationToken);
+        return _mapper.Map<UserCartProduct>(cartProduct);
     }
 }

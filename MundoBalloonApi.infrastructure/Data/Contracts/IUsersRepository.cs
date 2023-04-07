@@ -13,6 +13,8 @@ public interface IUsersRepository
     Task<UserEvent> UpdateUserEvent(UserEvent userEvent, CancellationToken cancellationToken);
     Task<EventCartDetail> AddToEventCart(EventCartDetail eventCartDetail, CancellationToken cancellationToken);
     Task<UserCartProduct> AddToCart(UserCartProduct userCart, CancellationToken cancellationToken);
+    Task<UserCartProduct?> AddItemToCart(string userId, string sku, CancellationToken cancellationToken);
+    Task<UserCartProduct?> SubtractItemToCart(string userId, string sku, CancellationToken cancellationToken);
     Task<bool> DeleteUserCartProduct(string userId, string sku, CancellationToken cancellationToken);
     Task<UserCartProduct?> GetUserCarts(CancellationToken cancellationToken);
 }
