@@ -504,7 +504,7 @@ public class MundoBalloonContext : DbContext
             entity.HasKey(e => e.UserEventCartDetailId)
                 .HasName("PRIMARY");
 
-            entity.ToTable("event_cart_details");
+            entity.ToTable("user_event_cart_details");
 
             entity.HasIndex(e => e.UserEventId, "event_cart_details_user_event_user_event_id_fk");
 
