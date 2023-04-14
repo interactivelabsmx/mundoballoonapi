@@ -9,5 +9,5 @@ public class UserEvent : BaseDto
     public string Details { get; set; } = string.Empty;
 
     public User? User { get; set; }
-    public ICollection<EventCartDetail>? Carts { get; set; }
+    public ICollection<UserEventCartDetail>? Carts { get; set; }
 }

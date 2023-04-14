@@ -1,8 +1,8 @@
 ﻿namespace MundoBalloonApi.infrastructure.Data.Models;
 
-public class EventCartDetail : BaseEntity
+public class UserEventCartDetail : BaseEntity
 {
-    public int EventCartDetailId { get; init; }
+    public int UserEventCartDetailId { get; init; }
     public int ProductVariantId { get; init; }
     public int UserEventId { get; init; }
     public double Quantity { get; init; }

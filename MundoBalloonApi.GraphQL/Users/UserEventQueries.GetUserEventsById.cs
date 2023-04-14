@@ -14,7 +14,7 @@ public partial class UserEventQueries
         [Service] IMapper mapper, int userEventId)
     {
         var userEvent = await mundoBalloonContext.UserEvents
-            .Include(ue => ue.EventCartDetails)
+            .Include(ue => ue.UserEventCartDetails)
             .Include(ue => ue.User)
             .AsNoTracking()
             .FirstOrDefaultAsync(ue => ue.UserEventId == userEventId);

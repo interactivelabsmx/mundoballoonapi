@@ -2,6 +2,7 @@
 
 public class UserCartProduct : BaseEntity
 {
+    public int UserCartId { get; init; }
     public string? UserId { get; init; }
     public string? Sku { get; init; }
     public double Quantity { get; set; }

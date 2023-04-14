@@ -15,6 +15,6 @@ public partial class ProductQueries
         [Service] IMapper mapper, int productId)
     {
         return mapper.ProjectTo<ProductVariantReview>(mundoBalloonContext.ProductVariantReviews.Where
-            (p => p.ProductVariant.ProductId == productId).Include(p => p.ProductVariant));
+            (p => p.ProductVariant != null && p.ProductVariant.ProductId == productId).Include(p => p.ProductVariant));
     }
 }

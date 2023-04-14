@@ -2,7 +2,6 @@ using AutoMapper;
 using MundoBalloonApi.business.DTOs.Entities;
 using Stripe;
 using CountryCode = MundoBalloonApi.infrastructure.Data.Models.CountryCode;
-using EventCartDetail = MundoBalloonApi.infrastructure.Data.Models.EventCartDetail;
 using OrderProductsDetails = MundoBalloonApi.infrastructure.Data.Models.OrderProductsDetails;
 using Orders = MundoBalloonApi.infrastructure.Data.Models.Orders;
 using Product = MundoBalloonApi.infrastructure.Data.Models.Product;
@@ -15,6 +14,7 @@ using UiRegistry = MundoBalloonApi.infrastructure.Data.Models.UiRegistry;
 using User = MundoBalloonApi.infrastructure.Data.Models.User;
 using UserCartProduct = MundoBalloonApi.infrastructure.Data.Models.UserCartProduct;
 using UserEvent = MundoBalloonApi.infrastructure.Data.Models.UserEvent;
+using UserEventCartDetail = MundoBalloonApi.infrastructure.Data.Models.UserEventCartDetail;
 using UserPaymentProfile = MundoBalloonApi.infrastructure.Data.Models.UserPaymentProfile;
 using Variant = MundoBalloonApi.infrastructure.Data.Models.Variant;
 using VariantsType = MundoBalloonApi.infrastructure.Data.Models.VariantsType;
@@ -71,7 +71,7 @@ public class EntitiesMappingProfile : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.EventName))
             .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.EventDate))
             .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.EventDetails))
-            .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.EventCartDetails));
+            .ForMember(dest => dest.Carts, opt => opt.MapFrom(src => src.UserEventCartDetails));
         CreateMap<UserPaymentProfile, DTOs.Entities.UserPaymentProfile>();
         // ORDERS
         CreateMap<Orders, DTOs.Entities.Orders>();
@@ -80,7 +80,7 @@ public class EntitiesMappingProfile : Profile
         // SAVED CARTS
         CreateMap<UserCartProduct, DTOs.Entities.UserCartProduct>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
-        CreateMap<EventCartDetail, DTOs.Entities.EventCartDetail>()
+        CreateMap<UserEventCartDetail, DTOs.Entities.UserEventCartDetail>()
             .ForMember(dest => dest.Variant, opt => opt.MapFrom(src => src.ProductVariant));
         // CUSTOMER
         CreateMap<Customer, DTOs.Customer.Customer>();

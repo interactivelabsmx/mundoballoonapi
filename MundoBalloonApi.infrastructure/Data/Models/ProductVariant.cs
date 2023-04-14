@@ -10,8 +10,8 @@ public class ProductVariant : BaseEntity
     public double Price { get; init; }
     public Product? Product { get; set; }
 
-    public ICollection<EventCartDetail> EventCartDetailProductVariants { get; set; } =
-        new HashSet<EventCartDetail>();
+    public ICollection<UserEventCartDetail> UserEventCartDetailUserProductVariants { get; set; } =
+        new HashSet<UserEventCartDetail>();
 
     public ICollection<OrderProductsDetails> OrderProductsDetailsProductVariants { get; set; } =
         new HashSet<OrderProductsDetails>();

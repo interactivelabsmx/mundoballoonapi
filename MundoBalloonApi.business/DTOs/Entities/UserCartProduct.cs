@@ -2,6 +2,7 @@
 
 public class UserCartProduct
 {
+    public int UserCartId { get; init; } = 0;
     public string UserId { get; set; } = string.Empty;
     public string Sku { get; set; } = string.Empty;
     public double Quantity { get; set; }

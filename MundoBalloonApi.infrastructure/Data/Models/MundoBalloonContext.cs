@@ -9,7 +9,7 @@ public class MundoBalloonContext : DbContext
     {
     }
 
-    public DbSet<EventCartDetail> EventCartDetails { get; set; } = default!;
+    public DbSet<UserEventCartDetail> EventCartDetails { get; set; } = default!;
     public DbSet<Orders> Orders { get; set; } = default!;
     public DbSet<OrderProductsDetails> OrderProductDetails { get; set; } = default!;
     public DbSet<Product> Products { get; set; } = default!;
@@ -30,51 +30,69 @@ public class MundoBalloonContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<EventCartDetail>(entity =>
+        modelBuilder.Entity<CountryCode>(entity =>
         {
-            entity.HasKey(e => e.EventCartDetailId)
-                .HasName("PRIMARY");
+            entity.HasKey(e => new { e.Fifa, e.Wmo })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-            entity.ToTable("event_cart_details");
+            entity.ToTable("country_codes");
 
-            entity.HasIndex(e => e.UserEventId, "event_cart_details_user_event_user_event_id_fk");
+            entity.HasIndex(e => e.Dial, "country_codes_Dial_index");
 
-            entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2");
+            entity.Property(e => e.Fifa)
+                .HasMaxLength(3)
+                .HasColumnName("FIFA");
 
-            entity.Property(e => e.EventCartDetailId).HasColumnName("event_cart_detail_id");
+            entity.Property(e => e.Wmo)
+                .HasMaxLength(3)
+                .HasColumnName("WMO");
+
+            entity.Property(e => e.Capital).HasColumnType("text");
+
+            entity.Property(e => e.Continent).HasMaxLength(2);
 
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.ProductVariantId)
-                .HasColumnName("product_variant_id");
+            entity.Property(e => e.Dial).HasMaxLength(5);
 
-            entity.Property(d => d.UserEventId)
-                .HasColumnName("user_event_id");
+            entity.Property(e => e.Ds)
+                .HasMaxLength(3)
+                .HasColumnName("DS");
 
-            entity.Property(e => e.Quantity)
-                .HasPrecision(10, 2)
-                .HasColumnName("quantity");
+            entity.Property(e => e.GeoNameId).HasColumnName("Geoname ID");
+
+            entity.Property(e => e.Ioc)
+                .HasMaxLength(3)
+                .HasColumnName("IOC");
+
+            entity.Property(e => e.Itu)
+                .HasMaxLength(3)
+                .HasColumnName("ITU");
+
+            entity.Property(e => e.Languages).HasColumnType("text");
+
+            entity.Property(e => e.OfficialNameEn)
+                .HasColumnType("text")
+                .HasColumnName("official_name_en");
+
+            entity.Property(e => e.OfficialNameEs)
+                .HasColumnType("text")
+                .HasColumnName("official_name_es");
+
+            entity.Property(e => e.Supported)
+                .HasColumnName("supported")
+                .HasDefaultValueSql("'0'");
 
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(6)")
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
-            entity.HasOne(d => d.ProductVariant)
-                .WithMany(p => p.EventCartDetailProductVariants)
-                .HasPrincipalKey(p => p.ProductVariantId)
-                .HasForeignKey(d => d.ProductVariantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_occasion_cart_details_product_variants2");
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -386,15 +404,16 @@ public class MundoBalloonContext : DbContext
 
         modelBuilder.Entity<UserCartProduct>(entity =>
         {
-            entity.HasKey(e => new { e.UserId, e.Sku })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.UserCartId)
+                .HasName("PRIMARY");
 
             entity.ToTable("user_cart");
 
             entity.HasIndex(e => e.Sku, "fk_user_cart_product_variants1_idx");
 
             entity.HasIndex(e => e.ProductVariantId, "fk_user_cart_product_variants2_idx");
+
+            entity.HasIndex(e => e.UserId, "user_cart_user_id_index");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -480,6 +499,89 @@ public class MundoBalloonContext : DbContext
                 .HasConstraintName("fk_user_event_Users1");
         });
 
+        modelBuilder.Entity<UserEventCartDetail>(entity =>
+        {
+            entity.HasKey(e => e.UserEventCartDetailId)
+                .HasName("PRIMARY");
+
+            entity.ToTable("event_cart_details");
+
+            entity.HasIndex(e => e.UserEventId, "event_cart_details_user_event_user_event_id_fk");
+
+            entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2");
+
+            entity.Property(e => e.UserEventCartDetailId).HasColumnName("event_cart_detail_id");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.ProductVariantId)
+                .HasColumnName("product_variant_id");
+
+            entity.Property(d => d.UserEventId)
+                .HasColumnName("user_event_id");
+
+            entity.Property(e => e.Quantity)
+                .HasPrecision(10, 2)
+                .HasColumnName("quantity");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+            entity.HasOne(d => d.ProductVariant)
+                .WithMany(p => p.UserEventCartDetailUserProductVariants)
+                .HasPrincipalKey(p => p.ProductVariantId)
+                .HasForeignKey(d => d.ProductVariantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_occasion_cart_details_product_variants2");
+        });
+
+        modelBuilder.Entity<UserPaymentProfile>(entity =>
+        {
+            entity.HasKey(e => e.UserProfileId)
+                .HasName("PRIMARY");
+
+            entity.ToTable("user_payment_profile");
+
+            entity.HasIndex(e => e.UserId, "user_id_UNIQUE")
+                .IsUnique();
+
+            entity.Property(e => e.UserProfileId).HasColumnName("user_profile_id");
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.ProcessorId)
+                .HasColumnType("varchar(45)")
+                .HasColumnName("processor_id");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp(6)")
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.UserPaymentProfiles)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("user_payment_profile_users_id_fk");
+        });
+
         modelBuilder.Entity<Orders>(entity =>
         {
             entity.ToTable("orders");
@@ -557,42 +659,6 @@ public class MundoBalloonContext : DbContext
                 .HasPrincipalKey(p => p.OrderId)
                 .HasForeignKey(d => d.OrderId)
                 .HasConstraintName("fk_order_products_details_orders1");
-        });
-
-        modelBuilder.Entity<UserPaymentProfile>(entity =>
-        {
-            entity.HasKey(e => e.UserProfileId)
-                .HasName("PRIMARY");
-
-            entity.ToTable("user_payment_profile");
-
-            entity.HasIndex(e => e.UserId, "user_id_UNIQUE")
-                .IsUnique();
-
-            entity.Property(e => e.UserProfileId).HasColumnName("user_profile_id");
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.ProcessorId)
-                .HasColumnType("varchar(45)")
-                .HasColumnName("processor_id");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
-
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.HasOne(d => d.User)
-                .WithMany(p => p.UserPaymentProfiles)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("user_payment_profile_users_id_fk");
         });
 
         modelBuilder.Entity<Variant>(entity =>
@@ -721,71 +787,6 @@ public class MundoBalloonContext : DbContext
                 .HasMaxLength(45)
                 .IsUnicode(false)
                 .HasColumnName("variant_type");
-        });
-
-        modelBuilder.Entity<CountryCode>(entity =>
-        {
-            entity.HasKey(e => new { e.Fifa, e.Wmo })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-            entity.ToTable("country_codes");
-
-            entity.HasIndex(e => e.Dial, "country_codes_Dial_index");
-
-            entity.Property(e => e.Fifa)
-                .HasMaxLength(3)
-                .HasColumnName("FIFA");
-
-            entity.Property(e => e.Wmo)
-                .HasMaxLength(3)
-                .HasColumnName("WMO");
-
-            entity.Property(e => e.Capital).HasColumnType("text");
-
-            entity.Property(e => e.Continent).HasMaxLength(2);
-
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.Dial).HasMaxLength(5);
-
-            entity.Property(e => e.Ds)
-                .HasMaxLength(3)
-                .HasColumnName("DS");
-
-            entity.Property(e => e.GeoNameId).HasColumnName("Geoname ID");
-
-            entity.Property(e => e.Ioc)
-                .HasMaxLength(3)
-                .HasColumnName("IOC");
-
-            entity.Property(e => e.Itu)
-                .HasMaxLength(3)
-                .HasColumnName("ITU");
-
-            entity.Property(e => e.Languages).HasColumnType("text");
-
-            entity.Property(e => e.OfficialNameEn)
-                .HasColumnType("text")
-                .HasColumnName("official_name_en");
-
-            entity.Property(e => e.OfficialNameEs)
-                .HasColumnType("text")
-                .HasColumnName("official_name_es");
-
-            entity.Property(e => e.Supported)
-                .HasColumnName("supported")
-                .HasDefaultValueSql("'0'");
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp(6)")
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
-
-            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
         });
 
         modelBuilder.ApplyGlobalFilters<ISoftDelete>(e => e.IsDeleted == false);

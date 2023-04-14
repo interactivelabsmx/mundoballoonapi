@@ -9,5 +9,5 @@ public class UserEvent : BaseEntity
     public string? EventDetails { get; init; }
 
     public User? User { get; set; }
-    public ICollection<EventCartDetail> EventCartDetails { get; set; } = new HashSet<EventCartDetail>();
+    public ICollection<UserEventCartDetail> UserEventCartDetails { get; set; } = new HashSet<UserEventCartDetail>();
 }
