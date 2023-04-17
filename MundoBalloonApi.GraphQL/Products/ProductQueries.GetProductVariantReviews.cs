@@ -14,7 +14,8 @@ public partial class ProductQueries
         [Service(ServiceKind.Pooled)] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)
     {
-        return mapper.ProjectTo<ProductVariantReview>(mundoBalloonContext.ProductVariantReviews.Where
-            (p => p.ProductVariant != null && p.ProductVariant.ProductId == productId).Include(p => p.ProductVariant));
+        return mapper.ProjectTo<ProductVariantReview>(mundoBalloonContext.ProductVariantReviews
+            .Where(p => p.ProductVariant != null && p.ProductVariant.ProductId == productId)
+            .Include(p => p.ProductVariant));
     }
 }

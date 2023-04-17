@@ -414,6 +414,8 @@ public class MundoBalloonContext : DbContext
             entity.HasIndex(e => e.ProductVariantId, "fk_user_cart_product_variants2_idx");
 
             entity.HasIndex(e => e.UserId, "user_cart_user_id_index");
+            
+            entity.Property(e => e.UserCartId).HasColumnName("user_cart_id");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -510,7 +512,7 @@ public class MundoBalloonContext : DbContext
 
             entity.HasIndex(e => e.ProductVariantId, "fk_event_cart_details_product_variants2");
 
-            entity.Property(e => e.UserEventCartDetailId).HasColumnName("event_cart_detail_id");
+            entity.Property(e => e.UserEventCartDetailId).HasColumnName("user_event_cart_detail_id");
 
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp(6)")
