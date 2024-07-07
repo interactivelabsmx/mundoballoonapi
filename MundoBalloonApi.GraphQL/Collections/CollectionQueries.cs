@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.graphql.Collections;
 
-[ExtendObjectType(Name = "Query")]
+[ExtendObjectType("Query")]
 public partial class CollectionQueries
 {
 }

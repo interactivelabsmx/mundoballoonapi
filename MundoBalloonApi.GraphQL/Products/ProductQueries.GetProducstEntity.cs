@@ -7,7 +7,7 @@ namespace MundoBalloonApi.graphql.Products;
 public partial class ProductQueries
 {
     [AllowAnonymous]
-    [UseDbContext(typeof(MundoBalloonContext))]
+    
     [UsePaging]
     [UseSorting]
     public IQueryable<ProductEntity> GetProductsEntity(MundoBalloonContext mundoBalloonContext)

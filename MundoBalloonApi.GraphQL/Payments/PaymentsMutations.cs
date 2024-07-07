@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.graphql.Payments;
 
-[ExtendObjectType(Name = "Mutation")]
+[ExtendObjectType("Mutation")]
 public partial class PaymentsMutations
 {
 }

@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.graphql.Users;
 
-[ExtendObjectType(Name = "Query")]
+[ExtendObjectType("Query")]
 public partial class UserQueries
 {
 }

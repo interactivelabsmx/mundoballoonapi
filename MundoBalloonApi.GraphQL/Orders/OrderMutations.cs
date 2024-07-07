@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.graphql.Orders;
 
-[ExtendObjectType(Name = "Mutation")]
+[ExtendObjectType("Mutation")]
 public partial class OrderMutations
 {
 }

@@ -10,7 +10,6 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserQueries
 {
     [Authorize]
-    [UseDbContext(typeof(MundoBalloonContext))]
     public async Task<User?> GetLoggedInUser(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
