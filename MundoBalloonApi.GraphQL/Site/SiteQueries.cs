@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.graphql.Site;
 
-[ExtendObjectType(Name = "Query")]
+[ExtendObjectType("Query")]
 public partial class SiteQueries
 {
 }

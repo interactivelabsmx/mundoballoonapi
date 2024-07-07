@@ -9,7 +9,7 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserEventQueries
 {
     [Authorize]
-    [UseDbContext(typeof(MundoBalloonContext))]
+    
     public async Task<UserEvent?> GetUserEventById(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int userEventId)
     {

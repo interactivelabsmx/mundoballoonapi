@@ -9,7 +9,7 @@ namespace MundoBalloonApi.graphql.Orders;
 public partial class OrderQueries
 {
     [Authorize]
-    [UseDbContext(typeof(MundoBalloonContext))]
+    
     public IQueryable<OrderProductsDetails> GetOrdersProductDetails(
         MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int orderDetailsProductsId)

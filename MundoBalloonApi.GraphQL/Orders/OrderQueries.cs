@@ -1,6 +1,6 @@
 namespace MundoBalloonApi.graphql.Orders;
 
-[ExtendObjectType(Name = "Query")]
+[ExtendObjectType("Query")]
 public partial class OrderQueries
 {
 }
