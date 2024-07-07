@@ -9,7 +9,7 @@ namespace MundoBalloonApi.graphql.Products;
 public partial class ProductQueries
 {
     [AllowAnonymous]
-    [UseDbContext(typeof(MundoBalloonContext))]
+    
     public IQueryable<ProductVariantReview> GetProductVariantReviews(
         [Service(ServiceKind.Pooled)] MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, int productId)

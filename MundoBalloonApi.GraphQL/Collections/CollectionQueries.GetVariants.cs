@@ -8,7 +8,7 @@ namespace MundoBalloonApi.graphql.Collections;
 public partial class CollectionQueries
 {
     [AllowAnonymous]
-    [UseDbContext(typeof(MundoBalloonContext))]
+    
     public IQueryable<Variant> GetVariants(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper)
     {

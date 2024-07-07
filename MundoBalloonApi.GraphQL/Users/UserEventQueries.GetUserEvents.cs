@@ -9,7 +9,7 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserEventQueries
 {
     [Authorize]
-    [UseDbContext(typeof(MundoBalloonContext))]
+    
     public IQueryable<UserEvent> GetUserEvents(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser)
     {

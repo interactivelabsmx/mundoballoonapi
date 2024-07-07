@@ -11,7 +11,7 @@ namespace MundoBalloonApi.graphql.Users;
 public partial class UserCartQueries
 {
     [Authorize]
-    [UseDbContext(typeof(MundoBalloonContext))]
+    
     public async Task<UserCart> GetUserCart(MundoBalloonContext mundoBalloonContext,
         [Service] IMapper mapper, [GlobalState("currentUser")] CurrentUser currentUser,
         CancellationToken cancellationToken)
